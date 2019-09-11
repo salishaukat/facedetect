@@ -1,0 +1,36 @@
+body {
+
+    color: #797979;
+
+    background: #035caa;
+
+    font-family: 'Lato', sans-serif;
+
+    padding: 0px !important;
+
+    margin: 0px !important;
+
+    font-size:14px !important;
+    background-color: #983651!important;
+
+}
+.container {
+    margin-top: 150px !important;
+}
+ul {
+    margin-top: 30px !important;
+}
+.messages {
+    padding-left: 0px !important;
+    list-style-type: none;
+}
+.logo{
+    padding-top: 10px;
+}
+
+.btn-theme{
+
+    color: #ffffff;
+    background-color: #86314fde;
+    border-color: #86314fde;
+}
