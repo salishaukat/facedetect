@@ -1,6 +1,39 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .models import  LostOne
+from django.core.files.storage import FileSystemStorage
 
 
 def index(request):
     return render(request, 'index.html')
+
+
+def lostone(request):
+    if request.method == 'POST' and request.FILES['person_pic1']:
+        person_pic1 = request.FILES['person_pic1']
+        person_pic2 = request.FILES['person_pic2']
+        person_pic3 = request.FILES['person_pic3']
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email_address = request.POST.get('email_address')
+        contact_number = request.POST.get('contact_number')
+        city = request.POST.get('city')
+        fs = FileSystemStorage(location='collection/'+first_name+last_name)
+        person_pic1 = fs.save(person_pic1.name, person_pic1)
+        person_pic1 = fs.url(person_pic1)
+        try:
+            person_pic2 = fs.save(person_pic2.name, person_pic2)
+            person_pic2 = fs.url(person_pic2)
+        except:
+            person_pic2 = None
+        try:
+            person_pic3 = fs.save(person_pic2.name, person_pic3)
+            person_pic3 = fs.url(person_pic3)
+        except:
+            person_pic3 = None
+        lost_one_object = LostOne.objects.create(first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number, city=city, person_pic1=person_pic1,
+                                                 person_pic2=person_pic2, person_pic3=person_pic3)
+        return render(request, 'lostone.html', {
+            'uploaded_file_url': lost_one_object
+        })
+    return render(request, 'lostone.html')
