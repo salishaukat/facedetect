@@ -33,10 +33,8 @@ def lostone(request):
             person_pic3 = None
         lost_one_object = LostOne.objects.create(first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number, city=city, person_pic1=person_pic1,
                                                  person_pic2=person_pic2, person_pic3=person_pic3)
-        return render(request, 'lostone.html', {
-            'uploaded_file_url': lost_one_object
-        })
-    return render(request, 'lostone.html')
+
+    return render(request, '5-rescuer.html')
 
 
 def contact(request):
