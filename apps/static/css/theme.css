@@ -1674,7 +1674,7 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
 .show>.btn-primary.dropdown-toggle,
 .show>.btn-primary.dropdown-toggle:focus,
 .show>.btn-primary.dropdown-toggle:hover {
-  background-color: #fa7a50;
+  background-color: #ffc72c;
   color: #FFFFFF;
   box-shadow: none;
 }
@@ -1728,8 +1728,8 @@ fieldset[disabled] .btn-primary.active {
 .show>.btn-primary.btn-simple.dropdown-toggle:focus,
 .show>.btn-primary.btn-simple.dropdown-toggle:hover {
   background-color: transparent;
-  color: #fa7a50;
-  border-color: #fa7a50;
+  color: #ffc72c;
+  border-color: #ffc72c;
   box-shadow: none;
 }
 
@@ -1749,7 +1749,7 @@ fieldset[disabled] .btn-primary.active {
 .show>.btn-primary.btn-link.dropdown-toggle:focus,
 .show>.btn-primary.btn-link.dropdown-toggle:hover {
   background-color: transparent;
-  color: #fa7a50;
+  color: #ffc72c;
   text-decoration: none;
   box-shadow: none;
 }
@@ -2208,7 +2208,7 @@ fieldset[disabled] .btn-neutral.active {
 .btn-neutral.btn-primary:hover,
 .btn-neutral.btn-primary:focus,
 .btn-neutral.btn-primary:active {
-  color: #fa7a50 !important;
+  color: #ffc72c !important;
 }
 
 .btn-neutral.btn-info {
@@ -2263,13 +2263,13 @@ fieldset[disabled] .btn-neutral.active {
 .show>.btn-neutral.dropdown-toggle:focus,
 .show>.btn-neutral.dropdown-toggle:hover {
   background-color: #FFFFFF;
-  color: #fa7a50;
+  color: #ffc72c;
   box-shadow: none;
 }
 
 .btn-neutral:hover,
 .btn-neutral:focus {
-  color: #fa7a50 !important;
+  color: #ffc72c !important;
 }
 
 .btn-neutral:hover:not(.nav-link),
@@ -2337,8 +2337,8 @@ fieldset[disabled] .btn-neutral.active {
 .show>.btn-outline-primary.dropdown-toggle:focus,
 .show>.btn-outline-primary.dropdown-toggle:hover {
   background-color: transparent;
-  color: #fa7a50;
-  border-color: #fa7a50;
+  color: #ffc72c;
+  border-color: #ffc72c;
   box-shadow: none;
 }
 
@@ -2975,17 +2975,17 @@ textarea.form-control {
   max-height: 80px;
   padding: 10px 10px 0 0;
   resize: none;
-  border: none;
+  /*border: none;*/
   border-bottom: 1px solid #E3E3E3;
-  border-radius: 0;
+  border-radius: 10px;
   line-height: 2;
 }
 
 textarea.form-control:focus,
 textarea.form-control:active {
-  border-left: none;
+/*  border-left: none;
   border-top: none;
-  border-right: none;
+  border-right: none;*/
 }
 
 .has-success.form-group .form-control,
@@ -3046,8 +3046,9 @@ textarea.form-control:active {
   content: " ";
   display: inline-block;
   position: absolute;
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
+  line-height: 23px;
   left: 0;
   cursor: pointer;
   border-radius: 3px;
@@ -3123,6 +3124,7 @@ textarea.form-control:active {
 .form-check-radio input[type="radio"]+.form-check-sign:after,
 .form-check-radio input[type="radio"] {
   opacity: 0;
+  width: 0;
 }
 
 .form-check-radio input[type="radio"]:checked+.form-check-sign::after {
@@ -4500,7 +4502,8 @@ Created using IcoMoon - icomoon.io
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   min-height: 53px;
-  z-index: 1;
+  z-index: 2;
+  border-bottom: 1px solid #00778b;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
 }
 
@@ -5968,7 +5971,8 @@ img {
   padding: 0;
   color: #FFFFFF;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 1;
 }
 
 .page-header>.content {
@@ -6024,7 +6028,7 @@ img {
 
 .page-header .container {
   height: 100%;
-  z-index: 1;
+  z-index: 0;
   text-align: center;
   position: relative;
 }

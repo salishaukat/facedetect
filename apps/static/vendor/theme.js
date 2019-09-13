@@ -274,3 +274,32 @@ function debounce(func, wait, immediate) {
     if (immediate && !timeout) func.apply(context, args);
   };
 };
+
+
+// owl-carousel
+$(document).ready(function(){
+  $('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    center: true,
+    responsiveClass:true,
+    autoplay: true,
+    autoplayTimeout:5000,
+    autoplayHoverPause:true,
+    responsive:{
+        0:{
+            items:3,
+            dots: true
+        },
+        600:{
+            items:4,
+            dots: true
+        },
+        1000:{
+            items:6,
+            loop:true,
+            dots: true,
+        }
+    },
+})
+});
