@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import  LostOne
+from .models import  LostOne, Contact
 from django.core.files.storage import FileSystemStorage
 
 
@@ -37,3 +37,16 @@ def lostone(request):
             'uploaded_file_url': lost_one_object
         })
     return render(request, 'lostone.html')
+
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        contact_number1 = request.POST.get('contact_number1')
+        contact_number2 = request.POST.get('contact_number2')
+        address = request.POST.get('address')
+        note = request.POST.get('note')
+        contact = Contact.objects.create(name=name, contact_number1=contact_number1,
+                                                 contact_number2=contact_number2, address=address, note=note,
+                                                 )
+    return render(request, 'contact.html')

@@ -18,7 +18,7 @@ class Contact(models.Model):
     contact_number2 = models.CharField(null=True, blank=True, max_length=100)
     address = models.TextField(null=True, blank=True, max_length=300)
     note = models.TextField(null=True, blank=True)
-    rescued = models.BooleanField(null=True, blank=True)
-    died = models.BooleanField(null=True, blank=True)
+    rescued = models.BooleanField(null=True, blank=True, default=False)
+    died = models.BooleanField(null=True, blank=True, default=False)
     lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
 
