@@ -88,7 +88,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="table-header col-12">
-							<button type="button" class="btn btn-info">ENTER LOST ONE</button>
+							<a class="btn btn-info" href="{% url 'lostone' %}">ENTER LOST ONE</a>
 
 							<div class="float-right pt-2">
 								<span class="pr-3"> Filter by Status: </span>
@@ -221,13 +221,13 @@
 		</div>
 
 		<!-- Bootstrap core JavaScript -->
-		<script src="vendor/jquery/jquery.min.js"></script>
-		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+		<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
 		<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
 		<!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
 
-		<script src="vendor/theme.js" type="text/javascript"></script>
+		<script src="{% static 'vendor/theme.js' %}" type="text/javascript"></script>
 
 	</body>
 
