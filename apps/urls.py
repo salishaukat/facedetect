@@ -7,4 +7,5 @@ urlpatterns = [
     path('search', views.search, name="search"),
     path('advance_search', views.advance_search, name="advance_search"),
     path('lostone', views.lostone, name="lostone"),
+    path('login', views.login, name="login"),
 ]

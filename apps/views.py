@@ -4,6 +4,8 @@ from .models import  LostOne, Contact
 from django.core.files.storage import FileSystemStorage
 import ntpath
 from django.db.models import Q
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 
 def search(request):
@@ -104,3 +106,32 @@ def lostone(request):
             print (e)
 
     return render(request, '5-rescuer.html', {'n' : range(1,100),'user':user})
+
+def login(request):
+
+    if request.method == 'POST':
+        username=get_user(request.POST['email'])
+        #print("email----------------", username)
+        user = authenticate(username=username, password=request.POST['password'])
+        #print ("user",type(username.username))
+        if user:
+            #print ("test-----------------------------")
+            request.session['username'] = username.username
+            #print ("test1-----------------------------")
+            request.session['email'] = request.POST['email']
+            request.session['password'] = request.POST['password']
+        return redirect('search')
+    return render(request, 'login.html')
+
+def logout(request):
+   try:
+      del request.session['username']
+   except:
+      pass
+   return redirect('login')
+
+def get_user(email):
+    try:
+        return User.objects.get(email=email.lower())
+    except User.DoesNotExist:
+        return None
