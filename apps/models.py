@@ -14,6 +14,7 @@ class LostOne(models.Model):
     person_pic2 = models.CharField(null=True, blank=True, max_length=100)
     person_pic3 = models.CharField(null=True, blank=True, max_length=100)
     gender = models.CharField(null=False, blank=False, max_length=100)
+    name = models.CharField(null=True, blank=True, max_length=100)
 
 
 class Contact(models.Model):
