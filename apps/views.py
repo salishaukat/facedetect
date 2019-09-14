@@ -3,14 +3,40 @@ from django.http import HttpResponse
 from .models import  LostOne, Contact
 from django.core.files.storage import FileSystemStorage
 import ntpath
-
+from django.db.models import Q
 
 
 def search(request):
+    contact = None
     if request.POST.get('search_name'):
         name = request.POST.get('search_name')
         contact = Contact.objects.filter(lost_one__name__contains=name)
-        return render(request, 'index.html', {"contacts":contact})
+    
+    return render(request, 'index.html', {"contacts":contact})
+
+def advance_search(request):
+    contact = None
+    tags = {}
+    if request.POST.get('first_name'):
+        tags.update({'lost_one__first_name__contains':request.POST.get('first_name')})
+    if request.POST.get('area'):
+        tags.update({'lost_one__area__contains':request.POST.get('area')})
+    if request.POST.get('country'):
+        tags.update({'lost_one__country__contains':request.POST.get('country')})
+    if request.POST.get('status'):
+        tags.update({'lost_one__status__contains':request.POST.get('status')})
+    male = request.POST.get('male') if request.POST.get('male') else None
+    female = request.POST.get('female') if request.POST.get('female') else None
+    if male:
+        tags.update({'lost_one__gender__contains':"male"})
+    elif female:
+        tags.update({'lost_one__gender__contains':"female"})
+     # Your dict with fields
+    or_condition = Q()
+    for key, value in tags.items():
+        or_condition.add(Q(**{key: value}), Q.OR)
+    contact = Contact.objects.filter(or_condition)
+    return render(request, 'index.html', {"contacts":contact})
 
 def index(request):
     lostones = LostOne.objects.all()
@@ -26,11 +52,17 @@ def lostone(request):
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
             email_address = request.POST.get('email')
-            contact_number = request.POST.get('lost_one_contact_number')
+            contact_number = request.POST.get('lost_one_contact_no')
             age = request.POST.get('age')
             status = request.POST.get('status')
             area = request.POST.get('lost_one_area')
             country = request.POST.get('country')
+            male = request.POST.get('male') if request.POST.get('male') else None
+            female = request.POST.get('female') if request.POST.get('female') else None
+            if male:
+                gender = 'male'
+            elif female:
+                gender = 'female'
             
             path = '/collection/'+first_name+last_name
             fs = FileSystemStorage(location='collection/'+first_name+ ' ' +last_name)
@@ -57,14 +89,14 @@ def lostone(request):
             except:
                 person_pic3 = None
             name = request.POST.get('name')
-            country = request.POST.get('contact_area')
+            contact_area = request.POST.get('contact_area')
             contact_number1 = request.POST.get('contact_1')
             contact_number2 = request.POST.get('contact_2')
             address = request.POST.get('address')
             note = request.POST.get('note')
             contact_area = request.POST.get('contact_area')
 
-            lost_one_object = LostOne.objects.create(name=first_name+ ' ' +last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
+            lost_one_object = LostOne.objects.create(gender=gender, name=first_name+ ' ' +last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
                                                      person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country)
             contact = Contact.objects.create(name=name, contact_number1=contact_number1,
                                              contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
