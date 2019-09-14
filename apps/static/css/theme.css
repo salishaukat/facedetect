@@ -3619,6 +3619,10 @@ p {
   color: #FF3636 !important;
 }
 
+.text-default {
+  color: #767588 !important;
+}
+
 .text-black {
   color: #444;
 }

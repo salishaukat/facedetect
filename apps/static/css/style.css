@@ -151,7 +151,28 @@ form label{
     opacity: 0.5;
     width: 12px;
 }
+.owl-carousel p{
+	font-size: 14px;
+	margin-top: 5px;
+}
 
+.image-upload>input {
+  display: none;
+}
+
+.image-upload{
+	display: inline-block;
+}
+.image-upload .card-image {
+	border: 1px solid #E3E3E3;
+	padding: 21px;
+	height: 64px;
+	width: 64px;
+	cursor: pointer;
+}
+.image-upload .card-image i{
+	font-size: 20px;
+}
 @media (min-width: 992px){
 	.notification-dropdown{
 		min-width: 280px;
@@ -179,5 +200,4 @@ form label{
 	.h4:after {
 		margin: 0 0 0 20px;
 	}
-
 }

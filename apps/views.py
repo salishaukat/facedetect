@@ -8,6 +8,10 @@ def index(request):
     contact = Contact.objects.all()
     return render(request, 'index.html', {"contacts":contact})
 
+def home(request):
+    contact = Contact.objects.all()
+    return render(request, 'home.html', {"contacts":contact})
+
 
 def lostone(request):
     user = None
