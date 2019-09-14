@@ -8,10 +8,10 @@ import ntpath
 
 def search(request):
     contact = Contact.objects.all()
-    return render(request, 'home.html', {"contacts":contact})
+    return render(request, 'index.html', {"contacts":contact})
 
-def home(request):
-    contact = Contact.objects.all()
+def index(request):
+    contact = LostOne.objects.all().only("person_pic1", "status")
     return render(request, 'home.html', {"contacts":contact})
 
 
