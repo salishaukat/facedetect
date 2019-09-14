@@ -190,27 +190,11 @@
 						<!-- Set up your HTML -->
 						<h4 class="text-center text-primary mt-5 mb-5 h4"> RECENT UPDATES </h4>
 						<div class="owl-carousel"  id="owl-carousel-updates">
-							<div> <img src="{% static 'img/image.jpg' %}"/> 
-								<p class="text-center text-danger"> <strong> Died </strong> </p>
+							{% for lostone in lostones %}
+							<div> <img src="{{lostone.person_pic1}}"/> 
+								<p class="text-center text-danger"> <strong> {{lostone.status}} </strong> </p>
 							</div>
-							<div> <img src="{% static 'img/image.jpg' %}"/> 
-								<p class="text-center text-success"> <strong> Rescued </strong> </p>
-							</div>
-							<div> <img src="{% static 'img/image.jpg' %}"/> 
-								<p class="text-center text-primary"> <strong> Need Evacuation </strong> </p>
-							</div>
-							<div> <img src="{% static 'img/image.jpg' %}"/> 
-								<p class="text-center text-danger"> <strong> Died </strong> </p>
-							</div>
-							<div> <img src="{% static 'img/image.jpg' %}"/> 
-								<p class="text-center text-primary"> <strong> Need Evacuation </strong> </p>
-							</div>
-							<div> <img src="{% static 'img/image.jpg' %}"/> 
-								<p class="text-center text-danger"> <strong> Died </strong> </p>
-							</div>
-							<div> <img src="{% static 'img/image.jpg' %}"/> 
-								<p class="text-center text-success"> <strong> Rescued </strong> </p>
-							</div>
+							{% endfor %}
 						</div>
 					</div>
 				</div>

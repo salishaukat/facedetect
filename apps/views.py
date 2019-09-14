@@ -11,8 +11,8 @@ def search(request):
     return render(request, 'index.html', {"contacts":contact})
 
 def index(request):
-    contact = LostOne.objects.all().only("person_pic1", "status")
-    return render(request, 'home.html', {"contacts":contact})
+    lostones = LostOne.objects.all()
+    return render(request, 'home.html', {"lostones":lostones})
 
 
 def lostone(request):
