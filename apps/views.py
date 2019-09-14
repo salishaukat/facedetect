@@ -6,9 +6,9 @@ import ntpath
 
 
 
-def index(request):
+def search(request):
     contact = Contact.objects.all()
-    return render(request, 'index.html', {"contacts":contact})
+    return render(request, 'home.html', {"contacts":contact})
 
 def home(request):
     contact = Contact.objects.all()
