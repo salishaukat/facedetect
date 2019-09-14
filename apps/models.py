@@ -1,5 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import User
 
+class UserProfile(models.Model):
+  user = models.OneToOneField(User, related_name="profile", on_delete=True)
+  CHOICES = (
+        ('reporter', 'reporter'),
+        ('recruiter', 'recruiter'),
+    )
+  role = models.CharField(
+        max_length=200,
+        choices=CHOICES,
+        default=1
+    )
 
 class LostOne(models.Model):
     first_name = models.CharField(null=False, blank=False, max_length=100)
@@ -28,4 +40,3 @@ class Contact(models.Model):
     died = models.BooleanField(null=True, blank=True, default=False)
     area = models.CharField(null=False, blank=False, max_length=100)
     lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
-
