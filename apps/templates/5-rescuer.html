@@ -43,7 +43,7 @@
             </button>
         </div>
         <div class="collapse navbar-collapse justify-content-end" id="navigation"
-             data-nav-image="img/blurred-image-1.jpg">
+             data-nav-image="{% static 'img/blurred-image-1.jpg' %}">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link text-primary" href="#"><small>CONTACT US</small> <br/> +1-719-5842</a>
@@ -70,36 +70,36 @@
                     <div class="col-md-6 px-5">
                         <h4 class="text-primary">Fill the detail for your lost one </h4>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="firstName" placeholder="First Name*">
+                            <input type="text" class="form-control" name="first_name" id="firstName" placeholder="First Name*">
                             <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                            <input type="text" class="form-control" name="last_name" id="lastName" placeholder="Last Name">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="emailAdd" placeholder="Email Address">
+                            <input type="email" class="form-control" name="email" id="emailAdd" placeholder="Email Address">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="contactNo" placeholder="Contact Number*">
+                            <input type="text" class="form-control" name="lost_one_contact_no" id="contactNo" placeholder="Contact Number*">
                         </div>
                         <div class="form-group">
                             <div class="form-check form-check-radio form-check-inline">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                    <input class="form-check-input" type="radio" name="male"
                                            id="inlineRadio1" value="option1" checked="checked"> Male
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                             <div class="form-check form-check-radio form-check-inline">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                    <input class="form-check-input" type="radio" name="Female"
                                            id="inlineRadio2" value="option2"> Female
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <select class="form-control">
+                            <select name="age" class="form-control">
                                 <option selected>Age</option>
                                 {% for i in n%}
                                 <option value="{{ i }}">{{i}}</option>
@@ -107,7 +107,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="form-control">
+                            <select name="status" class="form-control">
                                 <option selected>Status*</option>
                                 <option value="0">Rescued</option>
                                 <option>Died</option>
@@ -116,7 +116,7 @@
                                 <option>Searching</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div name="lost_one_area" class="form-group">
                             <select class="form-control">
                                 <option selected value="0">Area*</option>
                                 <option value="North Andros"> North Andros</option>
@@ -142,7 +142,7 @@
                                 <option value="Bimini"> Bimini</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div name="country" class="form-group">
                             <select class="form-control">
                                 <option selected>Country*</option>
                                 <option value="Afganistan">Afghanistan</option>
@@ -393,20 +393,45 @@
                                 <option value="Zimbabwe">Zimbabwe</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="uploadPic">Upload Pics</label>
+                        <div class="row">
+                            
+                                
+                                    <img id="personpic1" name="12" src="{% static 'img/plus.jpg' %}" alt="Snow" style="width: 25%" onclick="openloader1();">
+                                
+                            <br>
+                            
+                                 
+                                    <img id="personpic2" src="{% static 'img/plus.jpg' %}" alt="Forest"  style="width: 25%" onclick="openloader2();">
+                                
+                            
+                            <br>
+                              
+                                
+                                    <img id="personpic3" src="{% static 'img/plus.jpg' %}" alt="Mountains" style="width: 25%" onclick="openloader3();">
+                            
+                            
+                        </div>
+                        <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" /> 
+                        <input type="file" id="uploadfile2" name="person_pic2" style="display: none;" onchange="upload_img2(this);"/> 
+                        <input type="file" id="uploadfile3" name="person_pic3" style="display: none;" onchange="upload_img3(this);"/> 
+                            <!-- Upload Image here -->
+                        </div>
                     </div>
                     <div class="col-md-6 px-5">
                         <h4 class="text-primary">Where to contact if found </h4>
                         <div class="form-group">
-                            <input type="text" class="form-control" {% if user%}placeholder="Shelter Name"{% else %}placeholder="Name*"{% endif %}>
+                            <input type="text" name="name" class="form-control" {% if user%}placeholder="Shelter Name"{% else %}placeholder="Name*"{% endif %}>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Contact Number 1*">
+                            <input type="text" name="contact_1" class="form-control" placeholder="Contact Number 1*">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Contact Number 2">
+                            <input type="text" name="contact_2" class="form-control" placeholder="Contact Number 2">
                         </div>
                         <div class="form-group">
-                            <select class="form-control">
+                            <select name="contact_area" class="form-control">
                                 <option selected value="0">Area*</option>
                                 <option value="North Andros"> North Andros</option>
                                 <option value="Great Inagua"> Great Inagua</option>
@@ -433,11 +458,11 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Address">
+                            <input name="address" type="text" class="form-control" placeholder="Address">
                         </div>
                         <div class="form-group">
                             <label for="noteTextArea">Note</label>
-                            <textarea class="form-control" id="noteTextArea" rows="3"></textarea>
+                            <textarea name="note" class="form-control" id="noteTextArea" rows="3"></textarea>
                         </div>
 						{% if user %}
                         <div class="form-group">
@@ -456,7 +481,7 @@
                                 </label>
                             </div>
                         </div>
-						{% else %}
+						{% endif %}
                         <button type="submit" class="btn btn-primary btn-round btn-block mt-4">Submit</button>
                     </div>
                 </div>
@@ -469,9 +494,55 @@
             <div class="copyright" id="copyright">
                 &copy;
                 <script>
-						document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
+                        var image = 0
+						document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()));
+                        function openloader1() {
+                            $("#uploadfile1").click();
+                        }
+                        function openloader2() {
+                            $("#uploadfile2").click();
+                        }
+                        function openloader3() {
+                            $("#uploadfile3").click();
+                        }
+                        
+                        
+                        function upload_img1(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
 
+                                reader.onload = function (e) {
+                                    $('#personpic1').attr('src', e.target.result);
+                                }
 
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                        
+                        function upload_img2(input) {
+                            
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+
+                                reader.onload = function (e) {
+                                    $('#personpic2').attr('src', e.target.result);
+                                }
+
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+
+                        function upload_img3(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+
+                                reader.onload = function (e) {
+                                    $('#personpic3').attr('src', e.target.result);
+                                }
+
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
 
 
                 </script>
