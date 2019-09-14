@@ -189,7 +189,7 @@
 					<div class="col-12">
 						<!-- Set up your HTML -->
 						<h4 class="text-center text-primary mt-5 mb-5 h4"> RECENT UPDATES </h4>
-						<div class="owl-carousel">
+						<div class="owl-carousel"  id="owl-carousel-updates">
 							<div> <img src="{% static 'img/image.jpg' %}"/> 
 								<p class="text-center text-danger"> <strong> Died </strong> </p>
 							</div>
@@ -217,15 +217,19 @@
 				<div class="row">
 					<div class="col-12">
 						<!-- Set up your HTML -->
-						<h4 class="text-center text-primary mt-5 mb-1 h4"> SPONSORS </h4>
-						<div>
-							<div> <img src="{% static 'img/sponsor.jpg' %}"> </div>
+						<h4 class="text-center text-primary mt-5 mb-5 h4"> SPONSORS </h4>
+						<div class="owl-carousel" id="owl-carousel-sponsors">
+							<div> <img src="{% static 'img/addidas.jpg' %}"></div>
+							<div> <img src="{% static 'img/roypsolo.jpg' %}"></div>
+							<div> <img src="{% static 'img/cocacola.jpg' %}"></div>
+							<div> <img src="{% static 'img/pepsi.jpg' %}"></div>
+							<div> <img src="{% static 'img/microsoft.jpg' %}"></div>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6 col-lg-4 col-xl-4 mx-auto">
-						<a href="#" class="btn btn-primary btn-round btn-block mt-4 btn-lg">CLICK HERE TO SPONSOR</a>
+						<a href="#" class="btn btn-primary btn-round btn-block mt-4 btn-lg" data-toggle="modal" data-target="#register-sponsor">CLICK HERE TO SPONSOR</a>
 					</div>
 				</div>
 			</div>
@@ -244,6 +248,51 @@
 			</div>
 		</footer>
 	</div>
+
+	<!-- Modal Sponsor -->
+	<div class="modal fade" id="register-sponsor" tabindex="-1" role="dialog" aria-labelledby="sponsorDetail" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-center text-primary w-100" id="sponsorDetail">SPONSOR DETAILS</h5>
+					<button type="button" class="close text-primary" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body px-5 mx-5">
+					<p class="text-center text-default"> Please provide following details our team member will contact you </p>
+					<form>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Your Name">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Company Name">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Email">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Contact No.">
+						</div>
+						<div class="form-group">
+							<label for="noteTextArea">Upload Company Logo</label>
+							<div class="clearfix"></div>
+							<div class="image-upload">
+								<label for="file-input">
+									<div class="card-image text-default">
+										<i class="fa fa-plus"></i>
+									</div>
+								</label>
+								<input id="file-input" type="file" />
+							</div>
+						</div>
+						<button type="button" class="btn btn-primary btn-round btn-block mt-4" ">Register</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
