@@ -5,7 +5,8 @@ from django.core.files.storage import FileSystemStorage
 
 
 def index(request):
-    return render(request, 'index.html')
+    contact = Contact.objects.all()
+    return render(request, 'index.html', {"contacts":contact})
 
 
 def lostone(request):

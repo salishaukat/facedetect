@@ -145,37 +145,17 @@
 								</thead>
 								<tbody>
 									<tr>
+										{% for contact in contacts %}
 										<th scope="row">1</th>
-										<td>Mark</td>
-										<td>Male</td>
-										<td>Otto</td>
-										<td>@mdo</td>
-										<td>Mark</td>
-										<td>Otto</td>
-										<td>@mdo</td>
-										<td>@mdo</td>
-									</tr>
-									<tr>
-										<th scope="row">2</th>
-										<td>Mark</td>
-										<td>Male</td>
-										<td>Otto</td>
-										<td>@mdo</td>
-										<td>Mark</td>
-										<td>Otto</td>
-										<td>@mdo</td>
-										<td>@mdo</td>
-									</tr>
-									<tr>
-										<th scope="row">3</th>
-										<td>Mark</td>
-										<td>Male</td>
-										<td>Otto</td>
-										<td>@mdo</td>
-										<td>Mark</td>
-										<td>Otto</td>
-										<td>@mdo</td>
-										<td>@mdo</td>
+										<td> {{ forloop.counter }} <td>
+										<td>{{contact.lost_one.first_name}} {{contact.lost_one.last_name}}</td>
+										<td>{{contact.lost_one.gender}}</td>
+										<td>{{contact.lost_one.area}}</td>
+										<td>{{contact.lost_one.nationality}}</td>
+										<td>{{contact.lost_one.contact_number}}</td>
+										<td>{{contact.lost_one.status}}</td>
+										<td>{{contact.note}}</td>
+										{% endfor %}
 									</tr>
 								</tbody>
 							</table>
