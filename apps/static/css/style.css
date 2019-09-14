@@ -173,6 +173,17 @@ form label{
 .image-upload .card-image i{
 	font-size: 20px;
 }
+
+.text-instagram{
+	color: magenta !important;
+}
+.font-sm{
+	font-size: 1.1em !important;
+}
+.font-xs{
+	font-size: 0.8em !important;
+	font-weight: 500;
+}
 @media (min-width: 992px){
 	.notification-dropdown{
 		min-width: 280px;

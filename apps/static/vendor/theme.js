@@ -275,10 +275,8 @@ function debounce(func, wait, immediate) {
   };
 };
 
-
 // owl-carousel
-$(document).ready(function(){
-  $('.owl-carousel').owlCarousel({
+  $('#owl-carousel-updates').owlCarousel({
     loop:true,
     margin:10,
     center: true,
@@ -301,5 +299,30 @@ $(document).ready(function(){
             dots: true,
         }
     },
-})
 });
+
+// owl-carousel
+  $('#owl-carousel-sponsors').owlCarousel({
+    loop:true,
+    margin:10,
+    center: false,
+    responsiveClass:true,
+    autoplay: true,
+    autoplayTimeout:5000,
+    autoplayHoverPause:true,
+    responsive:{
+        0:{
+            items:3,
+            dots: false
+        },
+        600:{
+            items:4,
+            dots: false
+        },
+        1000:{
+            items:5,
+            loop:true,
+            dots: false,
+        }
+    },
+})
