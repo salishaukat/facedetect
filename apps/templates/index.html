@@ -961,6 +961,14 @@
 								<p><span class="text-default"> Jama Nix - </span> Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged.</p>
 							</div>
 						</div>
+						<div class="row pt-5 pb-0 px-1"> 
+						<form>
+							<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
+								Update Record
+							</button>
+						</form>
+						</div>
+
 
 					</div>
 				</div>
@@ -978,7 +986,8 @@
 			function showmodel(image,lost_one_name,gender,age,area,country,lost_one_contact_number,status,name,contact_number,address,note,email){
 				$('.register-detail').modal('show');
 				$('#h4name').text(lost_one_name);
-				$('#h4_lost_one_contact_no').text(age)
+				$('#h4_lost_one_contact_no').text(lost_one_contact_number)
+				$('#h4age').text(age)
 				$('#h4images').attr('src', image)
 				$('#h4status').text(status)
 				$('#h4_lost_one_contact_no').text(lost_one_contact_number)
