@@ -20,6 +20,14 @@ def search(request):
     
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
+def get_all(request):
+    user_role = UserProfile.objects.filter(user=request.user.id)
+    contact = None
+    contact = Contact.objects.all()
+    
+    return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
+
+
 def pic_search(request):
     print("in function ==============")
     contact = None
@@ -51,40 +59,22 @@ def pic_search(request):
             bounding_boxes, points, chips = fr.find_faces(frame,
                                                       return_chips=True,
                                                       return_binary=True)
-            # if bounding_boxes is None:
-            #         continue
             for i, chip in enumerate(chips):
                 identity = fr.identify(chip,
                                        threshold=0.3,
                                        collection='./collection.npz')
                 print('=======identity=======')
                 print(identity)
-                #print(lost_one__folder_name__contains=identity['predicted_label'])
                 print(identity['predicted_label'])
                 if identity['predicted_label'] != None:
 
                     contact = Contact.objects.filter(lost_one__folder_name__contains=identity['predicted_label'])
-                # if contact[]:
-                #     print("contact[0]")
-                #     print(contact)
         
         except Exception as e:
             print("in except =====================")
             print(str(e))
 
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})                
-                # if identity['predicted_label']:
-                #     fr.draw_label(
-                #         frame,
-                #         (int(bounding_boxes[i][0]),
-                #          int(bounding_boxes[i][1])),
-                #         identity['predicted_label'])
-                # fr.draw_box(frame, bounding_boxes[i])
-            #cv2.imshow('Trueface.ai', frame)                
-
-
-
-    #return render(request, 'index.html', {"contacts":contact})
 
 def advance_search(request):
     contact = None
@@ -199,7 +189,7 @@ def login(request):
             request.session['username'] = request.POST['username']
             #print ("test1-----------------------------")
             request.session['password'] = request.POST['password']
-        return redirect('search')
+        return redirect('get_all')
     return render(request, 'login.html')
 
 def logout(request):
