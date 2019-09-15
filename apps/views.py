@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import  LostOne, Contact
+from .models import  LostOne, Contact, UserProfile
 from django.core.files.storage import FileSystemStorage
 import ntpath
 from django.db.models import Q
@@ -9,12 +9,13 @@ from django.contrib.auth import authenticate
 
 
 def search(request):
+    user_role = UserProfile.objects.filter(user=request.user.id)
     contact = None
     if request.POST.get('search_name'):
         name = request.POST.get('search_name')
         contact = Contact.objects.filter(lost_one__name__contains=name)
     
-    return render(request, 'index.html', {"contacts":contact})
+    return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def advance_search(request):
     contact = None
@@ -38,11 +39,11 @@ def advance_search(request):
     for key, value in tags.items():
         or_condition.add(Q(**{key: value}), Q.OR)
     contact = Contact.objects.filter(or_condition)
-    return render(request, 'index.html', {"contacts":contact})
+    return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def index(request):
     lostones = LostOne.objects.all()
-    return render(request, 'home.html', {"lostones":lostones})
+    return render(request, 'home.html', {"lostones":lostones, "user":request.session["username"]})
 
 
 def lostone(request):
@@ -67,7 +68,7 @@ def lostone(request):
                 gender = 'female'
             
             path = '/collection/'+first_name+last_name
-            fs = FileSystemStorage(location='collection/'+first_name+ ' ' +last_name)
+            fs = FileSystemStorage(location='collection/'+first_name+last_name)
             person_pic1 = fs.save(person_pic1.name, person_pic1)
             person_pic1 = fs.url(person_pic1)
             person_pic1 = ntpath.basename(person_pic1)
@@ -98,37 +99,41 @@ def lostone(request):
             note = request.POST.get('note')
             contact_area = request.POST.get('contact_area')
 
+
             lost_one_object = LostOne.objects.create(gender=gender, name=first_name+ ' ' +last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
                                                      person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country)
-            contact = Contact.objects.create(name=name, contact_number1=contact_number1,
+            
+            rescued = True if request.POST.get('rescued') else False
+            died = True if request.POST.get('died') else False
+            contact = Contact.objects.create(rescued=rescued, died=died, name=name, contact_number1=contact_number1,
                                              contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
+            
+            
         except Exception as e:
             print (e)
 
-    return render(request, '5-rescuer.html', {'n' : range(1,100),'user':user})
+    return render(request, '5-rescuer.html', {'n' : range(1,100), "user":request.session["username"]})
 
 def login(request):
 
     if request.method == 'POST':
-        username=get_user(request.POST['email'])
         #print("email----------------", username)
-        user = authenticate(username=username, password=request.POST['password'])
+        user = authenticate(username=request.POST['username'], password=request.POST['password'])
         #print ("user",type(username.username))
         if user:
             #print ("test-----------------------------")
-            request.session['username'] = username.username
+            request.session['username'] = request.POST['username']
             #print ("test1-----------------------------")
-            request.session['email'] = request.POST['email']
             request.session['password'] = request.POST['password']
         return redirect('search')
     return render(request, 'login.html')
 
 def logout(request):
    try:
-      del request.session['username']
+      request.session['username'] = None
    except:
       pass
-   return redirect('login')
+   return redirect('home')
 
 def get_user(email):
     try:

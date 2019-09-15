@@ -45,17 +45,24 @@
 					<li class="nav-item">
 						<a class="nav-link text-primary" href="#"><small>CONTACT US</small> <br/> +1-719-5842</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link text-secondary" href="#"><i class="fa fa-bell"></i></a>
+					</li>
+					{% if user is None or 'AnonymousUser' in user %}
 					<li class="nav-item dropdown">
+
 						<a class="btn btn-warning btn-round" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Rescuer Login
 						</a>
+
 						<div class="dropdown-menu dropdown-menu-right notification-dropdown" aria-labelledby="navbarDropdownMenuLink">
-							<form class="px-3 pt-3 pb-3">
+							<form class="px-3 pt-3 pb-3" action="{% url 'login' %}" method="post" enctype="multipart/form-data">
+								{% csrf_token %}
 								<div class="form-group">
-									<input type="text" class="form-control" id="userId" placeholder="User Id">
+									<input type="text" class="form-control" id="userId" name="username"  placeholder="User Id">
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control" id="passwordId" placeholder="Password">
+									<input type="password" class="form-control" id="passwordId"  name="password" placeholder="Password">
 								</div>
 								<div class="form-check">
 									<label class="form-check-label text-default">
@@ -69,7 +76,17 @@
 								<button type="submit" class="btn btn-primary btn-round btn-block mt-4">LOGIN</button>
 							</form>
 						</div>
+					</li>	
+					
+					{% else %}
+					<li class="nav-item">
+						<form class="px-3 pt-3 pb-3" action="{% url 'logout' %}" method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							<button type="submit" class="btn btn-primary btn-round btn-block mt-4">Logout</button>
+						</form>
 					</li>
+										
+					{% endif %}
 				</ul>
 			</div>
 		</div>
