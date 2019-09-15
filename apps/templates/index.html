@@ -775,7 +775,7 @@
 								{% if contacts %}
 								<tbody>
 										{% for contact in contacts %}
-									<tr onclick="showmodel('{{contact.lost_one.person_pic1}}','{{contact.lost_one.first_name}}  {{contact.lost_one.last_name}}','{{contact.lost_one.gender}}','{{contact.lost_one.age}}','{{contact.lost_one.area}}','{{contact.lost_one.country}}','{{contact.lost_one.contact_number}}','{{contact.lost_one.status}}','{{contact.name}}','{{contact.contact_number1}}','{{contact.address}}','{{contact.note}},{{contact.lost_one.email}}')">
+									<tr onclick="showmodel('{{contact.lost_one.id}}','{{contact.lost_one.person_pic1}}','{{contact.lost_one.first_name}}  {{contact.lost_one.last_name}}','{{contact.lost_one.gender}}','{{contact.lost_one.age}}','{{contact.lost_one.area}}','{{contact.lost_one.country}}','{{contact.lost_one.contact_number}}','{{contact.lost_one.status}}','{{contact.name}}','{{contact.contact_number1}}','{{contact.address}}','{{contact.note}},{{contact.lost_one.email}}')">
 										<!-- <td scope="row">1</td> -->
 										<td> {{ forloop.counter }} </td>
 										<td><img class="rounded-circle user-img" src="{{contact.lost_one.person_pic1}}"/><span>{{contact.lost_one.first_name}}  {{contact.lost_one.last_name}}</span></td>
@@ -962,11 +962,11 @@
 							</div>
 						</div>
 						<div class="row pt-5 pb-0 px-1"> 
-						<form>
-							<button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
+							{% if user and 'AnonymousUser' not in user %}
+							<a href='#' id="lost_one_update" type="button" class="btn btn-primary" >
 								Update Record
-							</button>
-						</form>
+							</a>
+							{% pass %}
 						</div>
 
 
@@ -983,14 +983,13 @@
 		<script src="{% static 'vendor/jquery.dataTables.min.js' %}" type="text/javascript"></script>
 
 		<script>
-			function showmodel(image,lost_one_name,gender,age,area,country,lost_one_contact_number,status,name,contact_number,address,note,email){
-				$('.register-detail').modal('show');
+			function showmodel(id,image,lost_one_name,gender,age,area,country,lost_one_contact_number,status,name,contact_number,address,note,email){
+				
 				$('#h4name').text(lost_one_name);
 				$('#h4_lost_one_contact_no').text(lost_one_contact_number)
 				$('#h4age').text(age)
 				$('#h4images').attr('src', image)
 				$('#h4status').text(status)
-				$('#h4_lost_one_contact_no').text(lost_one_contact_number)
 				$('#h4gender').text(gender)
 				$('#h4_lost_one_area').text(area)
 				$('#h4country').text(country)
@@ -999,6 +998,8 @@
 				$('#h4address').text(address)
 				$('#h4note').text(note)
 				$('#h4contact_number').text(contact_number)
+				$('#lost_one_update').attr('href', '{% url "lostone" %}/'+id)
+				$('.register-detail').modal('show');
 
 
 			}
