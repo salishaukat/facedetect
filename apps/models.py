@@ -41,3 +41,11 @@ class Contact(models.Model):
     died = models.BooleanField(null=True, blank=True, default=False)
     area = models.CharField(null=False, blank=False, max_length=100)
     lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
+
+
+class Sponsor(models.Model):
+    name = models.CharField(null=False, blank=False, max_length=100)
+    company_name = models.CharField(null=False, blank=False, max_length=100)
+    email_address = models.CharField(null=False, blank=False, max_length=100)
+    contact_number = models.CharField(null=True, blank=True, max_length=100)
+    company_logo = models.CharField(null=False, blank=False, max_length=100)
