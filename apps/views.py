@@ -42,8 +42,13 @@ def advance_search(request):
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def index(request):
-    lostones = LostOne.objects.all()
-    return render(request, 'home.html', {"lostones":lostones, "user":request.session["username"]})
+    if 'username' not in request.session or request.session['username'] is None:
+        request.session['username'] = None
+        lostones = LostOne.objects.all()
+        return render(request, 'home.html', {"lostones":lostones, "user":None})
+    elif request.session['username'] is not None:
+        return redirect('search')
+
 
 
 def lostone(request):
@@ -133,7 +138,7 @@ def logout(request):
       request.session['username'] = None
    except:
       pass
-   return redirect('home')
+   return redirect('index')
 
 def get_user(email):
     try:
