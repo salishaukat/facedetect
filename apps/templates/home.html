@@ -116,6 +116,38 @@
 						<strong>
 							<a class="text-primary" href="#"> NAME </a> 
 							<span class="px-2 text-primary"> | </span> 
+							<a class="text-default"  onclick="toggle_pic()"> PICTURE </a>
+						</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+
+		<form id="picture_search_form" action="{% url 'pic_search' %}" method="post" enctype="multipart/form-data" style="display: none;">
+			{% csrf_token %}
+		<div class="picture-page-header" style="background: #f0f4f9">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+						<div class="input-group">
+							<input id="personpic1" class="btn" value="PICTURE" name="print_btn" onclick="openloader1()"/>
+                                <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" />
+<!-- 							<input type="text" name="search_name" class="form-control bg-white" placeholder="Search by Name"> -->
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<a onclick="submit_picture_search()"><i class="fa fa-search" ></i></a>
+								</div>
+
+								<a type="button" class="btn btn-neutral btn-lg advance-search" onclick="advance_search()"> Advance Search
+									<span class="sr-only">Toggle Dropdown</span>
+								</a>
+
+							</div>
+						</div>
+						<strong>
+							<a class="text-primary" href="#"> NAME </a> 
+							<span class="px-2 text-primary"> | </span> 
 							<a class="text-default" href="#"> PICTURE </a>
 						</strong>
 					</div>
@@ -578,6 +610,28 @@
 			function submit_simple_search(){
 				$('#simple_search_form').submit();
 			}
+			function submit_picture_search(){
+				$('#picture_search_form').submit();
+			}			
+            function openloader1() {
+                $("#uploadfile1").click();
+            }
+            function upload_img1(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#personpic1').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            function toggle_pic(){
+		    	$(".page-header").hide();
+		    	$(".page-header-adv").hide();
+		    	$("#picture_search_form").show();            	
+            }
 		</script>
 
 </body>

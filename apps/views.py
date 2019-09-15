@@ -6,6 +6,9 @@ import ntpath
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from trueface.recognition import FaceRecognizer
+from trueface.video import VideoStream
+import cv2
 
 
 def search(request):
@@ -16,6 +19,59 @@ def search(request):
         contact = Contact.objects.filter(lost_one__name__contains=name)
     
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
+
+def pic_search(request):
+    print("in function ==============")
+    contact = None
+    if request.method == 'POST' and request.FILES['person_pic1']:
+        try:
+            person_pic1 = request.FILES['person_pic1']     
+            
+            fs = FileSystemStorage(location='search/')
+            person_pic1 = fs.save(person_pic1.name, person_pic1)
+            person_pic1 = fs.url(person_pic1)
+            person_pic1 = ntpath.basename(person_pic1)
+            person_pic1 = 'search' + '/' + person_pic1
+
+            fr = FaceRecognizer(ctx='cpu',
+                                fd_model_path='./fd_model',
+                                fr_model_path='./model-tfv2/model.trueface',
+                                params_path='./model-tfv2/model.params',
+                                license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
+                                )
+
+            fr.create_collection('collection', 'collection.npz', return_features=False)
+
+            #vcap = VideoStream(src=0).start()
+            vcap = cv2.imread('./'+person_pic1)
+            #while(True):
+                #frame = vcap.read()
+            frame = vcap
+            frame = cv2.resize(frame, (640, 480))
+            bounding_boxes, points, chips = fr.find_faces(frame,
+                                                      return_chips=True,
+                                                      return_binary=True)
+            # if bounding_boxes is None:
+            #         continue
+            for i, chip in enumerate(chips):
+                identity = fr.identify(chip,
+                                       threshold=0.3,
+                                       collection='./collection.npz')
+                print('=======identity=======')
+                print(identity)
+                # if identity['predicted_label']:
+                #     fr.draw_label(
+                #         frame,
+                #         (int(bounding_boxes[i][0]),
+                #          int(bounding_boxes[i][1])),
+                #         identity['predicted_label'])
+                # fr.draw_box(frame, bounding_boxes[i])
+            #cv2.imshow('Trueface.ai', frame)                
+        except:
+            print("in except =====================")
+
+
+    return render(request, 'index.html', {"contacts":contact})
 
 def advance_search(request):
     contact = None
