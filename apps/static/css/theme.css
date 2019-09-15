@@ -2139,8 +2139,8 @@ fieldset[disabled] .btn-danger.active {
 }
 
 .btn-neutral {
-  background-color: #FFFFFF;
-  color: #00778b;
+  background-color: #FFFFFF !important;
+  color: #00778b !important;
 }
 
 .btn-neutral:hover,

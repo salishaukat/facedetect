@@ -1,21 +1,3 @@
-/*!
-
- =========================================================
- * Now UI Kit - v1.3.0
- =========================================================
-
- * Product Page: https://www.creative-tim.com/product/now-ui-kit
- * Copyright 2019 Creative Tim (http://www.creative-tim.com)
-
- * Designed by www.invisionapp.com Coded by www.creative-tim.com
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
- */
-
-
 var transparent = true;
 var big_image;
 
