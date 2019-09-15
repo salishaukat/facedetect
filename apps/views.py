@@ -162,7 +162,7 @@ def lostone(request):
 
 
             lost_one_object = LostOne.objects.create(gender=gender, name=first_name+ ' ' +last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
-                                                     person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country)
+                                                     person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
             
             rescued = True if request.POST.get('rescued') else False
             died = True if request.POST.get('died') else False
