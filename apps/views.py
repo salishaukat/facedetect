@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import  LostOne, Contact, UserProfile
+from .models import  LostOne, Contact, UserProfile, Sponsor
 from django.core.files.storage import FileSystemStorage
 import ntpath
 from django.db.models import Q
@@ -108,8 +108,40 @@ def index(request):
     elif request.session['username'] is not None:
         return redirect('search')
 
+def sponsor(request):
+    sponsor = None    
+    print("in sponsor =============================")
+    if request.method == 'POST' and request.FILES['company_logo']:
+        print("in sponsor =============================")
+        try:
+            company_logo = request.FILES['company_logo']
+            name = request.POST.get('name')
+            company_name = request.POST.get('company_name')
+            email_address = request.POST.get('email_address')
+            contact_number = request.POST.get('contact_number')
+            fs = FileSystemStorage(location='company/')
+            company_logo = fs.save(company_logo.name, company_logo)
+            company_logo = fs.url(company_logo)
+            company_logo = ntpath.basename(company_logo)
+            company_logo = 'company/' + company_logo
 
+            sponsor_object = Sponsor.objects.create(name=name, company_name=company_name, email_address=email_address, contact_number=contact_number, company_logo=company_logo)
+                        
+        except Exception as e:
+            print (e)
+    else:
+        try:
+            name = request.POST.get('name')
+            company_name = request.POST.get('company_name')
+            email_address = request.POST.get('email_address')
+            contact_number = request.POST.get('contact_number')
 
+            sponsor_object = Sponsor.objects.create(name=name, company_name=company_name, email_address=email_address, contact_number=contact_number)
+                        
+        except Exception as e:
+            print (e)        
+    return redirect('index')
+    #return render(request, 'home.html', {'n' : range(1,100), "user":request.session["username"]})
 def lostone(request):
     user = None
 

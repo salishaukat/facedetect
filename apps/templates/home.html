@@ -45,9 +45,9 @@
 					<li class="nav-item">
 						<a class="nav-link text-primary" href="#"><small>CONTACT US</small> <br/> +1-719-5842</a>
 					</li>
-					<li class="nav-item">
+<!-- 					<li class="nav-item">
 						<a class="nav-link text-secondary" href="#"><i class="fa fa-bell"></i></a>
-					</li>
+					</li> -->
 					{% if user is None or 'AnonymousUser' in user %}
 					<li class="nav-item dropdown">
 
@@ -108,13 +108,12 @@
 								</div>
 
 								<a type="button" class="btn btn-neutral btn-lg advance-search" onclick="advance_search()"> Advance Search
-									<span class="sr-only">Toggle Dropdown</span>
 								</a>
 
 							</div>
 						</div>
 						<strong>
-							<a class="text-primary" href="#"> NAME </a> 
+							<a class="text-primary" href="#" "> NAME </a> 
 							<span class="px-2 text-primary"> | </span> 
 							<a class="text-default"  onclick="toggle_pic()"> PICTURE </a>
 						</strong>
@@ -126,7 +125,7 @@
 
 		<form id="picture_search_form" action="{% url 'pic_search' %}" method="post" enctype="multipart/form-data" style="display: none;">
 			{% csrf_token %}
-		<div class="picture-page-header" style="background: #f0f4f9">
+		<div class="page-header" style="background: #f0f4f9">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
@@ -146,7 +145,7 @@
 							</div>
 						</div>
 						<strong>
-							<a class="text-primary" href="#"> NAME </a> 
+							<a class="text-primary" onclick="name_search()"> NAME </a> 
 							<span class="px-2 text-primary"> | </span> 
 							<a class="text-default" href="#"> PICTURE </a>
 						</strong>
@@ -155,6 +154,54 @@
 			</div>
 		</div>
 		</form>
+
+<!-- 	<div class="page-header" style="background: #f0f4f9">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+						<div class="tab-content">
+							<div class="tab-pane active" id="home">
+								<form id="simple_search_form" class="w-100" action="{% url 'search' %}" method="post" enctype="multipart/form-data">
+									{% csrf_token %}
+									<div class="input-group">
+										<input type="text" class="form-control bg-white" placeholder="Search by Name">
+										<div class="input-group-append">
+											<div class="input-group-text">
+												<a onclick="submit_simple_search()"><i class="fa fa-search" ></i></a>
+											</div>
+											<a class="btn btn-neutral btn-lg advance-search text-primary" onclick="advance_search()"> Advance Search </a>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="tab-pane" id="updates" >
+								<form id="picture_search_form" class="w-100" action="{% url 'pic_search' %}" method="post" enctype="multipart/form-data">
+									{% csrf_token %}
+									<div class="input-group" >
+										<input type="text" class="form-control bg-white" placeholder="Upload or Drag & drop">
+										<div class="input-group-append">
+											<div class="input-group-text">
+												<a onclick="submit_picture_search()"><i class="fa fa-image"></i></a>
+											</div>
+											<a class="btn btn-neutral btn-lg advance-search text-primary" onclick="advance_search()"> Advance Search </a>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<ul class="nav nav-tabs justify-content-center" data-tabs="tabs">
+							<li class="nav-item">
+								<a class="nav-link active" href="#home" data-toggle="tab">NAME</a>
+							</li>
+							<span class="text-default" style="padding-top: 10px;"> | </span>
+							<li class="nav-item">
+								<a class="nav-link" href="#updates" data-toggle="tab">PICTURE</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div -->
 
 		<div class="page-header-adv" style="background: #f0f4f9; display: none;">
 			<form action="{% url 'advance_search' %}" method="post" enctype="multipart/form-data">
@@ -559,32 +606,30 @@
 				</div>
 				<div class="modal-body px-5 mx-5">
 					<p class="text-center text-default"> Please provide following details our team member will contact you </p>
-					<form>
+					<form id="sponsor_form" action="{% url 'sponsor' %}" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Your Name">
+							<input type="text" class="form-control" name="name" placeholder="Your Name">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Company Name">
+							<input type="text" class="form-control" name="company_name" placeholder="Company Name">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Email">
+							<input type="text" class="form-control" name="email_address" placeholder="Email">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Contact No.">
+							<input type="text" class="form-control" name="contact_number" placeholder="Contact No.">
 						</div>
 						<div class="form-group">
-							<label for="noteTextArea">Upload Company Logo</label>
-							<div class="clearfix"></div>
-							<div class="image-upload">
-								<label for="file-input">
-									<div class="card-image text-default">
-										<i class="fa fa-plus"></i>
-									</div>
-								</label>
-								<input id="file-input" type="file" />
+							<label for="uploadLogo">Upload Company Logo</label>
+							
+							<div class="row">
+								<img id="com_logo" name="12" src="{% static 'img/plus.jpg' %}" alt="Snow" style="width: 10%; height: 10%;" onclick="logo_loader();">
 							</div>
+									
+								<input id="logo_input" type="file" name="company_logo" style="display: none;" onchange="upload_logo(this);"/>
 						</div>
-						<button type="button" class="btn btn-primary btn-round btn-block mt-4" ">Register</button>
+						<button type="button" class="btn btn-primary btn-round btn-block mt-4" onclick="submit_sponsor_form()">Register</button>
 					</form>
 				</div>
 			</div>
@@ -599,10 +644,30 @@
 	<script src="{% static 'vendor/theme.js' %}" type="text/javascript"></script>
 
 <script>
+
+			function logo_loader() {
+                $("#logo_input").click();
+            }	
+            function upload_logo(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#com_logo').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
 		    function advance_search() {
-		    	$(".page-header").hide();
+		    	$("#simple_search_form").hide();
+		    	$("#picture_search_form").hide();
 		    	$(".page-header-adv").show();
 			}
+			function submit_sponsor_form(){
+				$('#sponsor_form').submit();
+			}				
 			function closeDialog(){
 				$(".page-header").show();
 		    	$(".page-header-adv").hide();
@@ -628,10 +693,15 @@
                 }
             }
             function toggle_pic(){
-		    	$(".page-header").hide();
+		    	$("#simple_search_form").hide();
 		    	$(".page-header-adv").hide();
 		    	$("#picture_search_form").show();            	
             }
+            function name_search(){
+		    	$(".page-header-adv").hide();
+		    	$("#picture_search_form").hide();            	
+		    	$("#simple_search_form").show();
+            }            
 		</script>
 
 </body>

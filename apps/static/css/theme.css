@@ -6037,6 +6037,13 @@ img {
   position: relative;
 }
 
+.picture-page-header .container {
+  height: 100%;
+  z-index: 0;
+  text-align: center;
+  position: relative;
+}
+
 .page-header .category,
 .page-header .description {
   color: rgba(255, 255, 255, 0.8);
