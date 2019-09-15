@@ -59,6 +59,20 @@ def pic_search(request):
                                        collection='./collection.npz')
                 print('=======identity=======')
                 print(identity)
+                #print(lost_one__folder_name__contains=identity['predicted_label'])
+                print(identity['predicted_label'])
+                if identity['predicted_label'] != None:
+
+                    contact = Contact.objects.filter(lost_one__folder_name__contains=identity['predicted_label'])
+                # if contact[]:
+                #     print("contact[0]")
+                #     print(contact)
+        
+        except Exception as e:
+            print("in except =====================")
+            print(str(e))
+
+    return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})                
                 # if identity['predicted_label']:
                 #     fr.draw_label(
                 #         frame,
@@ -67,11 +81,10 @@ def pic_search(request):
                 #         identity['predicted_label'])
                 # fr.draw_box(frame, bounding_boxes[i])
             #cv2.imshow('Trueface.ai', frame)                
-        except:
-            print("in except =====================")
 
 
-    return render(request, 'index.html', {"contacts":contact})
+
+    #return render(request, 'index.html', {"contacts":contact})
 
 def advance_search(request):
     contact = None
@@ -161,7 +174,7 @@ def lostone(request):
             contact_area = request.POST.get('contact_area')
 
 
-            lost_one_object = LostOne.objects.create(gender=gender, name=first_name+ ' ' +last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
+            lost_one_object = LostOne.objects.create(gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
                                                      person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
             
             rescued = True if request.POST.get('rescued') else False
