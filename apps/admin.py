@@ -15,7 +15,7 @@ class LostOneAdmin(admin.ModelAdmin):
 admin.site.register(LostOne, LostOneAdmin)
 
 class SponsorAdmin(admin.ModelAdmin):
-	list_display = ['id','name','email_address','contact_number']
+	list_display = ['id','name','email_address','contact_number','active']
 
 admin.site.register(Sponsor, SponsorAdmin)
 

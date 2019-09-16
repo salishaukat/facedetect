@@ -547,11 +547,9 @@
 						<!-- Set up your HTML -->
 						<h4 class="text-center text-primary mt-5 mb-5 h4"> SPONSORS </h4>
 						<div class="owl-carousel" id="owl-carousel-sponsors">
-							<div> <img src="{% static 'img/addidas.jpg' %}"></div>
-							<div> <img src="{% static 'img/roypsolo.jpg' %}"></div>
-							<div> <img src="{% static 'img/cocacola.jpg' %}"></div>
-							<div> <img src="{% static 'img/pepsi.jpg' %}"></div>
-							<div> <img src="{% static 'img/microsoft.jpg' %}"></div>
+							{% for sponsor in sponsors %}
+							<div> <img src="{{sponsor.company_logo}}"></div>
+							{% endfor %}
 						</div>
 					</div>
 				</div>
