@@ -16,5 +16,6 @@ urlpatterns = [
     path('login', views.login, name="login"),
     path('logout', views.logout, name="logout"),
     path('comment', views.comments, name="comment"),
-    path('reports', views.reports, name="reports")
+    path('reports', views.reports, name="reports"),
+    path('reports/<str:search>', views.reports, name="reports")
 ]

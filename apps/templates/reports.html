@@ -48,11 +48,11 @@
 							Status
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="#">Rescued</a>
-							<a class="dropdown-item" href="#">Died</a>
-							<a class="dropdown-item" href="#">Need Evacuation</a>
-							<a class="dropdown-item" href="#">Critical Evacuation</a>
-							<a class="dropdown-item" href="#">Searching Evacuation</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Rescued'>Rescued</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Died'>Died</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Need Evacuation'>Need Evacuation</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Critical Evacuation'>Critical Evacuation</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Searching Evacuation'>Searching Evacuation</a>
 						</div>
 					</li>
 					<li class="nav-item dropdown">
@@ -60,13 +60,13 @@
 							Area
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="#">AB - Bahama Coral Island</a>
-							<a class="dropdown-item" href="#">AB - Bahama Palm Shores</a>
-							<a class="dropdown-item" href="#">AB - Blackwood Village</a>
-							<a class="dropdown-item" href="#">AB - Central Pines</a>
-							<a class="dropdown-item" href="#">AB - Cooper's Town</a>
-							<a class="dropdown-item" href="#">AB - Crossing Rocks</a>
-							<a class="dropdown-item" href="#">AB - Dundas Town</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Bahama Coral Island'>AB - Bahama Coral Island</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Bahama Palm Shores'>AB - Bahama Palm Shores</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Blackwood Village'>AB - Blackwood Village</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Central Pines'>AB - Central Pines</a>
+							<a class="dropdown-item" href="{% url 'reports' %}/Cooper's Town">AB - Cooper's Town</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Crossing Rocks'>AB - Crossing Rocks</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Dundas Town'>AB - Dundas Town</a>
 						</div>
 					</li>
 					<li class="nav-item dropdown">
@@ -74,13 +74,13 @@
 							Shelter
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="#">Green Turtle Cay</a>
-							<a class="dropdown-item" href="#">Elbow Cay</a>
-							<a class="dropdown-item" href="#">Abaco & Grand Bahama</a>
-							<a class="dropdown-item" href="#">Headknowles </a>
-							<a class="dropdown-item" href="#">Lend A Hand Bahamas</a>
-							<a class="dropdown-item" href="#">Sandals Foundation</a>
-							<a class="dropdown-item" href="#">Fort Lauderdale</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Green Turtle Cay'>Green Turtle Cay</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Elbow Cay'>Elbow Cay</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Abaco & Grand'>Abaco & Grand Bahama</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Headknowles'>Headknowles </a>
+							<a class="dropdown-item" href='{% url "reports" %}/Lend A Hand Bahamas'>Lend A Hand Bahamas</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Sandals Foundation'>Sandals Foundation</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Fort Lauderdale'>Fort Lauderdale</a>
 						</div>
 					</li>
 					<li class="nav-item dropdown">
@@ -88,10 +88,10 @@
 							Foreigner
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="#">United State of America</a>
-							<a class="dropdown-item" href="#">Canada</a>
-							<a class="dropdown-item" href="#">Westindies</a>
-							<a class="dropdown-item" href="#">Other Countries</a>
+							<a class="dropdown-item" href='{% url "reports" %}/USA'>United State of America</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Canada'>Canada</a>
+							<a class="dropdown-item" href='{% url "reports" %}/Bahamas'>Bahamas</a>
+							<a class="dropdown-item" href='{% url "reports" %}/OC'>Other Countries</a>
 						</div>
 					</li>
 					<li class="nav-item">
@@ -127,10 +127,11 @@
 						</div>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-primary" href="#" target="_blank">
-							Logout
-						</a>
-					</li>
+                        <form class="px-3 pt-3 pb-3" action="{% url 'logout' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary btn-round btn-block mt-4">Logout</button>
+                        </form>
+                    </li>
 				</ul>
 			</div>
 		</div>
@@ -141,132 +142,75 @@
 			<div class="container">
 				<div class="row">
 					<div class="table-header mt-2 col-12">
-						<span class="pr-3 mt-3 float-left font-md"><strong> CANADA </strong> </span>
+						{% if search %}
+						<span class="pr-3 mt-3 float-left font-md"><strong> {{search}} </strong> </span>
 
-						<div class="float-right pt-2 pb-2">
-							<span class="pr-3"><strong> Filter by Status:</strong> </span>
-							<div class="form-check form-check-radio form-check-inline">
-								<label class="form-check-label">
-									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Rescued
-									<span class="form-check-sign"></span>
-								</label>
-							</div>
-							<div class="form-check form-check-radio form-check-inline">
-								<label class="form-check-label">
-									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Died
-									<span class="form-check-sign"></span>
-								</label>
-							</div>
-							<div class="form-check form-check-radio form-check-inline">
-								<label class="form-check-label">
-									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option1"> Critical Evacuation
-									<span class="form-check-sign"></span>
-								</label>
-							</div>
-							<div class="form-check form-check-radio form-check-inline">
-								<label class="form-check-label">
-									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option2"> Need Evaculation
-									<span class="form-check-sign"></span>
-								</label>
-							</div>
-							<div class="form-check form-check-radio form-check-inline">
-								<label class="form-check-label">
-									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option2"> Searching
-									<span class="form-check-sign"></span>
-								</label>
-							</div>
-						</div>
-					</div> <!-- table header -->
+						 <!-- table header -->
+						{% endif %}
 				</div>
 				<div class="row">
 					<div class="col-12">
 						<table class="table">
 							<thead>
-								<tr>
-									<th scope="col" width="5%">S#</th>
-									<th scope="col" width="20%">Name</th>
-									<th scope="col">Gender</th>
-									<th scope="col">Age</th>
-									<th scope="col">Contact No</th>
-									<th scope="col" width="15%x">Status</th>
-									<th scope="col" width="30%">Note</th>
-								</tr>
-							</thead>
+									<tr>
+										<th scope="col">S#</th>
+										<th scope="col">Name</th>
+										<th scope="col">Gender</th>
+										<th scope="col">Age</th>
+										<th scope="col">Area</th>
+										<th scope="col">Nationality</th>
+										<th scope="col">Contact No</th>
+										<th scope="col">Status</th>
+										<th scope="col">Note</th>
+									</tr>
+								</thead>
 							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td> <img class="rounded-circle user-img" src="https://community.smartsheet.com/sites/default/files/default_user.jpg"><span> Mark </span></td>
-									<td>Male</td>
-									<td>Otto</td>
-									<td>Otto</td>
-									<td class="text-success font-weight-bold">Rescued</td>
-									<td>If you can find your lost one then fill the form
-									We wil help you to find them</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td> <img class="rounded-circle user-img" src="https://community.smartsheet.com/sites/default/files/default_user.jpg"><span> Mark </span></td>
-									<td>Male</td>
-									<td>Otto</td>
-									<td>Otto</td>
-									<td class="text-danger font-weight-bold">Died</td>
-									<td>If you can find your lost one then fill the form
-									We wil help you to find them</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td> <img class="rounded-circle user-img" src="https://community.smartsheet.com/sites/default/files/default_user.jpg"><span> Mark </span></td>
-									<td>Male</td>
-									<td>Otto</td>
-									<td>Otto</td>
-									<td class="text-primary font-weight-bold">Critical Evacuation</td>
-									<td>If you can find your lost one then fill the form
-									We wil help you to find them</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td> <img class="rounded-circle user-img" src="https://community.smartsheet.com/sites/default/files/default_user.jpg"><span> Mark </span></td>
-									<td>Male</td>
-									<td>Otto</td>
-									<td>Otto</td>
-									<td class="text-primary font-weight-bold">Need Evacuation</td>
-									<td>If you can find your lost one then fill the form
-									We wil help you to find them</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td> <img class="rounded-circle user-img" src="https://community.smartsheet.com/sites/default/files/default_user.jpg"><span> Mark </span></td>
-									<td>Male</td>
-									<td>Otto</td>
-									<td>Otto</td>
-									<td class="text-default font-weight-bold">Searching</td>
-									<td>If you can find your lost one then fill the form
-									We wil help you to find them</td>
-								</tr>
-							</tbody>
+									{% if contacts %}
+										{% for contact in contacts %}
+									<tr>
+										<!-- <td scope="row">1</td> -->
+										<td> {{ forloop.counter }} </td>
+										<td><img class="rounded-circle user-img" src="{{contact.lost_one.person_pic1}}"/><span>{{contact.lost_one.first_name}}  {{contact.lost_one.last_name}}</span></td>
+										<td>{{contact.lost_one.gender}}</td>
+										<td>{{contact.lost_one.age}}</td>
+										<td>{{contact.lost_one.area}}</td>
+										<td>{{contact.lost_one.country}}</td>
+										<td>{{contact.lost_one.contact_number}}</td>
+										<td>{{contact.lost_one.status}}</td>
+										<td>{{contact.note}}</td>
+									</tr>
+										{% endfor %}
+										{% else %}
+										<tr>
+											<td colspan="9" style="text-align:center">No records found</td>
+										</tr>
+										{% endif %}
+
+								</tbody>
+
 						</table>
 					</div>
-					<ul class="pagination mx-auto">
-						<li class="page-item">
-							<a class="page-link" href="#link" aria-label="Previous">
-								<span aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
-							</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#link">1</a>
-						</li>
-						<li class="page-item active">
-							<a class="page-link" href="#link">2</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#link">3</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#link" aria-label="Next">
-								<span aria-hidden="true"><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
-							</a>
-						</li>
-					</ul>
+					{% if is_paginated %}
+						  <ul class="pagination mx-auto">
+						    {% if page_obj.has_previous %}
+						      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+						    {% else %}
+						      <li class="disabled"><span>&laquo;</span></li>
+						    {% endif %}
+						    {% for i in paginator.page_range %}
+						      {% if page_obj.number == i %}
+						        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+						      {% else %}
+						        <li><a href="?page={{ i }}">{{ i }}</a></li>
+						      {% endif %}
+						    {% endfor %}
+						    {% if page_obj.has_next %}
+						      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+						    {% else %}
+						      <li class="disabled"><span>&raquo;</span></li>
+						    {% endif %}
+						  </ul>
+						{% endif %}
 
 				</div>
 			</div>
