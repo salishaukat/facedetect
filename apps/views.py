@@ -14,6 +14,9 @@ import time
 
 
 def search(request):
+    if request.session["username"]:
+        if "reporter" in request.session["role"]:
+            return redirect('reports')
     user_role = UserProfile.objects.filter(user=request.user.id)
     contact = None
     if request.POST.get('search_name'):
@@ -153,6 +156,9 @@ def advance_search(request):
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def index(request):
+    if request.session["username"]:
+        if "reporter" in request.session["role"]:
+            return redirect('reports')
     if 'username' not in request.session or request.session['username'] is None:
         request.session['username'] = None
         lostones = LostOne.objects.order_by("-id")[:10]
@@ -198,8 +204,12 @@ def sponsor(request):
 
 
 def lostone(request, lost_one_id=None):
+    if request.session["username"]:
+        if "reporter" in request.session["role"]:
+            return redirect('reports')
     contact = None
-    
+    if ('username' not in request.session or request.session['username'] is None) and lost_one_id:
+        return redirect('lostone')
     if request.method == 'POST':
         try:
             lost_one_id = request.POST.get('lost_one_id')
@@ -312,14 +322,23 @@ def login(request):
     if request.method == 'POST':
         #print("email----------------", username)
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
+
         #print ("user",type(username.username))
         if user:
+            print(user,"----------------------")
             #print ("test-----------------------------")
             request.session['username'] = request.POST['username']
             #print ("test1-----------------------------")
             request.session['password'] = request.POST['password']
-        return redirect('get_all')
-    return render(request, 'login.html')
+            role = UserProfile.objects.filter(user=user).first()
+            request.session['role'] = None
+            print(role,"----------------------")
+            if role:
+                request.session['role'] = role.role
+                if "reporter" in role.role:
+                    return redirect('reports')
+            return redirect('get_all')
+    return render(request, 'home.html')
 
 def logout(request):
    try:
@@ -343,9 +362,18 @@ def comments(request):
         comments = request.POST.get('comment')
         print("--------------------",request.POST.get('lost_one'))
         lost_one_object = LostOne.objects.get(id=request.POST.get('lost_one'))
-        id = Comments.objects.create(name=name, comment=comments, lost_one_object=request.POST.get('lost_one'))
+        id = Comments.objects.create(name=name, comment=comments, lost_one=request.POST.get('lost_one'))
     return render(request, 'login.html')
 
-def reports(request):
-    contacts = Contact.objects.all()
-    return render(request, 'reports.html',{contacts:contacts})
+def reports(request, search=None):
+    if request.session["username"]:
+        if "reporter" in request.session["role"]:
+            if search:
+                if search.lower() == 'oc':
+                    contacts = Contact.objects.exclude(lost_one__country__in=['Canada','Bahamas','United States of America'])
+                else:
+                    contacts = Contact.objects.filter(Q(lost_one__status__contains=search) | Q(name__contains=search) | Q(lost_one__area__contains=search) | Q(lost_one__country__contains=search))
+            else:
+                contacts = Contact.objects.all()
+            return render(request, 'reports.html',{'contacts':contacts,'search':search})
+    return redirect('index')
