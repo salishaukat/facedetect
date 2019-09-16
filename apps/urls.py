@@ -14,4 +14,6 @@ urlpatterns = [
     path('lostone/<int:lost_one_id>', views.lostone, name="lostone"),
     path('login', views.login, name="login"),
     path('logout', views.logout, name="logout"),
+    path('comment', views.comments, name="comment"),
+    path('reports', views.reports, name="reports")
 ]

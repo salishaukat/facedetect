@@ -1,99 +1,9 @@
 
-<!DOCTYPE html>
-<html lang="en">
+	
+{% extends 'base.html' %}
 
-<head>
+{% block content %}
 {% load static %}
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
-
-	<title>bahamas</title>
-
-	<!-- Bootstrap core CSS -->
-
-	<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
-	<!-- Custom fonts for this template -->
-	<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-	<link href="{% static 'css/jquery.dataTables.min.css' %}" rel="stylesheet" type="text/css">
-
-	<!-- Custom theme template -->
-	<link href="{% static 'css/theme.css' %}" rel="stylesheet">
-
-	<!-- Custom styles for this template -->
-	<link href="{% static 'css/style.css' %}" rel="stylesheet">
-
-</head>
-
-<body class="profile-page sidebar-collapse">
-	<!-- Navbar -->
-	<nav class="navbar navbar-expand-lg bg-white " color-on-scroll="400">
-		<div class="container">
-			<div class="navbar-translate">
-				<a class="navbar-brand" href="/">
-					<span class="text-primary"> Find Me</span> <span class="text-secondary"> Bahamas </span>
-				</a>
-				<button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-bar top-bar"></span>
-					<span class="navbar-toggler-bar middle-bar"></span>
-					<span class="navbar-toggler-bar bottom-bar"></span>
-				</button>
-			</div>
-			<div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="img/blurred-image-1.jpg">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link text-primary" href="#"><small>CONTACT US</small> <br/> +1-719-5842</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link text-secondary" href="#"><i class="fa fa-bell"></i></a>
-					</li>
-					{% if user is None or 'AnonymousUser' in user %}
-					<li class="nav-item dropdown">
-
-						<a class="btn btn-warning btn-round" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Rescuer Login
-						</a>
-
-						<div class="dropdown-menu dropdown-menu-right notification-dropdown" aria-labelledby="navbarDropdownMenuLink">
-							<form class="px-3 pt-3 pb-3" action="{% url 'login' %}" method="post" enctype="multipart/form-data">
-								{% csrf_token %}
-								<div class="form-group">
-									<input type="text" class="form-control" id="userId" name="username"  placeholder="User Id">
-								</div>
-								<div class="form-group">
-									<input type="password" class="form-control" id="passwordId"  name="password" placeholder="Password">
-								</div>
-								<div class="form-check">
-									<label class="form-check-label text-default">
-										<input class="form-check-input" type="checkbox" value="">
-										Remember 
-										<span class="form-check-sign">
-											<span class="check"></span>
-										</span>
-									</label>
-								</div>
-								<button type="submit" class="btn btn-primary btn-round btn-block mt-4">LOGIN</button>
-							</form>
-						</div>
-					</li>	
-					
-					{% else %}
-					<li class="nav-item">
-						<form class="px-3 pt-3 pb-3" action="{% url 'logout' %}" method="post" enctype="multipart/form-data">
-							{% csrf_token %}
-							<button type="submit" class="btn btn-primary btn-round btn-block mt-4">Logout</button>
-						</form>
-					</li>
-									
-					{% endif %}
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- End Navbar -->
 	<div class="wrapper">
 		<form id="simple_search_form" action="{% url 'search' %}" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
@@ -172,29 +82,8 @@
 									</div>
 									<div class="form-group">
 										<select name="area" class="form-control">
-		                                <option selected value="0">Area</option>
-		                                <option value="North Andros"> North Andros</option>
-		                                <option value="Great Inagua"> Great Inagua</option>
-		                                <option value="South Andros"> South Andros</option>
-		                                <option value="Great Abac"> Great Abaco</option>
-		                                <option value="Grand Bahama"> Grand Bahama</option>
-		                                <option value="Long Island, Bahamas"> Long Island, Bahamas</option>
-		                                <option value="Acklins"> Acklins</option>
-		                                <option value="Eleuthera"> Eleuthera</option>
-		                                <option value="Cat Island"> Cat Island</option>
-		                                <option value="Mayaguana"> Mayaguana</option>
-		                                <option value="Crooked Island, Bahamas"> Crooked Island, Bahamas</option>
-		                                <option value="New Providence"> New Providence</option>
-		                                <option value="Exuma"> Exuma</option>
-		                                <option value="San Salvador Island"> San Salvador Island</option>
-		                                <option value="Little Inagua"> Little Inagua</option>
-		                                <option value="Rum Cay"> Rum Cay</option>
-		                                <option value="Little Abaco">Little Abaco</option>
-		                                <option value="Samana Cay">Samana Cay</option>
-		                                <option value="Ragged Island"> Ragged Island</option>
-		                                <option value="Berry Islands"> Berry Islands</option>
-		                                <option value="Bimini"> Bimini</option>
-                            		</select>
+										{% include "area_drop_down.html" %}
+										</select>
 									</div>
 									<div class="form-group">
 										<select name="country" class="form-control">
@@ -504,30 +393,9 @@
 		                            </select>
 								</div>
 								<div class="form-check form-check-radio form-check-inline">
-									 <select name="contact_area" class="form-control">
-		                                <option selected value="0">Area</option>
-		                                <option value="North Andros"> North Andros</option>
-		                                <option value="Great Inagua"> Great Inagua</option>
-		                                <option value="South Andros"> South Andros</option>
-		                                <option value="Great Abac"> Great Abaco</option>
-		                                <option value="Grand Bahama"> Grand Bahama</option>
-		                                <option value="Long Island, Bahamas"> Long Island, Bahamas</option>
-		                                <option value="Acklins"> Acklins</option>
-		                                <option value="Eleuthera"> Eleuthera</option>
-		                                <option value="Cat Island"> Cat Island</option>
-		                                <option value="Mayaguana"> Mayaguana</option>
-		                                <option value="Crooked Island, Bahamas"> Crooked Island, Bahamas</option>
-		                                <option value="New Providence"> New Providence</option>
-		                                <option value="Exuma"> Exuma</option>
-		                                <option value="San Salvador Island"> San Salvador Island</option>
-		                                <option value="Little Inagua"> Little Inagua</option>
-		                                <option value="Rum Cay"> Rum Cay</option>
-		                                <option value="Little Abaco">Little Abaco</option>
-		                                <option value="Samana Cay">Samana Cay</option>
-		                                <option value="Ragged Island"> Ragged Island</option>
-		                                <option value="Berry Islands"> Berry Islands</option>
-		                                <option value="Bimini"> Bimini</option>
-                            		</select>
+									<select class="form-control" name="area">
+									 {% include "area_drop_down.html" %}
+									</select>
 								</div>
 								<div class="form-check form-check-radio form-check-inline">
 									<label class="form-check-label">
@@ -830,67 +698,34 @@
 								
 							</table>
 						</div>
-<!-- 						<ul class="pagination mx-auto">
-							<li class="page-item">
-								<a class="page-link" href="#link" aria-label="Previous">
-									<span aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
-								</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#link">1</a>
-							</li>
-							<li class="page-item active">
-								<a class="page-link" href="#link">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#link">3</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#link" aria-label="Next">
-									<span aria-hidden="true"><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
-								</a>
-							</li>
-						</ul> -->
 
-{% if is_paginated %}
-  <ul class="pagination mx-auto">
-    {% if page_obj.has_previous %}
-      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in paginator.page_range %}
-      {% if page_obj.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if page_obj.has_next %}
-      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
-{% endif %}
+						{% if is_paginated %}
+						  <ul class="pagination mx-auto">
+						    {% if page_obj.has_previous %}
+						      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+						    {% else %}
+						      <li class="disabled"><span>&laquo;</span></li>
+						    {% endif %}
+						    {% for i in paginator.page_range %}
+						      {% if page_obj.number == i %}
+						        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+						      {% else %}
+						        <li><a href="?page={{ i }}">{{ i }}</a></li>
+						      {% endif %}
+						    {% endfor %}
+						    {% if page_obj.has_next %}
+						      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+						    {% else %}
+						      <li class="disabled"><span>&raquo;</span></li>
+						    {% endif %}
+						  </ul>
+						{% endif %}
 
 					</div>
 				</div>
 			</section>
 
-			<footer class="footer footer-default">
-				<div class=" container ">
-					<div class="copyright" id="copyright">
-						&copy;
-						<script>
-							document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
-						</script>, Designed by
-						<a href="#" target="_blank"></a>. Coded by
-						<a href="#" target="_blank">Abdullah Team</a>.
-					</div>
-				</div>
-			</footer>
-		</div>
+
 	<!-- Modal -->
 	<div class="modal fade register-detail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
@@ -902,6 +737,7 @@
 					</button>
 				</div>
 				<div class="container"> 
+
 					<div class="row"> 
 						<div class="col-sm-12 bg-white col-md-4">
 							<img id="h4images" src="{% static 'img/image.jpg' %}" alt="Rounded Image" class="rounded">
@@ -973,9 +809,35 @@
 
 						<div class="row"> 
 							<div class="col">
-								<div id="summernote"></div>
+								<div id="summernote">
+									
+								</div>
 							</div>
 						</div>
+
+						<div class="row pt-5 pb-0 px-1" style="display: none;">
+							<form action="{% url 'comment' %}" method="post">
+							{% csrf_token %}
+							<input type="hidden" name="lost_one">
+							<div class="col-md-12">
+								<p> if you have any information on this person</p>
+								<p> please add in the discussion below </p>
+							</div>
+							{% if user and 'AnonymousUser' not in user %}
+							<div class="col-md-12">
+								<input name="comment_name" type="text"  placeholder="name" style="width: 300px" />
+							</div>
+							{% endif %}
+							<div class="col-md-12">
+								<textarea  style="width:300px" name="comment" placeholder="comment"></textarea>
+							</div>
+							<div class="col-md-12">
+								<button class="btn btn-primary">Add</button>
+							</div>
+							</form>
+						</div>
+						
+						
 
 						<div class="row pt-5 pb-0 px-1"> 
 							<div class="col-md-1">
@@ -986,17 +848,6 @@
 								<p class="font-xs"> 2 Comments - 3 days ago </p>
 								<div class="clearfix"></div>
 								<p><span class="text-default"> Jama Nix - </span> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-							</div>
-						</div>
-						<div class="row pt-5 pb-0 px-1"> 
-							<div class="col-md-1">
-								<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
-							</div>
-							<div class="col-md-11">
-								<h4 class="text-primary m-0"><strong> James Delia </strong></h4>
-								<p class="font-xs"> 2 Comments - 3 days ago </p>
-								<div class="clearfix"></div>
-								<p><span class="text-default"> Jama Nix - </span> Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged.</p>
 							</div>
 						</div>
 						<div class="row pt-5 pb-0 px-1"> 
@@ -1014,11 +865,9 @@
 		</div>
 		<!-- Modal end -->
 		<!-- Bootstrap core JavaScript -->
-		<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-		<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-		<script src="{% static 'vendor/owl-carousel/owl.carousel.min.js' %}"></script>
-		<script src="{% static 'vendor/theme.js' %}" type="text/javascript"></script>
-		<script src="{% static 'vendor/jquery.dataTables.min.js' %}" type="text/javascript"></script>
+		
+
+
 
 		<script>
 			function showmodel(id,image,lost_one_name,gender,age,area,country,lost_one_contact_number,status,name,contact_number,address,note,email){
@@ -1037,6 +886,7 @@
 				$('#h4note').text(note)
 				$('#h4contact_number').text(contact_number)
 				$('#lost_one_update').attr('href', '{% url "lostone" %}/'+id)
+				$('#lost_one').val(id)
 				$('.register-detail').modal('show');
 
 
@@ -1064,15 +914,6 @@
             }
             function upload_img1(input) {
             	submit_picture_search();
-                // if (input.files && input.files[0]) {
-                //     var reader = new FileReader();
-
-                //     reader.onload = function (e) {
-                //         $('#personpic1').attr('src', e.target.result);
-                //     }
-
-                //     reader.readAsDataURL(input.files[0]);
-                // }
             }
             function toggle_pic(){
 		    	$("#simple_search_form").hide();
@@ -1085,9 +926,4 @@
 		    	$("#simple_search_form").show();
             }            
 		</script>
-
-	</body>
-
-
-
-	</html>
+{% endblock %}

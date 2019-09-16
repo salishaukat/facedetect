@@ -17,24 +17,24 @@ h6 {
 
 /*line heading*/
 .h4 {
-   display: flex;
-    width: 100%;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+	display: flex;
+	width: 100%;
+	margin: 0 auto;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
 }
 
 .h4:before,
 .h4:after {
-    content: '';
-    border-top: 1px solid;
-    margin: 0 20px 0 0;
-    flex: 1 0 20px;
+	content: '';
+	border-top: 1px solid;
+	margin: 0 20px 0 0;
+	flex: 1 0 20px;
 }
 
 .h4:after {
-    margin: 0 0 0 20px;
+	margin: 0 0 0 20px;
 }
 
 
@@ -64,11 +64,12 @@ h6 {
 
 .navbar .navbar-nav .nav-link:not(.btn) {
 	text-transform: none;
-	font-size: 1.1em;
+	font-size: 1em;
 	padding: 0.5rem 0.7rem;
 	line-height: 1.1rem;
 	font-weight: 600;
 	text-align: right;
+	text-transform: uppercase;
 }
 
 .navbar-nav .nav-item{
@@ -78,13 +79,19 @@ h6 {
 	text-align: center;
 }
 
+@media screen and (max-width: 991px) {
+	.sidebar-collapse .navbar-collapse .navbar-nav:not(.navbar-logo) .nav-link:not(.btn) {
+		text-align: left ;
+	}
+}
+
 .form-check-radio input[type="radio"]:checked+.form-check-sign::after {
 	width: 12px;
-    height: 12px;
-    background-color: #ffc72c;
-    border-color: #ffc72c;
-    top: 7px;
-    left: 7px;
+	height: 12px;
+	background-color: #ffc72c;
+	border-color: #ffc72c;
+	top: 7px;
+	left: 7px;
 }
 
 .form-check .form-check-label {
@@ -115,13 +122,13 @@ form label{
 
 .notification-dropdown p{
 	white-space: normal;
-	}
+}
 
 .notification-dropdown .list-group-item{
 	border: none;
-    padding: 0;
-    background: transparent;
-	}
+	padding: 0;
+	background: transparent;
+}
 
 .notification-dropdown .dropdown-item {
 	border-bottom: 1px solid #f3f3f3;
@@ -134,22 +141,22 @@ form label{
 
 .owl-carousel button.owl-dot span{
 	background: none repeat scroll 0 0 #869791;
-    border-radius: 20px;
-    display: block;
-    height: 12px;
-    margin: 5px 7px;
-    opacity: 0.5;
-    width: 12px;
+	border-radius: 20px;
+	display: block;
+	height: 12px;
+	margin: 5px 7px;
+	opacity: 0.5;
+	width: 12px;
 }
 
 .owl-carousel button.owl-dot.active span{
 	background: none repeat scroll 0 0 #00778b;
-    border-radius: 20px;
-    display: block;
-    height: 12px;
-    margin: 5px 7px;
-    opacity: 0.5;
-    width: 12px;
+	border-radius: 20px;
+	display: block;
+	height: 12px;
+	margin: 5px 7px;
+	opacity: 0.5;
+	width: 12px;
 }
 .owl-carousel p{
 	font-size: 14px;
@@ -157,7 +164,7 @@ form label{
 }
 
 .image-upload>input {
-  display: none;
+	display: none;
 }
 
 .image-upload{
@@ -177,12 +184,18 @@ form label{
 .text-instagram{
 	color: magenta !important;
 }
+.font-md{
+	font-size: 1.3em !important;
+}
 .font-sm{
 	font-size: 1.1em !important;
 }
 .font-xs{
 	font-size: 0.8em !important;
 	font-weight: 500;
+}
+a.text-primary:focus, a.text-primary:hover {
+	color: #ffc72c!important
 }
 @media (min-width: 992px){
 	.notification-dropdown{

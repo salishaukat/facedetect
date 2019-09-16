@@ -1,109 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    {% load static %}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% extends 'base.html' %}
 
-    <title>bahamas</title>
-
-    <!-- Bootstrap core CSS -->
-
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
-          type="text/css">
-
-    <!-- Custom theme template -->
-    <link href="{% static 'css/theme.css' %}" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-
-        <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-    <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
-
-    <script src="{% static 'vendor/theme.js' %}" type="text/javascript"></script>
-
-</head>
-
-<body class="profile-page sidebar-collapse">
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-white " color-on-scroll="400">
-    <div class="container">
-        <div class="navbar-translate">
-            <a class="navbar-brand" href="#">
-                <span class="text-primary"> Find Me</span> <span class="text-secondary"> Bahamas </span>
-            </a>
-            <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
-                    aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-bar top-bar"></span>
-                <span class="navbar-toggler-bar middle-bar"></span>
-                <span class="navbar-toggler-bar bottom-bar"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse justify-content-end" id="navigation"
-             data-nav-image="{% static 'img/blurred-image-1.jpg' %}">
-            <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-primary" href="#"><small>CONTACT US</small> <br/> +1-719-5842</a>
-                    </li>
-<!--                     <li class="nav-item">
-                        <a class="nav-link text-secondary" href="#"><i class="fa fa-bell"></i></a>
-                    </li> -->
-                    {% if user is None or 'AnonymousUser' in user %}
-                    <li class="nav-item dropdown">
-
-                        <a class="btn btn-warning btn-round" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Rescuer Login
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right notification-dropdown" aria-labelledby="navbarDropdownMenuLink">
-                            <form class="px-3 pt-3 pb-3" action="{% url 'login' %}" method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="userId" name="username"  placeholder="User Id">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" id="passwordId"  name="password" placeholder="Password">
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label text-default">
-                                        <input class="form-check-input" type="checkbox" value="">
-                                        Remember 
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-round btn-block mt-4">LOGIN</button>
-                            </form>
-                        </div>
-                    </li>   
-                    
-                    {% else %}
-                    <li class="nav-item">
-                        <form class="px-3 pt-3 pb-3" action="{% url 'logout' %}" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-primary btn-round btn-block mt-4">Logout</button>
-                        </form>
-                    </li>
-                                    
-                    {% endif %}
-                </ul>
-        </div>
-    </div>
-</nav>
-<!-- End Navbar -->
+{% block content %}
+{% load static %}
 <div class="wrapper">
     <section class="lost-detail mt-5 mb-5">
         <form action="{% url 'lostone' %}" method="post" enctype="multipart/form-data">
@@ -161,28 +60,7 @@
                         </div>
                         <div  class="form-group">
                             <select name="lost_one_area" class="form-control">
-                                <option selected value="0">Area*</option>
-                                <option value="North Andros"> North Andros</option>
-                                <option value="Great Inagua"> Great Inagua</option>
-                                <option value="South Andros"> South Andros</option>
-                                <option value="Great Abac"> Great Abaco</option>
-                                <option value="Grand Bahama"> Grand Bahama</option>
-                                <option value="Long Island, Bahamas"> Long Island, Bahamas</option>
-                                <option value="Acklins"> Acklins</option>
-                                <option value="Eleuthera"> Eleuthera</option>
-                                <option value="Cat Island"> Cat Island</option>
-                                <option value="Mayaguana"> Mayaguana</option>
-                                <option value="Crooked Island, Bahamas"> Crooked Island, Bahamas</option>
-                                <option value="New Providence"> New Providence</option>
-                                <option value="Exuma"> Exuma</option>
-                                <option value="San Salvador Island"> San Salvador Island</option>
-                                <option value="Little Inagua"> Little Inagua</option>
-                                <option value="Rum Cay"> Rum Cay</option>
-                                <option value="Little Abaco">Little Abaco</option>
-                                <option value="Samana Cay">Samana Cay</option>
-                                <option value="Ragged Island"> Ragged Island</option>
-                                <option value="Berry Islands"> Berry Islands</option>
-                                <option value="Bimini"> Bimini</option>
+                                {% include "area_drop_down.html" %}
                             </select>
                         </div>
                         <div  class="form-group">
@@ -475,29 +353,7 @@
                         </div>
                         <div class="form-group">
                             <select name="contact_area" class="form-control">
-                                <option selected value="0">Area*</option>
-                                <option value="North Andros"> North Andros</option>
-                                <option value="Great Inagua"> Great Inagua</option>
-                                <option value="South Andros"> South Andros</option>
-                                <option value="Great Abac"> Great Abaco</option>
-                                <option value="Grand Bahama"> Grand Bahama</option>
-                                <option value="Long Island, Bahamas"> Long Island, Bahamas</option>
-                                <option value="Acklins"> Acklins</option>
-                                <option value="Eleuthera"> Eleuthera</option>
-                                <option value="Cat Island"> Cat Island</option>
-                                <option value="Mayaguana"> Mayaguana</option>
-                                <option value="Crooked Island, Bahamas"> Crooked Island, Bahamas</option>
-                                <option value="New Providence"> New Providence</option>
-                                <option value="Exuma"> Exuma</option>
-                                <option value="San Salvador Island"> San Salvador Island</option>
-                                <option value="Little Inagua"> Little Inagua</option>
-                                <option value="Rum Cay"> Rum Cay</option>
-                                <option value="Little Abaco">Little Abaco</option>
-                                <option value="Samana Cay">Samana Cay</option>
-                                <option value="Ragged Island"> Ragged Island</option>
-                                <option value="Berry Islands"> Berry Islands</option>
-                                <option value="Bimini"> Bimini</option>
-
+                                 {% include "area_drop_down.html" %}
                             </select>
                         </div>
                         <div class="form-group">
@@ -535,121 +391,110 @@
         </form>
     </section>
 
-    <footer class="footer footer-default">
-        <div class=" container ">
-            <div class="copyright" id="copyright">
-                &copy;
-                <script>
-                    {% if contact %}
-                    $(document).ready(function(){
-                        $('#firstName').val('{{contact.lost_one.first_name}}')
-                        $('#lastName').val('{{contact.lost_one.last_name}}')
-                        $('#emailAdd').val('{{contact.lost_one.email_address}}')
-                        $('#contactNo').val('{{contact.lost_one.contact_number}}')
-                        $('#name').val('{{contact.name}}')
-                        $('#address').val('{{contact.address}}')
-                        $('#note').val('{{contact.note}}')
-                        $('#contact_1').val('{{contact.contact_number1}}')
-                        $('#contact_2').val('{{contact.contact_number2}}')
-                        $('select[name="age"]').val('{{contact.lost_one.age}}')
-                        $('select[name="status"]').val('{{contact.lost_one.status}}')
-                        $('select[name="country"]').val('{{contact.lost_one.country}}')
-                        $('select[name="lost_one_area"]').val('{{contact.lost_one.area}}')
-                        $('select[name="contact_area"]').val('{{contact.area}}')
-                        
-                        gender = "{{contact.lost_one.gender}}"
-                        
-                        if (gender == 'male'){
-                            $('#male'). prop("checked", true)
-                        }
-                        else{
-                            $('#female'). prop("checked", true)
-                        }
-                        
-                        rescued = Boolean("{{contact.rescued}}")
-                        died = Boolean("{{contact.died}}")
-
-                        if (rescued == true){
-                             $('#rescued'). prop("checked", true)
-                        }
-                        else if (died == true){
-                            $('#died'). prop("checked", true)
-                        }
-
-                        $('#personpic1').attr('src','{{contact.lost_one.person_pic1}}')
-                        person_pic2 = '{{contact.lost_one.person_pic2}}'
-                        person_pic3 = '{{contact.lost_one.person_pic2}}'
-
-                        if (person_pic2 != 'None'){
-                             $('#personpic2').attr('src','{{contact.lost_one.person_pic2}}')
-                        }
-                        if (person_pic3 != 'None'){
-                             $('#personpic3').attr('src','{{contact.lost_one.person_pic3}}')
-                        }
-                    });
-                    {% endif %}
-                        var image = 0
-						document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()));
-                        function openloader1() {
-                            $("#uploadfile1").click();
-                        }
-                        function openloader2() {
-                            $("#uploadfile2").click();
-                        }
-                        function openloader3() {
-                            $("#uploadfile3").click();
-                        }
-                        
-                        
-                        function upload_img1(input) {
-                            if (input.files && input.files[0]) {
-                                var reader = new FileReader();
-
-                                reader.onload = function (e) {
-                                    $('#personpic1').attr('src', e.target.result);
-                                }
-
-                                reader.readAsDataURL(input.files[0]);
-                            }
-                        }
-                        
-                        function upload_img2(input) {
-                            
-                            if (input.files && input.files[0]) {
-                                var reader = new FileReader();
-
-                                reader.onload = function (e) {
-                                    $('#personpic2').attr('src', e.target.result);
-                                }
-
-                                reader.readAsDataURL(input.files[0]);
-                            }
-                        }
-
-                        function upload_img3(input) {
-                            if (input.files && input.files[0]) {
-                                var reader = new FileReader();
-
-                                reader.onload = function (e) {
-                                    $('#personpic3').attr('src', e.target.result);
-                                }
-
-                                reader.readAsDataURL(input.files[0]);
-                            }
-                        }
-
-
-                </script>
-                , Designed by
-                <a href="#" target="_blank"></a>. Coded by
-                <a href="#" target="_blank">Abdullah Team</a>.
-            </div>
-        </div>
-    </footer>
-</div>
 
 
 
-</body>
+<script>
+{% if contact %}
+$(document).ready(function(){
+    $('#firstName').val('{{contact.lost_one.first_name}}')
+    $('#lastName').val('{{contact.lost_one.last_name}}')
+    $('#emailAdd').val('{{contact.lost_one.email_address}}')
+    $('#contactNo').val('{{contact.lost_one.contact_number}}')
+    $('#name').val('{{contact.name}}')
+    $('#address').val('{{contact.address}}')
+    $('#note').val('{{contact.note}}')
+    $('#contact_1').val('{{contact.contact_number1}}')
+    $('#contact_2').val('{{contact.contact_number2}}')
+    $('select[name="age"]').val('{{contact.lost_one.age}}')
+    $('select[name="status"]').val('{{contact.lost_one.status}}')
+    $('select[name="country"]').val('{{contact.lost_one.country}}')
+    $('select[name="lost_one_area"]').val('{{contact.lost_one.area}}')
+    $('select[name="contact_area"]').val('{{contact.area}}')
+    
+    gender = "{{contact.lost_one.gender}}"
+    
+    if (gender == 'male'){
+        $('#male'). prop("checked", true)
+    }
+    else{
+        $('#female'). prop("checked", true)
+    }
+    
+    rescued = Boolean("{{contact.rescued}}")
+    died = Boolean("{{contact.died}}")
 
-</html>
+    if (rescued == true){
+         $('#rescued'). prop("checked", true)
+    }
+    else if (died == true){
+        $('#died'). prop("checked", true)
+    }
+
+    $('#personpic1').attr('src','{{contact.lost_one.person_pic1}}')
+    person_pic2 = '{{contact.lost_one.person_pic2}}'
+    person_pic3 = '{{contact.lost_one.person_pic2}}'
+
+    if (person_pic2 != 'None'){
+         $('#personpic2').attr('src','{{contact.lost_one.person_pic2}}')
+    }
+    if (person_pic3 != 'None'){
+         $('#personpic3').attr('src','{{contact.lost_one.person_pic3}}')
+    }
+});
+{% endif %}
+    var image = 0
+    document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()));
+    function openloader1() {
+        $("#uploadfile1").click();
+    }
+    function openloader2() {
+        $("#uploadfile2").click();
+    }
+    function openloader3() {
+        $("#uploadfile3").click();
+    }
+    
+    
+    function upload_img1(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#personpic1').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    function upload_img2(input) {
+        
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#personpic2').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function upload_img3(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#personpic3').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+</script>
+
+
+{% endblock %}

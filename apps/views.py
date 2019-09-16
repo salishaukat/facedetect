@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import  LostOne, Contact, UserProfile
+from .models import  LostOne, Contact, UserProfile, Comments
 from django.core.files.storage import FileSystemStorage
 import ntpath
 from django.db.models import Q
@@ -283,3 +283,19 @@ def get_user(email):
         return User.objects.get(email=email.lower())
     except User.DoesNotExist:
         return None
+
+def comments(request):
+    if request.method == 'POST':
+        if request.session['username']:
+            name = request.session['username']
+        else:
+            name = request.POST.get('comment_name')
+        comments = request.POST.get('comment')
+        print("--------------------",request.POST.get('lost_one'))
+        lost_one_object = LostOne.objects.get(id=request.POST.get('lost_one'))
+        id = Comments.objects.create(name=name, comment=comments, lost_one_object=request.POST.get('lost_one'))
+    return render(request, 'login.html')
+
+def reports(request):
+    contacts = Contact.objects.all()
+    return render(request, 'reports.html',{contacts:contacts})
