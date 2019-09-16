@@ -5,7 +5,7 @@ class UserProfile(models.Model):
   user = models.OneToOneField(User, related_name="profile", on_delete=True)
   CHOICES = (
         ('reporter', 'reporter'),
-        ('recruiter', 'recruiter'),
+        ('rescuer', 'rescuer'),
     )
   role = models.CharField(
         max_length=200,
