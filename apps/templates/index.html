@@ -109,15 +109,18 @@
 									<a onclick="submit_simple_search()"><i class="fa fa-search" ></i></a>
 								</div>
 
-								<a type="button" class="btn btn-neutral btn-lg advance-search" onclick="advance_search()"> Advance Search
-								</a>
+								<button type="button" class="btn btn-neutral btn-lg advance-search dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
+									
+								</button>
 
 							</div>
 						</div>
 						<strong>
 							<a class="text-primary" href="#" "> NAME </a> 
 							<span class="px-2 text-primary"> | </span> 
-							<a class="text-default"  onclick="toggle_pic()"> PICTURE </a>
+							<a class="text-primary"  onclick="toggle_pic()"> PICTURE </a>
+							<span class="px-2 text-primary"> | </span> 
+							<a class="text-primary"  onclick="toggle_live()"> LIVE </a>
 						</strong>
 					</div>
 				</div>
@@ -133,22 +136,50 @@
 					<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
 						<div class="input-group">
 
-							<input id="personpic1" style="width:65%" class="btn btn-warning advance-search" value="PICTURE" name="print_btn" onclick="openloader1()"/>
+							<input id="personpic1"  class="form-control bg-white" placeholder="Upload Picture here" name="print_btn" onclick="openloader1()"/>
                             <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" />
 
-							
 							<div class="input-group-append">
+								<div class="input-group-text">
+									<i class="fa fa-picture-o" ></i>
+								</div>
+								<button type="button" class="btn btn-neutral btn-lg advance-search dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
+									
+								</button>								
 
-								<a type="button" class="btn btn-neutral btn-lg advance-search"  onclick="advance_search()"> Advance Search
-									<span class="sr-only">Toggle Dropdown</span>
-								</a>
 
 							</div>
 						</div>
 						<strong>
 							<a class="text-primary" onclick="name_search()"> NAME </a> 
 							<span class="px-2 text-primary"> | </span> 
-							<a class="text-default" href="#"> PICTURE </a>
+							<a class="text-primary" href="#"> PICTURE </a>
+							<span class="px-2 text-primary"> | </span> 
+							<a class="text-primary" onclick="toggle_live()"> LIVE </a>
+						</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+
+		<form id="live_search_form" action="{% url 'live_search' %}" method="post" enctype="multipart/form-data" style="display: none;">
+			{% csrf_token %}
+		<div class="page-header" style="background: #f0f4f9">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+						<div class="input-group">
+
+								<button type="button" class="btn btn-neutral btn-lg form-control bg-white" aria-haspopup="true" aria-expanded="false" onclick="live_btn()"> Start live
+								</button>	
+						</div>
+						<strong>
+							<a class="text-primary" onclick="name_search()"> NAME </a> 
+							<span class="px-2 text-primary"> | </span> 
+							<a class="text-primary" onclick="toggle_pic()"> PICTURE </a>
+							<span class="px-2 text-primary"> | </span> 
+							<a class="text-primary" href="#"> LIVE </a>
 						</strong>
 					</div>
 				</div>
@@ -1044,14 +1075,17 @@
 		    function advance_search() {
 		    	$("#simple_search_form").hide();
 		    	$("#picture_search_form").hide();
+		    	$("#live_search_form").hide();
 		    	$(".page-header-adv").show();
 			}
 			function submit_sponsor_form(){
 				$('#sponsor_form').submit();
 			}				
 			function closeDialog(){
-				$(".page-header").show();
+		    	$("#picture_search_form").hide();
+		    	$("#live_search_form").hide();				
 		    	$(".page-header-adv").hide();
+		    	$("#simple_search_form").show();
 			}
 			function submit_simple_search(){
 				$('#simple_search_form').submit();
@@ -1059,6 +1093,9 @@
 			function submit_picture_search(){
 				$('#picture_search_form').submit();
 			}			
+			function live_btn(){
+				$('#live_search_form').submit();
+			}	
             function openloader1() {
                 $("#uploadfile1").click();
             }
@@ -1075,13 +1112,21 @@
                 // }
             }
             function toggle_pic(){
+		    	$("#live_search_form").hide();
 		    	$("#simple_search_form").hide();
 		    	$(".page-header-adv").hide();
 		    	$("#picture_search_form").show();            	
             }
+            function toggle_live(){
+		    	$("#simple_search_form").hide();
+		    	$(".page-header-adv").hide();
+		    	$("#picture_search_form").hide();            	
+		    	$("#live_search_form").show();
+            }            
             function name_search(){
 		    	$(".page-header-adv").hide();
 		    	$("#picture_search_form").hide();            	
+		    	$("#live_search_form").hide();            	
 		    	$("#simple_search_form").show();
             }            
 		</script>
