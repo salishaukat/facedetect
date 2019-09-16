@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate
 from trueface.recognition import FaceRecognizer
 from trueface.video import VideoStream
 import cv2
+from django.shortcuts import redirect, reverse
 
 
 def search(request):
@@ -17,7 +18,7 @@ def search(request):
     if request.POST.get('search_name'):
         name = request.POST.get('search_name')
         contact = Contact.objects.filter(lost_one__name__contains=name)
-    
+
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def get_all(request):
@@ -52,6 +53,7 @@ def pic_search(request):
 
             #vcap = VideoStream(src=0).start()
             vcap = cv2.imread('./'+person_pic1)
+            print (vcap)
             #while(True):
                 #frame = vcap.read()
             frame = vcap
@@ -69,6 +71,7 @@ def pic_search(request):
                 if identity['predicted_label'] != None:
 
                     contact = Contact.objects.filter(lost_one__folder_name__contains=identity['predicted_label'])
+                    print (contact)
         
         except Exception as e:
             print("in except =====================")

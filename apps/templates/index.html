@@ -110,13 +110,43 @@
 								</div>
 
 								<a type="button" class="btn btn-neutral btn-lg advance-search" onclick="advance_search()"> Advance Search
+								</a>
+
+							</div>
+						</div>
+						<strong>
+							<a class="text-primary" href="#" "> NAME </a> 
+							<span class="px-2 text-primary"> | </span> 
+							<a class="text-default"  onclick="toggle_pic()"> PICTURE </a>
+						</strong>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+
+		<form id="picture_search_form" action="{% url 'pic_search' %}" method="post" enctype="multipart/form-data" style="display: none;">
+			{% csrf_token %}
+		<div class="page-header" style="background: #f0f4f9">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+						<div class="input-group">
+
+							<input id="personpic1" style="width:65%" class="btn btn-warning advance-search" value="PICTURE" name="print_btn" onclick="openloader1()"/>
+                            <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" />
+
+							
+							<div class="input-group-append">
+
+								<a type="button" class="btn btn-neutral btn-lg advance-search"  onclick="advance_search()"> Advance Search
 									<span class="sr-only">Toggle Dropdown</span>
 								</a>
 
 							</div>
 						</div>
 						<strong>
-							<a class="text-primary" href="#"> NAME </a> 
+							<a class="text-primary" onclick="name_search()"> NAME </a> 
 							<span class="px-2 text-primary"> | </span> 
 							<a class="text-default" href="#"> PICTURE </a>
 						</strong>
@@ -772,8 +802,9 @@
 										<th scope="col">Note</th>
 									</tr>
 								</thead>
-								{% if contacts %}
+								
 								<tbody>
+									{% if contacts %}
 										{% for contact in contacts %}
 									<tr onclick="showmodel('{{contact.lost_one.id}}','{{contact.lost_one.person_pic1}}','{{contact.lost_one.first_name}}  {{contact.lost_one.last_name}}','{{contact.lost_one.gender}}','{{contact.lost_one.age}}','{{contact.lost_one.area}}','{{contact.lost_one.country}}','{{contact.lost_one.contact_number}}','{{contact.lost_one.status}}','{{contact.name}}','{{contact.contact_number1}}','{{contact.address}}','{{contact.note}},{{contact.lost_one.email}}')">
 										<!-- <td scope="row">1</td> -->
@@ -788,8 +819,15 @@
 										<td>{{contact.note}}</td>
 									</tr>
 										{% endfor %}
+										{% else %}
+										<tr>
+											<td colspan="9" style="text-align:center">No records found</td>
+										</tr>
+										{% endif %}
+
 								</tbody>
-								{% endif %}
+
+								
 							</table>
 						</div>
 <!-- 						<ul class="pagination mx-auto">
@@ -966,7 +1004,7 @@
 							<a href='#' id="lost_one_update" type="button" class="btn btn-primary" >
 								Update Record
 							</a>
-							{% pass %}
+							{% endif %}
 						</div>
 
 
@@ -1004,9 +1042,13 @@
 
 			}
 		    function advance_search() {
-		    	$(".page-header").hide();
+		    	$("#simple_search_form").hide();
+		    	$("#picture_search_form").hide();
 		    	$(".page-header-adv").show();
 			}
+			function submit_sponsor_form(){
+				$('#sponsor_form').submit();
+			}				
 			function closeDialog(){
 				$(".page-header").show();
 		    	$(".page-header-adv").hide();
@@ -1014,9 +1056,34 @@
 			function submit_simple_search(){
 				$('#simple_search_form').submit();
 			}
-			$(document).ready(function () {
-			  $('#lostone-table').DataTable();
-			});			
+			function submit_picture_search(){
+				$('#picture_search_form').submit();
+			}			
+            function openloader1() {
+                $("#uploadfile1").click();
+            }
+            function upload_img1(input) {
+            	submit_picture_search();
+                // if (input.files && input.files[0]) {
+                //     var reader = new FileReader();
+
+                //     reader.onload = function (e) {
+                //         $('#personpic1').attr('src', e.target.result);
+                //     }
+
+                //     reader.readAsDataURL(input.files[0]);
+                // }
+            }
+            function toggle_pic(){
+		    	$("#simple_search_form").hide();
+		    	$(".page-header-adv").hide();
+		    	$("#picture_search_form").show();            	
+            }
+            function name_search(){
+		    	$(".page-header-adv").hide();
+		    	$("#picture_search_form").hide();            	
+		    	$("#simple_search_form").show();
+            }            
 		</script>
 
 	</body>
