@@ -197,23 +197,6 @@ form label{
 a.text-primary:focus, a.text-primary:hover {
 	color: #ffc72c!important
 }
-.nav-tabs>.nav-item>.nav-link.active{
-	background: transparent;
-	color: #00778b !important;
-	border:none !important;
-	box-shadow: none !important;
-	font-weight: bold;
-}
-.nav-tabs>.nav-item>.nav-link{
-	background: transparent;
-	color: #888888 !important;
-	border:none !important;
-	box-shadow: none !important;
-	font-weight: bold;
-}
-.tab-content>.active{
-	display: flex !important;
-}
 @media (min-width: 992px){
 	.notification-dropdown{
 		min-width: 280px;

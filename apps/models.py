@@ -50,3 +50,10 @@ class Sponsor(models.Model):
     contact_number = models.CharField(null=True, blank=True, max_length=100)
     company_logo = models.CharField(null=False, blank=False, max_length=100)
     active = models.BooleanField(null=True, blank=True, default=False)
+
+
+class Comments(models.Model):
+    lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
+    name = models.CharField(null=False, blank=False, max_length=100)
+    comment = models.TextField(null=False, blank=False)
+    created_date = models.DateTimeField(auto_now_add=True, blank=True)
