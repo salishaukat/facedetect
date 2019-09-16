@@ -28,6 +28,52 @@ def get_all(request):
     
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
+def live_search(request):
+    print("in function live ==============")
+    contact = None
+
+    fr = FaceRecognizer(ctx='cpu',
+                        fd_model_path='./fd_model',
+                        fr_model_path='./model-tfv2/model.trueface',
+                        params_path='./model-tfv2/model.params',
+                        license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
+                        )
+
+    fr.create_collection('collection', 'collection.npz', return_features=False)
+
+    vcap = VideoStream(src=0).start()
+
+    while(True):
+        frame = vcap.read()
+        frame = cv2.resize(frame, (640, 480))
+        bounding_boxes, points, chips = fr.find_faces(frame,
+                                                  return_chips=True,
+                                                  return_binary=True)
+        if bounding_boxes is None:
+                continue
+        for i, chip in enumerate(chips):
+            identity = fr.identify(chip,
+                                   threshold=0.3,
+                                   collection='./collection.npz')
+            print("========================")
+            print(identity)
+            if identity['predicted_label'] != None:
+                contact = Contact.objects.filter(lost_one__folder_name__contains=identity['predicted_label'])
+                print (contact)
+                break
+        if contact:
+            print('==============================')
+            print('in if contact')
+            vcap.stopped = True
+            vcap.stream.release()
+            break
+        else:
+            print('==============================')
+            print('in else contact')
+
+            continue
+
+    return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def pic_search(request):
     print("in function ==============")
