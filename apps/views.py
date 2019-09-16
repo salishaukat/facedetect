@@ -10,6 +10,7 @@ from trueface.recognition import FaceRecognizer
 from trueface.video import VideoStream
 import cv2
 from django.shortcuts import redirect, reverse
+import time
 
 
 def search(request):
@@ -45,8 +46,9 @@ def live_search(request):
     fr.create_collection('collection', 'collection.npz', return_features=False)
 
     vcap = VideoStream(src=0).start()
-
-    while(True):
+    t_end = time.time() + 60 * 0.5
+    while time.time() < t_end:
+    #while(True):
         frame = vcap.read()
         frame = cv2.resize(frame, (640, 480))
         bounding_boxes, points, chips = fr.find_faces(frame,
@@ -67,15 +69,16 @@ def live_search(request):
         if contact:
             print('==============================')
             print('in if contact')
-            vcap.stopped = True
-            vcap.stream.release()
+            # vcap.stopped = True
+            # vcap.stream.release()
             break
         else:
             print('==============================')
             print('in else contact')
 
             continue
-
+    vcap.stopped = True
+    vcap.stream.release()
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def pic_search(request):
