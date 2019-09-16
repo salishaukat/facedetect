@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import  LostOne, Contact, UserProfile
+from .models import  LostOne, Contact, UserProfile, Sponsor
 from django.core.files.storage import FileSystemStorage
 import ntpath
 from django.db.models import Q
@@ -152,8 +152,9 @@ def advance_search(request):
 def index(request):
     if 'username' not in request.session or request.session['username'] is None:
         request.session['username'] = None
-        lostones = LostOne.objects.all()
-        return render(request, 'home.html', {"lostones":lostones, "user":None})
+        lostones = LostOne.objects.order_by("-id")[:10]
+        sponsors = Sponsor.objects.filter(active=True)
+        return render(request, 'home.html', {"lostones":lostones, "sponsors":sponsors, "user":None})
     elif request.session['username'] is not None:
         return redirect('search')
 
@@ -168,11 +169,11 @@ def sponsor(request):
             company_name = request.POST.get('company_name')
             email_address = request.POST.get('email_address')
             contact_number = request.POST.get('contact_number')
-            fs = FileSystemStorage(location='company/')
+            fs = FileSystemStorage(location='collection/company/')
             company_logo = fs.save(company_logo.name, company_logo)
             company_logo = fs.url(company_logo)
             company_logo = ntpath.basename(company_logo)
-            company_logo = 'company/' + company_logo
+            company_logo = '/collection/company/' + company_logo
 
             sponsor_object = Sponsor.objects.create(name=name, company_name=company_name, email_address=email_address, contact_number=contact_number, company_logo=company_logo)
                         

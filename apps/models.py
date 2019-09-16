@@ -49,3 +49,4 @@ class Sponsor(models.Model):
     email_address = models.CharField(null=False, blank=False, max_length=100)
     contact_number = models.CharField(null=True, blank=True, max_length=100)
     company_logo = models.CharField(null=False, blank=False, max_length=100)
+    active = models.BooleanField(null=True, blank=True, default=False)
