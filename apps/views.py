@@ -156,16 +156,16 @@ def advance_search(request):
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def index(request):
-    if request.session["username"]:
-        if "reporter" in request.session["role"]:
-            return redirect('reports')
     if 'username' not in request.session or request.session['username'] is None:
         request.session['username'] = None
         lostones = LostOne.objects.order_by("-id")[:10]
         sponsors = Sponsor.objects.filter(active=True)
         return render(request, 'home.html', {"lostones":lostones, "sponsors":sponsors, "user":None})
-    elif request.session['username'] is not None:
-        return redirect('search')
+    if request.session["username"]:
+        if "reporter" in request.session["role"]:
+            return redirect('reports')
+        else:
+            return redirect('search')
 
 def sponsor(request):
     sponsor = None    
