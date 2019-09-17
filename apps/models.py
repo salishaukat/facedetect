@@ -42,6 +42,18 @@ class Contact(models.Model):
     area = models.CharField(null=False, blank=False, max_length=100)
     lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
 
+class Shelter(models.Model):
+    shelter = models.CharField(null=False, blank=False, max_length=100)
+    contact_number1 = models.CharField(null=True, blank=True, max_length=100)
+    contact_number2 = models.CharField(null=True, blank=True, max_length=100)
+    address = models.TextField(null=True, blank=True, max_length=300)
+    area = models.CharField(null=True, blank=True, max_length=100)
+    note = models.TextField(null=True, blank=True)
+    rescued = models.BooleanField(null=True, blank=True, default=False)
+    died = models.BooleanField(null=True, blank=True, default=False)
+    area = models.CharField(null=False, blank=False, max_length=100)
+    lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
+
 
 class Sponsor(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
