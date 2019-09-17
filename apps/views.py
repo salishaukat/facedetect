@@ -222,8 +222,8 @@ def lostone(request, lost_one_id=None):
         if "reporter" in request.session["role"]:
             return redirect('reports')
     contact = None
-    if ('username' not in request.session or request.session['username'] is None) and lost_one_id:
-        return redirect('lostone')
+
+
     if request.method == 'POST':
         try:
             lost_one_id = request.POST.get('lost_one_id')
@@ -282,7 +282,6 @@ def lostone(request, lost_one_id=None):
 
             
             if lost_one_id:
-                print("lost_one --------------------------- found")
                 lost_one_object = LostOne.objects.get(id=lost_one_id)
                 if person_pic1:
                     lost_one_object.person_pic1 = person_pic1
@@ -324,9 +323,16 @@ def lostone(request, lost_one_id=None):
         except Exception as e:
             print (e)
 
+    elif ('username' not in request.session or request.session['username'] is None) and lost_one_id:
+        return redirect('lostone')
+
     elif lost_one_id:
         contact = Contact.objects.filter(lost_one=lost_one_id).first()
         return render(request, '5-rescuer.html', {'n' : range(1,100), "user":request.session["username"], 'contact':contact})
+    
+   
+    
+    
 
 
     return render(request, '5-rescuer.html', {'n' : range(1,100), "user":request.session["username"]})
