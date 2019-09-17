@@ -14,6 +14,7 @@ class UserProfile(models.Model):
     )
 
 class LostOne(models.Model):
+    uid = models.IntegerField(null=True, blank=True)
     first_name = models.CharField(null=False, blank=False, max_length=100)
     last_name = models.CharField(null=False, blank=False, max_length=100)
     email_address = models.CharField(null=False, blank=False, max_length=100)
@@ -36,7 +37,7 @@ class Contact(models.Model):
     contact_number2 = models.CharField(null=True, blank=True, max_length=100)
     address = models.TextField(null=True, blank=True, max_length=300)
     area = models.CharField(null=True, blank=True, max_length=100)
-    note = models.TextField(null=True, blank=True)
+    note = models.TextField(null=True, blank=True, max_length=500)
     rescued = models.BooleanField(null=True, blank=True, default=False)
     died = models.BooleanField(null=True, blank=True, default=False)
     area = models.CharField(null=False, blank=False, max_length=100)
@@ -48,7 +49,7 @@ class Shelter(models.Model):
     contact_number2 = models.CharField(null=True, blank=True, max_length=100)
     address = models.TextField(null=True, blank=True, max_length=300)
     area = models.CharField(null=True, blank=True, max_length=100)
-    note = models.TextField(null=True, blank=True)
+    note = models.TextField(null=True, blank=True, max_length=500)
     rescued = models.BooleanField(null=True, blank=True, default=False)
     died = models.BooleanField(null=True, blank=True, default=False)
     area = models.CharField(null=False, blank=False, max_length=100)
@@ -56,6 +57,7 @@ class Shelter(models.Model):
 
 
 class Sponsor(models.Model):
+    sid = models.IntegerField(null=True, blank=True)
     name = models.CharField(null=False, blank=False, max_length=100)
     company_name = models.CharField(null=False, blank=False, max_length=100)
     email_address = models.CharField(null=False, blank=False, max_length=100)

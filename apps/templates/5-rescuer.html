@@ -333,30 +333,16 @@
                             
                             
                         </div>
-                        <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter %} disabled {% else %} required {% endif %}/> 
-                        <input type="file" id="uploadfile2" name="person_pic2" style="display: none;" onchange="upload_img2(this);"{% if allow_shelter %} disabled {% else %} required {% endif %}/> 
-                        <input type="file" id="uploadfile3" name="person_pic3" style="display: none;" onchange="upload_img3(this);"{% if allow_shelter %} disabled {% else %} required {% endif %}/> 
+                        <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter %} disabled  {% endif %}/> 
+                        <input type="file" id="uploadfile2" name="person_pic2" style="display: none;" onchange="upload_img2(this);"{% if allow_shelter %} disabled  {% endif %}/> 
+                        <input type="file" id="uploadfile3" name="person_pic3" style="display: none;" onchange="upload_img3(this);"{% if allow_shelter %} disabled  {% endif %}/> 
                             <!-- Upload Image here -->
                         </div>
                     </div>
                     <div class="col-md-6 px-5">
                         <h4 class="text-primary">Where to contact if found </h4>
                         <div class="form-group">
-                            {% if allow_shelter %}
-                            <select name="name" id="name" class="form-control" required>
-                                <option value="">Shelter Name*</option>
-                                <option value="Green Turtle Cay">Green Turtle Cay</a>
-                                <option value="Elbow Cay">Elbow Cay</a>
-                                <option value="Abaco & Grand">Abaco & Grand Bahama</a>
-                                <option value="Headknowles">Headknowles </a>
-                                <option value="Lend A Hand Bahamas">Lend A Hand Bahamas</a>
-                                <option value="Sandals Foundation">Sandals Foundation</a>
-                                <option value="Fort Lauderdale">Fort Lauderdale</a>
-                            </select>
-                            
-                            {% else %}
                             <input type="text" name="name" id="name" class="form-control" placeholder="Name*" required>
-                            {% endif %}
                         </div>
                         <div class="form-group">
                             <input type="tel" name="contact_1" id="contact_1" class="form-control" placeholder="Contact Number 1*" required>
@@ -430,7 +416,7 @@ $(document).ready(function(){
     }
     
     {% if shelter %}
-        $('#name').val('{{contact.shelter}}')
+        $('#name').val('{{contact.name}}')
         $('#address').val('{{contact.address}}')
         $('#note').val('{{contact.note}}')
         $('#contact_1').val('{{contact.contact_number1}}')
