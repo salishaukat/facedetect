@@ -11,7 +11,7 @@
                     <div class="col-md-6 px-5">
                         <h4 class="text-primary">Fill the detail for your lost one </h4>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="first_name" id="firstName" placeholder="First Name*">
+                            <input type="text" class="form-control" name="first_name" id="firstName" placeholder="First Name*" required>
                             <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
@@ -21,7 +21,7 @@
                             <input type="email" class="form-control" name="email" id="emailAdd" placeholder="Email Address">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="lost_one_contact_no" id="contactNo" placeholder="Contact Number*">
+                            <input type="tel" class="form-control" name="lost_one_contact_no" id="contactNo" placeholder="Contact Number*" required>
                         </div>
                         <div class="form-group">
                             <div class="form-check form-check-radio form-check-inline">
@@ -40,16 +40,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <select name="age" class="form-control">
-                                <option selected>Age</option>
+                            <select name="age" class="form-control" required>
+                                <option value="">Age</option>
                                 {% for i in n%}
                                 <option value="{{ i }}">{{i}}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="form-group">
-                            <select name="status" class="form-control">
-                                <option selected>Status*</option>
+                            <select name="status" class="form-control" required>
+                                <option value="">Status*</option>
                                 <option value="Rescued">Rescued</option>
                                 <option value="Died">Died</option>
                                 <option value="Need Evacuation">Need Evacuation</option>
@@ -58,13 +58,13 @@
                             </select>
                         </div>
                         <div  class="form-group">
-                            <select name="lost_one_area" class="form-control">
+                            <select name="lost_one_area" class="form-control" required>
                                 {% include "area_drop_down.html" %}
                             </select>
                         </div>
                         <div  class="form-group">
-                            <select name="country" class="form-control">
-                                <option selected>Country*</option>
+                            <select name="country" class="form-control" required>
+                                <option value="">Country*</option>
                                 <option value="Afganistan">Afghanistan</option>
                                 <option value="Albania">Albania</option>
                                 <option value="Algeria">Algeria</option>
@@ -342,25 +342,25 @@
                     <div class="col-md-6 px-5">
                         <h4 class="text-primary">Where to contact if found </h4>
                         <div class="form-group">
-                            <input type="text" name="name" id="name" class="form-control" {% if user%}placeholder="Shelter Name"{% else %}placeholder="Name*"{% endif %}>
+                            <input type="text" name="name" id="name" class="form-control" {% if user%}placeholder="Shelter Name"{% else %}placeholder="Name*"{% endif %} required>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="contact_1" id="contact_1" class="form-control" placeholder="Contact Number 1*">
+                            <input type="tel" name="contact_1" id="contact_1" class="form-control" placeholder="Contact Number 1*" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" name="contact_2" id="contact_2" class="form-control" placeholder="Contact Number 2">
+                            <input type="tel" name="contact_2" id="contact_2" class="form-control" placeholder="Contact Number 2">
                         </div>
                         <div class="form-group">
-                            <select name="contact_area" class="form-control">
+                            <select name="contact_area" class="form-control" required>
                                  {% include "area_drop_down.html" %}
                             </select>
                         </div>
                         <div class="form-group">
-                            <input name="address" id="address" type="text" class="form-control" placeholder="Address">
+                            <input name="address" id="address" type="text" class="form-control" placeholder="Address" required>
                         </div>
                         <div class="form-group">
                             <label for="noteTextArea">Note</label>
-                            <textarea name="note" id="note" class="form-control" id="noteTextArea" rows="3"></textarea>
+                            <textarea name="note" id="note" class="form-control" id="noteTextArea" rows="3" required></textarea>
                         </div>
 						{% if user and 'AnonymousUser' not in user %}
                         <div class="form-group">

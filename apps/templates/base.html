@@ -60,7 +60,7 @@
 <!--                     <li class="nav-item">
                         <a class="nav-link text-secondary" href="#"><i class="fa fa-bell"></i></a>
                     </li> -->
-                    {% if user is None or 'AnonymousUser' in user %}
+                    {% if user is None or 'AnonymousUser' in user  and username is None%}
                     <li class="nav-item dropdown">
 
                         <a class="btn btn-warning btn-round" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,10 +71,10 @@
                             <form class="px-3 pt-3 pb-3" action="{% url 'login' %}" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="userId" name="username"  placeholder="User Id">
+                                    <input type="text" class="form-control" id="userId" name="username"  placeholder="User Id" required {% if username %} value="{{username}}" {% endif %}>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" id="passwordId"  name="password" placeholder="Password">
+                                    <input type="password" class="form-control" id="passwordId"  name="password" placeholder="Password" required>
                                 </div>
                                 <div class="form-check">
                                     <label class="form-check-label text-default">
@@ -85,6 +85,11 @@
                                         </span>
                                     </label>
                                 </div>
+                                {% if username %}
+                                <div style="color:red">
+                                    Invalid username or password !
+                                </div>
+                                {% endif %}
                                 <button type="submit" class="btn btn-primary btn-round btn-block mt-4">LOGIN</button>
                             </form>
                         </div>
@@ -120,6 +125,13 @@
                 </div>
             </footer>
         </div>
+        <script type="text/javascript">
+            {% if username %}
+            $(document).ready(function(){
+                $('#navbarDropdownMenuLink').click();
+            })
+            {% endif %}
+        </script>
 </body>
 
 </html>

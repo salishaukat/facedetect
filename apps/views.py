@@ -371,6 +371,9 @@ def login(request):
                 if "reporter" in role.role:
                     return redirect('reports')
             return redirect('get_all')
+        else:
+            print("in else")
+            return render(request, 'home.html', {"username":request.POST['username'],'user':None})
     return render(request, 'home.html')
 
 def logout(request):
