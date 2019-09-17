@@ -755,7 +755,7 @@
 					</div>
 				</div>
 			</section>
-
+</div>
 
 	<!-- Modal -->
 	<div class="modal fade register-detail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -767,6 +767,7 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
+				{% if contacts %}
 				<div class="container"> 
 
 					<div class="row"> 
@@ -892,15 +893,66 @@
 
 					</div>
 				</div>
+				{% else %}
+				<div class="container"><p class="text-center text-default">No record found</p>
+					<p class="text-center text-default"> Please fill the form, <br/> we will help you to find your lost one</p>
+					<a type="button" class="btn btn-primary btn-round btn-block mt-4" href="{% url 'lostone' %}">Register</a>
+				</div>
+				{% endif %}
 			</div>
 		</div>
 		<!-- Modal end -->
 		<!-- Bootstrap core JavaScript -->
+			<!-- Modal Record Not Found-->
+		
+		<!-- Modal -->
+	<!-- <div class="modal fade" id="not-found"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content p-4">
+				<div class="modal-header">
+					<button type="button" class="close text-primary" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="container"> 
+						<p class="text-center text-default"> Please fill the form, <br/> we will help you to find your lost one</p>
+						<a type="button" class="btn btn-primary btn-round btn-block mt-4" href="{% url 'lostone' %}">Register</a>
+				</div>
+			</div>	
+		</div>	
+	</div>	 -->
+
+		
+	<div class="modal" id="test" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 		
 
 
 
 		<script>
+			{% if contacts %}
+			{% else  %}
+			$(document).ready(function(){
+				$('.register-detail').modal('show');
+			})
+			{% endif %}
 			function showmodel(id,image,lost_one_name,gender,age,area,country,lost_one_contact_number,status,name,contact_number,address,note,email){
 				
 				$('#h4name').text(lost_one_name);
