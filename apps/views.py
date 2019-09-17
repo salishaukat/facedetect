@@ -30,6 +30,9 @@ def search(request):
 def get_all(request):
     if 'username' not in request.session:
         request.session["username"] = None
+    if request.session["username"]:
+        if "reporter" in request.session["role"]:
+            return redirect('reports')
     user_role = UserProfile.objects.filter(user=request.user.id)
     contact = None
     contact = Contact.objects.all()
@@ -241,6 +244,12 @@ def lostone(request, lost_one_id=None):
                 gender = 'male'
             elif female:
                 gender = 'female'
+            died = False
+            rescued = False
+            if request.POST.get('died'):        
+                died = True
+            if request.POST.get('rescued'):
+                rescued = True
             
             path = '/collection/'+first_name+last_name
             fs = FileSystemStorage(location='collection/'+first_name+last_name)
@@ -297,6 +306,7 @@ def lostone(request, lost_one_id=None):
                 lost_one_object.status = request.POST.get('status')
                 lost_one_object.area = request.POST.get('lost_one_area')
                 lost_one_object.country = request.POST.get('country')
+                lost_one_object.gender = gender 
                 lost_one_object.save()
                 
                 contact_object = Contact.objects.get(id=lost_one_id)
@@ -307,8 +317,11 @@ def lostone(request, lost_one_id=None):
                 contact_object.address = request.POST.get('address')
                 contact_object.note = request.POST.get('note')
                 contact_object.contact_area = request.POST.get('contact_area')
+                contact_object.rescued = rescued
+                contact_object.died = died
                 contact_object.save()
-                return redirect('index')
+
+                return redirect('get_all')
             else:
                 lost_one_object = LostOne.objects.create(gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
                                                          person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
@@ -317,7 +330,7 @@ def lostone(request, lost_one_id=None):
                 died = True if request.POST.get('died') else False
                 contact = Contact.objects.create(rescued=rescued, died=died, name=name, contact_number1=contact_number1,
                                                  contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
-                return redirect('index')
+                return redirect('get_all')
             
             
         except Exception as e:
