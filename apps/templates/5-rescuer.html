@@ -443,7 +443,7 @@ $(document).ready(function(){
 });
 {% endif %}
     var image = 0
-    document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()));
+    // document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()));
     function openloader1() {
         $("#uploadfile1").click();
     }
@@ -492,7 +492,15 @@ $(document).ready(function(){
         }
     }
 
+$(document).ready(function(){
+    $('#male').click(function(){
+       $('#female'). prop("checked", false)
+    });
 
+    $('#female').click(function(){
+       $('#male'). prop("checked", false)
+    });
+});
 </script>
 
 

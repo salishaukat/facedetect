@@ -14,6 +14,8 @@ import time
 
 
 def search(request):
+    if 'username' not in request.session:
+        request.session["username"] = None
     if request.session["username"]:
         if "reporter" in request.session["role"]:
             return redirect('reports')
@@ -26,6 +28,8 @@ def search(request):
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def get_all(request):
+    if 'username' not in request.session:
+        request.session["username"] = None
     user_role = UserProfile.objects.filter(user=request.user.id)
     contact = None
     contact = Contact.objects.all()
@@ -33,6 +37,8 @@ def get_all(request):
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def live_search(request):
+    if 'username' not in request.session:
+        request.session["username"] = None
     print("in function live ==============")
     contact = None
 
@@ -82,6 +88,8 @@ def live_search(request):
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def pic_search(request):
+    if 'username' not in request.session:
+        request.session["username"] = None
     print("in function ==============")
     contact = None
     if request.method == 'POST' and request.FILES['person_pic1']:
@@ -132,6 +140,8 @@ def pic_search(request):
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})                
 
 def advance_search(request):
+    if 'username' not in request.session:
+        request.session["username"] = None
     contact = None
     tags = {}
     if request.POST.get('first_name'):
@@ -168,6 +178,8 @@ def index(request):
             return redirect('search')
 
 def sponsor(request):
+    if 'username' not in request.session:
+        request.session["username"] = None
     sponsor = None    
     print("in sponsor =============================")
     if request.method == 'POST' and request.FILES['company_logo']:
@@ -204,6 +216,8 @@ def sponsor(request):
 
 
 def lostone(request, lost_one_id=None):
+    if 'username' not in request.session:
+        request.session["username"] = None
     if request.session["username"]:
         if "reporter" in request.session["role"]:
             return redirect('reports')
@@ -354,6 +368,8 @@ def get_user(email):
         return None
 
 def comments(request):
+    if 'username' not in request.session:
+        request.session["username"] = None
     if request.method == 'POST':
         if request.session['username']:
             name = request.session['username']
@@ -366,6 +382,8 @@ def comments(request):
     return render(request, 'login.html')
 
 def reports(request, search=None):
+    if 'username' not in request.session:
+        request.session["username"] = None
     if request.session["username"]:
         if "reporter" in request.session["role"]:
             if search:
