@@ -900,19 +900,8 @@
 						
 						
 
-						<div class="row pt-5 pb-0 px-1"> 
-							<div class="col-md-1">
-								<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
-							</div>
-							<div class="col-md-11">
-								<h4 class="text-primary m-0"><strong> James Delia </strong></h4>
-								<p class="font-xs"> 2 Comments - 3 days ago </p>
-								<div class="clearfix"></div>
-								<p><span class="text-default"> Jama Nix - </span> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-							</div>
-						</div>
-						<div class="row" id='com'>
-						</div>
+				
+						
 						<div class="row pt-5 pb-0 px-1"> 
 							{% if user and 'AnonymousUser' not in user %}
 							<a href='#' id="lost_one_update" type="button" class="btn btn-primary" >
@@ -930,7 +919,10 @@
 					<a type="button" class="btn btn-primary btn-round btn-block mt-4" href="{% url 'lostone' %}">Register</a>
 				</div>
 				{% endif %}
+				<div class="row" id='com'>
+						</div>
 			</div>
+
 		</div>
 		<!-- Modal end -->
 		<!-- Bootstrap core JavaScript -->
@@ -1020,12 +1012,14 @@
 				$('#lost_one_update').attr('href', '{% url "lostone" %}/'+id)
 				$('#lost_one').val(id)
 				host = window.location.host
-					protocol = window.location.protocol 
-					document.getElementById('com').innerHTML='';
-					parser=document.getElementById('com');
-					parser.innerHTML='<div  class="fb-comments" data-href="'+protocol+'://'+host+'/lostone/'+id+'" data-num-posts="20" data-width="380"></div>';
-					FB.XFBML.parse(parser);	
-				$('.register-detail').modal('show');
+				protocol = window.location.protocol 
+				document.getElementById('com').innerHTML='';
+				parser=document.getElementById('com');
+				parser.innerHTML='<div  class="fb-comments" data-href="'+protocol+'://'+host+'/lostone/'+id+'" data-num-posts="20" data-width="380"></div>';
+				FB.XFBML.parse(parser);	
+				setTimeout(function() {
+				    $('.register-detail').modal('show');
+				}, 2000);
 				},
 				error: function(error) {
 						console.log(error)
