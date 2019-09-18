@@ -12,6 +12,13 @@ import cv2
 from django.shortcuts import redirect, reverse
 import time
 from django.http import JsonResponse
+from random import randint
+from itertools import chain
+
+def random_with_N_digits(n):
+    range_start = 10**(n-1)
+    range_end = (10**n)-1
+    return randint(range_start, range_end)
 
 
 def search(request):
@@ -35,9 +42,12 @@ def get_all(request):
         if "reporter" in request.session["role"]:
             return redirect('reports')
     user_role = UserProfile.objects.filter(user=request.user.id)
-    contact = None
-    contact = Contact.objects.all()
-    
+    contact_data = None
+    shelter_data = None
+    contact_data = Contact.objects.all()
+    shelter_data = Shelter.objects.all()
+    contact = list(chain(contact_data, shelter_data))
+
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def live_search(request):
@@ -189,6 +199,7 @@ def sponsor(request):
     if request.method == 'POST' and request.FILES['company_logo']:
         print("in sponsor =============================")
         try:
+            sid = random_with_N_digits(6)
             company_logo = request.FILES['company_logo']
             name = request.POST.get('name')
             company_name = request.POST.get('company_name')
@@ -200,7 +211,7 @@ def sponsor(request):
             company_logo = ntpath.basename(company_logo)
             company_logo = '/collection/company/' + company_logo
 
-            sponsor_object = Sponsor.objects.create(name=name, company_name=company_name, email_address=email_address, contact_number=contact_number, company_logo=company_logo)
+            sponsor_object = Sponsor.objects.create(sid=sid, name=name, company_name=company_name, email_address=email_address, contact_number=contact_number, company_logo=company_logo)
                         
         except Exception as e:
             print (e)
@@ -230,6 +241,7 @@ def lostone(request, lost_one_id=None):
 
     if request.method == 'POST':
         try:
+            uid = random_with_N_digits(6)
             lost_one_id = request.POST.get('lost_one_id')
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
@@ -248,9 +260,9 @@ def lostone(request, lost_one_id=None):
             rescued = request.POST.get('rescued') if request.POST.get('rescued') else None
             died = request.POST.get('died') if request.POST.get('died') else None
             if rescued:
-                status = 'rescued'
+                shelter_status = 'rescued'
             elif died:
-                status = 'died'                
+                shelter_status = 'died'                
             
             path = '/collection/'+first_name+last_name
             fs = FileSystemStorage(location='collection/'+first_name+last_name)
@@ -302,23 +314,23 @@ def lostone(request, lost_one_id=None):
                     shelter.contact_number2 = request.POST.get('contact_2')
                     shelter.address = request.POST.get('address')
                     shelter.note = request.POST.get('note')
-                    shelter.status = status
+                    shelter.status = shelter_status
                     shelter.save()
                 else:
-                    shelter = Shelter.objects.create(status=status, shelter=name, contact_number1=contact_number1,
+                    shelter = Shelter.objects.create(status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                      contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
 
                 
                 return redirect('get_all')
             else:
-                lost_one_object = LostOne.objects.create(gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
+                lost_one_object = LostOne.objects.create(uid=uid, gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
                                                          person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
                 
                 if request.session['username'] is None:
                     contact = Contact.objects.create(name=name, contact_number1=contact_number1,
                                                      contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
                 else:
-                    shelter = Shelter.objects.create(status=status, shelter=name, contact_number1=contact_number1,
+                    shelter = Shelter.objects.create(status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                          contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
 
                 return redirect('get_all')
