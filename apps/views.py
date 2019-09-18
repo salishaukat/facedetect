@@ -11,13 +11,8 @@ from trueface.video import VideoStream
 import cv2
 from django.shortcuts import redirect, reverse
 import time
-from random import randint
-from itertools import chain
+from django.http import JsonResponse
 
-def random_with_N_digits(n):
-    range_start = 10**(n-1)
-    range_end = (10**n)-1
-    return randint(range_start, range_end)
 
 def search(request):
     if 'username' not in request.session:
@@ -40,14 +35,9 @@ def get_all(request):
         if "reporter" in request.session["role"]:
             return redirect('reports')
     user_role = UserProfile.objects.filter(user=request.user.id)
-    contact_data = None
-    shelter_data = None
-    contact_data = Contact.objects.all()
-    shelter_data = Shelter.objects.all()
-    contact = list(chain(contact_data, shelter_data))
-    print("=============type============")
-    print(type(contact))
-
+    contact = None
+    contact = Contact.objects.all()
+    
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def live_search(request):
@@ -199,7 +189,6 @@ def sponsor(request):
     if request.method == 'POST' and request.FILES['company_logo']:
         print("in sponsor =============================")
         try:
-            sid = random_with_N_digits(6)
             company_logo = request.FILES['company_logo']
             name = request.POST.get('name')
             company_name = request.POST.get('company_name')
@@ -211,7 +200,7 @@ def sponsor(request):
             company_logo = ntpath.basename(company_logo)
             company_logo = '/collection/company/' + company_logo
 
-            sponsor_object = Sponsor.objects.create(sid=sid, name=name, company_name=company_name, email_address=email_address, contact_number=contact_number, company_logo=company_logo)
+            sponsor_object = Sponsor.objects.create(name=name, company_name=company_name, email_address=email_address, contact_number=contact_number, company_logo=company_logo)
                         
         except Exception as e:
             print (e)
@@ -241,7 +230,6 @@ def lostone(request, lost_one_id=None):
 
     if request.method == 'POST':
         try:
-            uid = random_with_N_digits(6)
             lost_one_id = request.POST.get('lost_one_id')
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
@@ -309,22 +297,17 @@ def lostone(request, lost_one_id=None):
                 shelter = Shelter.objects.filter(lost_one=lost_one_id).first()
                 print("123========================")
                 if shelter:
-                    shelter.name = request.POST.get('name')
-                    shelter.contact_area = request.POST.get('contact_area')
-                    shelter.contact_number1 = request.POST.get('contact_1')
-                    shelter.contact_number2 = request.POST.get('contact_2')
-                    shelter.address = request.POST.get('address')
-                    shelter.note = request.POST.get('note')
-                    shelter.contact_area = request.POST.get('contact_area')
-                    died = False
-                    rescued = False
-                    if request.POST.get('died'):        
-                        died = True
-                    if request.POST.get('rescued'):
-                        rescued = True                    
-                    shelter.rescued = rescued
-                    shelter.died = died
-                    shelter.save()
+                    contact_object = Shelter.objects.get(id=lost_one_id)
+                    contact_object.name = request.POST.get('name')
+                    contact_object.contact_area = request.POST.get('contact_area')
+                    contact_object.contact_number1 = request.POST.get('contact_1')
+                    contact_object.contact_number2 = request.POST.get('contact_2')
+                    contact_object.address = request.POST.get('address')
+                    contact_object.note = request.POST.get('note')
+                    contact_object.contact_area = request.POST.get('contact_area')
+                    contact_object.rescued = rescued
+                    contact_object.died = died
+                    contact_object.save()
 
                 else:
                     shelter = Shelter.objects.create(rescued=rescued, died=died, shelter=name, contact_number1=contact_number1,
@@ -333,7 +316,7 @@ def lostone(request, lost_one_id=None):
                 
                 return redirect('get_all')
             else:
-                lost_one_object = LostOne.objects.create(uid=uid, gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
+                lost_one_object = LostOne.objects.create(gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
                                                          person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
                 
                 rescued = True if request.POST.get('rescued') else False
@@ -436,3 +419,21 @@ def reports(request, search=None):
                 contacts = Contact.objects.all()
             return render(request, 'reports.html',{'contacts':contacts,'search':search})
     return redirect('index')
+
+def get_all_lost_one(request, lost_one_id=None):
+    try:
+        lostone = LostOne.objects.filter(id=lost_one_id).values()[0]
+    except:
+        lostone = None
+    try:
+        contact = Contact.objects.filter(lost_one=lost_one_id).values()[0]
+    except:
+        contact = None
+    try:
+        shelter = Shelter.objects.filter(lost_one=lost_one_id).values()[0]
+    except:
+        shelter = None
+    print(lostone)
+   
+    return JsonResponse({'lostone':lostone,'contact':contact, 'shelter':shelter})
+

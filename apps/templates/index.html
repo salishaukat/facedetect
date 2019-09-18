@@ -705,7 +705,7 @@
 								<tbody>
 									{% if contacts %}
 										{% for contact in contacts %}
-									<tr onclick="showmodel('{{contact.lost_one.id}}','{{contact.lost_one.person_pic1}}','{{contact.lost_one.first_name}}  {{contact.lost_one.last_name}}','{{contact.lost_one.gender}}','{{contact.lost_one.age}}','{{contact.lost_one.area}}','{{contact.lost_one.country}}','{{contact.lost_one.contact_number}}','{{contact.lost_one.status}}','{{contact.name}}','{{contact.contact_number1}}','{{contact.address}}','{{contact.note}},{{contact.lost_one.email}}')">
+									<tr onclick="showmodel('{{contact.lost_one.id}}')">
 										<!-- <td scope="row">1</td> -->
 										<td> {{ forloop.counter }} </td>
 										<td><img class="rounded-circle user-img" src="{{contact.lost_one.person_pic1}}"/><span>{{contact.lost_one.first_name}}  {{contact.lost_one.last_name}}</span></td>
@@ -953,24 +953,34 @@
 				$('.register-detail').modal('show');
 			})
 			{% endif %}
-			function showmodel(id,image,lost_one_name,gender,age,area,country,lost_one_contact_number,status,name,contact_number,address,note,email){
-				
-				$('#h4name').text(lost_one_name);
-				$('#h4_lost_one_contact_no').text(lost_one_contact_number)
-				$('#h4age').text(age)
-				$('#h4images').attr('src', image)
-				$('#h4status').text(status)
-				$('#h4gender').text(gender)
-				$('#h4_lost_one_area').text(area)
-				$('#h4country').text(country)
-				$('#h4email').text(email)
-				$('#h4contact_name').text(name)
-				$('#h4address').text(address)
-				$('#h4note').text(note)
-				$('#h4contact_number').text(contact_number)
+			function showmodel(id){
+				href = '/get_all_lost_one/' +id
+				$.ajax(href, {
+				success: function(data) {
+					$('#h4name').text(data.lostone.first_name + '' + data.lostone.last_name);
+				$('#h4_lost_one_contact_no').text(data.lostone.contact_number)
+				$('#h4age').text(data.lostone.age)
+				$('#h4images').attr('src', data.lostone.person_pic1)
+				$('#h4status').text(data.lostone.status)
+				$('#h4gender').text(data.lostone.gender)
+				$('#h4_lost_one_area').text(data.lostone.area)
+				$('#h4country').text(data.lostone.country)
+				$('#h4email').text(data.lostone.emal_address)
+				$('#h4contact_name').text(data.contact.name)
+				$('#h4address').text(data.contact.address)
+				$('#h4note').text(data.contact.note)
+				$('#h4contact_number').text(data.contact.contact_number1)
 				$('#lost_one_update').attr('href', '{% url "lostone" %}/'+id)
 				$('#lost_one').val(id)
 				$('.register-detail').modal('show');
+				},
+				error: function(error) {
+						console.log(error)
+				}
+				});
+				
+				
+				
 
 
 			}
