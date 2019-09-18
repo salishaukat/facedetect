@@ -43,6 +43,7 @@
         <div class="navbar-translate">
             <a class="navbar-brand" href="{% if user is None or 'AnonymousUser' in user %} {% url 'index' %} {% else %} {% url 'get_all' %} {% endif %}">
                 <span class="text-primary"> Find Me</span> <span class="text-secondary"> Bahamas </span>
+                <img class="ml-1" src="{% static 'img/flag.jpg' %}" width="50">
             </a>
             <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
                     aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
