@@ -691,7 +691,7 @@
 								<thead>
 									<tr>
 										<th scope="col">S#</th>
-										<th scope="col">Name</th>
+										<th scope="col" style="width:25%">Name</th>
 										<th scope="col">Gender</th>
 										<th scope="col">Age</th>
 										<th scope="col">Area</th>
@@ -705,10 +705,11 @@
 								<tbody>
 									{% if contacts %}
 										{% for contact in contacts %}
-									<tr onclick="showmodel('{{contact.lost_one.id}}','{{contact.lost_one.person_pic1}}','{{contact.lost_one.first_name}}  {{contact.lost_one.last_name}}','{{contact.lost_one.gender}}','{{contact.lost_one.age}}','{{contact.lost_one.area}}','{{contact.lost_one.country}}','{{contact.lost_one.contact_number}}','{{contact.lost_one.status}}','{{contact.name}}','{{contact.contact_number1}}','{{contact.address}}','{{contact.note}},{{contact.lost_one.email}}')">
+									<tr onclick="showmodel('{{contact.lost_one.uid}}','{{contact.lost_one.person_pic1}}','{{contact.lost_one.first_name}}  {{contact.lost_one.last_name}}','{{contact.lost_one.gender}}','{{contact.lost_one.age}}','{{contact.lost_one.area}}','{{contact.lost_one.country}}','{{contact.lost_one.contact_number}}','{{contact.lost_one.status}}','{{contact.name}}','{{contact.contact_number1}}','{{contact.address}}','{{contact.note}},{{contact.lost_one.email}}')">
 										<!-- <td scope="row">1</td> -->
 										<td> {{ forloop.counter }} </td>
-										<td><img class="rounded-circle user-img" src="{{contact.lost_one.person_pic1}}"/><span>{{contact.lost_one.first_name}}  {{contact.lost_one.last_name}}</span></td>
+										<td><img class="rounded-circle user-img" src="{{contact.lost_one.person_pic1}}"/>
+											<strong>{{contact.lost_one.first_name}} {{contact.lost_one.last_name}}</strong> <div>Id: {{contact.lost_one.uid}}</div></td>
 										<td>{{contact.lost_one.gender}}</td>
 										<td>{{contact.lost_one.age}}</td>
 										<td>{{contact.lost_one.area}}</td>
@@ -776,6 +777,7 @@
 						</div>
 						<div class="col">
 							<h4 class="mb-0" id="h4name"> </h4>
+							<p class="mb-0">Id: <span> 35484 </span> </p>
 							<div class="row">
 								<div class="col-md-5">
 									<h4 class="text-primary" id="h4status"> </h4>
@@ -811,9 +813,9 @@
 								</div>
 							</div>
 							<hr/>
-							<div class="row"> 
+							<div class="row contact_info"> 
 								<div class="col-md-6 col-sm-12">
-									<h5 class="font-weight-bold font-xs mb-1" > Name </h5>
+									<h5 class="font-weight-bold font-xs mb-1" > Contact Name </h5>
 									<p class="font-sm" id="h4contact_name"> </p>
 								</div>
 								<div class="col-md-6 col-sm-12">
@@ -821,12 +823,29 @@
 									<p class="font-sm" id="h4contact_number"> </p>
 								</div>
 							</div>
-							<div class="row"> 
+							<div class="row contact_info"> 
 								<div class="col">
-									<h5 class="font-weight-bold font-xs mb-1" > Address </h5>
+									<h5 class="font-weight-bold font-xs mb-1" > Contact Address </h5>
 									<p class="font-sm mb-0" id="h4address"></p>
 								</div>
 							</div>
+							<hr/>
+							<div class="row shelter_info"> 
+								<div class="col-md-6 col-sm-12">
+									<h5 class="font-weight-bold font-xs mb-1" > Shelter Name </h5>
+									<p class="font-sm" id="h4contact_name"> </p>
+								</div>
+								<div class="col-md-6 col-sm-12">
+									<h5 class="font-weight-bold font-xs mb-1" > Shelter Contact </h5>
+									<p class="font-sm" id="h4contact_number"> </p>
+								</div>
+							</div>
+							<div class="row shelter_info"> 
+								<div class="col">
+									<h5 class="font-weight-bold font-xs mb-1" > Shelter Address </h5>
+									<p class="font-sm mb-0" id="h4address"></p>
+								</div>
+							</div>							
 						</div>
 					</div>
 					<hr/>

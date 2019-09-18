@@ -333,7 +333,7 @@
                             
                             
                         </div>
-                        <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter %} disabled  {% endif %}/> 
+                        <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter %} disabled {% else %} required  {% endif %}/> 
                         <input type="file" id="uploadfile2" name="person_pic2" style="display: none;" onchange="upload_img2(this);"{% if allow_shelter %} disabled  {% endif %}/> 
                         <input type="file" id="uploadfile3" name="person_pic3" style="display: none;" onchange="upload_img3(this);"{% if allow_shelter %} disabled  {% endif %}/> 
                             <!-- Upload Image here -->
@@ -363,22 +363,23 @@
                             <textarea name="note" id="note" class="form-control" id="noteTextArea" rows="3" required></textarea>
                         </div>
 						{% if user and 'AnonymousUser' not in user %}
+                        
                         <div class="form-group">
                             <div class="form-check form-check-radio form-check-inline">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="rescued" name="rescued" 
-                                           value="option1"> Rescued
+                                    <input class="form-check-input" type="radio" name="rescued"
+                                           id="rescued" value="option1"> Rescued
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
                             <div class="form-check form-check-radio form-check-inline">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="died" name="died"
-                                           value="option2"> Died
+                                    <input class="form-check-input" type="radio" name="died"
+                                           id="died" value="option2"> Died
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
-                        </div>
+                        </div>                        
 						{% endif %}
                         <button type="submit" class="btn btn-primary btn-round btn-block mt-4">Submit</button>
                     </div>
@@ -416,21 +417,22 @@ $(document).ready(function(){
     }
     
     {% if shelter %}
-        $('#name').val('{{contact.name}}')
+        $('#name').val('{{contact.shelter}}')
         $('#address').val('{{contact.address}}')
         $('#note').val('{{contact.note}}')
         $('#contact_1').val('{{contact.contact_number1}}')
         $('#contact_2').val('{{contact.contact_number2}}')
         $('select[name="contact_area"]').val('{{contact.area}}')
-        rescued = Boolean("{{contact.rescued}}")
-        died = Boolean("{{contact.died}}")
 
-        if (rescued == true){
-             $('#rescued'). prop("checked", true)
+        status = "{{contact.status}}"
+        
+        if (status == 'rescued'){
+            $('#rescued'). prop("checked", true)
         }
-        else if (died == true){
+        else{
             $('#died'). prop("checked", true)
-        }
+        }        
+
     {% endif %}
 
     $('#personpic1').attr('src','{{contact.lost_one.person_pic1}}')
@@ -503,6 +505,14 @@ $(document).ready(function(){
     $('#female').click(function(){
        $('#male'). prop("checked", false)
     });
+    $('#rescued').click(function(){
+       $('#died'). prop("checked", false)
+    });
+
+    $('#died').click(function(){
+       $('#rescued'). prop("checked", false)
+    });
+
 });
 </script>
 

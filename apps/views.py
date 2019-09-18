@@ -257,12 +257,12 @@ def lostone(request, lost_one_id=None):
                 gender = 'male'
             elif female:
                 gender = 'female'
-            died = False
-            rescued = False
-            if request.POST.get('died'):        
-                died = True
-            if request.POST.get('rescued'):
-                rescued = True
+            rescued = request.POST.get('rescued') if request.POST.get('rescued') else None
+            died = request.POST.get('died') if request.POST.get('died') else None
+            if rescued:
+                status = 'rescued'
+            elif died:
+                status = 'died'                
             
             path = '/collection/'+first_name+last_name
             fs = FileSystemStorage(location='collection/'+first_name+last_name)
@@ -290,7 +290,6 @@ def lostone(request, lost_one_id=None):
             contact_number2 = request.POST.get('contact_2')
             address = request.POST.get('address')
             note = request.POST.get('note')
-            contact_area = request.POST.get('contact_area')
 
             try:
                 person_pic1 = request.FILES['person_pic1']
@@ -309,25 +308,17 @@ def lostone(request, lost_one_id=None):
                 shelter = Shelter.objects.filter(lost_one=lost_one_id).first()
                 print("123========================")
                 if shelter:
-                    shelter.name = request.POST.get('name')
-                    shelter.contact_area = request.POST.get('contact_area')
+                    shelter.shelter = request.POST.get('name')
+                    shelter.area = request.POST.get('contact_area')
                     shelter.contact_number1 = request.POST.get('contact_1')
                     shelter.contact_number2 = request.POST.get('contact_2')
                     shelter.address = request.POST.get('address')
                     shelter.note = request.POST.get('note')
-                    shelter.contact_area = request.POST.get('contact_area')
-                    died = False
-                    rescued = False
-                    if request.POST.get('died'):        
-                        died = True
-                    if request.POST.get('rescued'):
-                        rescued = True                    
-                    shelter.rescued = rescued
-                    shelter.died = died
+                    shelter.status = status
                     shelter.save()
 
                 else:
-                    shelter = Shelter.objects.create(rescued=rescued, died=died, shelter=name, contact_number1=contact_number1,
+                    shelter = Shelter.objects.create(status=status, shelter=name, contact_number1=contact_number1,
                                                      contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
 
                 
@@ -336,13 +327,11 @@ def lostone(request, lost_one_id=None):
                 lost_one_object = LostOne.objects.create(uid=uid, gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
                                                          person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
                 
-                rescued = True if request.POST.get('rescued') else False
-                died = True if request.POST.get('died') else False
                 if request.session['username'] is None:
-                    contact = Contact.objects.create(rescued=rescued, died=died, name=name, contact_number1=contact_number1,
+                    contact = Contact.objects.create(name=name, contact_number1=contact_number1,
                                                      contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
                 else:
-                    shelter = Shelter.objects.create(rescued=rescued, died=died, shelter=name, contact_number1=contact_number1,
+                    shelter = Shelter.objects.create(status=status, shelter=name, contact_number1=contact_number1,
                                                          contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
 
                 return redirect('get_all')

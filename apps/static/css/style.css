@@ -99,6 +99,13 @@ h6 {
 	padding-right: 10px;
 }
 
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #767588;
+    border: 1px solid #cacbd5;
+}
+
 section.lost-table .table thead{
 	background: #f0f4f9;
 }
@@ -108,12 +115,15 @@ form label{
 	font-weight: 600;
 }
 
+
 .user-img {
     max-width: 35px;
     height: 35px;
     width: 100%;
     object-fit: cover;
+    display: block;
     margin-right: 5px;
+    float: left;
 }
 
 .table td, .table th {
