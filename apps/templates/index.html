@@ -834,28 +834,35 @@
 							<div class="row shelter_info"> 
 								<div class="col-md-6 col-sm-12">
 									<h5 class="font-weight-bold font-xs mb-1" > Shelter Name </h5>
-									<p class="font-sm" id="h4contact_name"> </p>
+									<p class="font-sm" id="h4shelter_name"> </p>
 								</div>
 								<div class="col-md-6 col-sm-12">
 									<h5 class="font-weight-bold font-xs mb-1" > Shelter Contact </h5>
-									<p class="font-sm" id="h4contact_number"> </p>
+									<p class="font-sm" id="h4shelter_number"> </p>
 								</div>
 							</div>
 							<div class="row shelter_info"> 
 								<div class="col">
 									<h5 class="font-weight-bold font-xs mb-1" > Shelter Address </h5>
-									<p class="font-sm mb-0" id="h4address"></p>
+									<p class="font-sm mb-0" id="h4shelter_address"></p>
 								</div>
 							</div>							
 						</div>
 					</div>
 					<hr/>
-					<div class="row"> 
+					<div class="row contact_info"> 
 						<div class="col">
-							<h5 class="font-weight-bold font-xs mb-1" > Note </h5>
+							<h5 class="font-weight-bold font-xs mb-1" > Contact's Note </h5>
 							<p class="font-sm mb-0" id="h4note"></p>
 						</div>
 					</div>
+					<hr/>
+					<div class="row shelter_info"> 
+						<div class="col">
+							<h5 class="font-weight-bold font-xs mb-1" > Shelter's Note </h5>
+							<p class="font-sm mb-0" id="h4shelter_note"></p>
+						</div>
+					</div>					
 					<hr/>
 					<div class="row"> 
 
@@ -986,10 +993,26 @@
 				$('#h4_lost_one_area').text(data.lostone.area)
 				$('#h4country').text(data.lostone.country)
 				$('#h4email').text(data.lostone.emal_address)
-				$('#h4contact_name').text(data.contact.name)
-				$('#h4address').text(data.contact.address)
-				$('#h4note').text(data.contact.note)
-				$('#h4contact_number').text(data.contact.contact_number1)
+				if (data.contact){
+					$('.contact_info').show()
+					$('#h4contact_name').text(data.contact.name)
+					$('#h4address').text(data.contact.address)
+					$('#h4note').text(data.contact.note)
+					$('#h4contact_number').text(data.contact.contact_number1)
+				}
+				else{
+					$('.contact_info').hide()
+				}
+				if (data.shelter){
+					$('.shelter_info').show()
+					$('#h4shelter_name').text(data.shelter.shelter)
+					$('#h4shelter_address').text(data.shelter.address)
+					$('#h4shelter_note').text(data.shelter.note)
+					$('#h4shelter_number').text(data.shelter.contact_number1)
+				}
+				else{
+					$('.shelter_info').hide()
+				}
 				$('#lost_one_update').attr('href', '{% url "lostone" %}/'+id)
 				$('#lost_one').val(id)
 				$('.register-detail').modal('show');
