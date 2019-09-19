@@ -483,13 +483,13 @@
 									<div class="form-group text-left">
 										<div class="form-check form-check-radio form-check-inline">
 											<label class="form-check-label">
-												<input class="form-check-input" type="radio" name="male" id="inlineRadio1" value="option1" checked="checked"> Male
+												<input class="form-check-input" type="radio" name="male" id="male" value="option1"> Male
 												<span class="form-check-sign"></span>
 											</label>
 										</div>
 										<div class="form-check form-check-radio form-check-inline">
 											<label class="form-check-label">
-												<input class="form-check-input" type="radio" name="female" id="inlineRadio2" value="option2"> Female
+												<input class="form-check-input" type="radio" name="female" id="female" value="option2"> Female
 												<span class="form-check-sign"></span>
 											</label>
 										</div>
@@ -567,7 +567,7 @@
 						document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
 					</script>, Designed by
 					<a href="#" target="_blank"></a>. Coded by
-					<a href="#" target="_blank">Abdullah Team</a>.
+					<a href="#" target="_blank">Blustones</a>.
 				</div>
 			</div>
 		</footer>
@@ -690,7 +690,15 @@
 		    {% if username %}
             $(document).ready(function(){
                 $('#navbarDropdownMenuLink').click();
+			                    
             })
+				$('#male').click(function(){
+			       $('#female'). prop("checked", false)
+			    });
+
+			    $('#female').click(function(){
+			       $('#male'). prop("checked", false)
+			    });            
             {% endif %}
         </script>
 

@@ -763,7 +763,7 @@
 		<div class="modal-dialog modal-lg">
 				{% if contacts %}
 			<div class="modal-content p-4">
-				<div class="modal-header">-
+				<div class="modal-header">
 					<!-- <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4> -->
 					<button type="button" class="close text-primary" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
@@ -781,8 +781,9 @@
 														
 						</div>
 						<div class="col">
+
 							<h3 class="mb-0 font-weight-bold" id="h4name"> </h3>
-							<p class="mb-0">Id: <span> 35484 </span> </p>
+							<p class="mb-0">Id: <span id="h4id"></span> </p>
 								<div class="row">
 								<div class="col-md-5">
 									<h4 class="text-primary" id="h4status"></h4>
@@ -974,6 +975,7 @@
 				$.ajax(href, {
 				success: function(data) {
 				$('#h4name').text(data.lostone.first_name + '' + data.lostone.last_name);
+				$('#h4id').text(data.lostone.uid);
 				$('#h4_lost_one_contact_no').text(data.lostone.contact_number)
 				$('#h4age').text(data.lostone.age)
 				$('#h4images').attr('src', data.lostone.person_pic1)
