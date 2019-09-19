@@ -103,10 +103,14 @@ h6 {
 }
 
 .table {
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #767588;
-    border: 1px solid #cacbd5;
+	width: 100%;
+	margin-bottom: 1rem;
+	color: #767588;
+	border: 1px solid #cacbd5;
+}
+
+.table tr{
+	cursor: pointer;
 }
 
 section.lost-table .table thead{
@@ -120,13 +124,13 @@ form label{
 
 
 .user-img {
-    max-width: 35px;
-    height: 35px;
-    width: 100%;
-    object-fit: cover;
-    display: block;
-    margin-right: 5px;
-    float: left;
+	max-width: 35px;
+	height: 35px;
+	width: 100%;
+	object-fit: cover;
+	display: block;
+	margin-right: 5px;
+	float: left;
 }
 
 .table td, .table th {
@@ -181,10 +185,10 @@ form label{
 }
 
 #owl-carousel-updates .owl-item img {
-    display: block;
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+	display: block;
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
 }
 
 .image-upload>input {

@@ -777,6 +777,11 @@
 					<div class="row"> 
 						<div class="col-sm-12 bg-white col-md-4">
 							<img id="h4images" src="{% static 'img/image.jpg' %}" alt="Rounded Image" class="rounded">
+							
+							{% if user and 'AnonymousUser' not in user %}
+							<a href="#" id="lost_one_update" class="btn btn-primary btn-round btn-block mt-4"> UPDATE DATA </a>
+							{% endif %}
+														
 						</div>
 						<div class="col">
 							<h4 class="mb-0" id="h4name"> </h4>
@@ -905,20 +910,16 @@
 							</form>
 						</div>
 						
-						
-
- 
-
 						<div class="row" id='com'>
 						</div>
 
-						<div class="row pt-5 pb-0 px-1"> 
+					<!-- 	<div class="row pt-5 pb-0 px-1"> 
 							{% if user and 'AnonymousUser' not in user %}
 							<a href='#' id="lost_one_update" type="button" class="btn btn-primary" >
 								Update Record
 							</a>
 							{% endif %}
-						</div>
+						</div> -->
 
 
 					</div>
