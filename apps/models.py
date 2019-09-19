@@ -18,7 +18,7 @@ class LostOne(models.Model):
     first_name = models.CharField(null=False, blank=False, max_length=100)
     last_name = models.CharField(null=True, blank=True, max_length=100)
     email_address = models.CharField(null=True, blank=True, max_length=100)
-    contact_number = models.CharField(null=False, blank=False, max_length=100)
+    contact_number = models.CharField(null=True, blank=True, max_length=100)
     age = models.IntegerField(null=True, blank=True)
     status = models.CharField(null=False, blank=False, max_length=100)
     area = models.CharField(null=True, blank=True, max_length=900)
@@ -33,23 +33,23 @@ class LostOne(models.Model):
 
 class Contact(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
-    contact_number1 = models.CharField(null=False, blank=False, max_length=100)
+    contact_number1 = models.CharField(null=True, blank=True, max_length=100)
     contact_number2 = models.CharField(null=True, blank=True, max_length=100)
     address = models.TextField(null=True, blank=True, max_length=300)
     area = models.CharField(null=True, blank=True, max_length=100)
     note = models.TextField(null=True, blank=True, max_length=500)
-    area = models.CharField(null=False, blank=False, max_length=100)
+    area = models.CharField(null=True, blank=True, max_length=100)
     lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
 
 class Shelter(models.Model):
     shelter = models.CharField(null=False, blank=False, max_length=100)
-    contact_number1 = models.CharField(null=False, blank=False, max_length=100)
+    contact_number1 = models.CharField(null=True, blank=True, max_length=100)
     contact_number2 = models.CharField(null=True, blank=True, max_length=100)
     address = models.TextField(null=True, blank=True, max_length=300)
     area = models.CharField(null=True, blank=True, max_length=100)
     note = models.TextField(null=True, blank=True, max_length=500)
     status = models.CharField(null=True, blank=True, max_length=100)
-    area = models.CharField(null=False, blank=False, max_length=100)
+    area = models.CharField(null=True, blank=True, max_length=100)
     lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
 
 
