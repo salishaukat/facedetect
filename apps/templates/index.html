@@ -81,11 +81,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-						<div class="input-group">
-
-								<button type="button" class="btn btn-neutral btn-lg form-control bg-white" aria-haspopup="true" aria-expanded="false" onclick="live_btn()"> Start live
-								</button>	
-						</div>
+						<button type="button" class="btn btn-neutral btn-block btn-round bg-white mt-0 btn-live" aria-haspopup="true" aria-expanded="false" onclick="live_btn()"> <i class="fas fa-video"></i> Start live
+						</button>	
 						<ul class="list-inline toggle-items">
 							<li class="list-inline-item"> <a class="font-weight-bold" onclick="name_search()"> NAME </a> </li>
 							<span class="px-1"> | </span> 
@@ -776,7 +773,7 @@
 
 					<div class="row"> 
 						<div class="col-sm-12 bg-white col-md-4">
-							<img id="h4images" src="{% static 'img/image.jpg' %}" alt="Rounded Image" class="rounded">
+							<img class="modal-img rounded" id="h4images" src="{% static 'img/image.jpg' %}" alt="Rounded Image" class="rounded">
 
 							{% if user and 'AnonymousUser' not in user %}
 							<a href="#" id="lost_one_update" class="btn btn-primary btn-round btn-block mt-4"> UPDATE DATA </a>
@@ -790,12 +787,12 @@
 								<div class="col-md-5">
 									<h4 class="text-primary" id="h4status"></h4>
 								</div>
-								<div class="col text-center" id="shareOnFacebook" onclick="shareOnFacebook();" >
-									<h6 class="title text-primary m-0 p-0" >
-									  Share on Facebook
-									</h6>
+								<div class="col text-center">
+									<h6 class="title text-primary m-0 p-0">Share on</h6>
 									<!-- <a href="#" class="btn btn-primary btn-outline-primary text-instagram"><i class="fab fa-instagram"></i> <strong> Instagram </strong></a> -->
-									<!-- <a href="#" class="btn btn-primary btn-outline-primary "><i class="fab fa-facebook"></i> <strong> Facebook </strong></a> -->
+									<button type="button" id="shareOnFacebook" class="btn btn-primary btn-outline-primary" onclick="shareOnFacebook();">
+										<i class="fab fa-facebook"></i> <strong> Facebook </strong>
+									</button>
 
 									
 								</div>
