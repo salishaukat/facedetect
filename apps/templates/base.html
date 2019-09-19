@@ -98,9 +98,9 @@
                     
                     {% else %}
                     <li class="nav-item">
-                        <form class="px-3 pt-3 pb-3" action="{% url 'logout' %}" method="post" enctype="multipart/form-data">
+                        <form class="px-3" action="{% url 'logout' %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-primary btn-round btn-block mt-4">Logout</button>
+                            <button type="submit" class="btn btn-primary btn-round btn-block">Logout</button>
                         </form>
                     </li>
                                     

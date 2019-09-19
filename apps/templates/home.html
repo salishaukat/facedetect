@@ -86,9 +86,9 @@
 					
 					{% else %}
 					<li class="nav-item">
-						<form class="px-3 pt-3 pb-3" action="{% url 'logout' %}" method="post" enctype="multipart/form-data">
+						<form class="px-3" action="{% url 'logout' %}" method="post" enctype="multipart/form-data">
 							{% csrf_token %}
-							<button type="submit" class="btn btn-primary btn-round btn-block mt-4">Logout</button>
+							<button type="submit" class="btn btn-primary btn-round btn-block">Logout</button>
 						</form>
 					</li>
 										
@@ -113,7 +113,7 @@
 									<a onclick="submit_simple_search()"><i class="fa fa-search" ></i></a>
 								</div>
 
-								<button type="button" class="btn btn-neutral btn-lg advance-search dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
+								<button type="button" class="btn btn-neutral btn-lg advance-search" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
 									
 								</button>
 

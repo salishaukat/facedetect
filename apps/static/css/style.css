@@ -221,6 +221,17 @@ form label{
 a.text-primary:focus, a.text-primary:hover {
 	color: #ffc72c!important
 }
+
+.modal-header .close {
+	border: 2px solid #535353;
+	padding: 5px;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	line-height: 18px;
+	font-weight: 100;
+	color: #535353 !important;
+}
 @media (min-width: 992px){
 	.notification-dropdown{
 		min-width: 280px;
