@@ -160,6 +160,10 @@ def advance_search(request):
     tags = {}
     if request.POST.get('first_name'):
         tags.update({'lost_one__first_name__icontains':request.POST.get('first_name')})
+    if request.POST.get('last_name'):
+        tags.update({'lost_one__last_name__icontains':request.POST.get('last_name')})
+    if request.POST.get('contact_no'):
+        tags.update({'lost_one__contact_number__icontains':request.POST.get('contact_no')})        
     if request.POST.get('area'):
         tags.update({'lost_one__area__icontains':request.POST.get('area')})
     if request.POST.get('country'):
@@ -169,9 +173,9 @@ def advance_search(request):
     male = request.POST.get('male') if request.POST.get('male') else None
     female = request.POST.get('female') if request.POST.get('female') else None
     if male:
-        tags.update({'lost_one__gender__icontains':"male"})
+        tags.update({'lost_one__gender__contains':"male"})
     elif female:
-        tags.update({'lost_one__gender__icontains':"female"})
+        tags.update({'lost_one__gender__contains':"female"})
      # Your dict with fields
     or_condition = Q()
     for key, value in tags.items():
@@ -315,11 +319,14 @@ def lostone(request, lost_one_id=None):
                     shelter.address = request.POST.get('address')
                     shelter.note = request.POST.get('note')
                     shelter.status = shelter_status
+                    lost_one_object.status = shelter_status
                     shelter.save()
+                    lost_one_object.save()
                 else:
                     shelter = Shelter.objects.create(status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                      contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
-
+                    lost_one_object.status = shelter_status
+                    lost_one_object.save()
                 
                 return redirect('get_all')
             else:
