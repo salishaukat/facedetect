@@ -98,7 +98,7 @@
                     
                     {% else %}
                     <li class="nav-item">
-                        <form class="px-3" action="{% url 'logout' %}" method="post" enctype="multipart/form-data">
+                        <form action="{% url 'logout' %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-primary btn-round btn-block">Logout</button>
                         </form>
@@ -121,7 +121,7 @@
                             document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
                         </script>, Designed by
                         <a href="#" target="_blank"></a>. Coded by
-                        <a href="#" target="_blank">Abdullah Team</a>.
+                        <a href="#" target="_blank">Blustones</a>.
                     </div>
                 </div>
             </footer>

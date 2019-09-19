@@ -81,11 +81,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-						<div class="input-group">
-
-								<button type="button" class="btn btn-neutral btn-lg form-control bg-white" aria-haspopup="true" aria-expanded="false" onclick="live_btn()"> Start live
-								</button>	
-						</div>
+						<button type="button" class="btn btn-neutral btn-block btn-round bg-white mt-0 btn-live" aria-haspopup="true" aria-expanded="false" onclick="live_btn()"> <i class="fas fa-video"></i> Start live
+						</button>	
 						<ul class="list-inline toggle-items">
 							<li class="list-inline-item"> <a class="font-weight-bold" onclick="name_search()"> NAME </a> </li>
 							<span class="px-1"> | </span> 
@@ -431,7 +428,6 @@
 									</select>
 								</div>
 								<div class="form-check form-check-radio form-check-inline">
-									<label class="form-check-label">
 										<select class="form-control">
 			                                <option selected>Country</option>
 			                                <option value="Afganistan">Afghanistan</option>
@@ -681,7 +677,6 @@
 			                                <option value="Zambia">Zambia</option>
 			                                <option value="Zimbabwe">Zimbabwe</option>
 			                            </select>
-									</label>
 								</div>
 								
 							</div>
@@ -694,10 +689,9 @@
 									<tr>
 										<th class="align-middle" scope="col">S#</th>
 										<th class="align-middle" scope="col" style="width:25%">Name</th>
-										<th class="align-middle" scope="col">Gender</th>
 										<th class="align-middle" scope="col">Age</th>
 										<th class="align-middle" scope="col">Area</th>
-										<th class="align-middle" scope="col">Nationality</th>
+										<th class="align-middle" scope="col">Country</th>
 										<th class="align-middle" scope="col">Contact No</th>
 										<th class="align-middle" scope="col">Status</th>
 										<th class="align-middle" scope="col">Note</th>
@@ -713,7 +707,6 @@
 										<td class="align-middle"> {{ forloop.counter }} </td>
 										<td class="align-middle"><img class="rounded-circle user-img mt-1" src="{{contact.lost_one.person_pic1}}"/>
 											<strong>{{contact.lost_one.first_name}} {{contact.lost_one.last_name}}</strong> <div>Id: {{contact.lost_one.uid}}</div></td>
-										<td class="align-middle">{{contact.lost_one.gender}}</td>
 										<td class="align-middle">{{contact.lost_one.age}}</td>
 										<td class="align-middle">{{contact.lost_one.area}}</td>
 										<td class="align-middle">{{contact.lost_one.country}}</td>
@@ -766,7 +759,7 @@
 		<div class="modal-dialog modal-lg">
 				{% if contacts %}
 			<div class="modal-content p-4">
-				<div class="modal-header">-
+				<div class="modal-header pt-0">
 					<!-- <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4> -->
 					<button type="button" class="close text-primary" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
@@ -775,27 +768,35 @@
 				<div class="container"> 
 
 					<div class="row"> 
-						<div class="col-sm-12 bg-white col-md-4">
-							<img id="h4images" src="{% static 'img/image.jpg' %}" alt="Rounded Image" class="rounded">
-
+						<div class="col-sm-12 bg-white col-md-4 ">
+							<img class="modal-img rounded" id="h4images" src="{% static 'img/image.jpg' %}" alt="Rounded Image">
+							<div class="row">
+								<div class="col">
+									<img class="img-show" src="{% static 'img/image.jpg' %}" alt="Rounded Image">
+								</div>
+								<div class="col">
+									<img class="img-show" src="{% static 'img/image.jpg' %}" alt="Rounded Image" >
+								</div>
+							</div>
 							{% if user and 'AnonymousUser' not in user %}
 							<a href="#" id="lost_one_update" class="btn btn-primary btn-round btn-block mt-4"> UPDATE DATA </a>
 							{% endif %}
 														
 						</div>
 						<div class="col">
-							<h4 class="mb-0" id="h4name"> </h4>
-							<p class="mb-0">Id: <span> 35484 </span> </p>
+
+							<h3 class="mb-0 font-weight-bold" id="h4name"> </h3>
+							<p class="mb-0">Id: <span id="h4id"></span> </p>
 								<div class="row">
 								<div class="col-md-5">
-									<h4 class="text-primary" id="h4status"></h4>
+									<h4 class="text-primary font-weight-bold mt-4" id="h4status"></h4>
 								</div>
-								<div class="col text-center" id="shareOnFacebook" onclick="shareOnFacebook();" >
-									<h6 class="title text-primary m-0 p-0" >
-									  Share on Facebook
-									</h6>
+								<div class="col text-center">
+									<h6 class="title text-primary m-0 p-0">Share on</h6>
 									<!-- <a href="#" class="btn btn-primary btn-outline-primary text-instagram"><i class="fab fa-instagram"></i> <strong> Instagram </strong></a> -->
-									<!-- <a href="#" class="btn btn-primary btn-outline-primary "><i class="fab fa-facebook"></i> <strong> Facebook </strong></a> -->
+									<button type="button" id="shareOnFacebook" class="btn btn-primary btn-outline-primary mt-1" onclick="shareOnFacebook();">
+										<i class="fab fa-facebook"></i> <strong> Facebook </strong>
+									</button>
 
 									
 								</div>
@@ -806,7 +807,7 @@
 									<h5 class="font-weight-bold font-xs mb-1"> Contact No </h5>
 									<p class="font-sm" id="h4_lost_one_contact_no"></p>
 								</div>
-								<div class="col-md-2 col-sm-12">
+								<div class="col-md-1 col-sm-12">
 									<h5 class="font-weight-bold font-xs mb-1"> Age </h5>
 									<p class="font-sm" id="h4age"></p>
 								</div>
@@ -814,7 +815,7 @@
 									<h5 class="font-weight-bold font-xs mb-1"> Gender </h5>
 									<p class="font-sm" id="h4gender"> </p>
 								</div>
-								<div class="col-md-2 col-sm-12">
+								<div class="col-md-3 col-sm-12">
 									<h5 class="font-weight-bold font-xs mb-1"> Area </h5>
 									<p class="font-sm" id="h4_lost_one_area"></p>
 								</div>
@@ -830,67 +831,80 @@
 								</div>
 							</div>
 							<hr/>
+							<div class="row"> 
+								<div class="col-sm-12">
+									<h4 class="text-primary font-weight-bold mt-0"> Where to Contact</h4>
+								</div>
+							</div>
 							<div class="row contact_info"> 
 								<div class="col-md-6 col-sm-12">
-									<h5 class="font-weight-bold font-xs mb-1" > Contact Name </h5>
+									<h5 class="font-weight-bold font-xs mb-1" > Name </h5>
 									<p class="font-sm" id="h4contact_name"> </p>
 								</div>
 								<div class="col-md-6 col-sm-12">
 									<h5 class="font-weight-bold font-xs mb-1" > Contact Person </h5>
 									<p class="font-sm" id="h4contact_number"> </p>
 								</div>
-							</div>
-							<div class="row contact_info"> 
-								<div class="col">
-									<h5 class="font-weight-bold font-xs mb-1" > Contact Address </h5>
-									<p class="font-sm mb-0" id="h4address"></p>
-								</div>
-							</div>
-							<hr/>
-							<div class="row shelter_info"> 
-								<div class="col-md-6 col-sm-12">
-									<h5 class="font-weight-bold font-xs mb-1" > Shelter Name </h5>
-									<p class="font-sm" id="h4shelter_name"> </p>
-								</div>
-								<div class="col-md-6 col-sm-12">
-									<h5 class="font-weight-bold font-xs mb-1" > Shelter Contact </h5>
-									<p class="font-sm" id="h4shelter_number"> </p>
-								</div>
-							</div>
-							<div class="row shelter_info"> 
-								<div class="col">
-									<h5 class="font-weight-bold font-xs mb-1" > Shelter Address </h5>
-									<p class="font-sm mb-0" id="h4shelter_address"></p>
-								</div>
-							</div>							
+							</div>						
 						</div>
 					</div>
-					<hr/>
+
+					<div class="row contact_info"> 
+						<div class="col-md-4">
+							<h5 class="font-weight-bold font-xs mb-1" > Area </h5>
+							<p class="font-sm" id="h4address"></p>
+						</div>
+						<div class="col-md-8">
+							<h5 class="font-weight-bold font-xs mb-1" > Address </h5>
+							<p class="font-sm" id="h4address"> 882 Clover Drive Mosca, CO 81146</p>
+						</div>
+					</div>
 					<div class="row contact_info"> 
 						<div class="col">
-							<h5 class="font-weight-bold font-xs mb-1" > Contact's Note </h5>
-							<p class="font-sm mb-0" id="h4note"></p>
+							<h5 class="font-weight-bold font-xs mb-1" > Note </h5>
+							<p class="font-sm" id="h4note"> </p>
 						</div>
 					</div>
 					<hr/>
+					<div class="row"> 
+						<div class="col-sm-12">
+							<h4 class="text-primary font-weight-bold mt-0"> Rescuer / Shelter Contact</h4>
+						</div>
+					</div>
+					<div class="row contact_info"> 
+						<div class="col-md-3">
+							<h5 class="font-weight-bold font-xs mb-1" > Name </h5>
+							<p class="font-sm"> Shelter name </p>
+						</div>
+						<div class="col-md-3">
+							<h5 class="font-weight-bold font-xs mb-1" > Contact Person </h5>
+							<p class="font-sm" id="h4address"> 90 49034 909</p>
+						</div>
+						<div class="col-md-6">
+							<h5 class="font-weight-bold font-xs mb-1" > Area </h5>
+							<p class="font-sm" id="h4address"> 882 Clover Drive Mosca, CO 81146</p>
+						</div>
+					</div>
+					<div class="row contact_info"> 
+						<div class="col-md-12">
+							<h5 class="font-weight-bold font-xs mb-1" > Address </h5>
+							<p class="font-sm" id="h4address"> 882 Clover Drive Mosca, CO 81146</p>
+						</div>
+					</div>
 					<div class="row shelter_info"> 
 						<div class="col">
 							<h5 class="font-weight-bold font-xs mb-1" > Shelter's Note </h5>
 							<p class="font-sm mb-0" id="h4shelter_note"></p>
 						</div>
 					</div>					
-					<!-- <hr/> -->
+					<hr/>
 					<div class="row"> 
-
 						<div class="row"> 
 							<div class="col">
 								<div id="summernote">
-									
 								</div>
 							</div>
 						</div>
-
-						
 
 					<!-- 	<div class="row pt-5 pb-0 px-1"> 
 							{% if user and 'AnonymousUser' not in user %}
@@ -899,9 +913,9 @@
 							</a>
 							{% endif %}
 						</div> -->
-
-
 					</div>
+					<div class="row" id='com'></div>
+
 				</div>
 				{% else %}
 				<div class="modal-content p-4 mx-auto" style="max-width: 540px;">
@@ -964,10 +978,6 @@
     </div>
   </div>
 </div>
-		
-shareOnFacebook
-
-
 		<script>
 			function shareOnFacebook(link){
 				window.open('https://www.facebook.com/sharer/sharer.php?u='+link+'', '_blank')
@@ -983,6 +993,7 @@ shareOnFacebook
 				$.ajax(href, {
 				success: function(data) {
 				$('#h4name').text(data.lostone.first_name + '' + data.lostone.last_name);
+				$('#h4id').text(data.lostone.uid);
 				$('#h4_lost_one_contact_no').text(data.lostone.contact_number)
 				$('#h4age').text(data.lostone.age)
 				$('#h4images').attr('src', data.lostone.person_pic1)
