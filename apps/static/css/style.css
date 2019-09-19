@@ -74,7 +74,7 @@ h6 {
 .navbar .navbar-nav .nav-link:not(.btn) {
 	text-transform: none;
 	font-size: 1.2em;
-	padding: 0.5rem 0.7rem;
+	padding: 0.5rem 1rem;
 	line-height: 1.1rem;
 	font-weight: 600;
 	text-align: right;
@@ -87,21 +87,19 @@ h6 {
 	flex-direction: column;
 	text-align: center;
 }
-
-.navbar-nav li:before {
-  content: " | ";
-  position: absolute;
-  color: #cacbd5;
+.navbar-nav li:first-child:before {
+  content: "";
 }
-
+.navbar-nav .btn:first-child{
+	min-width: 160px;
+	font-weight: 500;
+	font-size: 14px;
+	margin-left: 1rem;
+}
 .modal-img {
 	width: 100%;
     height: 230px;
     object-fit: contain;
-}
-
-.navbar-nav li:first-child:before {
-  content: "";
 }
 
 @media screen and (max-width: 991px) {
@@ -301,5 +299,16 @@ a.text-primary:focus, a.text-primary:hover {
 
 	.h4:after {
 		margin: 0 0 0 20px;
+	}
+
+	.navbar-nav li{
+		position: relative;
+	}
+	.navbar-nav li:before {
+		content: " | ";
+		position: absolute;
+		color: transparent;
+		left: -10px;
+		border-right: 1px solid #cacbd5;
 	}
 }
