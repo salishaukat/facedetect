@@ -31,7 +31,7 @@ def search(request):
     contact = None
     if request.POST.get('search_name'):
         name = request.POST.get('search_name')
-        contact = Contact.objects.filter(lost_one__name__contains=name)
+        contact = Contact.objects.filter(lost_one__name__icontains=name)
 
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
@@ -159,19 +159,19 @@ def advance_search(request):
     contact = None
     tags = {}
     if request.POST.get('first_name'):
-        tags.update({'lost_one__first_name__contains':request.POST.get('first_name')})
+        tags.update({'lost_one__first_name__icontains':request.POST.get('first_name')})
     if request.POST.get('area'):
-        tags.update({'lost_one__area__contains':request.POST.get('area')})
+        tags.update({'lost_one__area__icontains':request.POST.get('area')})
     if request.POST.get('country'):
-        tags.update({'lost_one__country__contains':request.POST.get('country')})
+        tags.update({'lost_one__country__icontains':request.POST.get('country')})
     if request.POST.get('status'):
-        tags.update({'lost_one__status__contains':request.POST.get('status')})
+        tags.update({'lost_one__status__icontains':request.POST.get('status')})
     male = request.POST.get('male') if request.POST.get('male') else None
     female = request.POST.get('female') if request.POST.get('female') else None
     if male:
-        tags.update({'lost_one__gender__contains':"male"})
+        tags.update({'lost_one__gender__icontains':"male"})
     elif female:
-        tags.update({'lost_one__gender__contains':"female"})
+        tags.update({'lost_one__gender__icontains':"female"})
      # Your dict with fields
     or_condition = Q()
     for key, value in tags.items():
