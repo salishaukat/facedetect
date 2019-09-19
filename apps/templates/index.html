@@ -111,12 +111,12 @@
 										<input type="text" class="form-control" id="contactNo" name="contact_no" placeholder="Contact Number">
 									</div>
 									<div class="form-group">
-										<select name="area" class="form-control">
+										<select name="area" id="area" class="form-control">
 										{% include "area_drop_down.html" %}
 										</select>
 									</div>
 									<div class="form-group">
-										<select name="country" class="form-control">
+										<select name="country" id="country" class="form-control">
 			                                <option selected>Country</option>
 			                                <option value="Afganistan">Afghanistan</option>
 			                                <option value="Albania">Albania</option>
@@ -413,23 +413,23 @@
 							<div class="float-right pt-2">
 								<span class="pr-3"> Filter by: </span>
 								<div class="form-check form-check-radio form-check-inline">
-									<select name="status" class="form-control">
-		                                <option selected>Status</option>
-		                                <option value="0">Rescued</option>
-		                                <option>Died</option>
-		                                <option>Need Evacuation</option>
-		                                <option>Critical Evacuation</option>
-		                                <option>Searching</option>
+									<select name="status" class="form-control" id="status">
+		                                <option value="">Status</option>
+		                                <option value="Rescued">Rescued</option>
+		                                <option value="Died">Died</option>
+		                                <option value="Need Evacuation">Need Evacuation</option>
+		                                <option value="Critical Evacuation">Critical Evacuation</option>
+		                                <option value="searching">Searching</option>
 		                            </select>
 								</div>
 								<div class="form-check form-check-radio form-check-inline">
-									<select class="form-control" name="area">
+									<select class="form-control" name="area" id="area_search">
 									 {% include "area_drop_down.html" %}
 									</select>
 								</div>
 								<div class="form-check form-check-radio form-check-inline">
-										<select class="form-control">
-			                                <option selected>Country</option>
+										<select id="country_search" class="form-control">
+			                                <option value="">Country</option>
 			                                <option value="Afganistan">Afghanistan</option>
 			                                <option value="Albania">Albania</option>
 			                                <option value="Algeria">Algeria</option>
@@ -1098,6 +1098,25 @@
 		    	$("#picture_search_form").hide();            	
 		    	$("#live_search_form").hide();            	
 		    	$("#simple_search_form").show();
-            }            
+            }      
+            $(document).ready(function(){
+			   var table = $('#lostone-table').DataTable({ dom: 'lrtip'});
+			   
+			   $('#status').on('change', function(){
+			   		//alert(this.value)
+   					table.column(6).search( this.value ).draw();   
+			   });
+			   $('#area_search').on('change', function(){
+			   		
+   					table.column(3).search( this.value ).draw();   
+			   });
+			   $('#country_search').on('change', function(){
+			   		
+   					table.column(4).search( this.value ).draw();    
+			   });
+			   
+			});
+
+			     
 		</script>
 {% endblock %}
