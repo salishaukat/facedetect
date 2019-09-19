@@ -5223,7 +5223,7 @@ img {
 }
 
 .modal-content {
-  border-radius: 0.1875rem;
+  border-radius: 0.6rem;
   border: none;
   box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.5);
 }

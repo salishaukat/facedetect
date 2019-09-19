@@ -102,6 +102,13 @@ h6 {
     object-fit: contain;
 }
 
+.img-show{
+	height: auto;
+	max-height: 100px;
+	width: 100%;
+	border-radius: 6px;
+}
+
 @media screen and (max-width: 991px) {
 	.sidebar-collapse .navbar-collapse .navbar-nav:not(.navbar-logo) .nav-link:not(.btn) {
 		text-align: left ;

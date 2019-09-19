@@ -16,24 +16,24 @@ class UserProfile(models.Model):
 class LostOne(models.Model):
     uid = models.IntegerField(null=True, blank=True)
     first_name = models.CharField(null=False, blank=False, max_length=100)
-    last_name = models.CharField(null=False, blank=False, max_length=100)
-    email_address = models.CharField(null=False, blank=False, max_length=100)
-    contact_number = models.CharField(null=True, blank=True, max_length=100)
-    age = models.IntegerField(null=False, blank=False)
+    last_name = models.CharField(null=True, blank=True, max_length=100)
+    email_address = models.CharField(null=True, blank=True, max_length=100)
+    contact_number = models.CharField(null=False, blank=False, max_length=100)
+    age = models.IntegerField(null=True, blank=True)
     status = models.CharField(null=False, blank=False, max_length=100)
     area = models.CharField(null=True, blank=True, max_length=900)
     country = models.CharField(null=False, blank=False, max_length=100)
     person_pic1 = models.CharField(null=False, blank=False, max_length=100)
     person_pic2 = models.CharField(null=True, blank=True, max_length=100)
     person_pic3 = models.CharField(null=True, blank=True, max_length=100)
-    gender = models.CharField(null=False, blank=False, max_length=100)
+    gender = models.CharField(null=True, blank=True, max_length=100)
     name = models.CharField(null=True, blank=True, max_length=100)
     folder_name = models.CharField(null=True, blank=True, max_length=100)
 
 
 class Contact(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
-    contact_number1 = models.CharField(null=True, blank=True, max_length=100)
+    contact_number1 = models.CharField(null=False, blank=False, max_length=100)
     contact_number2 = models.CharField(null=True, blank=True, max_length=100)
     address = models.TextField(null=True, blank=True, max_length=300)
     area = models.CharField(null=True, blank=True, max_length=100)
@@ -43,7 +43,7 @@ class Contact(models.Model):
 
 class Shelter(models.Model):
     shelter = models.CharField(null=False, blank=False, max_length=100)
-    contact_number1 = models.CharField(null=True, blank=True, max_length=100)
+    contact_number1 = models.CharField(null=False, blank=False, max_length=100)
     contact_number2 = models.CharField(null=True, blank=True, max_length=100)
     address = models.TextField(null=True, blank=True, max_length=300)
     area = models.CharField(null=True, blank=True, max_length=100)
