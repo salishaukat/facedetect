@@ -44,8 +44,8 @@ def get_all(request):
     user_role = UserProfile.objects.filter(user=request.user.id)
     contact_data = None
     shelter_data = None
-    contact_data = Contact.objects.all()
     shelter_data = Shelter.objects.all()
+    contact_data = Contact.objects.exclude(lost_one__in=shelter_data.values('lost_one'))
     contact = list(chain(contact_data, shelter_data))
 
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
@@ -246,6 +246,7 @@ def lostone(request, lost_one_id=None):
     if request.method == 'POST':
         try:
             uid = random_with_N_digits(6)
+            shelter_id = random_with_N_digits(6)
             lost_one_id = request.POST.get('lost_one_id')
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
@@ -261,6 +262,7 @@ def lostone(request, lost_one_id=None):
                 gender = 'male'
             elif female:
                 gender = 'female'
+            shelter_status = None
             rescued = request.POST.get('rescued') if request.POST.get('rescued') else None
             died = request.POST.get('died') if request.POST.get('died') else None
             if rescued:
@@ -282,7 +284,7 @@ def lostone(request, lost_one_id=None):
                 person_pic2 = None
             try:
                 person_pic3 = request.FILES['person_pic3']
-                person_pic3 = fs.save(person_pic2.name, person_pic3)
+                person_pic3 = fs.save(person_pic3.name, person_pic3)
                 person_pic3 = fs.url(person_pic3)
                 person_pic3 = ntpath.basename(person_pic3)
                 person_pic3 = path + '/' + person_pic3
@@ -323,7 +325,7 @@ def lostone(request, lost_one_id=None):
                     shelter.save()
                     lost_one_object.save()
                 else:
-                    shelter = Shelter.objects.create(status=shelter_status, shelter=name, contact_number1=contact_number1,
+                    shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                      contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
                     lost_one_object.status = shelter_status
                     lost_one_object.save()
@@ -337,7 +339,7 @@ def lostone(request, lost_one_id=None):
                     contact = Contact.objects.create(name=name, contact_number1=contact_number1,
                                                      contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
                 else:
-                    shelter = Shelter.objects.create(status=shelter_status, shelter=name, contact_number1=contact_number1,
+                    shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                          contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
 
                 return redirect('get_all')

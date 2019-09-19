@@ -42,6 +42,7 @@ class Contact(models.Model):
     lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
 
 class Shelter(models.Model):
+    shelter_id = models.IntegerField(null=True, blank=True)
     shelter = models.CharField(null=False, blank=False, max_length=100)
     contact_number1 = models.CharField(null=True, blank=True, max_length=100)
     contact_number2 = models.CharField(null=True, blank=True, max_length=100)
