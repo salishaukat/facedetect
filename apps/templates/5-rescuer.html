@@ -333,7 +333,7 @@
                             
                             
                         </div>
-                        <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter %} disabled {% else %} required  {% endif %}/> 
+                        <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter %} disabled   {% endif %}/> 
                         <input type="file" id="uploadfile2" name="person_pic2" style="display: none;" onchange="upload_img2(this);"{% if allow_shelter %} disabled  {% endif %}/> 
                         <input type="file" id="uploadfile3" name="person_pic3" style="display: none;" onchange="upload_img3(this);"{% if allow_shelter %} disabled  {% endif %}/> 
                             <!-- Upload Image here -->
@@ -342,7 +342,7 @@
                     <div class="col-md-6 px-5">
                         <h4 class="text-primary">Where to contact if found </h4>
                         <div class="form-group">
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Name*" required>
+                            <input type="text" name="name" id="name" class="form-control" {% if allow_shelter %} placeholder="Shelter Name*" {%else%} placeholder="Name*"  {% endif %} required>
                         </div>
                         <div class="form-group">
                             <input type="tel" name="contact_1" id="contact_1" class="form-control" placeholder="Contact Number 1*" required>
@@ -435,9 +435,14 @@ $(document).ready(function(){
 
     {% endif %}
 
-    $('#personpic1').attr('src','{{contact.lost_one.person_pic1}}')
+    //$('#personpic1').attr('src','{{contact.lost_one.person_pic1}}')
+    person_pic1 = '{{contact.lost_one.person_pic1}}'
     person_pic2 = '{{contact.lost_one.person_pic2}}'
     person_pic3 = '{{contact.lost_one.person_pic2}}'
+
+    if (person_pic1 != 'None'){
+         $('#personpic1').attr('src','{{contact.lost_one.person_pic1}}')
+    }
 
     if (person_pic2 != 'None'){
          $('#personpic2').attr('src','{{contact.lost_one.person_pic2}}')
