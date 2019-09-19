@@ -790,12 +790,14 @@
 								<div class="col-md-5">
 									<h4 class="text-primary" id="h4status"></h4>
 								</div>
-								<div class="col text-center">
-									<h6 class="title text-primary m-0 p-0">Share on</h6>
+								<div class="col text-center" id="shareOnFacebook" onclick="shareOnFacebook();" >
+									<h6 class="title text-primary m-0 p-0" >
+									  Share on Facebook
+									</h6>
 									<!-- <a href="#" class="btn btn-primary btn-outline-primary text-instagram"><i class="fab fa-instagram"></i> <strong> Instagram </strong></a> -->
 									<!-- <a href="#" class="btn btn-primary btn-outline-primary "><i class="fab fa-facebook"></i> <strong> Facebook </strong></a> -->
 
-									<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button_count&size=small&width=88&height=20&appId" width="88" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+									
 								</div>
 							</div>
 							<hr/>
@@ -888,27 +890,6 @@
 							</div>
 						</div>
 
-						<div class="row pt-5 pb-0 px-1" style="display: none;">
-							<form action="{% url 'comment' %}" method="post">
-							{% csrf_token %}
-							<input type="hidden" name="lost_one">
-							<div class="col-md-12">
-								<p> if you have any information on this person</p>
-								<p> please add in the discussion below </p>
-							</div>
-							{% if user and 'AnonymousUser' not in user %}
-							<div class="col-md-12">
-								<input name="comment_name" type="text"  placeholder="name" style="width: 300px" />
-							</div>
-							{% endif %}
-							<div class="col-md-12">
-								<textarea  style="width:300px" name="comment" placeholder="comment"></textarea>
-							</div>
-							<div class="col-md-12">
-								<button class="btn btn-primary">Add</button>
-							</div>
-							</form>
-						</div>		
 					<!-- 	<div class="row pt-5 pb-0 px-1"> 
 							{% if user and 'AnonymousUser' not in user %}
 							<a href='#' id="lost_one_update" type="button" class="btn btn-primary" >
@@ -981,11 +962,10 @@
     </div>
   </div>
 </div>
-		
-
-
-
 		<script>
+			function shareOnFacebook(link){
+				window.open('https://www.facebook.com/sharer/sharer.php?u='+link+'', '_blank')
+			}
 			{% if contacts %}
 			{% else  %}
 			$(document).ready(function(){
@@ -996,7 +976,7 @@
 				href = '/get_all_lost_one/' +id
 				$.ajax(href, {
 				success: function(data) {
-					$('#h4name').text(data.lostone.first_name + '' + data.lostone.last_name);
+				$('#h4name').text(data.lostone.first_name + '' + data.lostone.last_name);
 				$('#h4_lost_one_contact_no').text(data.lostone.contact_number)
 				$('#h4age').text(data.lostone.age)
 				$('#h4images').attr('src', data.lostone.person_pic1)
@@ -1026,9 +1006,16 @@
 					$('.shelter_info').hide()
 				}
 				$('#lost_one_update').attr('href', '{% url "lostone" %}/'+id)
-				$('#lost_one').val(id)
+				$('#lost_one').val(id);
+				// $('#share_fb').removeAttr('onclick');
+				
 				host = window.location.host
 				protocol = window.location.protocol 
+				$('#shareOnFacebook').attr('onClick', "shareOnFacebook('"+protocol+"://"+host+"/lostone/"+id+"');");
+				
+				// $('#share_fb').attr('onClick', 'shareOnFacebook("https://www.facebook.com/sharer/sharer.php?u='+protocol+'://'+host+'/lostone/'+id+'");');
+				
+
 				document.getElementById('com').innerHTML='';
 				parser=document.getElementById('com');
 				parser.innerHTML='<div  class="fb-comments" data-href="'+protocol+'://'+host+'/lostone/'+id+'" data-num-posts="20" data-width="100%"></div>';
