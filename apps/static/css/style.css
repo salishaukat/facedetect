@@ -67,7 +67,7 @@ h6 {
 
 .navbar .navbar-nav .nav-link:not(.btn) {
 	text-transform: none;
-	font-size: 1em;
+	font-size: 1.2em;
 	padding: 0.5rem 0.7rem;
 	line-height: 1.1rem;
 	font-weight: 600;
@@ -80,6 +80,16 @@ h6 {
 	justify-content: center;
 	flex-direction: column;
 	text-align: center;
+}
+
+.navbar-nav li:before {
+  content: " | ";
+  position: absolute;
+  color: #cacbd5;
+}
+
+.navbar-nav li:first-child:before {
+  content: "";
 }
 
 @media screen and (max-width: 991px) {
