@@ -141,6 +141,23 @@ form label{
 	z-index: -1;
 }
 
+.page-header .toggle-items a{
+	cursor: pointer;
+	color: #767588;
+}
+
+.page-header .toggle-items a:hover{
+	color: #00778b;
+}
+
+.page-header .toggle-items span{
+	color: #767588;
+}
+
+.page-header .toggle-items li.active a{
+	color: #00778b;
+}
+
 .notification-dropdown p{
 	white-space: normal;
 }

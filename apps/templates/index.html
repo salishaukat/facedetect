@@ -18,7 +18,7 @@
 							<input type="text" name="search_name" class="form-control bg-white" placeholder="Search by Name">
 							<div class="input-group-append">
 								<div class="input-group-text">
-									<a onclick="submit_simple_search()"><i class="fa fa-search" ></i></a>
+									<a onclick="submit_simple_search()"><i class="fas fa-search" ></i></a>
 								</div>
 
 								<button type="button" class="btn btn-neutral btn-lg advance-search" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
@@ -27,13 +27,13 @@
 
 							</div>
 						</div>
-						<strong>
-							<a class="text-primary" href="#" "> NAME </a> 
-							<span class="px-2 text-primary"> | </span> 
-							<a class="text-primary"  onclick="toggle_pic()"> PICTURE </a>
-							<span class="px-2 text-primary"> | </span> 
-							<a class="text-primary"  onclick="toggle_live()"> LIVE </a>
-						</strong>
+						<ul class="list-inline toggle-items">
+							<li class="list-inline-item active"> <a class="font-weight-bold" > NAME </a> </li>
+							<span class="px-1"> | </span> 
+							<li class="list-inline-item"> <a class="font-weight-bold"  onclick="toggle_pic()"> PICTURE </a> </li>
+							<span class="px-1"> | </span> 
+							<li class="list-inline-item"> <a class="font-weight-bold"  onclick="toggle_live()"> LIVE </a> </li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -53,22 +53,22 @@
 
 							<div class="input-group-append">
 								<div class="input-group-text">
-									<i class="fa fa-picture-o" ></i>
+									<i class="far fa-image" ></i>
 								</div>
-								<button type="button" class="btn btn-neutral btn-lg advance-search dropdown-toggle dropdown-toggle-split" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
+								<button type="button" class="btn btn-neutral btn-lg advance-search" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
 									
 								</button>								
 
 
 							</div>
 						</div>
-						<strong>
-							<a class="text-primary" onclick="name_search()"> NAME </a> 
-							<span class="px-2 text-primary"> | </span> 
-							<a class="text-primary" href="#"> PICTURE </a>
-							<span class="px-2 text-primary"> | </span> 
-							<a class="text-primary" onclick="toggle_live()"> LIVE </a>
-						</strong>
+						<ul class="list-inline toggle-items">
+							<li class="list-inline-item"> <a class="font-weight-bold" onclick="name_search()"> NAME </a> </li>
+							<span class="px-1"> | </span> 
+							<li class="list-inline-item active"> <a class="font-weight-bold"> PICTURE </a> </li>
+							<span class="px-1"> | </span> 
+							<li class="list-inline-item"> <a class="font-weight-bold"  onclick="toggle_live()"> LIVE </a> </li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -86,13 +86,13 @@
 								<button type="button" class="btn btn-neutral btn-lg form-control bg-white" aria-haspopup="true" aria-expanded="false" onclick="live_btn()"> Start live
 								</button>	
 						</div>
-						<strong>
-							<a class="text-primary" onclick="name_search()"> NAME </a> 
-							<span class="px-2 text-primary"> | </span> 
-							<a class="text-primary" onclick="toggle_pic()"> PICTURE </a>
-							<span class="px-2 text-primary"> | </span> 
-							<a class="text-primary" href="#"> LIVE </a>
-						</strong>
+						<ul class="list-inline toggle-items">
+							<li class="list-inline-item"> <a class="font-weight-bold" onclick="name_search()"> NAME </a> </li>
+							<span class="px-1"> | </span> 
+							<li class="list-inline-item"> <a class="font-weight-bold" onclick="toggle_pic()"> PICTURE </a> </li>
+							<span class="px-1"> | </span> 
+							<li class="list-inline-item active"> <a class="font-weight-bold"> LIVE </a> </li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -777,7 +777,7 @@
 					<div class="row"> 
 						<div class="col-sm-12 bg-white col-md-4">
 							<img id="h4images" src="{% static 'img/image.jpg' %}" alt="Rounded Image" class="rounded">
-							
+
 							{% if user and 'AnonymousUser' not in user %}
 							<a href="#" id="lost_one_update" class="btn btn-primary btn-round btn-block mt-4"> UPDATE DATA </a>
 							{% endif %}
@@ -877,7 +877,7 @@
 							<p class="font-sm mb-0" id="h4shelter_note"></p>
 						</div>
 					</div>					
-					<hr/>
+					<!-- <hr/> -->
 					<div class="row"> 
 
 						<div class="row"> 
