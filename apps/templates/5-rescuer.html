@@ -39,15 +39,16 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group select-custom">
                             <select name="age" class="form-control form-control-lg" {% if allow_shelter %} disabled {% endif %}>
                                 <option value="">Age</option>
                                 {% for i in n%}
                                 <option value="{{ i }}">{{i}}</option>
                                 {% endfor %}
                             </select>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group select-custom">
                             <select name="status" class="form-control form-control-lg" {% if allow_shelter %} disabled {% else %} required {% endif %}>
                                 <option value="">Status*</option>
                                 <option value="Rescued">Rescued</option>
@@ -56,13 +57,15 @@
                                 <option value="Critical Evacuation">Critical Evacuation</option>
                                 <option value="Searching">Searching</option>
                             </select>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
-                        <div  class="form-group">
+                        <div  class="form-group select-custom">
                             <select name="lost_one_area" class="form-control form-control-lg" {% if allow_shelter %} disabled  {% endif %}>
                                 {% include "area_drop_down.html" %}
                             </select>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
-                        <div  class="form-group">
+                        <div  class="form-group select-custom">
                             <select name="country" class="form-control form-control-lg" {% if allow_shelter %} disabled {% else %} required {% endif %}>
                                 <option value="">Country*</option>
                                 <option value="Afganistan">Afghanistan</option>
@@ -312,6 +315,7 @@
                                 <option value="Zambia">Zambia</option>
                                 <option value="Zimbabwe">Zimbabwe</option>
                             </select>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="form-group">
                             <label for="uploadPic">Upload Pics</label>
@@ -329,8 +333,8 @@
                             <!-- Upload Image here -->
                         </div>
                     </div>
-                    <div class="col-md-6 px-5">
-                        <h4 class="text-primary">{% if allow_shelter or user and 'AnonymousUser' not in user %} Current location {% else %} Where to contact if found ?{% endif %} </h4>
+                    <div class="col-md-6 register-col">
+                        <h4 class="text-primary font-weight-bold">{% if allow_shelter or user and 'AnonymousUser' not in user %} Current location {% else %} Where to contact if found ?{% endif %} </h4>
                         <div class="form-group">
                             <input type="text" name="name" id="name" class="form-control" {% if allow_shelter or user and 'AnonymousUser' not in user %} placeholder="Shelter Name*" {%else%} placeholder="Name*"  {% endif %} required>
                         </div>
@@ -341,10 +345,11 @@
                             <input type="tel" name="contact_2" id="contact_2" class="form-control form-control-lg" placeholder="Contact Number 2">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group select-custom">
                             <select name="contact_area" class="form-control form-control-lg">
                                  {% include "area_drop_down.html" %}
                             </select>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
 
                         <div class="form-group">
@@ -375,7 +380,7 @@
                             </div>
                         </div>                        
 						{% endif %}
-                        <button type="submit" class="btn btn-primary btn-round btn-block mt-4">Register</button>
+                        <button type="submit" class="btn btn-primary btn-round btn-block mt-4 btn-lg font-weight-bold">Register</button>
                     </div>
                 </div>
             </div>
