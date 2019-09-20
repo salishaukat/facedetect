@@ -7,6 +7,7 @@ urlpatterns = [
     path('home/<str:contact>', views.index, name="index"),
     path('sponsor', views.sponsor, name="sponsor"),
     path('search', views.search, name="search"),
+    path('search/<int:id>', views.search, name="search"),
     path('get_all', views.get_all, name="get_all"),
     path('pic_search', views.pic_search, name="pic_search"),
     path('live_search', views.live_search, name="live_search"),
@@ -20,4 +21,5 @@ urlpatterns = [
     path('reports/<str:search>', views.reports, name="reports"),
     path('get_all_lost_one/<int:lost_one_id>',views.get_all_lost_one, name="get_all_lost_one"),
     path('webcamera', views.webcamera, name="webcamera"),
+    path('get_face', views.get_face_from_image, name="get_face")
 ]

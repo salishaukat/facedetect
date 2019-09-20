@@ -41,7 +41,7 @@
                         </div>
                         <div class="form-group select-custom">
                             <select name="age" class="form-control form-control-lg" {% if allow_shelter %} disabled {% endif %}>
-                                <option value="">Age</option>
+                                <option value="0">Age</option>
                                 {% for i in n%}
                                 <option value="{{ i }}">{{i}}</option>
                                 {% endfor %}

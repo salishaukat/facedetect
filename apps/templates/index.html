@@ -67,7 +67,7 @@
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item active"> <a class="font-weight-bold"> PICTURE </a> </li>
 							<span class="px-1"> | </span> 
-							<li class="list-inline-item"> <a class="font-weight-bold"  onclick="toggle_live()"> LIVE </a> </li>
+							<li class="list-inline-item"> <a class="font-weight-bold"  href="{% url 'webcamera' %}"> LIVE </a> </li>
 						</ul>
 					</div>
 				</div>
@@ -993,6 +993,7 @@
   </div>
 </div>
 		<script>
+
 			function shareOnFacebook(link){
 				window.open('https://www.facebook.com/sharer/sharer.php?u='+link+'', '_blank')
 			}

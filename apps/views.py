@@ -14,6 +14,12 @@ import time
 from django.http import JsonResponse
 from random import randint
 from itertools import chain
+import sys
+import base64
+import numpy as np
+from django.views.decorators.csrf import csrf_protect
+
+
 
 def random_with_N_digits(n):
     range_start = 10**(n-1)
@@ -23,7 +29,7 @@ def random_with_N_digits(n):
 def webcamera(request):
     return render(request, 'webcamera.html')
 
-def search(request):
+def search(request, id=None):
     if 'username' not in request.session:
         request.session["username"] = None
     if request.session["username"]:
@@ -31,6 +37,8 @@ def search(request):
             return redirect('reports')
     user_role = UserProfile.objects.filter(user=request.user.id)
     contact = None
+    if id:
+        contact = Contact.objects.filter(id=id)
     if request.POST.get('search_name'):
         name = request.POST.get('search_name')
         contact = Contact.objects.filter(lost_one__name__icontains=name)
@@ -246,109 +254,108 @@ def lostone(request, lost_one_id=None):
 
 
     if request.method == 'POST':
+
+        uid = random_with_N_digits(6)
+        shelter_id = random_with_N_digits(6)
+        lost_one_id = request.POST.get('lost_one_id')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email_address = request.POST.get('email')
+        contact_number = request.POST.get('lost_one_contact_no')
+        age = request.POST.get('age')
+        status = request.POST.get('status')
+        area = request.POST.get('lost_one_area')
+        country = request.POST.get('country')
+        male = request.POST.get('male') if request.POST.get('male') else None
+        female = request.POST.get('female') if request.POST.get('female') else None
+        if male:
+            gender = 'male'
+        elif female:
+            gender = 'female'
+        shelter_status = None
+        rescued = request.POST.get('rescued') if request.POST.get('rescued') else None
+        died = request.POST.get('died') if request.POST.get('died') else None
+        if rescued:
+            shelter_status = 'rescued'
+        elif died:
+            shelter_status = 'died'
+
+        path = '/collection/'+first_name+last_name
+        fs = FileSystemStorage(location='collection/'+first_name+last_name)
+
+
         try:
-            uid = random_with_N_digits(6)
-            shelter_id = random_with_N_digits(6)
-            lost_one_id = request.POST.get('lost_one_id')
-            first_name = request.POST.get('first_name')
-            last_name = request.POST.get('last_name')
-            email_address = request.POST.get('email')
-            contact_number = request.POST.get('lost_one_contact_no')
-            age = request.POST.get('age')
-            status = request.POST.get('status')
-            area = request.POST.get('lost_one_area')
-            country = request.POST.get('country')
-            male = request.POST.get('male') if request.POST.get('male') else None
-            female = request.POST.get('female') if request.POST.get('female') else None
-            if male:
-                gender = 'male'
-            elif female:
-                gender = 'female'
-            shelter_status = None
-            rescued = request.POST.get('rescued') if request.POST.get('rescued') else None
-            died = request.POST.get('died') if request.POST.get('died') else None
-            if rescued:
-                shelter_status = 'rescued'
-            elif died:
-                shelter_status = 'died'                
-            
-            path = '/collection/'+first_name+last_name
-            fs = FileSystemStorage(location='collection/'+first_name+last_name)
+            person_pic2 = request.FILES['person_pic2']
+            person_pic2 = fs.save(person_pic2.name, person_pic2)
+            person_pic2 = fs.url(person_pic2)
+            person_pic2 = ntpath.basename(person_pic2)
+            person_pic2 = path + '/' + person_pic2
+        except:
+            person_pic2 = None
+        try:
+            person_pic3 = request.FILES['person_pic3']
+            person_pic3 = fs.save(person_pic3.name, person_pic3)
+            person_pic3 = fs.url(person_pic3)
+            person_pic3 = ntpath.basename(person_pic3)
+            person_pic3 = path + '/' + person_pic3
+        except:
+            person_pic3 = None
+        name = request.POST.get('name')
+        contact_area = request.POST.get('contact_area')
+        contact_number1 = request.POST.get('contact_1')
+        contact_number2 = request.POST.get('contact_2')
+        address = request.POST.get('address')
+        note = request.POST.get('note')
 
-
-            try:
-                person_pic2 = request.FILES['person_pic2']
-                person_pic2 = fs.save(person_pic2.name, person_pic2)
-                person_pic2 = fs.url(person_pic2)
-                person_pic2 = ntpath.basename(person_pic2)
-                person_pic2 = path + '/' + person_pic2
-            except:
-                person_pic2 = None
-            try:
-                person_pic3 = request.FILES['person_pic3']
-                person_pic3 = fs.save(person_pic3.name, person_pic3)
-                person_pic3 = fs.url(person_pic3)
-                person_pic3 = ntpath.basename(person_pic3)
-                person_pic3 = path + '/' + person_pic3
-            except:
-                person_pic3 = None
-            name = request.POST.get('name')
-            contact_area = request.POST.get('contact_area')
-            contact_number1 = request.POST.get('contact_1')
-            contact_number2 = request.POST.get('contact_2')
-            address = request.POST.get('address')
-            note = request.POST.get('note')
-
-            try:
-                person_pic1 = request.FILES['person_pic1']
-                person_pic1 = fs.save(person_pic1.name, person_pic1)
-                person_pic1 = fs.url(person_pic1)
-                person_pic1 = ntpath.basename(person_pic1)
-                person_pic1 = path + '/' + person_pic1
-            except:
-                if lost_one_id:
-                    person_pic1 = None
-
-            
+        try:
+            person_pic1 = request.FILES['person_pic1']
+            person_pic1 = fs.save(person_pic1.name, person_pic1)
+            person_pic1 = fs.url(person_pic1)
+            person_pic1 = ntpath.basename(person_pic1)
+            person_pic1 = path + '/' + person_pic1
+        except:
             if lost_one_id:
-                lost_one_object = LostOne.objects.get(id=lost_one_id)
-                print("here========================")
-                shelter = Shelter.objects.filter(lost_one=lost_one_id).first()
-                print("123========================")
-                if shelter:
-                    shelter.shelter = request.POST.get('name')
-                    shelter.area = request.POST.get('contact_area')
-                    shelter.contact_number1 = request.POST.get('contact_1')
-                    shelter.contact_number2 = request.POST.get('contact_2')
-                    shelter.address = request.POST.get('address')
-                    shelter.note = request.POST.get('note')
-                    shelter.status = shelter_status
-                    lost_one_object.status = shelter_status
-                    shelter.save()
-                    lost_one_object.save()
-                else:
-                    shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
-                                                     contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
-                    lost_one_object.status = shelter_status
-                    lost_one_object.save()
-                
-                return redirect('get_all')
-            else:
-                lost_one_object = LostOne.objects.create(uid=uid, gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
-                                                         person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
-                
-                if request.session['username'] is None:
-                    contact = Contact.objects.create(name=name, contact_number1=contact_number1,
-                                                     contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
-                else:
-                    shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
-                                                         contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
+                person_pic1 = None
 
-                return redirect('get_all')
+
+        if lost_one_id:
+            lost_one_object = LostOne.objects.get(id=lost_one_id)
+            print("here========================")
+            shelter = Shelter.objects.filter(lost_one=lost_one_id).first()
+            print("123========================")
+            if shelter:
+                shelter.shelter = request.POST.get('name')
+                shelter.area = request.POST.get('contact_area')
+                shelter.contact_number1 = request.POST.get('contact_1')
+                shelter.contact_number2 = request.POST.get('contact_2')
+                shelter.address = request.POST.get('address')
+                shelter.note = request.POST.get('note')
+                shelter.status = shelter_status
+                lost_one_object.status = shelter_status
+                shelter.save()
+                lost_one_object.save()
+            else:
+                shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
+                                                 contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
+                lost_one_object.status = shelter_status
+                lost_one_object.save()
+
+            return redirect('get_all')
+        else:
+            lost_one_object = LostOne.objects.create(uid=uid, gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
+                                                     person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
+
+            if request.session['username'] is None:
+                contact = Contact.objects.create(name=name, contact_number1=contact_number1,
+                                                 contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
+            else:
+                shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
+                                                     contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
+
+            return redirect('get_all')
             
             
-        except Exception as e:
-            print (e)
+
 
     elif ('username' not in request.session or request.session['username'] is None) and lost_one_id:
         return redirect('lostone')
@@ -453,3 +460,44 @@ def get_all_lost_one(request, lost_one_id=None):
    
     return JsonResponse({'lostone':lostone,'contact':contact, 'shelter':shelter})
 
+@csrf_protect
+def get_face_from_image(request):
+    contact=None
+    if request.method == 'POST':
+        image = request.POST.get('image')
+        print(image)
+
+        imagen_decodificada = base64.b64decode(image)
+
+        img_name = str(random_with_N_digits(6))+'.png'
+        output = open(img_name, 'wb')
+
+        output.write(imagen_decodificada)
+
+        output.close()
+        vcap = cv2.imread(img_name)
+
+        fr = FaceRecognizer(ctx='cpu',
+                            fd_model_path='./fd_model',
+                            fr_model_path='./model-tfv2/model.trueface',
+                            params_path='./model-tfv2/model.params',
+                            license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
+                            )
+
+        fr.create_collection('collection', 'collection.npz', return_features=False)
+
+
+        frame = vcap
+        frame = cv2.resize(frame, (640, 480))
+        bounding_boxes, points, chips = fr.find_faces(frame,
+                                                      return_chips=True,
+                                                      return_binary=True)
+        for i, chip in enumerate(chips):
+            identity = fr.identify(chip,
+                                   threshold=0.3,
+                                   collection='./collection.npz')
+            print ("----------------------------------------",identity['predicted_label'])
+            if identity['predicted_label'] != None:
+                contact = Contact.objects.filter(lost_one__folder_name__contains=identity['predicted_label']).values()[0]
+                print (contact)
+    return JsonResponse({'contact': contact})
