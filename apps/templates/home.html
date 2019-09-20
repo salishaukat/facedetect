@@ -480,20 +480,24 @@
 									<div class="form-group">
 										<input type="text" class="form-control" id="lastName" name="last_name" placeholder="Last Name" >
 									</div>
-									<div class="form-group text-left">
-										<div class="form-check form-check-radio form-check-inline">
-											<label class="form-check-label">
-												<input class="form-check-input" type="radio" name="male" id="male" value="option1"> Male
-												<span class="form-check-sign"></span>
-											</label>
-										</div>
-										<div class="form-check form-check-radio form-check-inline">
-											<label class="form-check-label">
-												<input class="form-check-input" type="radio" name="female" id="female" value="option2"> Female
-												<span class="form-check-sign"></span>
-											</label>
-										</div>
-									</div>
+
+			                        <div class="form-group">
+			                            <div class="form-check form-check-radio form-check-inline">
+			                                <label class="form-check-label">
+			                                    <input class="form-check-input" type="radio" name="male"
+			                                           id="male" value="option1"> Male
+			                                    <span class="form-check-sign"></span>
+			                                </label>
+			                            </div>
+			                            <div class="form-check form-check-radio form-check-inline">
+			                                <label class="form-check-label">
+			                                    <input class="form-check-input" type="radio" name="female"
+			                                           id="female" value="option2"> Female
+			                                    <span class="form-check-sign"></span>
+			                                </label>
+			                            </div>
+			                        </div>
+
 									<div class="form-group">
 										 <select name="status" class="form-control">
                                 <option selected>Status*</option>
@@ -687,19 +691,20 @@
 		    	$("#live_search_form").hide();            	
 		    	$("#simple_search_form").show();
             }            
-		
+			$(document).ready(function(){
+				$('#male').click(function(){
+					$('#female'). prop("checked", false)
+				});
+
+				$('#female').click(function(){
+					$('#male'). prop("checked", false)
+				});
+			})
 		    {% if username %}
             $(document).ready(function(){
                 $('#navbarDropdownMenuLink').click();
 			                    
             })
-				$('#male').click(function(){
-			       $('#female'). prop("checked", false)
-			    });
-
-			    $('#female').click(function(){
-			       $('#male'). prop("checked", false)
-			    });            
             {% endif %}
         </script>
 
