@@ -27,7 +27,7 @@
 
 							</div>
 						</div>
-						<ul class="list-inline toggle-items">
+						<ul class="list-inline toggle-items pt-1">
 							<li class="list-inline-item active"> <a class="font-weight-bold" > NAME </a> </li>
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item"> <a class="font-weight-bold"  onclick="toggle_pic()"> PICTURE </a> </li>
@@ -62,7 +62,7 @@
 
 							</div>
 						</div>
-						<ul class="list-inline toggle-items">
+						<ul class="list-inline toggle-items pt-1">
 							<li class="list-inline-item"> <a class="font-weight-bold" onclick="name_search()"> NAME </a> </li>
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item active"> <a class="font-weight-bold"> PICTURE </a> </li>
@@ -83,7 +83,7 @@
 					<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
 						<button type="button" class="btn btn-neutral btn-block btn-round bg-white mt-0 btn-live" aria-haspopup="true" aria-expanded="false" onclick="live_btn()"> <i class="fas fa-video"></i> Start live
 						</button>	
-						<ul class="list-inline toggle-items">
+						<ul class="list-inline toggle-items pt-1">
 							<li class="list-inline-item"> <a class="font-weight-bold" onclick="name_search()"> NAME </a> </li>
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item"> <a class="font-weight-bold" onclick="toggle_pic()"> PICTURE </a> </li>
@@ -105,18 +105,23 @@
 							<div class="row">
 								<div class="col-md-6 col-12">
 									<div class="form-group">
-										<input type="text" class="form-control" id="firstName" name="first_name" placeholder="First Name" >
+										<input type="text" class="form-control form-control-lg" id="firstName" name="first_name" placeholder="First Name" >
 									</div>
 									<div class="form-group">
-										<input type="text" class="form-control" id="contactNo" name="contact_no" placeholder="Contact Number">
+										<input type="text" class="form-control form-control-lg" id="contactNo" name="contact_no" placeholder="Contact Number">
 									</div>
-									<div class="form-group">
-										<select name="area" id="area" class="form-control">
+									<div class="form-group select-custom">
+
+										<select name="area" id="area" class="form-control form-control-lg">
+
 										{% include "area_drop_down.html" %}
 										</select>
+										<i class="fas fa-chevron-down"></i>
 									</div>
-									<div class="form-group">
-										<select name="country" id="country" class="form-control">
+									<div class="form-group select-custom">
+
+										<select name="country" id="country" class="form-control form-control-lg">
+
 			                                <option selected>Country</option>
 			                                <option value="Afganistan">Afghanistan</option>
 			                                <option value="Albania">Albania</option>
@@ -365,40 +370,41 @@
 			                                <option value="Zambia">Zambia</option>
 			                                <option value="Zimbabwe">Zimbabwe</option>
 			                            </select>
+			                            <i class="fas fa-chevron-down"></i>
 									</div>
 								</div>
 								<div class="col-md-6 col-12">
 									<div class="form-group">
-										<input type="text" class="form-control" id="lastName" name="last_name" placeholder="Last Name" >
+										<input type="text" class="form-control form-control-lg" id="lastName" name="last_name" placeholder="Last Name" >
 									</div>
-			                        <div class="form-group">
-			                            <div class="form-check form-check-radio form-check-inline">
-			                                <label class="form-check-label">
-			                                    <input class="form-check-input" type="radio" name="male"
-			                                           id="male" value="option1" > Male
-			                                    <span class="form-check-sign"></span>
-			                                </label>
-			                            </div>
-			                            <div class="form-check form-check-radio form-check-inline">
-			                                <label class="form-check-label">
-			                                    <input class="form-check-input" type="radio" name="female"
-			                                           id="female" value="option2"> Female
-			                                    <span class="form-check-sign"></span>
-			                                </label>
-			                            </div>
-			                        </div>
 
-									<div class="form-group">
-									 <select name="status" class="form-control">
-                                <option selected>Status*</option>
-                                <option value="Rescued">Rescued</option>
-                                <option value="Died">Died</option>
-                                <option value="Need Evacuation">Need Evacuation</option>
-                                <option value="Critical Evacuation">Critical Evacuation</option>
-                                <option value="Searching">Searching</option>
-                            </select>
+									<div class="form-group text-left mb-3">
+										<div class="form-check form-check-radio form-check-inline">
+											<label class="form-check-label">
+												<input class="form-check-input" type="radio" name="gender" id="male" value="male" > Male
+												<span class="form-check-sign"></span>
+											</label>
+										</div>
+										<div class="form-check form-check-radio form-check-inline">
+											<label class="form-check-label">
+												<input class="form-check-input" type="radio" name="gender" id="female" value="female"> Female
+												<span class="form-check-sign"></span>
+											</label>
+										</div>
 									</div>
-									<button type="submit" class="btn btn-primary btn-round btn-block mt-1">Submit</button>
+
+									<div class="form-group select-custom">
+										<select name="status" class="form-control form-control-lg">
+											<option selected>Status*</option>
+											<option value="Rescued">Rescued</option>
+											<option value="Died">Died</option>
+											<option value="Need Evacuation">Need Evacuation</option>
+											<option value="Critical Evacuation">Critical Evacuation</option>
+											<option value="Searching">Searching</option>
+										</select>
+										<i class="fas fa-chevron-down"></i>
+									</div>
+									<button type="submit" class="btn btn-primary btn-search-now btn-round btn-block mt-1">Search Now &nbsp; <i class="fas fa-search" ></i></button>
 								</div>
 							</div>
 							<a onclick="closeDialog();" class="btn btn-link mt-3 mb-0 text-primary font-weight-bold">Back to Normal Search</a>
@@ -415,7 +421,7 @@
 
 							<div class="float-right pt-2">
 								<span class="pr-3"> Filter by: </span>
-								<div class="form-check form-check-radio form-check-inline">
+								<div class="form-check form-check-radio form-check-inline select-custom">
 									<select name="status" class="form-control" id="status">
 		                                <option value="">Status</option>
 		                                <option value="Rescued">Rescued</option>
@@ -424,13 +430,15 @@
 		                                <option value="Critical Evacuation">Critical Evacuation</option>
 		                                <option value="searching">Searching</option>
 		                            </select>
+		                            <i class="fas fa-chevron-down"></i>
 								</div>
-								<div class="form-check form-check-radio form-check-inline">
+								<div class="form-check form-check-radio form-check-inline select-custom">
 									<select class="form-control" name="area" id="area_search">
 									 {% include "area_drop_down.html" %}
 									</select>
+									<i class="fas fa-chevron-down"></i>
 								</div>
-								<div class="form-check form-check-radio form-check-inline">
+								<div class="form-check form-check-radio form-check-inline select-custom">
 										<select id="country_search" class="form-control">
 			                                <option value="">Country</option>
 			                                <option value="Afganistan">Afghanistan</option>
@@ -680,6 +688,7 @@
 			                                <option value="Zambia">Zambia</option>
 			                                <option value="Zimbabwe">Zimbabwe</option>
 			                            </select>
+			                            <i class="fas fa-chevron-down"></i>
 								</div>
 								
 							</div>

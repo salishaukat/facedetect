@@ -44,8 +44,29 @@ h6 {
 /*Overright Theme CSS*/
 
 /*Header Search*/
-.profile-page .page-header {
-	min-height: 200px;
+
+.page-header>.container{
+  padding-top: 50px;
+  padding-bottom: 5px;
+}
+
+.form-control-lg {
+    padding: .8rem 1rem !important;
+}
+
+.img-plus{
+	width: 72px;
+	height: 72px;
+	border: 1px dotted #ccc;
+	object-fit: contain;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.btn-search-now{
+	padding: 12px 23px !important;
+	text-transform: uppercase;
+	font-weight: 600;
 }
 
 .login-page .page-header:before, .profile-page .page-header:before {
@@ -59,6 +80,8 @@ h6 {
 	border-top-left-radius: 0 !important;
 	border-bottom-left-radius: 0 !important;
 	border-radius: 30px;
+	text-transform: uppercase;
+	font-weight: 600;
 }
 
 .btn-live{
@@ -109,6 +132,46 @@ h6 {
 	border-radius: 6px;
 }
 
+select {
+    border: none;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+     appearance: none;
+    padding-top: 0px;
+    background-size: 20px;
+    color:#ffffff;
+    font-size:30px;
+  
+  }
+.select-custom i{
+    position: absolute;
+    right: 7%;
+    pointer-events: none;
+    top: 35%;
+}
+  select option {
+    color:#424146;
+    background:#ffffff;
+}
+
+/*data table customize*/
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+	justify-content: center !important;
+	margin-top: 20px !important;
+}
+
+.page-item.active .page-link{
+	background-color: #00778b !important;
+	border-color: #00778b !important;
+	font-weight: 600;
+}
+
+.dataTables_length, .dataTables_info {
+	display: none !important;
+}
+/*--------------*/
 @media screen and (max-width: 991px) {
 	.sidebar-collapse .navbar-collapse .navbar-nav:not(.navbar-logo) .nav-link:not(.btn) {
 		text-align: left ;
@@ -281,6 +344,21 @@ a.text-primary:focus, a.text-primary:hover {
 	color: #535353 !important;
 }
 @media (min-width: 992px){
+	.register-col {
+		padding-right: 100px !important;
+		padding-left: 100px !important;
+	}
+
+	.register-col.first:after {
+		content: "";
+		background-color: #c2c2c2;
+		position: absolute;
+		width: 1px;
+		height: 60%;
+		top: 20%;
+		right: 0;
+	}
+
 	.notification-dropdown{
 		min-width: 280px;
 		width: 100%;
