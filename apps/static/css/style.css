@@ -338,14 +338,14 @@ a.text-primary:focus, a.text-primary:hover {
 	border-radius: 50%;
 	width: 30px;
 	height: 30px;
-	line-height: 18px;
+	line-height: 16px;
 	font-weight: 100;
 	color: #535353 !important;
 }
 
-.contentarea {
+/*.contentarea {
 	min-height: calc(100vh - 146px)
-}
+}*/
 .contentarea .camera{
 	width: 320px;
 	margin: 0 auto;
