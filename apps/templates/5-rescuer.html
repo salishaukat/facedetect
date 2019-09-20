@@ -8,20 +8,20 @@
             {% csrf_token %}
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 px-5">
-                        <h4 class="text-primary">Fill the detail for your lost one </h4>
+                    <div class="col-md-6 register-col first">
+                        <h4 class="text-primary font-weight-bold">Fill the detail for your lost one </h4>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="first_name" id="firstName" placeholder="First Name*" {% if allow_shelter %} readonly  {% else %}   required {% endif %}>
-                            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <input type="text" class="form-control form-control-lg" name="first_name" id="firstName" placeholder="First Name*" {% if allow_shelter %} readonly  {% else %}   required {% endif %}>
+                            <small class="form-text text-muted" style="display: none;">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="last_name" id="lastName" placeholder="Last Name" {% if allow_shelter %} readonly  {% else %}   required {% endif %}>
+                            <input type="text" class="form-control form-control-lg" name="last_name" id="lastName" placeholder="Last Name" {% if allow_shelter %} readonly  {% else %}   required {% endif %}>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" name="email" id="emailAdd" placeholder="Email Address" {% if allow_shelter %} readonly  {% else %}   required {% endif %}>
+                            <input type="email" class="form-control form-control-lg" name="email" id="emailAdd" placeholder="Email Address" {% if allow_shelter %} readonly  {% else %}   required {% endif %}>
                         </div>
                         <div class="form-group">
-                            <input type="tel" class="form-control" name="lost_one_contact_no" id="contactNo" placeholder="Contact Number*" {% if allow_shelter %} readonly  {% else %}   required {% endif %}>
+                            <input type="tel" class="form-control form-control-lg" name="lost_one_contact_no" id="contactNo" placeholder="Contact Number*" {% if allow_shelter %} readonly  {% else %}   required {% endif %}>
                         </div>
                         <div class="form-group">
                             <div class="form-check form-check-radio form-check-inline">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <select name="age" class="form-control" {% if allow_shelter %} disabled {% else %} required {% endif %}>
+                            <select name="age" class="form-control form-control-lg" {% if allow_shelter %} disabled {% else %} required {% endif %}>
                                 <option value="">Age</option>
                                 {% for i in n%}
                                 <option value="{{ i }}">{{i}}</option>
@@ -48,7 +48,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select name="status" class="form-control" {% if allow_shelter %} disabled {% else %} required {% endif %}>
+                            <select name="status" class="form-control form-control-lg" {% if allow_shelter %} disabled {% else %} required {% endif %}>
                                 <option value="">Status*</option>
                                 <option value="Rescued">Rescued</option>
                                 <option value="Died">Died</option>
@@ -58,12 +58,12 @@
                             </select>
                         </div>
                         <div  class="form-group">
-                            <select name="lost_one_area" class="form-control" {% if allow_shelter %} disabled {% else %} required {% endif %}>
+                            <select name="lost_one_area" class="form-control form-control-lg" {% if allow_shelter %} disabled {% else %} required {% endif %}>
                                 {% include "area_drop_down.html" %}
                             </select>
                         </div>
                         <div  class="form-group">
-                            <select name="country" class="form-control" {% if allow_shelter %} disabled {% else %} required {% endif %}>
+                            <select name="country" class="form-control form-control-lg" {% if allow_shelter %} disabled {% else %} required {% endif %}>
                                 <option value="">Country*</option>
                                 <option value="Afganistan">Afghanistan</option>
                                 <option value="Albania">Albania</option>
@@ -315,52 +315,41 @@
                         </div>
                         <div class="form-group">
                             <label for="uploadPic">Upload Pics</label>
-                        <div class="row">
-                            
-                                
-                                    <img id="personpic1" name="12" src="{% static 'img/plus.jpg' %}" alt="Snow" style="width: 10%; height: 10%;" onclick="openloader1();">
-                                
-                            <br>
-                            
-                                 
-                                    <img id="personpic2" src="{% static 'img/plus.jpg' %}" alt="Forest"  style="width: 10%; height: 10%;" onclick="openloader2();">
-                                
-                            
-                            <br>
-                              
-                                
-                                    <img id="personpic3" src="{% static 'img/plus.jpg' %}" alt="Mountains" style="width: 10%; height: 10%;" onclick="openloader3();">
-                            
-                            
-                        </div>
-                        <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter %} disabled {% else %} required  {% endif %}/> 
-                        <input type="file" id="uploadfile2" name="person_pic2" style="display: none;" onchange="upload_img2(this);"{% if allow_shelter %} disabled  {% endif %}/> 
-                        <input type="file" id="uploadfile3" name="person_pic3" style="display: none;" onchange="upload_img3(this);"{% if allow_shelter %} disabled  {% endif %}/> 
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img class="img-plus mr-1" id="personpic1" name="12" src="{% static 'img/plus.jpg' %}" alt="Snow" onclick="openloader1();">
+                                    <img class="img-plus mr-1" id="personpic2" src="{% static 'img/plus.jpg' %}" alt="Forest"  onclick="openloader2();">
+                                    <img class="img-plus mr-1" id="personpic3" src="{% static 'img/plus.jpg' %}" alt="Mountains" onclick="openloader3();">
+                                </div>
+                            </div>
+                            <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter %} disabled {% else %} required  {% endif %}/> 
+                            <input type="file" id="uploadfile2" name="person_pic2" style="display: none;" onchange="upload_img2(this);"{% if allow_shelter %} disabled  {% endif %}/> 
+                            <input type="file" id="uploadfile3" name="person_pic3" style="display: none;" onchange="upload_img3(this);"{% if allow_shelter %} disabled  {% endif %}/> 
                             <!-- Upload Image here -->
                         </div>
                     </div>
-                    <div class="col-md-6 px-5">
-                        <h4 class="text-primary">Where to contact if found </h4>
+                    <div class="col-md-6 register-col">
+                        <h4 class="text-primary font-weight-bold">Where to contact if found ?</h4>
                         <div class="form-group">
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Name*" required>
+                            <input type="text" name="name" id="name" class="form-control form-control-lg" placeholder="Name*" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" name="contact_1" id="contact_1" class="form-control" placeholder="Contact Number 1*" required>
+                            <input type="tel" name="contact_1" id="contact_1" class="form-control form-control-lg" placeholder="Contact Number 1*" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" name="contact_2" id="contact_2" class="form-control" placeholder="Contact Number 2">
+                            <input type="tel" name="contact_2" id="contact_2" class="form-control form-control-lg" placeholder="Contact Number 2">
                         </div>
                         <div class="form-group">
-                            <select name="contact_area" class="form-control" required>
+                            <select name="contact_area" class="form-control form-control-lg" required>
                                  {% include "area_drop_down.html" %}
                             </select>
                         </div>
                         <div class="form-group">
-                            <input name="address" id="address" type="text" class="form-control" placeholder="Address" required>
+                            <input name="address" id="address" type="text" class="form-control form-control-lg" placeholder="Address" required>
                         </div>
                         <div class="form-group">
                             <label for="noteTextArea">Note</label>
-                            <textarea name="note" id="note" class="form-control" id="noteTextArea" rows="3" required></textarea>
+                            <textarea name="note" id="note" class="form-control form-control-lg" id="noteTextArea" rows="6" required></textarea>
                         </div>
 						{% if user and 'AnonymousUser' not in user %}
                         
@@ -381,7 +370,7 @@
                             </div>
                         </div>                        
 						{% endif %}
-                        <button type="submit" class="btn btn-primary btn-round btn-block mt-4">Submit</button>
+                        <button type="submit" class="btn btn-primary btn-round btn-block mt-4">Register</button>
                     </div>
                 </div>
             </div>

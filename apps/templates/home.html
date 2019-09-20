@@ -119,7 +119,7 @@
 
 							</div>
 						</div>
-						<ul class="list-inline toggle-items">
+						<ul class="list-inline toggle-items pt-1">
 							<li class="list-inline-item active"> <a class="font-weight-bold" > NAME </a> </li>
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item"> <a class="font-weight-bold"  onclick="toggle_pic()"> PICTURE </a> </li>
@@ -149,7 +149,7 @@
 								</button>								
 							</div>
 						</div>
-						<ul class="list-inline toggle-items">
+						<ul class="list-inline toggle-items pt-1">
 							<li class="list-inline-item"> <a class="font-weight-bold" onclick="name_search()"> NAME </a> </li>
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item active"> <a class="font-weight-bold"> PICTURE </a> </li>
@@ -171,7 +171,7 @@
 					<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
 						<button type="button" class="btn btn-neutral btn-block btn-round bg-white mt-0 btn-live" aria-haspopup="true" aria-expanded="false" onclick="live_btn()"> <i class="fas fa-video"></i> Start live
 						</button>	
-						<ul class="list-inline toggle-items">
+						<ul class="list-inline toggle-items pt-1">
 							<li class="list-inline-item"> <a class="font-weight-bold" onclick="name_search()"> NAME </a> </li>
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item"> <a class="font-weight-bold" onclick="toggle_pic()"> PICTURE </a> </li>
@@ -193,13 +193,13 @@
 							<div class="row">
 								<div class="col-md-6 col-12">
 									<div class="form-group">
-										<input type="text" class="form-control" id="firstName" name="first_name" placeholder="First Name" >
+										<input type="text" class="form-control form-control-lg" id="firstName" name="first_name" placeholder="First Name" >
 									</div>
 									<div class="form-group">
-										<input type="text" class="form-control" id="contactNo" name="contact_no" placeholder="Contact Number">
+										<input type="text" class="form-control form-control-lg" id="contactNo" name="contact_no" placeholder="Contact Number">
 									</div>
 									<div class="form-group">
-										<select name="area" class="form-control">
+										<select name="area" class="form-control form-control-lg">
 		                                <option selected value="0">Area</option>
 		                                <option value="North Andros"> North Andros</option>
 		                                <option value="Great Inagua"> Great Inagua</option>
@@ -225,7 +225,7 @@
                             		</select>
 									</div>
 									<div class="form-group">
-										<select name="country" class="form-control">
+										<select name="country" class="form-control form-control-lg">
 			                                <option selected>Country</option>
 			                                <option value="Afganistan">Afghanistan</option>
 			                                <option value="Albania">Albania</option>
@@ -478,33 +478,33 @@
 								</div>
 								<div class="col-md-6 col-12">
 									<div class="form-group">
-										<input type="text" class="form-control" id="lastName" name="last_name" placeholder="Last Name" >
+										<input type="text" class="form-control form-control-lg" id="lastName" name="last_name" placeholder="Last Name" >
 									</div>
-									<div class="form-group text-left">
+									<div class="form-group text-left mb-3">
 										<div class="form-check form-check-radio form-check-inline">
 											<label class="form-check-label">
-												<input class="form-check-input" type="radio" name="male" id="male" value="option1"> Male
+												<input class="form-check-input" type="radio" name="gender" id="male" value="option1"> Male
 												<span class="form-check-sign"></span>
 											</label>
 										</div>
 										<div class="form-check form-check-radio form-check-inline">
 											<label class="form-check-label">
-												<input class="form-check-input" type="radio" name="female" id="female" value="option2"> Female
+												<input class="form-check-input" type="radio" name="gender" id="female" value="option2"> Female
 												<span class="form-check-sign"></span>
 											</label>
 										</div>
 									</div>
 									<div class="form-group">
-										 <select name="status" class="form-control">
-                                <option selected>Status*</option>
-                                <option value="Rescued">Rescued</option>
-                                <option value="Died">Died</option>
-                                <option value="Need Evacuation">Need Evacuation</option>
-                                <option value="Critical Evacuation">Critical Evacuation</option>
-                                <option value="Searching">Searching</option>
-                            </select>
+										<select name="status" class="form-control form-control-lg">
+											<option selected>Status*</option>
+											<option value="Rescued">Rescued</option>
+											<option value="Died">Died</option>
+											<option value="Need Evacuation">Need Evacuation</option>
+											<option value="Critical Evacuation">Critical Evacuation</option>
+											<option value="Searching">Searching</option>
+										</select>
 									</div>
-									<button type="submit" class="btn btn-primary btn-round btn-block mt-1">Submit</button>
+									<button type="submit" class="btn btn-primary btn-search-now btn-round btn-block mt-1">Search Now &nbsp; <i class="fas fa-search" ></i></button>
 								</div>
 							</div>
 							<a onclick="closeDialog();" class="btn btn-link mt-3 mb-0 text-primary font-weight-bold">Back to Normal Search</a>
@@ -518,11 +518,11 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 col-lg-8 col-xl-7 mx-auto">
-						<h4 class="text-center mb-0"> If you cannot<span class="text-secondary"> find your lost one</span> then fill the form </h4>
+						<h4 class="text-center mb-0"> If you cant<span class="text-secondary font-weight-bold"> find your lost one</span> then fill the form </h4>
 						<h4 class="text-center mt-1"> We wil help you to find them </h4>
 						<div class="row">
 							<div class="col-md-12 col-lg-6 col-xl-6 mx-auto">
-								<a href="/lostone" class="btn btn-primary btn-round btn-block mt-4 btn-lg">REGISTER YOUR LOST ONE</a>
+								<a href="/lostone" class="btn btn-primary btn-round btn-block mt-4 btn-lg font-weight-bold">REGISTER YOUR LOST ONE</a>
 							</div>
 						</div>
 					</div>
@@ -530,7 +530,7 @@
 				<div class="row">
 					<div class="col-12">
 						<!-- Set up your HTML -->
-						<h4 class="text-center text-primary mt-5 mb-5 h4"> RECENT UPDATES </h4>
+						<h4 class="text-center text-primary mt-5 mb-5 h4 font-weight-bold"> RECENT UPDATES </h4>
 						<div class="owl-carousel"  id="owl-carousel-updates">
 							{% for lostone in lostones %}
 							<div> <img src="{{lostone.person_pic1}}"/> 
@@ -543,7 +543,7 @@
 				<div class="row">
 					<div class="col-12">
 						<!-- Set up your HTML -->
-						<h4 class="text-center text-primary mt-5 mb-5 h4"> SPONSORS </h4>
+						<h4 class="text-center text-primary mt-5 mb-5 h4 font-weight-bold"> SPONSORS </h4>
 						<div class="owl-carousel" id="owl-carousel-sponsors">
 							{% for sponsor in sponsors %}
 							<div> <img src="{{sponsor.company_logo}}"></div>
@@ -578,7 +578,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title text-center text-primary w-100" id="sponsorDetail">SPONSOR DETAILS</h5>
+					<h5 class="modal-title text-center text-primary w-100 font-weight-bold" id="sponsorDetail">SPONSOR DETAILS</h5>
 					<button type="button" class="close text-primary" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -588,27 +588,27 @@
 					<form id="sponsor_form" action="{% url 'sponsor' %}" method="post" enctype="multipart/form-data">
 						{% csrf_token %}
 						<div class="form-group">
-							<input type="text" class="form-control" name="name" placeholder="Your Name" required>
+							<input type="text" class="form-control form-control-lg" name="name" placeholder="Your Name" required>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" name="company_name" placeholder="Company Name" required>
+							<input type="text" class="form-control form-control-lg" name="company_name" placeholder="Company Name" required>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" name="email_address" placeholder="Email" required>
+							<input type="text" class="form-control form-control-lg" name="email_address" placeholder="Email" required>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" name="contact_number" placeholder="Contact No." required>
+							<input type="text" class="form-control form-control-lg" name="contact_number" placeholder="Contact No." required>
 						</div>
 						<div class="form-group">
 							<label for="uploadLogo">Upload Company Logo</label>
 							
 							<div class="row">
-								<img id="com_logo" name="12" src="{% static 'img/plus.jpg' %}" alt="Snow" style="width: 10%; height: 10%;" onclick="logo_loader();">
+								<img class="img-plus" id="com_logo" name="12" src="{% static 'img/plus.jpg' %}" alt="Snow" onclick="logo_loader();">
 							</div>
 									
 								<input id="logo_input" type="file" name="company_logo" style="display: none;" onchange="upload_logo(this);"/>
 						</div>
-						<button type="button" class="btn btn-primary btn-round btn-block mt-4" onclick="submit_sponsor_form()">Register</button>
+						<button type="button" class="btn btn-primary btn-round btn-block mt-4 btn-lg font-weight-bold" onclick="submit_sponsor_form()">Register</button>
 					</form>
 				</div>
 			</div>

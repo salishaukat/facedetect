@@ -1422,6 +1422,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   cursor: pointer;
   background-color: #888888;
   color: #FFFFFF;
+  letter-spacing: 0.02em;
 }
 
 .btn:hover,
@@ -2972,7 +2973,7 @@ fieldset[disabled] .form-control {
 
 textarea.form-control {
   max-width: 100%;
-  max-height: 80px;
+  max-height: 100px;
   padding: 10px 10px 0 0;
   resize: none;
   /*border: none;*/
@@ -3472,7 +3473,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
 h1,
@@ -3671,7 +3672,7 @@ p {
 body {
   color: #2c2c2c;
   font-size: 14px;
-  font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
   overflow-x: hidden;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -5667,7 +5668,7 @@ img {
 }
 
 .profile-page .page-header {
-  min-height: 550px;
+  min-height: 100px;
 }
 
 .profile-page .profile-container {
