@@ -332,7 +332,6 @@ form label{
 a.text-primary:focus, a.text-primary:hover {
 	color: #ffc72c!important
 }
-
 .modal-header .close {
 	border: 2px solid #535353;
 	padding: 5px;
@@ -342,6 +341,15 @@ a.text-primary:focus, a.text-primary:hover {
 	line-height: 18px;
 	font-weight: 100;
 	color: #535353 !important;
+}
+
+.contentarea {
+	min-height: calc(100vh - 146px)
+}
+.contentarea .camera{
+	width: 320px;
+	margin: 0 auto;
+	padding: 100px 0;
 }
 @media (min-width: 992px){
 	.register-col {
