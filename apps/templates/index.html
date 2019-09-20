@@ -111,12 +111,16 @@
 										<input type="text" class="form-control form-control-lg" id="contactNo" name="contact_no" placeholder="Contact Number">
 									</div>
 									<div class="form-group">
-										<select name="area" class="form-control form-control-lg">
+
+										<select name="area" id="area" class="form-control form-control-lg">
+
 										{% include "area_drop_down.html" %}
 										</select>
 									</div>
 									<div class="form-group">
-										<select name="country" class="form-control form-control-lg">
+
+										<select name="country" id="country" class="form-control form-control-lg">
+
 			                                <option selected>Country</option>
 			                                <option value="Afganistan">Afghanistan</option>
 			                                <option value="Albania">Albania</option>
@@ -371,6 +375,7 @@
 									<div class="form-group">
 										<input type="text" class="form-control form-control-lg" id="lastName" name="last_name" placeholder="Last Name" >
 									</div>
+
 									<div class="form-group text-left mb-3">
 										<div class="form-check form-check-radio form-check-inline">
 											<label class="form-check-label">
@@ -385,6 +390,7 @@
 											</label>
 										</div>
 									</div>
+
 									<div class="form-group">
 										<select name="status" class="form-control form-control-lg">
 											<option selected>Status*</option>
@@ -413,24 +419,24 @@
 							<div class="float-right pt-2">
 								<span class="pr-3"> Filter by: </span>
 								<div class="form-check form-check-radio form-check-inline">
-									<select name="status" class="form-control">
-		                                <option selected>Status</option>
-		                                <option value="0">Rescued</option>
-		                                <option>Died</option>
-		                                <option>Need Evacuation</option>
-		                                <option>Critical Evacuation</option>
-		                                <option>Searching</option>
+									<select name="status" class="form-control" id="status">
+		                                <option value="">Status</option>
+		                                <option value="Rescued">Rescued</option>
+		                                <option value="Died">Died</option>
+		                                <option value="Need Evacuation">Need Evacuation</option>
+		                                <option value="Critical Evacuation">Critical Evacuation</option>
+		                                <option value="searching">Searching</option>
 		                            </select>
 								</div>
 								<div class="form-check form-check-radio form-check-inline">
-									<select class="form-control" name="area">
+									<select class="form-control" name="area" id="area_search">
 									 {% include "area_drop_down.html" %}
 									</select>
 									<i class="fas fa-chevron-down"></i>
 								</div>
 								<div class="form-check form-check-radio form-check-inline">
-										<select class="form-control">
-			                                <option selected>Country</option>
+										<select id="country_search" class="form-control">
+			                                <option value="">Country</option>
 			                                <option value="Afganistan">Afghanistan</option>
 			                                <option value="Albania">Albania</option>
 			                                <option value="Algeria">Algeria</option>
@@ -694,6 +700,7 @@
 										<th class="align-middle" scope="col">Area</th>
 										<th class="align-middle" scope="col">Country</th>
 										<th class="align-middle" scope="col">Contact No</th>
+										<th class="align-middle" scope="col">Shelter</th>
 										<th class="align-middle" scope="col">Status</th>
 										<th class="align-middle" scope="col">Note</th>
 									</tr>
@@ -702,7 +709,7 @@
 								<tbody>
 									{% if contacts %}
 										{% for contact in contacts %}
-
+										
 									<tr onclick="showmodel('{{contact.lost_one.id}}')">
 										<!-- <td scope="row">1</td> -->
 										<td class="align-middle"> {{ forloop.counter }} </td>
@@ -712,6 +719,7 @@
 										<td class="align-middle">{{contact.lost_one.area}}</td>
 										<td class="align-middle">{{contact.lost_one.country}}</td>
 										<td class="align-middle">{{contact.lost_one.contact_number}}</td>
+										<td class="align-middle">{% if contact.shelter %} {{contact.shelter}} {%else%} - {%endif%}</td>
 										<td class="align-middle">{{contact.lost_one.status}}</td>
 										<td class="align-middle">{{contact.note}}</td>
 									</tr>
@@ -770,13 +778,13 @@
 
 					<div class="row"> 
 						<div class="col-sm-12 bg-white col-md-4 ">
-							<img class="modal-img rounded" id="h4images" src="{% static 'img/image.jpg' %}" alt="Rounded Image">
+							<img class="modal-img rounded" id="h4images" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
 							<div class="row">
 								<div class="col">
-									<img class="img-show" src="{% static 'img/image.jpg' %}" alt="Rounded Image">
+									<img class="img-show" id="h4images1" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
 								</div>
 								<div class="col">
-									<img class="img-show" src="{% static 'img/image.jpg' %}" alt="Rounded Image" >
+									<img class="img-show" id="h4images2" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image" >
 								</div>
 							</div>
 							{% if user and 'AnonymousUser' not in user %}
@@ -853,11 +861,11 @@
 					<div class="row contact_info"> 
 						<div class="col-md-4">
 							<h5 class="font-weight-bold font-xs mb-1" > Area </h5>
-							<p class="font-sm" id="h4address"></p>
+							<p class="font-sm" id="h4area"></p>
 						</div>
 						<div class="col-md-8">
 							<h5 class="font-weight-bold font-xs mb-1" > Address </h5>
-							<p class="font-sm" id="h4address"> 882 Clover Drive Mosca, CO 81146</p>
+							<p class="font-sm" id="h4address"></p>
 						</div>
 					</div>
 					<div class="row contact_info"> 
@@ -875,21 +883,21 @@
 					<div class="row contact_info"> 
 						<div class="col-md-3">
 							<h5 class="font-weight-bold font-xs mb-1" > Name </h5>
-							<p class="font-sm"> Shelter name </p>
+							<p class="font-sm" id="h4shelter_name"></p>
 						</div>
 						<div class="col-md-3">
 							<h5 class="font-weight-bold font-xs mb-1" > Contact Person </h5>
-							<p class="font-sm" id="h4address"> 90 49034 909</p>
+							<p class="font-sm" id="h4shelter_number"></p>
 						</div>
 						<div class="col-md-6">
 							<h5 class="font-weight-bold font-xs mb-1" > Area </h5>
-							<p class="font-sm" id="h4address"> 882 Clover Drive Mosca, CO 81146</p>
+							<p class="font-sm" id="h4shelter_area"></p>
 						</div>
 					</div>
 					<div class="row contact_info"> 
 						<div class="col-md-12">
 							<h5 class="font-weight-bold font-xs mb-1" > Address </h5>
-							<p class="font-sm" id="h4address"> 882 Clover Drive Mosca, CO 81146</p>
+							<p class="font-sm" id="h4shelter_address"></p>
 						</div>
 					</div>
 					<div class="row shelter_info"> 
@@ -997,31 +1005,51 @@
 				$('#h4id').text(data.lostone.uid);
 				$('#h4_lost_one_contact_no').text(data.lostone.contact_number)
 				$('#h4age').text(data.lostone.age)
-				$('#h4images').attr('src', data.lostone.person_pic1)
+				if (data.lostone.person_pic1){
+					$('#h4images').attr('src', data.lostone.person_pic1)
+				}
+				if (data.lostone.person_pic2){
+					$('#h4images1').attr('src', data.lostone.person_pic2)
+				}
+				if (data.lostone.person_pic3){
+					$('#h4images2').attr('src', data.lostone.person_pic3)
+				}
 				$('#h4status').text(data.lostone.status)
 				$('#h4gender').text(data.lostone.gender)
 				$('#h4_lost_one_area').text(data.lostone.area)
 				$('#h4country').text(data.lostone.country)
 				$('#h4email').text(data.lostone.email_address)
 				if (data.contact){
-					$('.contact_info').show()
+					/*$('.contact_info').show()*/
 					$('#h4contact_name').text(data.contact.name)
 					$('#h4address').text(data.contact.address)
 					$('#h4note').text(data.contact.note)
-					$('#h4contact_number').text(data.contact.contact_number1)
+					$('#h4contact_number').text(data.contact.contact_number1+' , '+data.contact.contact_number2)
+					$('#h4area').text(data.contact.area)
+
 				}
 				else{
-					$('.contact_info').hide()
+					$('#h4contact_name').text('')
+					$('#h4address').text('')
+					$('#h4note').text('')
+					$('#h4contact_number').text('')
+					$('#h4area').text('')
 				}
 				if (data.shelter){
-					$('.shelter_info').show()
+					/*$('.shelter_info').show()*/
 					$('#h4shelter_name').text(data.shelter.shelter)
 					$('#h4shelter_address').text(data.shelter.address)
 					$('#h4shelter_note').text(data.shelter.note)
-					$('#h4shelter_number').text(data.shelter.contact_number1)
+					$('#h4shelter_number').text(data.shelter.contact_number1+' , '+data.shelter.contact_number2)
+					$('#h4shelter_area').text(data.shelter.area)
 				}
 				else{
 					$('.shelter_info').hide()
+					$('#h4shelter_name').text('')
+					$('#h4shelter_address').text('')
+					$('#h4shelter_note').text('')
+					$('#h4shelter_number').text('')
+					$('#h4shelter_area').text('')				
 				}
 				$('#lost_one_update').attr('href', '{% url "lostone" %}/'+id)
 				$('#lost_one').val(id);
@@ -1099,6 +1127,31 @@
 		    	$("#picture_search_form").hide();            	
 		    	$("#live_search_form").hide();            	
 		    	$("#simple_search_form").show();
-            }            
+            }      
+            $(document).ready(function(){
+			   var table = $('#lostone-table').DataTable({ dom: 'lrtip'});
+			   
+			   $('#status').on('change', function(){
+			   		//alert(this.value)
+   					table.column(7).search( this.value ).draw();   
+			   });
+			   $('#area_search').on('change', function(){
+			   		
+   					table.column(3).search( this.value ).draw();   
+			   });
+			   $('#country_search').on('change', function(){
+			   		
+   					table.column(4).search( this.value ).draw();    
+			   });
+			   
+				$('#male').click(function(){
+					$('#female'). prop("checked", false)
+				});
+
+				$('#female').click(function(){
+					$('#male'). prop("checked", false)
+				});
+			})
+			     
 		</script>
 {% endblock %}

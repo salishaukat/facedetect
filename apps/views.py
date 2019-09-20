@@ -44,8 +44,8 @@ def get_all(request):
     user_role = UserProfile.objects.filter(user=request.user.id)
     contact_data = None
     shelter_data = None
-    contact_data = Contact.objects.all()
     shelter_data = Shelter.objects.all()
+    contact_data = Contact.objects.exclude(lost_one__in=shelter_data.values('lost_one'))
     contact = list(chain(contact_data, shelter_data))
 
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
@@ -160,6 +160,10 @@ def advance_search(request):
     tags = {}
     if request.POST.get('first_name'):
         tags.update({'lost_one__first_name__icontains':request.POST.get('first_name')})
+    if request.POST.get('last_name'):
+        tags.update({'lost_one__last_name__icontains':request.POST.get('last_name')})
+    if request.POST.get('contact_no'):
+        tags.update({'lost_one__contact_number__icontains':request.POST.get('contact_no')})        
     if request.POST.get('area'):
         tags.update({'lost_one__area__icontains':request.POST.get('area')})
     if request.POST.get('country'):
@@ -169,9 +173,9 @@ def advance_search(request):
     male = request.POST.get('male') if request.POST.get('male') else None
     female = request.POST.get('female') if request.POST.get('female') else None
     if male:
-        tags.update({'lost_one__gender__icontains':"male"})
+        tags.update({'lost_one__gender__contains':"male"})
     elif female:
-        tags.update({'lost_one__gender__icontains':"female"})
+        tags.update({'lost_one__gender__contains':"female"})
      # Your dict with fields
     or_condition = Q()
     for key, value in tags.items():
@@ -242,6 +246,7 @@ def lostone(request, lost_one_id=None):
     if request.method == 'POST':
         try:
             uid = random_with_N_digits(6)
+            shelter_id = random_with_N_digits(6)
             lost_one_id = request.POST.get('lost_one_id')
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
@@ -257,6 +262,7 @@ def lostone(request, lost_one_id=None):
                 gender = 'male'
             elif female:
                 gender = 'female'
+            shelter_status = None
             rescued = request.POST.get('rescued') if request.POST.get('rescued') else None
             died = request.POST.get('died') if request.POST.get('died') else None
             if rescued:
@@ -278,7 +284,7 @@ def lostone(request, lost_one_id=None):
                 person_pic2 = None
             try:
                 person_pic3 = request.FILES['person_pic3']
-                person_pic3 = fs.save(person_pic2.name, person_pic3)
+                person_pic3 = fs.save(person_pic3.name, person_pic3)
                 person_pic3 = fs.url(person_pic3)
                 person_pic3 = ntpath.basename(person_pic3)
                 person_pic3 = path + '/' + person_pic3
@@ -315,11 +321,14 @@ def lostone(request, lost_one_id=None):
                     shelter.address = request.POST.get('address')
                     shelter.note = request.POST.get('note')
                     shelter.status = shelter_status
+                    lost_one_object.status = shelter_status
                     shelter.save()
+                    lost_one_object.save()
                 else:
-                    shelter = Shelter.objects.create(status=shelter_status, shelter=name, contact_number1=contact_number1,
+                    shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                      contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
-
+                    lost_one_object.status = shelter_status
+                    lost_one_object.save()
                 
                 return redirect('get_all')
             else:
@@ -330,7 +339,7 @@ def lostone(request, lost_one_id=None):
                     contact = Contact.objects.create(name=name, contact_number1=contact_number1,
                                                      contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
                 else:
-                    shelter = Shelter.objects.create(status=shelter_status, shelter=name, contact_number1=contact_number1,
+                    shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                          contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
 
                 return redirect('get_all')

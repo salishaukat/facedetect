@@ -480,6 +480,7 @@
 									<div class="form-group">
 										<input type="text" class="form-control form-control-lg" id="lastName" name="last_name" placeholder="Last Name" >
 									</div>
+
 									<div class="form-group text-left mb-3">
 										<div class="form-check form-check-radio form-check-inline">
 											<label class="form-check-label">
@@ -494,6 +495,7 @@
 											</label>
 										</div>
 									</div>
+
 									<div class="form-group">
 										<select name="status" class="form-control form-control-lg">
 											<option selected>Status*</option>
@@ -534,6 +536,7 @@
 						<div class="owl-carousel"  id="owl-carousel-updates">
 							{% for lostone in lostones %}
 							<div> <img src="{{lostone.person_pic1}}"/> 
+								<p class="text-center"> <strong> {{lostone.name}} </strong> </p>
 								<p class="text-center text-danger"> <strong> {{lostone.status}} </strong> </p>
 							</div>
 							{% endfor %}
@@ -686,19 +689,20 @@
 		    	$("#live_search_form").hide();            	
 		    	$("#simple_search_form").show();
             }            
-		
+			$(document).ready(function(){
+				$('#male').click(function(){
+					$('#female'). prop("checked", false)
+				});
+
+				$('#female').click(function(){
+					$('#male'). prop("checked", false)
+				});
+			})
 		    {% if username %}
             $(document).ready(function(){
                 $('#navbarDropdownMenuLink').click();
 			                    
             })
-				$('#male').click(function(){
-			       $('#female'). prop("checked", false)
-			    });
-
-			    $('#female').click(function(){
-			       $('#male'). prop("checked", false)
-			    });            
             {% endif %}
         </script>
 
