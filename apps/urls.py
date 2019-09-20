@@ -18,5 +18,6 @@ urlpatterns = [
     path('comment', views.comments, name="comment"),
     path('reports', views.reports, name="reports"),
     path('reports/<str:search>', views.reports, name="reports"),
-    path('get_all_lost_one/<int:lost_one_id>',views.get_all_lost_one, name="get_all_lost_one")
+    path('get_all_lost_one/<int:lost_one_id>',views.get_all_lost_one, name="get_all_lost_one"),
+    path('webcamera', views.webcamera, name="webcamera"),
 ]

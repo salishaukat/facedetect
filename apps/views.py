@@ -20,6 +20,8 @@ def random_with_N_digits(n):
     range_end = (10**n)-1
     return randint(range_start, range_end)
 
+def webcamera(request):
+    return render(request, 'webcamera.html')
 
 def search(request):
     if 'username' not in request.session:
