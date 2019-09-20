@@ -155,7 +155,23 @@ select {
     background:#ffffff;
 }
 
+/*data table customize*/
 
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+	justify-content: center !important;
+	margin-top: 20px !important;
+}
+
+.page-item.active .page-link{
+	background-color: #00778b !important;
+	border-color: #00778b !important;
+	font-weight: 600;
+}
+
+.dataTables_length, .dataTables_info {
+	display: none !important;
+}
+/*--------------*/
 @media screen and (max-width: 991px) {
 	.sidebar-collapse .navbar-collapse .navbar-nav:not(.navbar-logo) .nav-link:not(.btn) {
 		text-align: left ;

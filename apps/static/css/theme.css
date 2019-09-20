@@ -3353,7 +3353,7 @@ textarea.form-control:active {
   color: #FFFFFF;
 }
 
-.pagination .page-item .page-link {
+/*.pagination .page-item .page-link {
   border: 0;
   border-radius: 30px !important;
   transition: all .3s;
@@ -3466,7 +3466,7 @@ textarea.form-control:active {
 .pagination-container {
   display: flex;
   align-items: center;
-}
+}*/
 
 button,
 input,
