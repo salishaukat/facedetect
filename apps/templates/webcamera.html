@@ -121,7 +121,7 @@
 
     request.done(function(data) {
         if (data.contact && data.contact.id > 0){
-            window.location.href = "{% url 'search' %}/"+data.contact.id;
+            window.location.href = "{% url 'search' %}/"+data.contact.lost_one_id;
         }
 
     });

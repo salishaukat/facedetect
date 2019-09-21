@@ -44,7 +44,13 @@ def search(request, id=None):
     user_role = UserProfile.objects.filter(user=request.user.id)
     contact = None
     if id:
-        contact = Contact.objects.filter(id=id)
+        contact = Shelter.objects.filter(lost_one=id)
+        print("search ============== contact1")
+        print(contact)
+        if not contact:
+            print("search ============== contact1")
+            contact = Contact.objects.filter(lost_one=id)    
+            print(contact)
     if request.POST.get('search_name'):
         name = request.POST.get('search_name')
         contact_data = None
@@ -163,8 +169,11 @@ def pic_search(request):
                 print(identity)
                 print(identity['predicted_label'])
                 if identity['predicted_label'] != None:
-
-                    contact = Contact.objects.filter(lost_one__folder_name__contains=identity['predicted_label'])
+                    contact_data = None
+                    shelter_data = None
+                    shelter_data = Shelter.objects.filter(lost_one__folder_name__contains=identity['predicted_label'])
+                    contact_data = Contact.objects.filter(lost_one__folder_name__contains=identity['predicted_label']).exclude(lost_one__in=shelter_data.values('lost_one'))
+                    contact = list(chain(contact_data, shelter_data))
                     print (contact)
         
         except Exception as e:
@@ -362,27 +371,24 @@ def lostone(request, lost_one_id=None):
         else:
             lost_one_object = LostOne.objects.create(uid=uid, gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
                                                      person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
-            fr.create_collection('collection', 'collection.npz', return_features=False)
+            #fr.create_collection('collection', 'collection.npz', return_features=False)
             
             if request.session['username'] is None:
                 contact = Contact.objects.create(name=name, contact_number1=contact_number1,
                                                  contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
                 contact_obj = Contact.objects.filter(lost_one__name__contains=first_name+' '+last_name)
                 print(contact_obj)
-                return render(request, 'index.html', {"contacts":contact_obj, "user":request.session["username"]})
+                return render(request, 'index.html', {"contacts":contact_obj, "user":request.session["username"], "created":"success"})
 
             else:
                 shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                      contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
                 shelter_obj = Shelter.objects.filter(lost_one__name__contains=first_name+' '+last_name)
                 print(shelter_obj)
-                return render(request, 'index.html', {"contacts":shelter_obj, "user":request.session["username"]})                
+                return render(request, 'index.html', {"contacts":shelter_obj, "user":request.session["username"], "created":"success"})                
 
             #return redirect('get_all')
             
-            
-
-
     elif ('username' not in request.session or request.session['username'] is None) and lost_one_id:
         return redirect('lostone')
 
@@ -524,6 +530,16 @@ def get_face_from_image(request):
                                    collection='./collection.npz')
             print ("----------------------------------------",identity['predicted_label'])
             if identity['predicted_label'] != None:
-                contact = Contact.objects.filter(lost_one__folder_name__contains=identity['predicted_label']).values()[0]
-                print (contact)
+                contact_data = None
+                shelter_data = None
+                shelter_data = Shelter.objects.filter(lost_one__folder_name__contains=identity['predicted_label'])
+                contact_data = Contact.objects.filter(lost_one__folder_name__contains=identity['predicted_label'])
+                print(shelter_data)
+                if shelter_data:
+                    contact = shelter_data.values()[0]
+                else:
+                    contact = contact_data.values()[0]
+                print(contact)
+                #contact = Contact.objects.filter(lost_one__folder_name__contains=identity['predicted_label']).values()[0]
+                print(contact)
     return JsonResponse({'contact': contact})

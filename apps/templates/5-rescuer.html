@@ -51,8 +51,6 @@
                         <div class="form-group select-custom">
                             <select name="status" class="form-control form-control-lg" {% if allow_shelter %} disabled {% else %} required {% endif %}>
                                 <option value="">Status*</option>
-                                <option value="Rescued">Rescued</option>
-                                <option value="Died">Died</option>
                                 <option value="Need Evacuation">Need Evacuation</option>
                                 <option value="Critical Evacuation">Critical Evacuation</option>
                                 <option value="Searching">Searching</option>
@@ -68,7 +66,7 @@
                         <div  class="form-group select-custom">
                             <select name="country" class="form-control form-control-lg" {% if allow_shelter %} disabled {% else %} required {% endif %}>
                                 <option value="">Country*</option>
-                                <option value="Afganistan">Afghanistan</option>
+<!--                                 <option value="Afganistan">Afghanistan</option>
                                 <option value="Albania">Albania</option>
                                 <option value="Algeria">Algeria</option>
                                 <option value="American Samoa">American Samoa</option>
@@ -81,9 +79,9 @@
                                 <option value="Aruba">Aruba</option>
                                 <option value="Australia">Australia</option>
                                 <option value="Austria">Austria</option>
-                                <option value="Azerbaijan">Azerbaijan</option>
+                                <option value="Azerbaijan">Azerbaijan</option> -->
                                 <option value="Bahamas">Bahamas</option>
-                                <option value="Bahrain">Bahrain</option>
+<!--                                 <option value="Bahrain">Bahrain</option>
                                 <option value="Bangladesh">Bangladesh</option>
                                 <option value="Barbados">Barbados</option>
                                 <option value="Belarus">Belarus</option>
@@ -313,7 +311,7 @@
                                 <option value="Yemen">Yemen</option>
                                 <option value="Zaire">Zaire</option>
                                 <option value="Zambia">Zambia</option>
-                                <option value="Zimbabwe">Zimbabwe</option>
+                                <option value="Zimbabwe">Zimbabwe</option> -->
                             </select>
                             <i class="fas fa-chevron-down"></i>
                         </div>
@@ -402,6 +400,7 @@
 <script>
 var spinner = $('#loader');
   $('form').submit(function(e) {
+    $.notify("Access granted", "success");
         spinner.show();
   });
 {% if contact %}

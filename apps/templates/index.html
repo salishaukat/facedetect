@@ -122,8 +122,8 @@
 
 										<select name="country" id="country" class="form-control form-control-lg">
 
-			                                <option selected>Country</option>
-			                                <option value="Afganistan">Afghanistan</option>
+ 			                                <option selected>Country</option>
+<!--			                                <option value="Afganistan">Afghanistan</option>
 			                                <option value="Albania">Albania</option>
 			                                <option value="Algeria">Algeria</option>
 			                                <option value="American Samoa">American Samoa</option>
@@ -136,9 +136,9 @@
 			                                <option value="Aruba">Aruba</option>
 			                                <option value="Australia">Australia</option>
 			                                <option value="Austria">Austria</option>
-			                                <option value="Azerbaijan">Azerbaijan</option>
+			                                <option value="Azerbaijan">Azerbaijan</option> -->
 			                                <option value="Bahamas">Bahamas</option>
-			                                <option value="Bahrain">Bahrain</option>
+<!-- 			                                <option value="Bahrain">Bahrain</option>
 			                                <option value="Bangladesh">Bangladesh</option>
 			                                <option value="Barbados">Barbados</option>
 			                                <option value="Belarus">Belarus</option>
@@ -368,7 +368,7 @@
 			                                <option value="Yemen">Yemen</option>
 			                                <option value="Zaire">Zaire</option>
 			                                <option value="Zambia">Zambia</option>
-			                                <option value="Zimbabwe">Zimbabwe</option>
+			                                <option value="Zimbabwe">Zimbabwe</option> -->
 			                            </select>
 			                            <i class="fas fa-chevron-down"></i>
 									</div>
@@ -441,7 +441,7 @@
 								<div class="form-check form-check-radio form-check-inline select-custom">
 										<select id="country_search" class="form-control">
 			                                <option value="">Country</option>
-			                                <option value="Afganistan">Afghanistan</option>
+<!-- 			                                <option value="Afganistan">Afghanistan</option>
 			                                <option value="Albania">Albania</option>
 			                                <option value="Algeria">Algeria</option>
 			                                <option value="American Samoa">American Samoa</option>
@@ -454,9 +454,9 @@
 			                                <option value="Aruba">Aruba</option>
 			                                <option value="Australia">Australia</option>
 			                                <option value="Austria">Austria</option>
-			                                <option value="Azerbaijan">Azerbaijan</option>
+			                                <option value="Azerbaijan">Azerbaijan</option> -->
 			                                <option value="Bahamas">Bahamas</option>
-			                                <option value="Bahrain">Bahrain</option>
+<!-- 			                                <option value="Bahrain">Bahrain</option>
 			                                <option value="Bangladesh">Bangladesh</option>
 			                                <option value="Barbados">Barbados</option>
 			                                <option value="Belarus">Belarus</option>
@@ -686,7 +686,7 @@
 			                                <option value="Yemen">Yemen</option>
 			                                <option value="Zaire">Zaire</option>
 			                                <option value="Zambia">Zambia</option>
-			                                <option value="Zimbabwe">Zimbabwe</option>
+			                                <option value="Zimbabwe">Zimbabwe</option> -->
 			                            </select>
 			                            <i class="fas fa-chevron-down"></i>
 								</div>
@@ -726,7 +726,7 @@
 										<td class="align-middle">{{contact.lost_one.contact_number}}</td>
 										<td class="align-middle">{% if contact.shelter %} {{contact.shelter}} {%else%} - {%endif%}</td>
 										<td class="align-middle">{{contact.lost_one.status}}</td>
-										<td class="align-middle">{{contact.note}}</td>
+										<td class="align-middle">{{contact.note|truncatechars:30 }}</td>
 									</tr>
 										{% endfor %}
 										{% else %}
@@ -998,11 +998,18 @@
 			function shareOnFacebook(link){
 				window.open('https://www.facebook.com/sharer/sharer.php?u='+link+'', '_blank')
 			}
-			{% if contacts %}
+			{% if created %}
+			$(document).ready(function(){
+					debugger;
+					$.notify("Your given details have been registered", "success");
+				});
+			{% endif %}
+			{% if contacts %}		
 			{% else  %}
 			$(document).ready(function(){
 				$('.register-detail').modal('show');
 			})
+
 			{% endif %}
 			function showmodel(id){
 				console.log("================")
@@ -1015,7 +1022,7 @@
 					setTimeout( function(){ 
 						spinner.hide(); 
   					}  , 2500 );
-				$('#h4name').text(data.lostone.first_name + '' + data.lostone.last_name);
+				$('#h4name').text(data.lostone.first_name + ' ' + data.lostone.last_name);
 				$('#h4id').text(data.lostone.uid);
 				$('#h4_lost_one_contact_no').text(data.lostone.contact_number)
 				$('#h4age').text(data.lostone.age)
