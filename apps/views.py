@@ -32,8 +32,8 @@ def random_with_N_digits(n):
     range_end = (10**n)-1
     return randint(range_start, range_end)
 
-def webcamera(request):
-    return render(request, 'webcamera.html')
+def live(request):
+    return render(request, 'live.html')
 
 def search(request, id=None):
     if 'username' not in request.session:
@@ -333,15 +333,12 @@ def lostone(request, lost_one_id=None):
             person_pic1 = ntpath.basename(person_pic1)
             person_pic1 = path + '/' + person_pic1
         except:
-            if lost_one_id:
-                person_pic1 = None
+            person_pic1 = None
 
 
         if lost_one_id:
             lost_one_object = LostOne.objects.get(id=lost_one_id)
-            print("here========================")
             shelter = Shelter.objects.filter(lost_one=lost_one_id).first()
-            print("123========================")
             if shelter:
                 shelter.shelter = request.POST.get('name')
                 shelter.area = request.POST.get('contact_area')
@@ -351,15 +348,19 @@ def lostone(request, lost_one_id=None):
                 shelter.note = request.POST.get('note')
                 shelter.status = shelter_status
                 lost_one_object.status = shelter_status
+                if person_pic1:
+                    print(person_pic1)
+                    lost_one_object.person_pic1 = person_pic1
                 shelter.save()
                 lost_one_object.save()
                 shelter_obj = Shelter.objects.filter(lost_one=lost_one_id)
-                print("=======shle in if=======")
-                print(shelter_obj)
 
             else:
                 shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                  contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
+                if person_pic1:
+                    print(person_pic1)
+                    lost_one_object.person_pic1 = person_pic1
                 lost_one_object.status = shelter_status
                 lost_one_object.save()
 
@@ -398,14 +399,14 @@ def lostone(request, lost_one_id=None):
         if contact is None:
             contact = Contact.objects.filter(lost_one=lost_one_id).first()
             shelter = False
-        return render(request, '5-rescuer.html', {'n' : range(1,100), "user":request.session["username"], 'contact':contact, 'shelter':shelter, 'allow_shelter':True})
+        return render(request, 'lostone.html', {'n' : range(1,100), "user":request.session["username"], 'contact':contact, 'shelter':shelter, 'allow_shelter':True})
     
    
     
     
 
 
-    return render(request, '5-rescuer.html', {'n' : range(1,100), "user":request.session["username"]})
+    return render(request, 'lostone.html', {'n' : range(1,100), "user":request.session["username"]})
 
 def login(request):
 
