@@ -327,7 +327,7 @@
                                     <img class="img-plus mr-1" id="personpic3" src="{% static 'img/plus.jpg' %}" alt="Mountains" onclick="openloader3();">
                                 </div>
                             </div>
-                            <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter %} disabled {% else %} required  {% endif %}/> 
+                            <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter is None %}  required  {% endif %}/>
                             <input type="file" id="uploadfile2" name="person_pic2" style="display: none;" onchange="upload_img2(this);"{% if allow_shelter %} disabled  {% endif %}/> 
                             <input type="file" id="uploadfile3" name="person_pic3" style="display: none;" onchange="upload_img3(this);"{% if allow_shelter %} disabled  {% endif %}/> 
                             <!-- Upload Image here -->
