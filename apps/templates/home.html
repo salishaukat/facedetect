@@ -124,7 +124,7 @@
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item"> <a class="font-weight-bold"  onclick="toggle_pic()"> PICTURE </a> </li>
 							<span class="px-1"> | </span> 
-							<li class="list-inline-item"> <a class="font-weight-bold"  href="{% url 'webcamera' %}"> LIVE </a> </li>
+							<li class="list-inline-item"> <a class="font-weight-bold" href="{% url 'webcamera' %}"> LIVE </a> </li>
 						</ul>
 					</div>
 				</div>
@@ -154,7 +154,7 @@
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item active"> <a class="font-weight-bold"> PICTURE </a> </li>
 							<span class="px-1"> | </span> 
-							<li class="list-inline-item"> <a class="font-weight-bold"  onclick="toggle_live()"> LIVE </a> </li>
+							<li class="list-inline-item"> <a class="font-weight-bold" href="{% url 'webcamera' %}"> LIVE </a> </li>
 						</ul>
 					</div>
 				</div>
@@ -617,7 +617,7 @@
 			</div>
 		</div>
 	</div>
-
+<div id="loader"></div>
 	
 	<!-- Bootstrap core JavaScript -->
 	<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
@@ -660,10 +660,12 @@
 				$('#simple_search_form').submit();
 			}
 			function submit_picture_search(){
+				var spinner = $('#loader');
+		        spinner.show();
 				$('#picture_search_form').submit();
 			}			
 			function live_btn(){
-				$('#live_search_form').submit();
+				$('#live_search_form').submit();	
 			}
             function openloader1() {
                 $("#uploadfile1").click();

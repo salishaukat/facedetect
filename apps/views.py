@@ -19,7 +19,13 @@ import base64
 import numpy as np
 from django.views.decorators.csrf import csrf_protect
 
-
+fr = FaceRecognizer(ctx='cpu',
+                    fd_model_path='./fd_model',
+                    fr_model_path='./model-tfv2/model.trueface',
+                    params_path='./model-tfv2/model.params',
+                    license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
+                    )
+#fr.create_collection('collection', 'collection.npz', return_features=False)
 
 def random_with_N_digits(n):
     range_start = 10**(n-1)
@@ -41,7 +47,11 @@ def search(request, id=None):
         contact = Contact.objects.filter(id=id)
     if request.POST.get('search_name'):
         name = request.POST.get('search_name')
-        contact = Contact.objects.filter(lost_one__name__icontains=name)
+        contact_data = None
+        shelter_data = None
+        shelter_data = Shelter.objects.filter(lost_one__name__icontains=name)
+        contact_data = Contact.objects.filter(lost_one__name__icontains=name).exclude(lost_one__in=shelter_data.values('lost_one'))
+        contact = list(chain(contact_data, shelter_data))
 
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
@@ -133,7 +143,7 @@ def pic_search(request):
                                 license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
                                 )
 
-            fr.create_collection('collection', 'collection.npz', return_features=False)
+            #fr.create_collection('collection', 'collection.npz', return_features=False)
 
             #vcap = VideoStream(src=0).start()
             vcap = cv2.imread('./'+person_pic1)
@@ -334,25 +344,41 @@ def lostone(request, lost_one_id=None):
                 lost_one_object.status = shelter_status
                 shelter.save()
                 lost_one_object.save()
+                shelter_obj = Shelter.objects.filter(lost_one=lost_one_id)
+                print("=======shle in if=======")
+                print(shelter_obj)
+
             else:
                 shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                  contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
                 lost_one_object.status = shelter_status
                 lost_one_object.save()
 
-            return redirect('get_all')
+                shelter_obj = Shelter.objects.filter(lost_one=lost_one_id)
+                print("=======shle in else =======")
+                print(shelter_obj)
+            return render(request, 'index.html', {"contacts":shelter_obj, "user":request.session["username"]})
+            #return redirect('get_all')
         else:
             lost_one_object = LostOne.objects.create(uid=uid, gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
                                                      person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
-
+            fr.create_collection('collection', 'collection.npz', return_features=False)
+            
             if request.session['username'] is None:
                 contact = Contact.objects.create(name=name, contact_number1=contact_number1,
                                                  contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
+                contact_obj = Contact.objects.filter(lost_one__name__contains=first_name+' '+last_name)
+                print(contact_obj)
+                return render(request, 'index.html', {"contacts":contact_obj, "user":request.session["username"]})
+
             else:
                 shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                      contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
+                shelter_obj = Shelter.objects.filter(lost_one__name__contains=first_name+' '+last_name)
+                print(shelter_obj)
+                return render(request, 'index.html', {"contacts":shelter_obj, "user":request.session["username"]})                
 
-            return redirect('get_all')
+            #return redirect('get_all')
             
             
 
@@ -465,7 +491,7 @@ def get_face_from_image(request):
     contact=None
     if request.method == 'POST':
         image = request.POST.get('image')
-        print(image)
+        #print(image)
 
         imagen_decodificada = base64.b64decode(image)
 
@@ -484,7 +510,7 @@ def get_face_from_image(request):
                             license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
                             )
 
-        fr.create_collection('collection', 'collection.npz', return_features=False)
+        #fr.create_collection('collection', 'collection.npz', return_features=False)
 
 
         frame = vcap

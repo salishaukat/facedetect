@@ -148,12 +148,13 @@ $(document).ready(function() {
             $('#upload').trigger('click');
             new_time = (end - start)/1000
             console.log(parseInt(new_time))
-            if (parseInt(new_time) >= 90)
+            if (parseInt(new_time) >= 30)
             {
+              console.log("================================")
               window.location.href = "{% url 'search' %}"
 
             }
-        }, 10000);
+        }, 2000);
 });
 
 </script>

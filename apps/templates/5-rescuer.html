@@ -378,9 +378,15 @@
                                     <span class="form-check-sign"></span>
                                 </label>
                             </div>
-                        </div>                        
+                        </div>
 						{% endif %}
+                        <input  type="checkbox" name="acc_pol" id="acc_pol" required />                        
+                        <label for="submit">Accept policies</label>                        
+                        {% if allow_shelter %}
+                        <button type="submit" class="btn btn-primary btn-round btn-block mt-4 btn-lg font-weight-bold">Update</button>
+                        {% else %}
                         <button type="submit" class="btn btn-primary btn-round btn-block mt-4 btn-lg font-weight-bold">Register</button>
+                        {% endif %}                        
                     </div>
                 </div>
             </div>
@@ -389,11 +395,15 @@
             {% endif %}
         </form>
     </section>
-
+<div id="loader"></div>
 
 
 
 <script>
+var spinner = $('#loader');
+  $('form').submit(function(e) {
+        spinner.show();
+  });
 {% if contact %}
 $(document).ready(function(){
     $('#firstName').val('{{contact.lost_one.first_name}}')

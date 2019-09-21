@@ -32,7 +32,7 @@
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item"> <a class="font-weight-bold"  onclick="toggle_pic()"> PICTURE </a> </li>
 							<span class="px-1"> | </span> 
-							<li class="list-inline-item"> <a class="font-weight-bold"  onclick="toggle_live()"> LIVE </a> </li>
+							<li class="list-inline-item"> <a class="font-weight-bold" href="{% url 'webcamera' %}"> LIVE </a> </li>
 						</ul>
 					</div>
 				</div>
@@ -767,7 +767,7 @@
 				</div>
 			</section>
 </div>
-
+<div id="loader"></div>
 	<!-- Modal -->
 	<div class="modal fade register-detail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
@@ -992,6 +992,7 @@
     </div>
   </div>
 </div>
+
 		<script>
 
 			function shareOnFacebook(link){
@@ -1004,9 +1005,16 @@
 			})
 			{% endif %}
 			function showmodel(id){
+				console.log("================")
+				var spinner = $('#loader');
+				console.log(spinner)
+		        spinner.show();
 				href = '/get_all_lost_one/' +id
 				$.ajax(href, {
 				success: function(data) {
+					setTimeout( function(){ 
+						spinner.hide(); 
+  					}  , 2500 );
 				$('#h4name').text(data.lostone.first_name + '' + data.lostone.last_name);
 				$('#h4id').text(data.lostone.uid);
 				$('#h4_lost_one_contact_no').text(data.lostone.contact_number)
@@ -1065,9 +1073,6 @@
 				protocol = window.location.protocol 
 				$('#shareOnFacebook').attr('onClick', "shareOnFacebook('"+protocol+"://"+host+"/lostone/"+id+"');");
 				
-				// $('#share_fb').attr('onClick', 'shareOnFacebook("https://www.facebook.com/sharer/sharer.php?u='+protocol+'://'+host+'/lostone/'+id+'");');
-				
-
 				document.getElementById('com').innerHTML='';
 				parser=document.getElementById('com');
 				parser.innerHTML='<div  class="fb-comments" data-href="'+protocol+'://'+host+'/lostone/'+id+'" data-num-posts="20" data-width="100%"></div>';
@@ -1080,11 +1085,6 @@
 						console.log(error)
 				}
 				});
-				
-				
-				
-
-
 			}
 		    function advance_search() {
 		    	$("#simple_search_form").hide();
@@ -1105,6 +1105,8 @@
 				$('#simple_search_form').submit();
 			}
 			function submit_picture_search(){
+				var spinner = $('#loader');
+		        spinner.show();				
 				$('#picture_search_form').submit();
 			}			
 			function live_btn(){
