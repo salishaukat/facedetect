@@ -96,7 +96,7 @@ h6 {
 
 .navbar .navbar-nav .nav-link:not(.btn) {
 	text-transform: none;
-	font-size: 1.2em;
+	font-size: 1em;
 	padding: 0.5rem 1rem;
 	line-height: 1.1rem;
 	font-weight: 600;
@@ -104,11 +104,22 @@ h6 {
 	text-transform: uppercase;
 }
 
+
+.navbar .navbar-nav .nav-link.contactUs{
+	font-size: 1.2em !important;
+	line-height: 1.2rem;
+}
+
+
+
 .navbar-nav .nav-item{
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	text-align: center;
+}
+.navbar-nav .nav-item .btn{
+	max-width: 260px;
 }
 .navbar-nav li:first-child:before {
   content: "";
@@ -119,6 +130,11 @@ h6 {
 	font-size: 14px;
 	margin-left: 1rem;
 }
+
+.navbar-nav .nav-item form{ 
+	margin-left: 1rem;
+}
+
 .modal-img {
 	width: 100%;
     height: 230px;
