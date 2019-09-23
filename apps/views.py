@@ -193,11 +193,11 @@ def advance_search(request):
         tags.update({'lost_one__last_name__icontains':request.POST.get('last_name')})
     if request.POST.get('contact_no'):
         tags.update({'lost_one__contact_number__icontains':request.POST.get('contact_no')})        
-    if request.POST.get('area'):
+    if request.POST.get('area') and request.POST.get('area') > 0:
         tags.update({'lost_one__area__icontains':request.POST.get('area')})
-    if request.POST.get('country'):
+    if request.POST.get('country') and request.POST.get('country') != "Country":
         tags.update({'lost_one__country__icontains':request.POST.get('country')})
-    if request.POST.get('status'):
+    if request.POST.get('status') and request.POST.get('status') !='Status*':
         tags.update({'lost_one__status__icontains':request.POST.get('status')})
     male = request.POST.get('male') if request.POST.get('male') else None
     female = request.POST.get('female') if request.POST.get('female') else None
@@ -208,7 +208,8 @@ def advance_search(request):
      # Your dict with fields
     or_condition = Q()
     for key, value in tags.items():
-        or_condition.add(Q(**{key: value}), Q.OR)
+        or_condition.add(Q(**{key: value}), Q.AND)
+    print (or_condition)
     contact = Contact.objects.filter(or_condition)
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
