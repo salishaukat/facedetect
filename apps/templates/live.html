@@ -5,6 +5,9 @@
 <div class="contentarea">
   <div class="camera">
     <video id="video" autoplay>Video stream not available.</video>
+    <button disabled id="flip-btn">
+      Flip Camera
+    </button>
     <button id="upload" style="display:none">Take photo</button>
   </div>
   <div style="display:none">
@@ -37,14 +40,18 @@
   var photo = null;
   var startbutton = null;
   var today = new Date();
+  let flipBtn = document.querySelector('#flip-btn');
+  let defaultsOpts = { audio: false, video: true }
+  let shouldFaceUser = true;
 
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');
     startbutton = document.getElementById('upload');
+    defaultsOpts.video = { facingMode: shouldFaceUser ? 'user' : 'environment' }
 
-    navigator.mediaDevices.getUserMedia({video: true, audio: false})
+    navigator.mediaDevices.getUserMedia(defaultsOpts)
     .then(function(stream) {
       video.srcObject = stream;
       video.play();
@@ -80,6 +87,23 @@
     clearphoto();
 
   }
+
+
+  let supports = navigator.mediaDevices.getSupportedConstraints();
+  if( supports['facingMode'] === true ) {
+    flipBtn.disabled = false;
+  }
+
+flipBtn.addEventListener('click', function(){
+  if( video.srcObject == null ) return
+  // we need to flip, stop everything
+  video.srcObject.getTracks().forEach(t => {
+    t.stop();
+  });
+  // toggle / flip
+  shouldFaceUser = !shouldFaceUser;
+  startup();
+})
 
   // Fill the photo with an indication that none has been
   // captured.
