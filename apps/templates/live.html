@@ -105,6 +105,23 @@ flipBtn.addEventListener('click', function(){
   startup();
 })
 
+function detectmob() { 
+ if( navigator.userAgent.match(/Android/i)
+ || navigator.userAgent.match(/webOS/i)
+ || navigator.userAgent.match(/iPhone/i)
+ || navigator.userAgent.match(/iPad/i)
+ || navigator.userAgent.match(/iPod/i)
+ || navigator.userAgent.match(/BlackBerry/i)
+ || navigator.userAgent.match(/Windows Phone/i)
+ ){
+    $('#flipBtn').show();
+    //$("p").css("background-color", "yellow");
+  }
+ else {
+    flipBtn.style.display = 'none'
+  }
+}
+
   // Fill the photo with an indication that none has been
   // captured.
 
@@ -161,6 +178,7 @@ flipBtn.addEventListener('click', function(){
 
   // Set up our event listener to run the startup process
   // once loading is complete.
+  window.addEventListener('load', detectmob, false);
   window.addEventListener('load', startup, false);
 })();
 
