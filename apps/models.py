@@ -52,7 +52,9 @@ class Shelter(models.Model):
     status = models.CharField(null=True, blank=True, max_length=100)
     area = models.CharField(null=True, blank=True, max_length=100)
     lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
-
+    person_pic4 = models.CharField(null=True, blank=True, max_length=1000)
+    person_pic5 = models.CharField(null=True, blank=True, max_length=1000)
+    person_pic6 = models.CharField(null=True, blank=True, max_length=1000)
 
 class Sponsor(models.Model):
     sid = models.IntegerField(null=True, blank=True)

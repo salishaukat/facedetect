@@ -321,11 +321,20 @@
                            <div class="row">
                                 <div class="col-md-12">
                                     <img class="img-plus mr-1" id="personpic1" name="12" src="{% static 'img/plus.jpg' %}" alt="Snow" onclick="openloader1();">
+                                    <div class="remove-img1" style="display: none;" onclick="rem_img1()">
+                                        <span class="fa fa-times"></span>
+                                    </div>
                                     <img class="img-plus mr-1" id="personpic2" src="{% static 'img/plus.jpg' %}" alt="Forest"  onclick="openloader2();">
+                                    <div class="remove-img2" style="display: none;" onclick="rem_img2()">
+                                        <span class="fa fa-times"></span>
+                                    </div>
                                     <img class="img-plus mr-1" id="personpic3" src="{% static 'img/plus.jpg' %}" alt="Mountains" onclick="openloader3();">
+                                    <div class="remove-img3" style="display: none;" onclick="rem_img3()">
+                                        <span class="fa fa-times"></span>
+                                    </div>
                                 </div>
                             </div>
-                            <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter is None %}  required  {% endif %}/>
+                            <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter %}  disabled  {% endif %}/>
                             <input type="file" id="uploadfile2" name="person_pic2" style="display: none;" onchange="upload_img2(this);"{% if allow_shelter %} disabled  {% endif %}/> 
                             <input type="file" id="uploadfile3" name="person_pic3" style="display: none;" onchange="upload_img3(this);"{% if allow_shelter %} disabled  {% endif %}/> 
                             <!-- Upload Image here -->
@@ -377,9 +386,35 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="uploadShelterPic">Upload Pics</label>
+
+                           <div class="row">
+                                <div class="col-md-12">
+                                    <img class="img-plus mr-1" id="personpic4" name="12" src="{% static 'img/plus.jpg' %}" alt="Snow" onclick="openloader4();">
+                                    <div class="remove-img4" style="display: none;" onclick="rem_img4()">
+                                        <span class="fa fa-times"></span>
+                                    </div>
+                                    <img class="img-plus mr-1" id="personpic5" src="{% static 'img/plus.jpg' %}" alt="Forest"  onclick="openloader5();">
+                                    <div class="remove-img5" style="display: none;" onclick="rem_img5()">
+                                        <span class="fa fa-times"></span>
+                                    </div>
+                                    <img class="img-plus mr-1" id="personpic6" src="{% static 'img/plus.jpg' %}" alt="Mountains" onclick="openloader6();">
+                                    <div class="remove-img6" style="display: none;" onclick="rem_img6()">
+                                        <span class="fa fa-times"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="file" id="uploadfile4" name="person_pic4" style="display: none;" onchange="upload_img4(this);"/>
+                            <input type="file" id="uploadfile5" name="person_pic5" style="display: none;" onchange="upload_img5(this);"/> 
+                            <input type="file" id="uploadfile6" name="person_pic6" style="display: none;" onchange="upload_img6(this);"/> 
+                            <!-- Upload Image here -->
+                        </div>
+
 						{% endif %}
-                        <input  type="checkbox" name="acc_pol" id="acc_pol" required />                        
+                        <input  type="checkbox" name="acc_pol" id="acc_pol" required />
                         <label for="submit">Accept policies</label>                        
+                        <a href="#" data-toggle="modal" data-target="#policy-popup">policy here</a>                        
                         {% if allow_shelter %}
                         <button type="submit" class="btn btn-primary btn-round btn-block mt-4 btn-lg font-weight-bold">Update</button>
                         {% else %}
@@ -393,6 +428,23 @@
             {% endif %}
         </form>
     </section>
+    <!-- Modal Sponsor -->
+    <div class="modal fade" id="policy-popup" tabindex="-1" role="dialog" aria-labelledby="policyDetail" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-center text-primary w-100 font-weight-bold" id="policyDetail">Policy Document</h5>
+                    <button type="button" class="close text-primary" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body px-5 mx-5">
+                    <p class="text-center text-default"> What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </p>
+
+                </div>
+            </div>
+        </div>
+    </div>    
 <div id="loader"></div>
 
 
@@ -432,6 +484,24 @@ $(document).ready(function(){
         $('#contact_2').val('{{contact.contact_number2}}')
         $('select[name="contact_area"]').val('{{contact.area}}')
 
+        person_pic4 = '{{contact.person_pic4}}'
+        person_pic5 = '{{contact.person_pic5}}'
+        person_pic6 = '{{contact.person_pic6}}'
+
+        if (person_pic4 != 'None'){
+             $(".remove-img4").show()
+             $('#personpic4').attr('src','{{contact.person_pic4}}')
+        }
+
+        if (person_pic5 != 'None'){
+             $(".remove-img5").show()
+             $('#personpic5').attr('src','{{contact.person_pic5}}')
+        }
+        if (person_pic6 != 'None'){
+             $(".remove-img6").show()
+             $('#personpic6').attr('src','{{contact.person_pic6}}')
+        }        
+
         status = "{{contact.status}}"
         
         if (status == 'rescued'){
@@ -446,7 +516,7 @@ $(document).ready(function(){
     //$('#personpic1').attr('src','{{contact.lost_one.person_pic1}}')
     person_pic1 = '{{contact.lost_one.person_pic1}}'
     person_pic2 = '{{contact.lost_one.person_pic2}}'
-    person_pic3 = '{{contact.lost_one.person_pic2}}'
+    person_pic3 = '{{contact.lost_one.person_pic3}}'
 
     if (person_pic1 != 'None'){
          $('#personpic1').attr('src','{{contact.lost_one.person_pic1}}')
@@ -471,10 +541,22 @@ $(document).ready(function(){
     function openloader3() {
         $("#uploadfile3").click();
     }
-    
+    function rem_img1(){
+        $('#personpic1').attr("src","{% static 'img/plus.jpg' %}")
+        $(".remove-img1").hide()
+    }
+    function rem_img2(){
+        $('#personpic2').attr("src","{% static 'img/plus.jpg' %}")
+        $(".remove-img2").hide()
+    }
+    function rem_img3(){
+        $('#personpic3').attr("src","{% static 'img/plus.jpg' %}")
+        $(".remove-img3").hide()
+    }    
     
     function upload_img1(input) {
         if (input.files && input.files[0]) {
+            $(".remove-img1").show()
             var reader = new FileReader();
 
             reader.onload = function (e) {
@@ -488,6 +570,7 @@ $(document).ready(function(){
     function upload_img2(input) {
         
         if (input.files && input.files[0]) {
+            $(".remove-img2").show()
             var reader = new FileReader();
 
             reader.onload = function (e) {
@@ -500,6 +583,7 @@ $(document).ready(function(){
 
     function upload_img3(input) {
         if (input.files && input.files[0]) {
+            $(".remove-img3").show()
             var reader = new FileReader();
 
             reader.onload = function (e) {
@@ -509,6 +593,68 @@ $(document).ready(function(){
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    function openloader4() {
+        $("#uploadfile4").click();
+    }
+    function openloader5() {
+        $("#uploadfile5").click();
+    }
+    function openloader6() {
+        $("#uploadfile6").click();
+    }
+    function rem_img4(){
+        $('#personpic4').attr("src","{% static 'img/plus.jpg' %}")
+        $(".remove-img4").hide()
+    }
+    function rem_img5(){
+        $('#personpic5').attr("src","{% static 'img/plus.jpg' %}")
+        $(".remove-img5").hide()
+    }
+    function rem_img6(){
+        $('#personpic6').attr("src","{% static 'img/plus.jpg' %}")
+        $(".remove-img6").hide()
+    }    
+    
+    function upload_img4(input) {
+        if (input.files && input.files[0]) {
+            $(".remove-img4").show()
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#personpic4').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    function upload_img5(input) {
+        
+        if (input.files && input.files[0]) {
+            $(".remove-img5").show()
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#personpic5').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function upload_img6(input) {
+        if (input.files && input.files[0]) {
+            $(".remove-img6").show()
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#personpic6').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }    
 
 $(document).ready(function(){
     $('#male').click(function(){

@@ -1002,10 +1002,14 @@
 			}
 			{% if created %}
 			$(document).ready(function(){
-					debugger;
 					$.notify("Your given details have been registered", "success");
 				});
 			{% endif %}
+			{% if exist %}
+			$(document).ready(function(){
+					$.notify("Record already exists", "error");
+				});
+			{% endif %}			
 			{% if contacts %}		
 			{% else  %}
 			$(document).ready(function(){
