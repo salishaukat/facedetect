@@ -4742,7 +4742,7 @@ Created using IcoMoon - icomoon.io
 .bootstrap-select .dropdown-menu.inner li a {
   font-size: 0.95em;
   padding-top: .6rem;
-  color: #888888 !important;
+  color: #888888 ;
   padding-bottom: .6rem;
   margin-top: 5px;
   -webkit-transition: all 150ms linear;
@@ -6499,17 +6499,7 @@ img {
     transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
   }
   .sidebar-collapse .navbar-collapse:before {
-    background: #00778b;
-    /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#00778b 0%, #000 80%);
-    /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#00778b 0%, #000 80%);
-    /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#00778b 0%, #000 80%);
-    /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#00778b 0%, #000 80%);
-    /* Standard syntax (must be last) */
-    opacity: 0.76;
+    background: #ffffff;
     filter: alpha(opacity=76);
     display: block;
     content: "";
@@ -6525,10 +6515,10 @@ img {
     margin-top: 0.3125rem;
   }
   .sidebar-collapse .navbar-collapse .navbar-nav:not(.navbar-logo) .nav-link:not(.btn) {
-    color: #FFFFFF !important;
+    color: #888888 !important;
   }
   .sidebar-collapse .navbar-collapse .dropdown-menu .dropdown-item {
-    color: #FFFFFF;
+    color: #888888;
   }
   .sidebar-collapse.menu-on-left .navbar-translate {
     flex-direction: row-reverse;
