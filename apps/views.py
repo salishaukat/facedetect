@@ -340,6 +340,35 @@ def lostone(request, lost_one_id=None):
         if lost_one_id:
             lost_one_object = LostOne.objects.get(id=lost_one_id)
             shelter = Shelter.objects.filter(lost_one=lost_one_id).first()
+            print("=================================")
+            print(path)
+            try:
+                person_pic4 = request.FILES['person_pic4']
+                person_pic4 = fs.save(person_pic4.name, person_pic4)
+                person_pic4 = fs.url(person_pic4)
+                person_pic4 = ntpath.basename(person_pic4)
+                person_pic4 = path + '/' + person_pic4
+            except:
+                person_pic4 = None
+
+            try:
+                person_pic5 = request.FILES['person_pic5']
+                person_pic5 = fs.save(person_pic5.name, person_pic5)
+                person_pic5 = fs.url(person_pic5)
+                person_pic5 = ntpath.basename(person_pic5)
+                person_pic5 = path + '/' + person_pic5
+            except:
+                person_pic5 = None
+
+            try:
+                person_pic6 = request.FILES['person_pic6']
+                person_pic6 = fs.save(person_pic6.name, person_pic6)
+                person_pic6 = fs.url(person_pic6)
+                person_pic6 = ntpath.basename(person_pic6)
+                person_pic6 = path + '/' + person_pic6
+            except:
+                person_pic6 = None
+
             if shelter:
                 shelter.shelter = request.POST.get('name')
                 shelter.area = request.POST.get('contact_area')
@@ -349,19 +378,21 @@ def lostone(request, lost_one_id=None):
                 shelter.note = request.POST.get('note')
                 shelter.status = shelter_status
                 lost_one_object.status = shelter_status
-                if person_pic1:
-                    print(person_pic1)
-                    lost_one_object.person_pic1 = person_pic1
+                if person_pic4:
+                    shelter.person_pic4 = person_pic4
+                if person_pic5:
+                    shelter.person_pic5 = person_pic5
+                if person_pic6:
+                    shelter.person_pic6 = person_pic6
                 shelter.save()
                 lost_one_object.save()
                 shelter_obj = Shelter.objects.filter(lost_one=lost_one_id)
 
             else:
                 shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
-                                                 contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
-                if person_pic1:
-                    print(person_pic1)
-                    lost_one_object.person_pic1 = person_pic1
+                                                 contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area,
+                                                 person_pic4=person_pic4,person_pic5=person_pic5,person_pic6=person_pic6)
+
                 lost_one_object.status = shelter_status
                 lost_one_object.save()
 
@@ -371,23 +402,33 @@ def lostone(request, lost_one_id=None):
             return render(request, 'index.html', {"contacts":shelter_obj, "user":request.session["username"]})
             #return redirect('get_all')
         else:
-            lost_one_object = LostOne.objects.create(uid=uid, gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
-                                                     person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
-            fr.create_collection('collection', 'collection.npz', return_features=False)
-            
-            if request.session['username'] is None:
-                contact = Contact.objects.create(name=name, contact_number1=contact_number1,
-                                                 contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
-                contact_obj = Contact.objects.filter(lost_one__name__contains=first_name+' '+last_name)
-                print(contact_obj)
-                return render(request, 'index.html', {"contacts":contact_obj, "user":request.session["username"], "created":"success"})
+            lost_one_exist = LostOne.objects.filter(first_name=first_name,last_name=last_name,contact_number=contact_number).first()
+            if lost_one_exist:
+                shelter_exist = Shelter.objects.filter(lost_one=lost_one_exist.id)
+                if shelter_exist:
+                    return render(request, 'index.html', {"contacts":shelter_exist, "user":request.session["username"], "exist":"success"})
+                else:
+                    contact_exist = Contact.objects.filter(lost_one=lost_one_exist.id)
+                    return render(request, 'index.html', {"contacts":contact_exist, "user":request.session["username"], "exist":"success"})
 
             else:
-                shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
+                lost_one_object = LostOne.objects.create(uid=uid, gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
+                                                     person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
+                fr.create_collection('collection', 'collection.npz', return_features=False)
+            
+                if request.session['username'] is None:
+                    contact = Contact.objects.create(name=name, contact_number1=contact_number1,
                                                      contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
-                shelter_obj = Shelter.objects.filter(lost_one__name__contains=first_name+' '+last_name)
-                print(shelter_obj)
-                return render(request, 'index.html', {"contacts":shelter_obj, "user":request.session["username"], "created":"success"})                
+                    contact_obj = Contact.objects.filter(lost_one__name__contains=first_name+' '+last_name)
+                    print(contact_obj)
+                    return render(request, 'index.html', {"contacts":contact_obj, "user":request.session["username"], "created":"success"})
+
+                else:
+                    shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
+                                                         contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
+                    shelter_obj = Shelter.objects.filter(lost_one__name__contains=first_name+' '+last_name)
+                    print(shelter_obj)
+                    return render(request, 'index.html', {"contacts":shelter_obj, "user":request.session["username"], "created":"success"})                
 
             #return redirect('get_all')
             

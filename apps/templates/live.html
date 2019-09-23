@@ -185,16 +185,15 @@ function detectmob() {
 $(document).ready(function() {
   var start = new Date();
   console.log("--------------------------------",start)
-  setInterval(function() {
+  var pic_interval = setInterval(function() {
             var end = new Date();
             $('#upload').trigger('click');
             new_time = (end - start)/1000
             console.log(parseInt(new_time))
             if (parseInt(new_time) >= 30)
             {
-              console.log("================================")
+              clearInterval(pic_interval);
               window.location.href = "{% url 'search' %}"
-
             }
         }, 2000);
 });

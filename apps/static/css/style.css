@@ -15,6 +15,100 @@ h6 {
 	color: #767588;
 }
 
+.remove-img1{
+	position: absolute;
+    top: 14%;
+    left: 19%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 10px;
+    padding: 3px 7px;
+    border: none;
+    cursor: pointer;
+    border-radius: 13px;
+    text-align: center;
+}
+
+.remove-img2{
+	position: absolute;
+    top: 14%;
+    left: 39%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 10px;
+    padding: 3px 7px;
+    border: none;
+    cursor: pointer;
+    border-radius: 13px;
+    text-align: center;
+}
+
+.remove-img3{
+	position: absolute;
+    top: 14%;
+    left: 59%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 10px;
+    padding: 3px 7px;
+    border: none;
+    cursor: pointer;
+    border-radius: 13px;
+    text-align: center;
+}
+.remove-img4{
+	position: absolute;
+    top: 14%;
+    left: 19%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 10px;
+    padding: 3px 7px;
+    border: none;
+    cursor: pointer;
+    border-radius: 13px;
+    text-align: center;
+}
+
+.remove-img5{
+	position: absolute;
+    top: 14%;
+    left: 39%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 10px;
+    padding: 3px 7px;
+    border: none;
+    cursor: pointer;
+    border-radius: 13px;
+    text-align: center;
+}
+
+.remove-img6{
+	position: absolute;
+    top: 14%;
+    left: 59%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 10px;
+    padding: 3px 7px;
+    border: none;
+    cursor: pointer;
+    border-radius: 13px;
+    text-align: center;
+}
 /*line heading*/
 .h4 {
 	display: flex;
