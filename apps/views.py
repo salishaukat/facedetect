@@ -218,7 +218,9 @@ def index(request):
         request.session['username'] = None
         lostones = LostOne.objects.order_by("-id")[:10]
         sponsors = Sponsor.objects.filter(active=True)
-        return render(request, 'home.html', {"lostones":lostones, "sponsors":sponsors, "user":None})
+        lost_one_count = LostOne.objects.all().count()
+        lost_one_status_count = LostOne.objects.filter(status__icontains='rescued').count()
+        return render(request, 'home.html', {"lostones_count":lost_one_count,"lostones_status_count":lost_one_status_count,"lostones":lostones, "sponsors":sponsors, "user":None})
     if request.session["username"]:
         if "reporter" in request.session["role"]:
             return redirect('reports')
