@@ -720,7 +720,7 @@
 										<!-- <td scope="row">1</td> -->
 										<td class="align-middle"> {{ forloop.counter }} </td>
 										<td class="align-middle"><img class="rounded-circle user-img mt-1" src="{{contact.lost_one.person_pic1}}"/>
-											<strong>{{contact.lost_one.first_name}} {{contact.lost_one.last_name}}</strong> <div>Id: {{contact.lost_one.uid}}</div></td>
+											<strong>{{contact.lost_one.first_name}} {{contact.lost_one.last_name}}</strong> <div>Id: {{contact.lost_one.id}}</div></td>
 										<td class="align-middle">{{contact.lost_one.age}}</td>
 										<td class="align-middle">{{contact.lost_one.area}}</td>
 										<td class="align-middle">{{contact.lost_one.country}}</td>
@@ -1029,7 +1029,7 @@
 						spinner.hide(); 
   					}  , 2500 );
 				$('#h4name').text(data.lostone.first_name + ' ' + data.lostone.last_name);
-				$('#h4id').text(data.lostone.uid);
+				$('#h4id').text(data.lostone.id);
 				$('#h4_lost_one_contact_no').text(data.lostone.contact_number)
 				$('#h4age').text(data.lostone.age)
 				if (data.lostone.person_pic1){
