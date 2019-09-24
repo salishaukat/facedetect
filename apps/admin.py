@@ -10,12 +10,12 @@ admin.site.register(UserProfile, UserProfileAdmin)
 
 # Register your models here.
 class LostOneAdmin(admin.ModelAdmin):
-      list_display = ['id','uid','first_name','last_name','email_address','contact_number','age','status']
+      list_display = ['id','first_name','last_name','email_address','contact_number','age','status']
 
 admin.site.register(LostOne, LostOneAdmin)
 
 class SponsorAdmin(admin.ModelAdmin):
-	list_display = ['id','sid','name','email_address','contact_number','active']
+	list_display = ['id','name','email_address','contact_number','active']
 
 admin.site.register(Sponsor, SponsorAdmin)
 
@@ -25,6 +25,6 @@ class ContactAdmin(admin.ModelAdmin):
 admin.site.register(Contact, ContactAdmin)
 
 class ShelterAdmin(admin.ModelAdmin):
-	list_display = ['id','shelter_id', 'shelter','address','contact_number1','lost_one']
+	list_display = ['id', 'shelter','address','contact_number1','lost_one']
 
 admin.site.register(Shelter, ShelterAdmin)

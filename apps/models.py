@@ -14,7 +14,7 @@ class UserProfile(models.Model):
     )
 
 class LostOne(models.Model):
-    uid = models.IntegerField(null=True, blank=True)
+    #uid = models.IntegerField(null=True, blank=True)
     first_name = models.CharField(null=False, blank=False, max_length=100)
     last_name = models.CharField(null=True, blank=True, max_length=100)
     email_address = models.CharField(null=True, blank=True, max_length=100)
@@ -42,7 +42,7 @@ class Contact(models.Model):
     lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
 
 class Shelter(models.Model):
-    shelter_id = models.IntegerField(null=True, blank=True)
+    #shelter_id = models.IntegerField(null=True, blank=True)
     shelter = models.CharField(null=False, blank=False, max_length=100)
     contact_number1 = models.CharField(null=True, blank=True, max_length=100)
     contact_number2 = models.CharField(null=True, blank=True, max_length=100)
@@ -57,7 +57,7 @@ class Shelter(models.Model):
     person_pic6 = models.CharField(null=True, blank=True, max_length=1000)
 
 class Sponsor(models.Model):
-    sid = models.IntegerField(null=True, blank=True)
+    #sid = models.IntegerField(null=True, blank=True)
     name = models.CharField(null=False, blank=False, max_length=100)
     company_name = models.CharField(null=False, blank=False, max_length=100)
     email_address = models.CharField(null=False, blank=False, max_length=100)

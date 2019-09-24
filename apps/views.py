@@ -25,7 +25,7 @@ fr = FaceRecognizer(ctx='cpu',
                     params_path='./model-tfv2/model.params',
                     license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
                     )
-fr.create_collection('collection', 'collection.npz', return_features=False)
+#fr.create_collection('collection', 'collection.npz', return_features=False)
 
 def random_with_N_digits(n):
     range_start = 10**(n-1)
@@ -233,7 +233,7 @@ def sponsor(request):
     if request.method == 'POST' and request.FILES['company_logo']:
         print("in sponsor =============================")
         try:
-            sid = random_with_N_digits(6)
+            # sid = random_with_N_digits(6)
             company_logo = request.FILES['company_logo']
             name = request.POST.get('name')
             company_name = request.POST.get('company_name')
@@ -245,7 +245,7 @@ def sponsor(request):
             company_logo = ntpath.basename(company_logo)
             company_logo = '/collection/company/' + company_logo
 
-            sponsor_object = Sponsor.objects.create(sid=sid, name=name, company_name=company_name, email_address=email_address, contact_number=contact_number, company_logo=company_logo)
+            sponsor_object = Sponsor.objects.create(name=name, company_name=company_name, email_address=email_address, contact_number=contact_number, company_logo=company_logo)
                         
         except Exception as e:
             print (e)
@@ -275,8 +275,8 @@ def lostone(request, lost_one_id=None):
 
     if request.method == 'POST':
 
-        uid = random_with_N_digits(6)
-        shelter_id = random_with_N_digits(6)
+        #uid = random_with_N_digits(6)
+        #shelter_id = random_with_N_digits(6)
         lost_one_id = request.POST.get('lost_one_id')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -300,8 +300,8 @@ def lostone(request, lost_one_id=None):
         elif died:
             shelter_status = 'died'
 
-        path = '/collection/'+first_name+last_name
-        fs = FileSystemStorage(location='collection/'+first_name+last_name)
+        path = '/collection/'+first_name+last_name+contact_number
+        fs = FileSystemStorage(location='collection/'+first_name+last_name+contact_number)
 
 
         try:
@@ -389,7 +389,7 @@ def lostone(request, lost_one_id=None):
                 shelter_obj = Shelter.objects.filter(lost_one=lost_one_id)
 
             else:
-                shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
+                shelter = Shelter.objects.create( status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                  contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area,
                                                  person_pic4=person_pic4,person_pic5=person_pic5,person_pic6=person_pic6)
 
@@ -412,7 +412,7 @@ def lostone(request, lost_one_id=None):
                     return render(request, 'index.html', {"contacts":contact_exist, "user":request.session["username"], "exist":"success"})
 
             else:
-                lost_one_object = LostOne.objects.create(uid=uid, gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
+                lost_one_object = LostOne.objects.create( gender=gender, name=first_name+ ' ' +last_name, folder_name=first_name+last_name+contact_number,first_name=first_name, last_name=last_name, email_address=email_address, contact_number=contact_number,  person_pic1=person_pic1,
                                                      person_pic2=person_pic2, person_pic3=person_pic3, age=age, area=area, country=country, status=status)
                 fr.create_collection('collection', 'collection.npz', return_features=False)
             
@@ -424,7 +424,7 @@ def lostone(request, lost_one_id=None):
                     return render(request, 'index.html', {"contacts":contact_obj, "user":request.session["username"], "created":"success"})
 
                 else:
-                    shelter = Shelter.objects.create(shelter_id=shelter_id, status=shelter_status, shelter=name, contact_number1=contact_number1,
+                    shelter = Shelter.objects.create( status=shelter_status, shelter=name, contact_number1=contact_number1,
                                                          contact_number2=contact_number2, address=address, note=note, lost_one=lost_one_object, area=contact_area)
                     shelter_obj = Shelter.objects.filter(lost_one__name__contains=first_name+' '+last_name)
                     print(shelter_obj)
