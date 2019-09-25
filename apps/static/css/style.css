@@ -460,10 +460,45 @@ a.text-primary:focus, a.text-primary:hover {
 /*.contentarea {
 	min-height: calc(100vh - 146px)
 }*/
-.contentarea .camera{
-	width: 320px;
-	margin: 0 auto;
-	padding: 100px 0;
+.contentarea .camera-container{
+	border: 1px solid #ccc; 
+	padding: 20px 20px 10px 20px;
+	border-radius: 15px; 
+	max-width: 360px;
+	 margin: 0 auto;
+}
+
+.icon-cam {
+  display: inline-block;
+  min-width: 40px;
+  height: 40px;
+  background-size: cover;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.flip-cam {
+  background-image: url(../img/flip.svg);
+}
+
+.flip-cam.active, .flip-cam:hover {
+  background-image: url(../img/flip-active.svg);
+}
+
+.male-user {
+  background-image: url(../img/male-user.svg);
+}
+
+.male-user.active, .male-user:hover {
+  background-image: url(../img/male-user-active.svg);
+}
+
+.cancel-cross {
+  background-image: url(../img/cancel.svg);
+}
+
+.cancel-cross.active, .cancel-cross:hover {
+  background-image: url(../img/cancel-active.svg);
 }
 
 #personpic1{
