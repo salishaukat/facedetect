@@ -282,6 +282,10 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 	display: none !important;
 }
 /*--------------*/
+
+#counter img{
+	width: 120px;
+}
 @media screen and (max-width: 991px) {
 	.sidebar-collapse .navbar-collapse .navbar-nav:not(.navbar-logo) .nav-link:not(.btn) {
 		text-align: left ;
@@ -530,5 +534,9 @@ a.text-primary:focus, a.text-primary:hover {
 		color: transparent;
 		left: -10px;
 		border-right: 1px solid #cacbd5;
+	}
+
+	#counter img{
+		width: 165px;
 	}
 }
