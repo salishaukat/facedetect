@@ -784,13 +784,13 @@
 				<div class="container"> 
 
 					<div class="row"> 
-						<div class="col-sm-12 bg-white col-md-4 ">
-							<img class="modal-img rounded" id="h4images" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
+						<div class="col-sm-12 bg-white col-md-4 text-center">
+							<img class="modal-img rounded mb-2" id="h4images" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
 							<div class="row">
-								<div class="col">
+								<div class="col pr-1 pl-1">
 									<img class="img-show" id="h4images1" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
 								</div>
-								<div class="col">
+								<div class="col pr-1 pl-1">
 									<img class="img-show" id="h4images2" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image" >
 								</div>
 							</div>
@@ -887,32 +887,54 @@
 							<h4 class="text-primary font-weight-bold mt-0"> Rescuer / Shelter Contact</h4>
 						</div>
 					</div>
-					<div class="row contact_info"> 
-						<div class="col-md-3">
-							<h5 class="font-weight-bold font-xs mb-1" > Name </h5>
-							<p class="font-sm" id="h4shelter_name"></p>
+					<div class="row contact_info">
+						<div class="col-sm-12 bg-white col-md-4 text-center">
+							<img class="modal-img rounded mb-2" id="h4images" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
+							<div class="row">
+								<div class="col pr-1 pl-1">
+									<img class="img-show" id="h4images1" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
+								</div>
+								<div class="col pr-1 pl-1">
+									<img class="img-show" id="h4images2" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image" >
+								</div>
+							</div>
+							{% if user and 'AnonymousUser' not in user %}
+							<a href="#" id="lost_one_update" class="btn btn-primary btn-round btn-block mt-4"> UPDATE DATA </a>
+							{% endif %}
+
 						</div>
-						<div class="col-md-3">
-							<h5 class="font-weight-bold font-xs mb-1" > Contact Person </h5>
-							<p class="font-sm" id="h4shelter_number"></p>
-						</div>
-						<div class="col-md-6">
-							<h5 class="font-weight-bold font-xs mb-1" > Area </h5>
-							<p class="font-sm" id="h4shelter_area"></p>
-						</div>
-					</div>
-					<div class="row contact_info"> 
-						<div class="col-md-12">
-							<h5 class="font-weight-bold font-xs mb-1" > Address </h5>
-							<p class="font-sm" id="h4shelter_address"></p>
-						</div>
-					</div>
-					<div class="row shelter_info"> 
 						<div class="col">
-							<h5 class="font-weight-bold font-xs mb-1" > Shelter's Note </h5>
-							<p class="font-sm mb-0" id="h4shelter_note"></p>
+							<div class="row">
+								<div class="col-md-4">
+									<h5 class="font-weight-bold font-xs mb-1" > Name </h5>
+									<p class="font-sm" id="h4shelter_name"></p>
+								</div>
+								<div class="col-md-4">
+									<h5 class="font-weight-bold font-xs mb-1" > Contact Person </h5>
+									<p class="font-sm" id="h4shelter_number"></p>
+								</div>
+								<div class="col-md-4">
+									<h5 class="font-weight-bold font-xs mb-1" > Area </h5>
+									<p class="font-sm" id="h4shelter_area"></p>
+								</div>
+							</div>
+
+							<div class="row contact_info"> 
+								<div class="col-md-12">
+									<h5 class="font-weight-bold font-xs mb-1" > Address </h5>
+									<p class="font-sm" id="h4shelter_address"></p>
+								</div>
+							</div>
+
+							<div class="row shelter_info"> 
+								<div class="col">
+									<h5 class="font-weight-bold font-xs mb-1" > Shelter's Note </h5>
+									<p class="font-sm mb-0" id="h4shelter_note"></p>
+								</div>
+							</div>
 						</div>
-					</div>					
+					</div>
+										
 					<hr/>
 					<div class="row"> 
 						<div class="row"> 
