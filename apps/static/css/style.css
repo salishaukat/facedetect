@@ -238,7 +238,7 @@ h6 {
 .img-show{
 	height: auto;
 	max-height: 100px;
-	width: 100%;
+	width: auto;;
 	border-radius: 6px;
 }
 
@@ -460,6 +460,10 @@ a.text-primary:focus, a.text-primary:hover {
 /*.contentarea {
 	min-height: calc(100vh - 146px)
 }*/
+
+.modal-content .modal-header button{
+	z-index: 9;
+}
 .contentarea .camera-container{
 	border: 1px solid #ccc; 
 	padding: 20px 20px 10px 20px;
