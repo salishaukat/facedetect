@@ -31,6 +31,44 @@ class LostOne(models.Model):
     folder_name = models.CharField(null=True, blank=True, max_length=100)
 
 
+class ShelterHome(models.Model):
+    AREA_CHOICES = (
+    ("AB - Bahama Coral Island", "AB - Bahama Coral Island"),
+    ("AB - Bahama Palm Shores", "AB - Bahama Palm Shores"),
+    ("AB - Blackwood Village", "AB - Blackwood Village"),
+    ("AB - Central Pines", "AB - Central Pines"),
+    ("AB - Cooper's Town", "AB - Cooper's Town"),
+    ("AB - Crossing Rocks", "AB - Crossing Rocks"),
+    ("AB - Dundas Town", "AB - Dundas Town"),
+    ("North Andros", "North Andros"),
+    ("Great Inagua", "Great Inagua"),
+    ("South Andros", "South Andros"),
+    ("Great Abac", "Great Abaco"),
+    ("Grand Bahama", "Grand Bahama"),
+    ("Long Island, Bahamas", "Long Island, Bahamas"),
+    ("Acklins", "Acklins"),
+    ("Eleuthera", "Eleuthera"),
+    ("Cat Island", "Cat Island"),
+    ("Mayaguana", "Mayaguana"),
+    ("Crooked Island, Bahamas", "Crooked Island, Bahamas"),
+    ("New Providence", "New Providence"),
+    ("Exuma", "Exuma"),
+    ("San Salvador Island", "San Salvador Island"),
+    ("Little Inagua", "Little Inagua"),
+    ("Rum Cay", "Rum Cay"),
+    ("Little Abaco", "Little Abaco"),
+    ("Samana Cay", "Samana Cay"),
+    ("Ragged Island", "Ragged Island"),
+    ("Berry Islands", "Berry Islands"),
+    ("Bimini", "Bimini"),
+    )    
+    name = models.CharField(null=False, blank=False, max_length=100)
+    contact_number1 = models.CharField(null=True, blank=True, max_length=100)
+    contact_number2 = models.CharField(null=True, blank=True, max_length=100)
+    address = models.TextField(null=True, blank=True, max_length=300)
+    area = models.CharField(null=True, blank=True, max_length=200, choices=AREA_CHOICES, default=1)
+    
+
 class Contact(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
     contact_number1 = models.CharField(null=True, blank=True, max_length=100)

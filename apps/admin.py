@@ -28,3 +28,8 @@ class ShelterAdmin(admin.ModelAdmin):
 	list_display = ['id', 'shelter','address','contact_number1','lost_one']
 
 admin.site.register(Shelter, ShelterAdmin)
+
+class ShelterHomeAdmin(admin.ModelAdmin):
+	list_display = ['id', 'name','address','area','contact_number1','contact_number2']
+
+admin.site.register(ShelterHome, ShelterHomeAdmin)
