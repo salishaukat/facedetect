@@ -2,24 +2,37 @@
 
 {% block content %}
 {% load static %}
-<div class="contentarea">
-  <div class="camera">
-    <video id="video" autoplay>Video stream not available.</video>
-    <button disabled id="flip-btn">
-      Flip Camera
-    </button>
-    <button id="upload" style="display:none">Take photo</button>
+<div class="contentarea mt-5 mb-4 pt-5 pb-5">
+  <div class="camera-container"> 
+    <div class="camera" >
+      <video id="video" autoplay>Video stream not available.</video>
+   <!--    <button disabled id="flip-btn">
+        Flip Camera
+      </button> -->
+      <button id="upload" style="display:none">Take photo</button>
+    </div>
+    <div class="row text-center">
+      <div class="col">
+        <div id="flip-btn" class="icon-cam flip-cam"></div>
+      </div>
+      <div class="col">
+       <div class="icon-cam male-user"></div>
+     </div>
+     <div class="col">
+      <div class="icon-cam cancel-cross"></div>
+    </div>
   </div>
-  <div style="display:none">
+</div> 
+<div style="display:none">
   <canvas id="canvas" class="hide">
   </canvas>
   <div class="output" class="hide">
     <img id="photo" alt="The screen capture will appear in this box.">
   </div>
-   </div>
+</div>
 </div>
 <script>
-(function() {
+  (function() {
   // The width and height of the captured photo. We will set the
   // width to the value defined here, but the height will be
   // calculated based on the aspect ratio of the input stream.
@@ -94,30 +107,30 @@
     flipBtn.disabled = false;
   }
 
-flipBtn.addEventListener('click', function(){
-  if( video.srcObject == null ) return
+  flipBtn.addEventListener('click', function(){
+    if( video.srcObject == null ) return
   // we need to flip, stop everything
-  video.srcObject.getTracks().forEach(t => {
-    t.stop();
-  });
+video.srcObject.getTracks().forEach(t => {
+  t.stop();
+});
   // toggle / flip
   shouldFaceUser = !shouldFaceUser;
   startup();
 })
 
-function detectmob() { 
- if( navigator.userAgent.match(/Android/i)
- || navigator.userAgent.match(/webOS/i)
- || navigator.userAgent.match(/iPhone/i)
- || navigator.userAgent.match(/iPad/i)
- || navigator.userAgent.match(/iPod/i)
- || navigator.userAgent.match(/BlackBerry/i)
- || navigator.userAgent.match(/Windows Phone/i)
- ){
+  function detectmob() { 
+   if( navigator.userAgent.match(/Android/i)
+     || navigator.userAgent.match(/webOS/i)
+     || navigator.userAgent.match(/iPhone/i)
+     || navigator.userAgent.match(/iPad/i)
+     || navigator.userAgent.match(/iPod/i)
+     || navigator.userAgent.match(/BlackBerry/i)
+     || navigator.userAgent.match(/Windows Phone/i)
+     ){
     $('#flipBtn').show();
     //$("p").css("background-color", "yellow");
   }
- else {
+  else {
     flipBtn.style.display = 'none'
   }
 }
@@ -153,23 +166,23 @@ function detectmob() {
       var item_image = data.replace(/^data:image\/(png|jpg);base64,/, "")
       photo.setAttribute('src', data);
       var request = $.ajax({
-          url: "{% url 'get_face' %}",
-          headers: { "X-CSRFToken": token },
-          type: "POST",
-          data: {image : item_image},
-          dataType: "json"
-        });
+        url: "{% url 'get_face' %}",
+        headers: { "X-CSRFToken": token },
+        type: "POST",
+        data: {image : item_image},
+        dataType: "json"
+      });
 
-    request.done(function(data) {
+      request.done(function(data) {
         if (data.contact && data.contact.id > 0){
-            window.location.href = "{% url 'search' %}/"+data.contact.lost_one_id;
+          window.location.href = "{% url 'search' %}/"+data.contact.lost_one_id;
         }
 
-    });
+      });
 
-    request.fail(function(jqXHR, textStatus) {
-      console.log( "Request failed: " + textStatus );
-    });
+      request.fail(function(jqXHR, textStatus) {
+        console.log( "Request failed: " + textStatus );
+      });
 
     } else {
       clearphoto();
@@ -186,16 +199,16 @@ $(document).ready(function() {
   var start = new Date();
   console.log("--------------------------------",start)
   var pic_interval = setInterval(function() {
-            var end = new Date();
-            $('#upload').trigger('click');
-            new_time = (end - start)/1000
-            console.log(parseInt(new_time))
-            if (parseInt(new_time) >= 30)
-            {
-              clearInterval(pic_interval);
-              window.location.href = "{% url 'search' %}"
-            }
-        }, 2000);
+    var end = new Date();
+    $('#upload').trigger('click');
+    new_time = (end - start)/1000
+    console.log(parseInt(new_time))
+    if (parseInt(new_time) >= 30)
+    {
+      clearInterval(pic_interval);
+      window.location.href = "{% url 'search' %}"
+    }
+  }, 2000);
 });
 
 </script>
