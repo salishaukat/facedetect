@@ -16,10 +16,10 @@
         <div id="flip-btn" class="icon-cam flip-cam"></div>
       </div>
       <div class="col">
-       <div class="icon-cam male-user"></div>
+       <div class="icon-cam male-user" onclick="live_session()" title="Start Live search"></div>
      </div>
      <div class="col">
-      <div class="icon-cam cancel-cross"></div>
+      <div class="icon-cam cancel-cross" onclick="stop_session()" title="Stop Live search"></div>
     </div>
   </div>
 </div> 
@@ -198,7 +198,10 @@ video.srcObject.getTracks().forEach(t => {
 $(document).ready(function() {
   var start = new Date();
   console.log("--------------------------------",start)
-  var pic_interval = setInterval(function() {
+
+
+
+/*  var pic_interval = setInterval(function() {
     var end = new Date();
     $('#upload').trigger('click');
     new_time = (end - start)/1000
@@ -208,8 +211,36 @@ $(document).ready(function() {
       clearInterval(pic_interval);
       window.location.href = "{% url 'search' %}"
     }
-  }, 2000);
+  }, 2000);*/
 });
+var pic_interval
+function live_session(){
+  $(".male-user").addClass("active");
+  $(".male-user").attr("style", "pointer-events: none;");
+  $(".cancel-cross").css({ 'pointer-events' : ''});
+  console.log("==========start========")
+  pic_interval = setInterval(function() {
+    var start = new Date();
+    var end = new Date();
+    $('#upload').trigger('click');
+    new_time = (end - start)/1000;
+    console.log(parseInt(new_time));
+/*      if (parseInt(new_time) >= 30)
+    {
+      clearInterval(pic_interval);
+      window.location.href = "{% url 'search' %}"
+    }*/
+  }, 2000);
+}
+
+function stop_session(){
+  console.log("=====stop===========")
+  $(".male-user").removeClass("active");
+  $(".male-user").css({ 'pointer-events' : ''});
+  $(".cancel-cross").attr("style", "pointer-events: none;");
+  clearInterval(pic_interval);
+}
+
 
 </script>
 {% endblock %}
