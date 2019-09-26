@@ -16,10 +16,11 @@
         <div id="flip-btn" class="icon-cam flip-cam"></div>
       </div>
       <div class="col">
-       <div class="icon-cam male-user" onclick="live_session()" title="Start Live search"></div>
+       <div class="icon-cam male-user" id="play" onclick="live_session()" title="Start Live search"></div>
+       <div class="icon-cam male-user active" id="pause" onclick="stop_session()" style="display: none;" title="Stop Live search"></div>
      </div>
      <div class="col">
-      <div class="icon-cam cancel-cross" onclick="stop_session()" title="Stop Live search"></div>
+      <div class="icon-cam cancel-cross" onclick="close_session()" title="Close search"></div>
     </div>
   </div>
 </div> 
@@ -215,9 +216,11 @@ $(document).ready(function() {
 });
 var pic_interval
 function live_session(){
-  $(".male-user").addClass("active");
+/*  $(".male-user").addClass("active");
   $(".male-user").attr("style", "pointer-events: none;");
-  $(".cancel-cross").css({ 'pointer-events' : ''});
+  $(".cancel-cross").css({ 'pointer-events' : ''});*/
+  $("#play").hide()
+  $("#pause").show()
   console.log("==========start========")
   pic_interval = setInterval(function() {
     var start = new Date();
@@ -225,22 +228,24 @@ function live_session(){
     $('#upload').trigger('click');
     new_time = (end - start)/1000;
     console.log(parseInt(new_time));
-/*      if (parseInt(new_time) >= 30)
-    {
-      clearInterval(pic_interval);
-      window.location.href = "{% url 'search' %}"
-    }*/
+
   }, 2000);
 }
 
 function stop_session(){
   console.log("=====stop===========")
-  $(".male-user").removeClass("active");
+/*  $(".male-user").removeClass("active");
   $(".male-user").css({ 'pointer-events' : ''});
-  $(".cancel-cross").attr("style", "pointer-events: none;");
+  $(".cancel-cross").attr("style", "pointer-events: none;");*/
+  $("#pause").hide()
+  $("#play").show()
   clearInterval(pic_interval);
 }
 
+function close_session(){
+  console.log("=====close===========");
+  window.location.href = "/";
+}
 
 </script>
 {% endblock %}
