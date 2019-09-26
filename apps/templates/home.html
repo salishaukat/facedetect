@@ -106,22 +106,22 @@
 				<div class="row">
 					<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
 						<div class="input-group">
-							
 							<input type="text" name="search_name" class="form-control bg-white" placeholder="Search by Name">
 							<div class="input-group-append">
-								<div class="input-group-text">
+								<!-- Hide on Mobile device -->
+								<div class="input-group-text d-none d-sm-block">
 									<a onclick="submit_simple_search()"><i class="fa fa-search" ></i></a>
 								</div>
-
+								<!-- Hide on Mobile device -->
 								<button type="button" class="btn btn-neutral btn-lg advance-search d-none d-sm-block" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
-									
 								</button>
-
+								<!-- Show on Mobile device -->
+								<button type="button" class="btn btn-primary btn-lg advance-search d-block d-sm-none pr-4 pl-3" aria-haspopup="true" aria-expanded="false" onclick="submit_simple_search()"> <i class="fa fa-search" ></i>
+								</button>
 							</div>
 						</div>
-
-						<button type="button" class="btn btn-neutral btn-lg advance-search mx-auto btn-round d-block d-sm-none mt-4 mb-4" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
-
+						<!-- Show on Mobile device -->
+						<button type="button" class="btn btn-warning mx-auto btn-round d-block d-sm-none mt-4 mb-4" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
 						</button>
 
 						<ul class="list-inline toggle-items pt-1">
@@ -147,13 +147,21 @@
 							<input id="personpic1"  class="form-control bg-white" placeholder="Upload Picture here" name="print_btn" onclick="openloader1()"/>
                             <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" />
 							<div class="input-group-append">
-								<div class="input-group-text">
+								<div class="input-group-text d-none d-sm-block">
 									<i class="far fa-image" ></i>
 								</div>
-								<button type="button" class="btn btn-neutral btn-lg advance-search" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
-								</button>								
+
+								<button type="button" class="tn btn-neutral btn-lg advance-search d-none d-sm-block" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
+								</button>		
+								<!-- Show on Mobile device -->	
+								<button type="button" class="btn btn-primary btn-lg advance-search d-block d-sm-none pr-4 pl-3" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> <i class="far fa-image" ></i>
+								</button>						
 							</div>
 						</div>
+						<!-- Show on Mobile device -->
+						<button type="button" class="btn btn-warning mx-auto btn-round d-block d-sm-none mt-4 mb-4" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
+						</button>
+
 						<ul class="list-inline toggle-items pt-1">
 							<li class="list-inline-item"> <a class="font-weight-bold" onclick="name_search()"> NAME </a> </li>
 							<span class="px-1"> | </span> 

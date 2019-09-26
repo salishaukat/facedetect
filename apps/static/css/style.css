@@ -173,7 +173,8 @@ h6 {
 	border-left: none;
 	border-top-left-radius: 0 !important;
 	border-bottom-left-radius: 0 !important;
-	border-radius: 30px;
+	border-top-right-radius: 30px !important;
+	border-bottom-right-radius: 30px !important;
 	text-transform: uppercase;
 	font-weight: 600;
 }
