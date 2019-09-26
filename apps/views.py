@@ -438,19 +438,20 @@ def lostone(request, lost_one_id=None):
         return redirect('lostone')
 
     elif lost_one_id:
+        shelter_homes = ShelterHome.objects.all()
         contact = Shelter.objects.filter(lost_one=lost_one_id).first()
         shelter = True
         if contact is None:
             contact = Contact.objects.filter(lost_one=lost_one_id).first()
             shelter = False
-        return render(request, 'lostone.html', {'n' : range(1,100), "user":request.session["username"], 'contact':contact, 'shelter':shelter, 'allow_shelter':True})
+        return render(request, 'lostone.html', {'n' : range(1,100), "user":request.session["username"], 'contact':contact, 'shelter':shelter, 'allow_shelter':True, 'shelter_homes':shelter_homes})
     
    
     
     
 
-
-    return render(request, 'lostone.html', {'n' : range(1,100), "user":request.session["username"]})
+    shelter_homes = ShelterHome.objects.all()
+    return render(request, 'lostone.html', {'n' : range(1,100), "user":request.session["username"], 'shelter_homes':shelter_homes})
 
 def login(request):
 

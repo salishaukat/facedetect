@@ -893,18 +893,16 @@
 					</div>
 					<div class="row contact_info">
 						<div class="col-sm-12 bg-white col-md-4 text-center">
-							<img class="modal-img rounded mb-2" id="h4images" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
+							<img class="modal-img rounded mb-2" id="h4shelterimages" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
 							<div class="row">
 								<div class="col pr-1 pl-1">
-									<img class="img-show" id="h4images1" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
+									<img class="img-show" id="h4shelterimages1" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
 								</div>
 								<div class="col pr-1 pl-1">
-									<img class="img-show" id="h4images2" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image" >
+									<img class="img-show" id="h4shelterimages2" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image" >
 								</div>
 							</div>
-							{% if user and 'AnonymousUser' not in user %}
-							<a href="#" id="lost_one_update" class="btn btn-primary btn-round btn-block mt-4"> UPDATE DATA </a>
-							{% endif %}
+
 
 						</div>
 						<div class="col">
@@ -1095,6 +1093,15 @@
 					$('#h4shelter_note').text(data.shelter.note)
 					$('#h4shelter_number').text(data.shelter.contact_number1+' , '+data.shelter.contact_number2)
 					$('#h4shelter_area').text(data.shelter.area)
+					if (data.shelter.person_pic4){
+						$('#h4shelterimages').attr('src', data.shelter.person_pic4)
+					}
+					if (data.shelter.person_pic5){
+						$('#h4shelterimages1').attr('src', data.shelter.person_pic5)
+					}
+					if (data.shelter.person_pic6){
+						$('#h4shelterimages2').attr('src', data.shelter.person_pic6)
+					}					
 				}
 				else{
 					$('.shelter_info').hide()
