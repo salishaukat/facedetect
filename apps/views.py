@@ -314,7 +314,7 @@ def lostone(request, lost_one_id=None):
 
         try:
             person_pic2 = request.FILES['person_pic2']
-            person_pic2 = fs.save(person_pic2.name, person_pic2)
+            person_pic2 = fs.save(person_pic2.name.replace(" ",""), person_pic2)
             person_pic2 = fs.url(person_pic2)
             person_pic2 = ntpath.basename(person_pic2)
             person_pic2 = path + '/' + person_pic2
@@ -322,7 +322,7 @@ def lostone(request, lost_one_id=None):
             person_pic2 = None
         try:
             person_pic3 = request.FILES['person_pic3']
-            person_pic3 = fs.save(person_pic3.name, person_pic3)
+            person_pic3 = fs.save(person_pic3.name.replace(" ",""), person_pic3)
             person_pic3 = fs.url(person_pic3)
             person_pic3 = ntpath.basename(person_pic3)
             person_pic3 = path + '/' + person_pic3
@@ -337,7 +337,7 @@ def lostone(request, lost_one_id=None):
 
         try:
             person_pic1 = request.FILES['person_pic1']
-            person_pic1 = fs.save(person_pic1.name, person_pic1)
+            person_pic1 = fs.save(person_pic1.name.replace(" ",""), person_pic1)
             person_pic1 = fs.url(person_pic1)
             person_pic1 = ntpath.basename(person_pic1)
             person_pic1 = path + '/' + person_pic1
@@ -352,7 +352,7 @@ def lostone(request, lost_one_id=None):
             print(path)
             try:
                 person_pic4 = request.FILES['person_pic4']
-                person_pic4 = fs.save(person_pic4.name, person_pic4)
+                person_pic4 = fs.save(person_pic4.name.replace(" ",""), person_pic4)
                 person_pic4 = fs.url(person_pic4)
                 person_pic4 = ntpath.basename(person_pic4)
                 person_pic4 = path + '/' + person_pic4
@@ -361,7 +361,7 @@ def lostone(request, lost_one_id=None):
 
             try:
                 person_pic5 = request.FILES['person_pic5']
-                person_pic5 = fs.save(person_pic5.name, person_pic5)
+                person_pic5 = fs.save(person_pic5.name.replace(" ",""), person_pic5)
                 person_pic5 = fs.url(person_pic5)
                 person_pic5 = ntpath.basename(person_pic5)
                 person_pic5 = path + '/' + person_pic5
@@ -370,7 +370,7 @@ def lostone(request, lost_one_id=None):
 
             try:
                 person_pic6 = request.FILES['person_pic6']
-                person_pic6 = fs.save(person_pic6.name, person_pic6)
+                person_pic6 = fs.save(person_pic6.name.replace(" ",""), person_pic6)
                 person_pic6 = fs.url(person_pic6)
                 person_pic6 = ntpath.basename(person_pic6)
                 person_pic6 = path + '/' + person_pic6
