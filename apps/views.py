@@ -137,9 +137,15 @@ def pic_search(request):
             person_pic1 = request.FILES['person_pic1']     
             
             fs = FileSystemStorage(location='search/')
-            person_pic1 = fs.save(person_pic1.name, person_pic1)
+            print(person_pic1.name)
+            person_pic1 = fs.save(person_pic1.name.replace(" ",""), person_pic1)
+            print(person_pic1)
             person_pic1 = fs.url(person_pic1)
+            print(person_pic1)
             person_pic1 = ntpath.basename(person_pic1)
+            print(person_pic1)
+            print("=================")
+            print(person_pic1.replace(" ", ""))
             person_pic1 = 'search' + '/' + person_pic1
 
             # fr = FaceRecognizer(ctx='cpu',
