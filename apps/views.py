@@ -23,7 +23,7 @@ fr = FaceRecognizer(ctx='cpu',
                     fd_model_path='./fd_model',
                     fr_model_path='./model-tfv2/model.trueface',
                     params_path='./model-tfv2/model.params',
-                    license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
+                    license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjp0cnVlLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTEwLTI2IiwidGhyZWF0X2RldGVjdGlvbiI6dHJ1ZSwibWFjaGluZXMiOjEsImFscHIiOnRydWUsIm5hbWUiOiJKb2huIEJyaWRnZXdhdGVyIiwidGtleSI6Im5ldyIsImV4cGlyeV90aW1lX3N0YW1wIjoxNTcyMDQ4MDAwLjAsImF0dHJpYnV0ZXMiOnRydWUsInR5cGUiOiJvZmZsaW5lIiwiZW1haWwiOiJqb2huYkBibHVlc3RvbmUubmV0d29yayJ9.nFu-Xiwo-jclLcnJ0lWM66exRhjrifL4v7ALimG71g0'
                     )
 fr.create_collection('collection', 'collection.npz', return_features=False)
 
@@ -82,14 +82,14 @@ def live_search(request):
     print("in function live ==============")
     contact = None
 
-    fr = FaceRecognizer(ctx='cpu',
-                        fd_model_path='./fd_model',
-                        fr_model_path='./model-tfv2/model.trueface',
-                        params_path='./model-tfv2/model.params',
-                        license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
-                        )
+    # fr = FaceRecognizer(ctx='cpu',
+    #                     fd_model_path='./fd_model',
+    #                     fr_model_path='./model-tfv2/model.trueface',
+    #                     params_path='./model-tfv2/model.params',
+    #                     license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
+    #                     )
 
-    fr.create_collection('collection', 'collection.npz', return_features=False)
+    # fr.create_collection('collection', 'collection.npz', return_features=False)
 
     vcap = VideoStream(src=0).start()
     t_end = time.time() + 60 * 0.5
@@ -142,12 +142,12 @@ def pic_search(request):
             person_pic1 = ntpath.basename(person_pic1)
             person_pic1 = 'search' + '/' + person_pic1
 
-            fr = FaceRecognizer(ctx='cpu',
-                                fd_model_path='./fd_model',
-                                fr_model_path='./model-tfv2/model.trueface',
-                                params_path='./model-tfv2/model.params',
-                                license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
-                                )
+            # fr = FaceRecognizer(ctx='cpu',
+            #                     fd_model_path='./fd_model',
+            #                     fr_model_path='./model-tfv2/model.trueface',
+            #                     params_path='./model-tfv2/model.params',
+            #                     license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
+            #                     )
 
             #fr.create_collection('collection', 'collection.npz', return_features=False)
 
@@ -555,12 +555,12 @@ def get_face_from_image(request):
         output.close()
         vcap = cv2.imread(img_name)
 
-        fr = FaceRecognizer(ctx='cpu',
-                            fd_model_path='./fd_model',
-                            fr_model_path='./model-tfv2/model.trueface',
-                            params_path='./model-tfv2/model.params',
-                            license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
-                            )
+        # fr = FaceRecognizer(ctx='cpu',
+        #                     fd_model_path='./fd_model',
+        #                     fr_model_path='./model-tfv2/model.trueface',
+        #                     params_path='./model-tfv2/model.params',
+        #                     license='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW90aW9uIjpudWxsLCJmciI6dHJ1ZSwicGFja2FnZV9pZCI6bnVsbCwiZXhwaXJ5X2RhdGUiOiIyMDE5LTA5LTI3IiwidGhyZWF0X2RldGVjdGlvbiI6bnVsbCwibWFjaGluZXMiOiI1IiwiYWxwciI6bnVsbCwibmFtZSI6IkpvaG4gQnJpZGdld2F0ZXIiLCJ0a2V5IjoibmV3IiwiZXhwaXJ5X3RpbWVfc3RhbXAiOjE1Njk1NDI0MDAuMCwiYXR0cmlidXRlcyI6dHJ1ZSwidHlwZSI6Im9mZmxpbmUiLCJlbWFpbCI6ImpvaG5iQGJsdWVzdG9uZS5uZXR3b3JrIn0._B9h-H4sZ5tQBslIVZtM1b2Y4_-TSN1e4dAo6KAp0nU'
+        #                     )
 
         #fr.create_collection('collection', 'collection.npz', return_features=False)
 
