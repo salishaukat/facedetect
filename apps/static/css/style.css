@@ -196,7 +196,6 @@ h6 {
 	line-height: 1.1rem;
 	font-weight: 600;
 	text-align: right;
-	text-transform: uppercase;
 }
 
 
@@ -520,6 +519,12 @@ a.text-primary:focus, a.text-primary:hover {
   width: 100%;
   background: rgba(0,0,0,0.75) url(../img/loading2.gif) no-repeat center center;
   z-index: 10000;
+}
+
+.live-content{
+	background: #f2f2f2;
+	margin-bottom: 0px !important;
+	margin-top: 0px !important;
 }
 
 @media (min-width: 992px){

@@ -179,9 +179,11 @@
                         </div>
 
 						{% endif %}
+                        <span>
                         <input  type="checkbox" name="acc_pol" id="acc_pol" required />
-                        <label for="submit">Accept policies</label>                        
-                        <a href="#" data-toggle="modal" data-target="#policy-popup">policy here</a>                        
+                        <label for="checkbox">Check here to indicate that you have read and agree to the terms of the FindMeBahamas webapp agreement.</label>                        
+                        <a href="#" data-toggle="modal" data-target="#policy-popup">policy here</a> 
+                        </span>                       
                         {% if allow_shelter %}
                         <button type="submit" class="btn btn-primary btn-round btn-block mt-4 btn-lg font-weight-bold">Update</button>
                         {% else %}

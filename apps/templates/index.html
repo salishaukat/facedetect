@@ -1042,6 +1042,33 @@
 
 			{% endif %}
 			function showmodel(id){
+
+				$('#h4name').text('');
+				$('#h4id').text('');
+				$('#h4_lost_one_contact_no').text('')
+				$('#h4age').text('')
+				$('#h4images').attr('src', "{% static 'img/no-img.jpeg' %}")
+				$('#h4images1').attr('src', "{% static 'img/no-img.jpeg' %}")
+				$('#h4images2').attr('src', "{% static 'img/no-img.jpeg' %}")
+				$('#h4status').text('')
+				$('#h4gender').text('')
+				$('#h4_lost_one_area').text('')
+				$('#h4country').text('')
+				$('#h4email').text('')				
+				$('#h4contact_name').text('')
+				$('#h4address').text('')
+				$('#h4note').text('')
+				$('#h4contact_number').text('')
+				$('#h4area').text('')
+				$('#h4shelter_name').text('')
+				$('#h4shelter_address').text('')
+				$('#h4shelter_note').text('')
+				$('#h4shelter_number').text('')
+				$('#h4shelter_area').text('')
+				$('#h4shelterimages').attr('src', "{% static 'img/no-img.jpeg' %}")
+				$('#h4shelterimages1').attr('src', "{% static 'img/no-img.jpeg' %}")
+				$('#h4shelterimages2').attr('src', "{% static 'img/no-img.jpeg' %}")
+
 				console.log("================")
 				var spinner = $('#loader');
 				console.log(spinner)
@@ -1077,14 +1104,6 @@
 					$('#h4note').text(data.contact.note)
 					$('#h4contact_number').text(data.contact.contact_number1+' , '+data.contact.contact_number2)
 					$('#h4area').text(data.contact.area)
-
-				}
-				else{
-					$('#h4contact_name').text('')
-					$('#h4address').text('')
-					$('#h4note').text('')
-					$('#h4contact_number').text('')
-					$('#h4area').text('')
 				}
 				if (data.shelter){
 					/*$('.shelter_info').show()*/
@@ -1102,14 +1121,6 @@
 					if (data.shelter.person_pic6){
 						$('#h4shelterimages2').attr('src', data.shelter.person_pic6)
 					}					
-				}
-				else{
-					$('.shelter_info').hide()
-					$('#h4shelter_name').text('')
-					$('#h4shelter_address').text('')
-					$('#h4shelter_note').text('')
-					$('#h4shelter_number').text('')
-					$('#h4shelter_area').text('')				
 				}
 				$('#lost_one_update').attr('href', '{% url "lostone" %}/'+id)
 				$('#lost_one').val(id);
