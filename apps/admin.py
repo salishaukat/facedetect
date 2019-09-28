@@ -33,3 +33,8 @@ class ShelterHomeAdmin(admin.ModelAdmin):
 	list_display = ['id', 'name','address','area','contact_number1','contact_number2']
 
 admin.site.register(ShelterHome, ShelterHomeAdmin)
+
+class UserAdmin(admin.ModelAdmin):
+	list_display = ['id', 'username','email','first_name','last_name','is_active']
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
