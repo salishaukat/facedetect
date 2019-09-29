@@ -141,11 +141,7 @@ def pic_search(request):
             person_pic1 = fs.save(person_pic1.name.replace(" ",""), person_pic1)
             print(person_pic1)
             person_pic1 = fs.url(person_pic1)
-            print(person_pic1)
             person_pic1 = ntpath.basename(person_pic1)
-            print(person_pic1)
-            print("=================")
-            print(person_pic1.replace(" ", ""))
             person_pic1 = 'search' + '/' + person_pic1
 
             # fr = FaceRecognizer(ctx='cpu',
@@ -199,7 +195,7 @@ def advance_search(request):
         tags.update({'lost_one__last_name__icontains':request.POST.get('last_name')})
     if request.POST.get('contact_no'):
         tags.update({'lost_one__contact_number__icontains':request.POST.get('contact_no')})        
-    if request.POST.get('area') and request.POST.get('area') > 0:
+    if request.POST.get('area') and request.POST.get('area') != '':
         tags.update({'lost_one__area__icontains':request.POST.get('area')})
     if request.POST.get('country') and request.POST.get('country') != "Country":
         tags.update({'lost_one__country__icontains':request.POST.get('country')})
@@ -216,7 +212,11 @@ def advance_search(request):
     for key, value in tags.items():
         or_condition.add(Q(**{key: value}), Q.AND)
     print (or_condition)
-    contact = Contact.objects.filter(or_condition)
+    contact_data = None
+    shelter_data = None
+    shelter_data = Shelter.objects.filter(or_condition)
+    contact_data = Contact.objects.filter(or_condition).exclude(lost_one__in=shelter_data.values('lost_one'))
+    contact = list(chain(contact_data, shelter_data))
     return render(request, 'index.html', {"contacts":contact, "user":request.session["username"]})
 
 def index(request):
