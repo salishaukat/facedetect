@@ -29,6 +29,8 @@ class LostOne(models.Model):
     gender = models.CharField(null=True, blank=True, max_length=100)
     name = models.CharField(null=True, blank=True, max_length=100)
     folder_name = models.CharField(null=True, blank=True, max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
 
 
 class ShelterHome(models.Model):
@@ -67,6 +69,8 @@ class ShelterHome(models.Model):
     contact_number2 = models.CharField(null=True, blank=True, max_length=100)
     address = models.TextField(null=True, blank=True, max_length=300)
     area = models.CharField(null=True, blank=True, max_length=200, choices=AREA_CHOICES, default=1)
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
     
 
 class Contact(models.Model):
@@ -78,6 +82,8 @@ class Contact(models.Model):
     note = models.TextField(null=True, blank=True, max_length=500)
     area = models.CharField(null=True, blank=True, max_length=100)
     lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
 
 class Shelter(models.Model):
     #shelter_id = models.IntegerField(null=True, blank=True)
@@ -93,6 +99,8 @@ class Shelter(models.Model):
     person_pic4 = models.CharField(null=True, blank=True, max_length=1000)
     person_pic5 = models.CharField(null=True, blank=True, max_length=1000)
     person_pic6 = models.CharField(null=True, blank=True, max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
 
 class Sponsor(models.Model):
     #sid = models.IntegerField(null=True, blank=True)
@@ -102,10 +110,17 @@ class Sponsor(models.Model):
     contact_number = models.CharField(null=True, blank=True, max_length=100)
     company_logo = models.CharField(null=False, blank=False, max_length=100)
     active = models.BooleanField(null=True, blank=True, default=False)
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
 
 
-class Comments(models.Model):
-    lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
+class News(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
-    comment = models.TextField(null=False, blank=False)
-    created_date = models.DateTimeField(auto_now_add=True, blank=True)
+    details = models.TextField(null=False, blank=False)
+    image1 = models.FileField(upload_to='news')
+    image2 = models.FileField(upload_to='news')
+    image3 = models.FileField(upload_to='news')
+    video = models.FileField(upload_to='news')
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
+
