@@ -595,3 +595,15 @@ def get_face_from_image(request):
                 #contact = Contact.objects.filter(lost_one__folder_name__contains=identity['predicted_label']).values()[0]
                 print(contact)
     return JsonResponse({'contact': contact})
+
+
+def news(request):
+    news = News.objects.all()
+    return render(request, 'news.html',{'news':news})
+
+
+def news_details(request, id=None):
+    news_first = News.objects.first()
+    news_last = News.objects.last()
+    news = News.objects.filter(id=id).first()
+    return render(request, 'news-details.html',{'news':news,"news_first":news_first,"news_last":news_last})
