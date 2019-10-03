@@ -23,5 +23,6 @@ urlpatterns = [
     path('live', views.live, name="live"),
     path('get_face', views.get_face_from_image, name="get_face"),
     path('news', views.news, name="news"),
-    path('news_details/<int:id>', views.news_details, name="news_details")
+    path('news_details/<int:id>', views.news_details, name="news_details"),
+    path('found/<int:id>', views.found, name="found")
 ]

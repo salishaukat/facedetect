@@ -607,3 +607,20 @@ def news_details(request, id=None):
     news_last = News.objects.last()
     news = News.objects.filter(id=id).first()
     return render(request, 'news-details.html',{'news':news,"news_first":news_first,"news_last":news_last})
+
+def found(request,id=None):
+    try:
+        lostone = LostOne.objects.filter(id=id).values()[0]
+    except:
+        lostone = None
+    try:
+        contact = Contact.objects.filter(id=id).values()[0]
+    except:
+        contact = None
+    try:
+        shelter = Shelter.objects.filter(id=id).values()[0]
+    except:
+        shelter = None
+    print(lostone)
+   
+    return  render(request, 'found-one.html',{'lostone':lostone,'contact':contact, 'shelter':shelter})
