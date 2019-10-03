@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="wrapper">
+    <section class=" mt-5 mb-5">
+        <div class="container news">
+            <div class="row">
+                <div class="col">
+                    <h4 class="text-center text-primary text-uppercase font-weight-bold mb-4 h4"> Bahamas News </h4>
+                </div>
+            </div>
+            <div class="row no-gutters mt-2">
+                <div class="col-sm-12 col-md-7 pr-2">
+                    {% for new in news %}
+                    <div class="bahamas-thumbs large video">
+                        <a href="{% url 'news_details' id='new.id' %}" class="post-link">
+                        <div class="post-image-holder">
+                            <img src="/collection/{{new.image1}}" alt="">
+                        </div>
+                        <img class="play-icon" src="/collection/{{new.image2}}" alt="play-icon">
+                        <div class="post-info">
+                            <span class="post-date d-block mb-2">{{new.name}}</span>
+                            <span class="post-title d-block">{{new.details}}</span>
+                        </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+        </div>
+    </section>
+{% endblock %}
+    

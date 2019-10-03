@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="wrapper detail">
+    <section class="pt-5 pb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <h3 class="news-title mb-0">{{news.name}}</h3>
+                    <span class="post-date d-block mb-2">{{news.created_at|date:"m-d-Y"}}</span>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-10 post-media ">
+                    <video  preload="auto" controls autoplay>
+                       <source type="video/mp4" src="/collection/{{news.video}}"/>
+                    </video>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-10 mb-4 post-content">
+                    <div class="social-share">
+                        <ul>
+                            <li>
+                                <a href="#.">
+                                    <img src="img/fb-icon.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#.">
+                                    <img src="img/twitter-icon.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#.">
+                                    <img src="img/youtube-icon.png" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    {{news.details}}
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-10 col-lg-10  mt-4">
+                    <div class="row recent-nav justify-content-between">
+                        {% if news.id > news_first.id %}
+                        <div class="col align-items-center ">
+                            <a href="#.">
+                                <img src="img/previous-arrow.png" alt="">
+                                <span class="ml-2">Previous</span>
+
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if news.id < news_last.id %}
+                        <div class="col align-items-center text-right">
+                            <a href="#.">
+                                <span class="mr-2">Next</span>
+                                <img src="img/next-arrow.png" alt="">
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-10 col-lg-10 mt-4">
+                    <div class="row justify-content-between">
+                        <div class="col-sm-6 col-md-6 col-lg-5">
+                            <div class="bahamas-thumbs video">
+                                <a href="#." class="post-link"></a>
+                                <div class="post-image-holder">
+                                    <img src="img/thumb-01.jpg" alt="">
+                                </div>
+                                <img class="play-icon" src="img/play-icon.png" alt="play-icon">
+                                <div class="post-info">
+                                    <span class="post-date d-block mb-2">05-Dec-2018</span>
+                                    <span class="post-title d-block">Future Interactions Between Man & Machine</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-5">
+                            <div class="bahamas-thumbs">
+                                <a href="#." class="post-link"></a>
+                                <div class="post-info">
+                                    <span class="post-date d-block mb-2">05-Dec-2018</span>
+                                    <span class="post-title d-block">Future Interactions Between Man & Machine</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

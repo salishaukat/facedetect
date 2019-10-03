@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
+
 
 class UserProfile(models.Model):
   user = models.OneToOneField(User, related_name="profile", on_delete=True)
@@ -116,7 +118,7 @@ class Sponsor(models.Model):
 
 class News(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
-    details = models.TextField(null=False, blank=False)
+    details = RichTextField(config_name='awesome_ckeditor')
     image1 = models.FileField(upload_to='news')
     image2 = models.FileField(upload_to='news')
     image3 = models.FileField(upload_to='news')
