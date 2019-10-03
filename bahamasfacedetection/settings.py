@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django_forms_bootstrap',
     'bootstrap4','bootstrap_datepicker_plus',
     'bootstrap_toolkit',
+    'ckeditor',
+    'ckeditor_uploader'
 
 ]
 
@@ -56,6 +58,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'bahamasfacedetection.urls'
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
 
 TEMPLATES = [
     {
@@ -90,9 +94,9 @@ WSGI_APPLICATION = 'bahamasfacedetection.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'facedetect1',
+        'NAME': 'facedetect',
         'USER': 'postgres',
-        'PASSWORD': '',
+        'PASSWORD': '123',
         'HOST': 'localhost',
         'PORT': '',
     }

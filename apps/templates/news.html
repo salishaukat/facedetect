@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="wrapper">
+    <section class=" mt-5 mb-5">
+        <div class="container news">
+            <div class="row">
+                <div class="col">
+                    <h4 class="text-center text-primary text-uppercase font-weight-bold mb-4 h4"> Bahamas News </h4>
+                </div>
+            </div>
+            <div class="row no-gutters mt-2">
+                <div class="col-sm-12 col-md-7 pr-2">
+                    <div class="bahamas-thumbs large video">
+                        <a href="#." class="post-link"></a>
+                        <div class="post-image-holder">
+                            <img src="{% static 'img/play-icon.png' %}" alt="">
+                        </div>
+                        <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
+                        <div class="post-info">
+                            <span class="post-date d-block mb-2">05-Dec-2018</span>
+                            <span class="post-title d-block">Storm nears northern Bahamas, complicating Dorian relief</span>
+                            <span class="video-description d-block mt-3 mt-2">Consectetur adipiscing elit. Morbi metus ligula, commodo sed quam sed, placerat egestas lorem. Suspendisse scelerisque.</span>
+                          </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-5 pl-2">
+                    <div class="h-50 pb-2">
+                        <div class="bahamas-thumbs spliter">
+                            <a href="#." class="post-link"></a>
+                            <div class="post-image-holder">
+                                <img src="{% static 'img/play-icon.png' %}" alt="">
+                            </div>
+                            <div class="post-info">
+                                <span class="post-date d-block mb-2">05-Dec-2018</span>
+                                <span class="post-title d-block">Storm nears northern Bahamas, complicating Dorian relief</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-50 pt-2">
+                        <div class="bahamas-thumbs spliter">
+                            <a href="#." class="post-link"></a>
+                            <div class="post-image-holder">
+                                <img src="{% static 'img/play-icon.png' %}" alt="">
+                            </div>
+                            <div class="post-info">
+                                <span class="post-date d-block mb-2">05-Dec-2018</span>
+                                <span class="post-title d-block">Storm nears northern Bahamas, complicating Dorian relief</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="looping-elements">
+                {% for new in news %}
+                <div class="col-sm-12 col-md-4">
+                    <div class="bahamas-thumbs">
+                        <a href="{% url 'news_details' id=new.id %}" class="post-link"></a>
+                        <div class="post-image-holder">
+                            <img src="{{new.image1}}" alt="">
+                        </div>
+                        <div class="post-info">
+                            <span class="post-date d-block mb-2">{{new.created_at|date:"m-d-Y"}</span>
+                            <span class="post-title d-block">{{new.name}}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
+
+
+
+            <div class="row mt-5 mb-5">
+                <div class="col text-center">
+                    <img src="img/loader.gif" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+     function splitrow (elem, elemCounter) {
+        var item = elem,
+            counter = 0,
+            length = item.length / elemCounter,
+            rowHtml = "<div class='row no-gutters mt-3'></div>";
+        for (var i = 0; i < length; i++) {
+            item.slice(counter, counter + elemCounter).wrapAll(rowHtml);
+            counter += elemCounter;
+        }
+    }
+
+     splitrow($(".looping-elements > div"), 3);  // Run this function when show other item on page scroll
+
+
+</script>
+
+{% endblock %}
+    

@@ -6,6 +6,10 @@
 
  */
 
+
+ /*Font Open Sans*/
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
 .bootstrap-switch {
   display: inline-block;
   direction: ltr;
@@ -1422,7 +1426,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   cursor: pointer;
   background-color: #888888;
   color: #FFFFFF;
-  letter-spacing: 0.02em;
 }
 
 .btn:hover,
@@ -1948,7 +1951,7 @@ fieldset[disabled] .btn-info.active {
 }
 
 .btn-warning {
-  background-color: #00778b;
+  background-color: #FFB236;
   color: #FFFFFF;
 }
 
@@ -2973,7 +2976,7 @@ fieldset[disabled] .form-control {
 
 textarea.form-control {
   max-width: 100%;
-  max-height: 100px;
+  max-height: 80px;
   padding: 10px 10px 0 0;
   resize: none;
   /*border: none;*/
@@ -3353,7 +3356,7 @@ textarea.form-control:active {
   color: #FFFFFF;
 }
 
-/*.pagination .page-item .page-link {
+.pagination .page-item .page-link {
   border: 0;
   border-radius: 30px !important;
   transition: all .3s;
@@ -3466,7 +3469,7 @@ textarea.form-control:active {
 .pagination-container {
   display: flex;
   align-items: center;
-}*/
+}
 
 button,
 input,
@@ -4742,7 +4745,7 @@ Created using IcoMoon - icomoon.io
 .bootstrap-select .dropdown-menu.inner li a {
   font-size: 0.95em;
   padding-top: .6rem;
-  color: #888888 ;
+  color: #888888 !important;
   padding-bottom: .6rem;
   margin-top: 5px;
   -webkit-transition: all 150ms linear;
@@ -5224,7 +5227,7 @@ img {
 }
 
 .modal-content {
-  border-radius: 0.6rem;
+  border-radius: 0.1875rem;
   border: none;
   box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.5);
 }
@@ -5668,7 +5671,7 @@ img {
 }
 
 .profile-page .page-header {
-  min-height: 100px;
+  min-height: 550px;
 }
 
 .profile-page .profile-container {
@@ -6499,7 +6502,17 @@ img {
     transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
   }
   .sidebar-collapse .navbar-collapse:before {
-    background: #ffffff;
+    background: #00778b;
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#00778b 0%, #000 80%);
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#00778b 0%, #000 80%);
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#00778b 0%, #000 80%);
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#00778b 0%, #000 80%);
+    /* Standard syntax (must be last) */
+    opacity: 0.76;
     filter: alpha(opacity=76);
     display: block;
     content: "";
@@ -6515,10 +6528,10 @@ img {
     margin-top: 0.3125rem;
   }
   .sidebar-collapse .navbar-collapse .navbar-nav:not(.navbar-logo) .nav-link:not(.btn) {
-    color: #888888 !important;
+    color: #FFFFFF !important;
   }
   .sidebar-collapse .navbar-collapse .dropdown-menu .dropdown-item {
-    color: #888888;
+    color: #FFFFFF;
   }
   .sidebar-collapse.menu-on-left .navbar-translate {
     flex-direction: row-reverse;

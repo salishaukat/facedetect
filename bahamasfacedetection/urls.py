@@ -23,6 +23,8 @@ admin.site.site_title = "Find me Bahamas Admin Portal"
 admin.site.index_title = "Welcome to Find me Bahamas Portal"
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('apps.urls'))
+    path('', include('apps.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls'))
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
