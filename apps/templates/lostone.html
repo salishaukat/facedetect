@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 register-col first">
-                        <h4 class="text-primary font-weight-bold">Fill the detail for your lost one </h4>
+                        <h4 class="text-primary font-weight-bold">Please fill in the details of your lost one </h4>
                         <div class="form-group">
                             <input type="text" class="form-control form-control-lg" name="first_name" id="firstName" placeholder="First Name*" {% if allow_shelter %} readonly  {% else %}   required {% endif %}>
                             <small class="form-text text-muted" style="display: none;">We'll never share your email with anyone else.</small>
@@ -89,14 +89,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" {% if allow_shelter %}  disabled  {% endif %}/>
+                            <input type="file" id="uploadfile1" name="person_pic1" style="display: none;" onchange="upload_img1(this);" required {% if allow_shelter %}  disabled {% endif %}/>
                             <input type="file" id="uploadfile2" name="person_pic2" style="display: none;" onchange="upload_img2(this);"{% if allow_shelter %} disabled  {% endif %}/> 
                             <input type="file" id="uploadfile3" name="person_pic3" style="display: none;" onchange="upload_img3(this);"{% if allow_shelter %} disabled  {% endif %}/> 
                             <!-- Upload Image here -->
                         </div>
                     </div>
                     <div class="col-md-6 register-col">
-                        <h4 class="text-primary font-weight-bold">{% if allow_shelter or user and 'AnonymousUser' not in user %} Current location {% else %} Where to contact if found ?{% endif %} </h4>
+                        <h4 class="text-primary font-weight-bold">{% if allow_shelter or user and 'AnonymousUser' not in user %} Current location {% else %} Where to contact if found{% endif %} </h4>
                         {% if allow_shelter or user and 'AnonymousUser' not in user %}
                         <div class="form-group select-custom">
                             <select name="shelter_home" id="shelter_home" class="form-control form-control-lg" required>
@@ -131,7 +131,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="noteTextArea">Note</label>
+                            <label for="noteTextArea">Last Seen / Notes</label>
                             <textarea name="note" id="note" class="form-control form-control-lg" id="noteTextArea" rows="6"></textarea>
                         </div>
 
@@ -179,11 +179,11 @@
                         </div>
 
 						{% endif %}
-                        <span>
+<!--                         <span>
                         <input  type="checkbox" name="acc_pol" id="acc_pol" required />
                         <label for="checkbox">Check here to indicate that you have read and agree to the terms of the FindMeBahamas webapp agreement.</label>                        
                         <a href="#" data-toggle="modal" data-target="#policy-popup">policy here</a> 
-                        </span>                       
+                        </span> -->
                         {% if allow_shelter %}
                         <button type="submit" class="btn btn-primary btn-round btn-block mt-4 btn-lg font-weight-bold">Update</button>
                         {% else %}
@@ -459,8 +459,7 @@ $(document).ready(function(){
         $('#contact_2').val(values[3]).prop("readonly", true);
         $('select[name="contact_area"]').val(values[5]).attr("style", "pointer-events: none;");
       }
-    });    
-
+    });
 });
 </script>
 

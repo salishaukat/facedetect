@@ -15,6 +15,15 @@ h6 {
 	color: #767588;
 }
 
+.search-text{
+	color: #767588;
+}
+
+#h4shelterimages-pop{
+	width: 300px;
+	height: 300px;
+}
+
 .remove-img1{
 	position: absolute;
     top: 14%;
