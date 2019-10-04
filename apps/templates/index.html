@@ -32,6 +32,7 @@
 						<button type="button" class="btn btn-warning mx-auto btn-round d-block d-sm-none mt-4 mb-4" aria-haspopup="true" aria-expanded="false" onclick="advance_search()"> Advance Search
 						</button>
 						<ul class="list-inline toggle-items pt-1">
+							<li class="list-inline-item font-weight-bold search-text"> Search by:  </li>
 							<li class="list-inline-item active"> <a class="font-weight-bold" > NAME </a> </li>
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item"> <a class="font-weight-bold"  onclick="toggle_pic()"> PICTURE </a> </li>
@@ -67,6 +68,7 @@
 							</div>
 						</div>
 						<ul class="list-inline toggle-items pt-1">
+							<li class="list-inline-item font-weight-bold search-text"> Search by:  </li>
 							<li class="list-inline-item"> <a class="font-weight-bold" onclick="name_search()"> NAME </a> </li>
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item active"> <a class="font-weight-bold"> PICTURE </a> </li>
@@ -88,6 +90,7 @@
 						<button type="button" class="btn btn-neutral btn-block btn-round bg-white mt-0 btn-live" aria-haspopup="true" aria-expanded="false" onclick="live_btn()"> <i class="fas fa-video"></i> Start live
 						</button>	
 						<ul class="list-inline toggle-items pt-1">
+							<li class="list-inline-item font-weight-bold search-text"> Search by:  </li>
 							<li class="list-inline-item"> <a class="font-weight-bold" onclick="name_search()"> NAME </a> </li>
 							<span class="px-1"> | </span> 
 							<li class="list-inline-item"> <a class="font-weight-bold" onclick="toggle_pic()"> PICTURE </a> </li>
@@ -723,7 +726,7 @@
 									<tr onclick="showmodel('{{contact.lost_one.id}}')">
 										<!-- <td scope="row">1</td> -->
 										<td class="align-middle"> {{ forloop.counter }} </td>
-										<td class="align-middle"><img class="rounded-circle user-img mt-1" src="{{contact.lost_one.person_pic1}}"/>
+										<td class="align-middle"><img class="rounded-circle user-img mt-1" src="{% if contact.lost_one.person_pic1 %} {{contact.lost_one.person_pic1}} {% else %} {% static 'img/no-img.jpeg' %} {% endif %}"/>
 											<strong>{{contact.lost_one.first_name}} {{contact.lost_one.last_name}}</strong> <div>Id: {{contact.lost_one.id}}</div></td>
 										<td class="align-middle">{{contact.lost_one.age}}</td>
 										<td class="align-middle">{{contact.lost_one.area}}</td>
@@ -893,13 +896,13 @@
 					</div>
 					<div class="row contact_info">
 						<div class="col-sm-12 bg-white col-md-4 text-center">
-							<img class="modal-img rounded mb-2" id="h4shelterimages" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
+							<img  data-toggle="modal" data-target="#image-popup" class="modal-img rounded mb-2" id="h4shelterimages" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
 							<div class="row">
 								<div class="col pr-1 pl-1">
-									<img class="img-show" id="h4shelterimages1" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
+									<img data-toggle="modal" data-target="#image-popup" class="img-show" id="h4shelterimages1" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
 								</div>
 								<div class="col pr-1 pl-1">
-									<img class="img-show" id="h4shelterimages2" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image" >
+									<img data-toggle="modal" data-target="#image-popup" class="img-show" id="h4shelterimages2" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image" >
 								</div>
 							</div>
 
@@ -995,8 +998,8 @@
 						<a type="button" class="btn btn-primary btn-round btn-block mt-4" href="{% url 'lostone' %}">Register</a>
 				</div>
 			</div>	
-		</div>	
-	</div>	 -->
+		</div>-->	
+	</div>	 
 
 		
 	<div class="modal" id="test" tabindex="-1" role="dialog">
@@ -1018,6 +1021,16 @@
     </div>
   </div>
 </div>
+
+    <div class="modal fade" id="image-popup" tabindex="-1" role="dialog" aria-labelledby="Image" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body px-5 mx-5">
+                	<img class="modal-img rounded mb-2" id="h4shelterimages-pop" src="{% static 'img/no-img.jpeg' %}" alt="Rounded Image">
+                </div>
+            </div>
+        </div>
+    </div>    
 
 		<script>
 
@@ -1216,6 +1229,18 @@
 				$('#female').click(function(){
 					$('#male'). prop("checked", false)
 				});
+				$("#h4shelterimages").click(function(){
+					img_url = $('#h4shelterimages').attr('src')
+					$('#h4shelterimages-pop').attr('src',img_url) 	
+				})
+				$("#h4shelterimages1").click(function(){
+					img_url = $('#h4shelterimages1').attr('src')
+					$('#h4shelterimages-pop').attr('src',img_url) 	
+				})
+				$("#h4shelterimages2").click(function(){
+					img_url = $('#h4shelterimages2').attr('src')
+					$('#h4shelterimages-pop').attr('src',img_url) 	
+				})								
 			})
 			     
 		</script>
