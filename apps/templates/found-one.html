@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="wrapper">
+    <section class=" mt-5 mb-5">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-12 bg-white col-md-4 text-center">
+                    <img class="modal-img rounded mb-2" id="h4images" src="{{lostone.person_pic1}}" alt="Rounded Image">
+                    <div class="row">
+                        {% if shelter.personpic2 %}
+                        <div class="col pr-1 pl-1">
+                            <img class="img-show" id="h4images1" src="{{lostone.person_pic2}}" alt="Rounded Image">
+                        </div>
+                        {% endif %}
+                        {% if shelter.personpic3 %}
+                        <div class="col pr-1 pl-1">
+                            <img class="img-show" id="h4images2" src="{{lostone.person_pic3}}" alt="Rounded Image">
+                        </div>
+                        {% endif %}
+                    </div>
+
+
+                </div>
+                <div class="col">
+
+                    <h3 class="mb-0 font-weight-bold" id="h4name">{{lostone.name}}</h3>
+                    <p class="mb-0">Id: <span id="h4id">{{lostone.id}}</span> </p>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h4 class="text-primary font-weight-bold mt-4" id="h4status">{{lostone.status}}</h4>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12">
+                            <h5 class="font-weight-bold font-xs mb-1"> Contact No </h5>
+                            <p class="font-sm" id="h4_lost_one_contact_no">{{lostone.contact_number}}</p>
+                        </div>
+                        <div class="col-md-1 col-sm-12">
+                            <h5 class="font-weight-bold font-xs mb-1"> Age </h5>
+                            <p class="font-sm" id="h4age">{{lostone.age}}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-12">
+                            <h5 class="font-weight-bold font-xs mb-1"> Gender </h5>
+                            <p class="font-sm" id="h4gender">{{lostone.gender}}</p>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <h5 class="font-weight-bold font-xs mb-1"> Area </h5>
+                            <p class="font-sm" id="h4_lost_one_area">{{lostone.area}}</p>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <h5 class="font-weight-bold font-xs mb-1"> Country</h5>
+                            <p class="font-sm" id="h4country">{{lostone.country}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="font-weight-bold font-xs mb-1"> Email Address </h5>
+                            <p class="font-sm mb-0" id="h4email">thomas_poindexter@yahoo.com</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h4 class="text-primary font-weight-bold mt-0"> Where to Contact</h4>
+                        </div>
+                    </div>
+                    <div class="row contact_info">
+                        <div class="col-md-6 col-sm-12">
+                            <h5 class="font-weight-bold font-xs mb-1"> Name </h5>
+                            <p class="font-sm" id="h4contact_name">{{contact.name}}</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <h5 class="font-weight-bold font-xs mb-1"> Contact Person </h5>
+                            <p class="font-sm" id="h4contact_number">{{contact.contact_number1}} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row contact_info">
+                <div class="col-md-4">
+                    <h5 class="font-weight-bold font-xs mb-1"> Area </h5>
+                    <p class="font-sm" id="h4area">{{contact.area}}</p>
+                </div>
+                <div class="col-md-8">
+                    <h5 class="font-weight-bold font-xs mb-1"> Address </h5>
+                    <p class="font-sm" id="h4address">{{contact.address}}</p>
+                </div>
+            </div>
+            <div class="row contact_info">
+                <div class="col">
+                    <h5 class="font-weight-bold font-xs mb-1"> Note </h5>
+                    <p class="font-sm" id="h4note">{{contact.note}}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="text-primary font-weight-bold mt-0"> Rescuer / Shelter Contact</h4>
+                </div>
+            </div>
+            <div class="row contact_info">
+                <div class="col-sm-12 bg-white col-md-4 text-center">
+                    <img class="modal-img rounded mb-2" id="h4shelterimages" src="{{shelter.person_pic4}}" alt="Rounded Image">
+                    <div class="row">
+                        {% if shelter.personpic5 %}
+                        <div class="col pr-1 pl-1">
+                            <img class="img-show" id="h4shelterimages1" src="{{shelter.person_pic5}}" alt="Rounded Image">
+                        </div>
+                        {% endif %}
+                        {% if shelter.personpic6 %}
+                        <div class="col pr-1 pl-1">
+                            <img class="img-show" id="h4shelterimages2" src="{{shelter.person_pic6}}" alt="Rounded Image">
+                        </div>
+                        {% endif %}
+                    </div>
+
+
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="font-weight-bold font-xs mb-1"> Name </h5>
+                            <p class="font-sm" id="h4shelter_name">{{shelter.name}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="font-weight-bold font-xs mb-1"> Contact Person </h5>
+                            <p class="font-sm" id="h4shelter_number">{{shelter.contact_number1}}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="font-weight-bold font-xs mb-1"> Area </h5>
+                            <p class="font-sm" id="h4shelter_area">{{shelter.area}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row contact_info">
+                        <div class="col-md-12">
+                            <h5 class="font-weight-bold font-xs mb-1"> Address </h5>
+                            <p class="font-sm" id="h4shelter_address">{{shelter.address}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row shelter_info">
+                        <div class="col">
+                            <h5 class="font-weight-bold font-xs mb-1"> Shelter's Note </h5>
+                            <p class="font-sm mb-0" id="h4shelter_note">{{shelter.note}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="row">
+                    <div class="col">
+                        <div id="summernote">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 	<div class="row pt-5 pb-0 px-1">
+
+                    </div> -->
+            </div>
+            
+        </div>
+    </section>
+
+
+</div>
+{% endblock %}
