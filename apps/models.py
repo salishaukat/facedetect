@@ -118,11 +118,9 @@ class Sponsor(models.Model):
 
 class News(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
-    details = RichTextField(config_name='awesome_ckeditor')
-    image1 = models.FileField(upload_to='news')
-    image2 = models.FileField(upload_to='news')
-    image3 = models.FileField(upload_to='news')
-    video = models.FileField(upload_to='news')
+    details = RichTextField(config_name='awesome_ckeditor',null=True, blank=True)
+    image1 = models.FileField(upload_to='news',null=True, blank=True)
+    video = models.FileField(upload_to='news',null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
 
