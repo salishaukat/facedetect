@@ -16,7 +16,7 @@
                             <a href="{% url 'news_details' id=news.0.id %}" class="post-link"></a>
                             {% if news.0.image1 %}
                                 <div class="post-image-holder">
-                                    <img src="collection/{{news.0.image1}}" alt="">
+                                    <img src="news/{{news.0.image1}}" alt="">
                                 </div>
                             {% endif %}
                             {% if news.0.video %}
@@ -37,7 +37,7 @@
                                 <a href="{% url 'news_details' id=news.1.id %}" class="post-link"></a>
                                 {% if news.1.image1 %}
                                     <div class="post-image-holder">
-                                        <img src="collection/{{news.1.image1}}" alt="">
+                                        <img src="news/{{news.1.image1}}" alt="">
                                     </div>
                                 {% endif %}                            
                                 {% if news.1.video %}
@@ -56,14 +56,14 @@
                                 <a href="{% url 'news_details' id=news.2.id %}" class="post-link"></a>
                                 {% if news.2.image1 %}
                                     <div class="post-image-holder">
-                                        <img src="collection/{{news.2.image1}}" alt="">
+                                        <img src="news/{{news.2.image1}}" alt="">
                                     </div>
                                 {% endif %}                            
                                 {% if news.2.video %}
                                     <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
                                 {% endif %}
                                 <div class="post-info">
-                                    <span class="post-date d-block mb-2">{{news.2.created_at|date:"d-F-y"}}</span>
+                                    <span class="post-date d-block mb-2">{{news.2.created_at|date:"d-M-y"}}</span>
                                     <span class="post-title d-block">{{news.2.name}}</span>
                                 </div>
                             </div>
@@ -78,14 +78,14 @@
                         <a href="{% url 'news_details' id=new.id %}" class="post-link"></a>
                         {% if new.image1 %}
                             <div class="post-image-holder">
-                                <img src="collection/{{new.image1}}" alt="">
+                                <img src="news/{{new.image1}}" alt="">
                             </div>
                         {% endif %}                            
                         {% if new.video %}
                             <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
                         {% endif %}                        
                         <div class="post-info">
-                            <span class="post-date d-block mb-2">{{new.created_at|date:"d-F-y"}}</span>
+                            <span class="post-date d-block mb-2">{{new.created_at | date:"d-M-y"}}</span>
                             <span class="post-title d-block">{{new.name}}</span>
                         </div>
                     </div>

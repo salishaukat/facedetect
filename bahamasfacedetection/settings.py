@@ -145,3 +145,6 @@ DATE_INPUT_FORMATS = ['%d-%m-%Y']
 BOOTSTRAP4 = {
     'include_jquery': True,
 }
+
+UPLOAD_ROOT = os.path.join(BASE_DIR, 'news')
+UPLOAD_URL = '/news/'

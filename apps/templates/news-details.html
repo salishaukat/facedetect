@@ -14,11 +14,11 @@
                 <div class="col-10 post-media ">
                     {% if news.video %}
                         <video  preload="auto" controls autoplay>
-                           <source type="video/mp4" src="/collection/{{news.video}}"/>
+                           <source type="video/mp4" src="/news/{{news.video}}"/>
                         </video>
                     {% elif news.image1 %}
                         <div class="col-10 post-media ">
-                            <img src="/collection/{{news.image1}}" alt="video">
+                            <img src="/news/{{news.image1}}" alt="video">
                         </div>
                     {% else %}
                     {% endif %}
@@ -78,7 +78,7 @@
                                 <a href="{{news_previous.id}}" class="post-link"></a>
                                 {% if news_previous.image1 %}
                                     <div class="post-image-holder">
-                                        <img src="/collection/{{news_previous.image1}}" alt="">
+                                        <img src="/news/{{news_previous.image1}}" alt="">
                                     </div>
                                 {% endif %}
                                 {% if news_previous.video %}
@@ -97,7 +97,7 @@
                                 <a href="{{news_next.id}}" class="post-link"></a>
                                 {% if news_next.image1 %}
                                     <div class="post-image-holder">
-                                        <img src="/collection/{{news_next.image1}}" alt="">
+                                        <img src="/news/{{news_next.image1}}" alt="">
                                     </div>
                                 {% endif %}
                                 {% if news_next.video %}
