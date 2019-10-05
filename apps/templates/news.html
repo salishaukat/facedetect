@@ -24,7 +24,7 @@
                             {% endif %}
                             <div class="post-info">
                                 <span class="post-date d-block mb-2">{{news.0.created_at|date:"d-F-y"}}</span>
-                                <span class="post-title d-block">{{news.0.name}}</span>
+                                <span class="post-title d-block">{{news.0.name|truncatechars:50}}</span>
                                 <span class="video-description d-block mt-3 mt-2">{{news.0.details|safe|truncatechars:100}}</span>
                               </div>
                         </div>
@@ -33,7 +33,7 @@
                 <div class="col-sm-12 col-md-5 pl-2">
                     {% if news.1 %}
                         <div class="h-50 pb-2">
-                            <div class="bahamas-thumbs spliter">
+                            <div class="bahamas-thumbs spliter video">
                                 <a href="{% url 'news_details' id=news.1.id %}" class="post-link"></a>
                                 {% if news.1.image1 %}
                                     <div class="post-image-holder">
@@ -45,14 +45,14 @@
                                 {% endif %}
                                 <div class="post-info">
                                     <span class="post-date d-block mb-2">{{news.1.created_at|date:"d-F-y"}}</span>
-                                    <span class="post-title d-block">{{news.1.name}}</span>
+                                    <span class="post-title d-block">{{news.1.name|truncatechars:50}}</span>
                                 </div>
                             </div>
                         </div>
                     {% endif %}
                     {% if news.2 %}
                         <div class="h-50 pt-2">
-                            <div class="bahamas-thumbs spliter">
+                            <div class="bahamas-thumbs spliter video">
                                 <a href="{% url 'news_details' id=news.2.id %}" class="post-link"></a>
                                 {% if news.2.image1 %}
                                     <div class="post-image-holder">
@@ -63,8 +63,8 @@
                                     <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
                                 {% endif %}
                                 <div class="post-info">
-                                    <span class="post-date d-block mb-2">{{news.2.created_at|date:"d-M-y"}}</span>
-                                    <span class="post-title d-block">{{news.2.name}}</span>
+                                    <span class="post-date d-block mb-2">{{news.2.created_at|date:"d-F-y"}}</span>
+                                    <span class="post-title d-block">{{news.2.name|truncatechars:50}}</span>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
             <div class="looping-elements">
                 {% for new in news|slice:"3:" %}
                 <div class="col-sm-12 col-md-4">
-                    <div class="bahamas-thumbs">
+                    <div class="bahamas-thumbs video">
                         <a href="{% url 'news_details' id=new.id %}" class="post-link"></a>
                         {% if new.image1 %}
                             <div class="post-image-holder">
@@ -85,8 +85,8 @@
                             <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
                         {% endif %}                        
                         <div class="post-info">
-                            <span class="post-date d-block mb-2">{{new.created_at | date:"d-M-y"}}</span>
-                            <span class="post-title d-block">{{new.name}}</span>
+                            <span class="post-date d-block mb-2">{{new.created_at|date:"d-F-y"}}</span>
+                            <span class="post-title d-block">{{new.name|truncatechars:50}}</span>
                         </div>
                     </div>
                 </div>

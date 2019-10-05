@@ -11,18 +11,19 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-10 post-media ">
                     {% if news.video %}
-                        <video  preload="auto" controls autoplay>
-                           <source type="video/mp4" src="/news/{{news.video}}"/>
-                        </video>
+                        <div class="col-10 post-media ">
+                            <video  preload="auto" controls autoplay>
+                               <source type="video/mp4" src="/news/{{news.video}}"/>
+                            </video>
+                        </div>
                     {% elif news.image1 %}
                         <div class="col-10 post-media ">
                             <img src="/news/{{news.image1}}" alt="video">
                         </div>
                     {% else %}
                     {% endif %}
-                </div>
+                
             </div>
             <div class="row justify-content-center">
                 <div class="col-10 mb-4 post-content">
@@ -93,7 +94,7 @@
                         {% endif %}
                         {% if news.id < news_last.id %}
                         <div class="col-sm-6 col-md-6 col-lg-5">
-                            <div class="bahamas-thumbs">
+                            <div class="bahamas-thumbs video">
                                 <a href="{{news_next.id}}" class="post-link"></a>
                                 {% if news_next.image1 %}
                                     <div class="post-image-holder">
