@@ -610,7 +610,7 @@ def news_details(request, id=None):
     news = News.objects.filter(id=id).first()
     print(news_next)
     print(news_previous)
-    return render(request, 'news-details.html',{'news':news,"news_first":news_first,"news_last":news_last,"news_next":news_next,"news_previous":news_previous})
+    return render(request, 'news-details.html',{'news':news,"news_first":news_first,"news_last":news_last,"news_next":news_next,"news_previous":news_previous,  "user":request.session["username"]})
 
 def found(request,id=None):
     try:
