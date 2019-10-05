@@ -121,7 +121,7 @@ class Sponsor(models.Model):
 
 class News(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
-    details = RichTextField(config_name='awesome_ckeditor')
+    details = RichTextField(config_name='awesome_ckeditor',null=True, blank=True)
     image1 = models.FileField(upload_to='images', storage=upload_storage)
     image2 = models.FileField(upload_to='images', storage=upload_storage)
     image3 = models.FileField(upload_to='images', storage=upload_storage)

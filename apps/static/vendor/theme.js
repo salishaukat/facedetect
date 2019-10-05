@@ -326,3 +326,6 @@ function debounce(func, wait, immediate) {
         }
     },
 })
+$('body').on('hidden.bs.modal', '.modal', function() {
+    $('.btn').blur();
+});

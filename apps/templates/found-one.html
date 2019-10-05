@@ -9,12 +9,12 @@
                 <div class="col-sm-12 bg-white col-md-4 text-center">
                     <img class="modal-img rounded mb-2" id="h4images" src="{{lostone.person_pic1}}" alt="Rounded Image">
                     <div class="row">
-                        {% if shelter.personpic2 %}
+                        {% if lostone.personpic2 %}
                         <div class="col pr-1 pl-1">
                             <img class="img-show" id="h4images1" src="{{lostone.person_pic2}}" alt="Rounded Image">
                         </div>
                         {% endif %}
-                        {% if shelter.personpic3 %}
+                        {% if lostone.personpic3 %}
                         <div class="col pr-1 pl-1">
                             <img class="img-show" id="h4images2" src="{{lostone.person_pic3}}" alt="Rounded Image">
                         </div>
@@ -58,7 +58,7 @@
                     <div class="row">
                         <div class="col">
                             <h5 class="font-weight-bold font-xs mb-1"> Email Address </h5>
-                            <p class="font-sm mb-0" id="h4email">thomas_poindexter@yahoo.com</p>
+                            <p class="font-sm mb-0" id="h4email">{{lostone.email_address}}</p>
                         </div>
                     </div>
                     <hr>
@@ -74,7 +74,7 @@
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <h5 class="font-weight-bold font-xs mb-1"> Contact Person </h5>
-                            <p class="font-sm" id="h4contact_number">{{contact.contact_number1}} </p>
+                            <p class="font-sm" id="h4contact_number">{{contact.contact_number1}},{{contact.contact_number2}} </p>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
             </div>
             <div class="row contact_info">
                 <div class="col">
-                    <h5 class="font-weight-bold font-xs mb-1"> Note </h5>
+                    <h5 class="font-weight-bold font-xs mb-1"> Last Seen / Notes </h5>
                     <p class="font-sm" id="h4note">{{contact.note}}</p>
                 </div>
             </div>
@@ -124,11 +124,11 @@
                     <div class="row">
                         <div class="col-md-4">
                             <h5 class="font-weight-bold font-xs mb-1"> Name </h5>
-                            <p class="font-sm" id="h4shelter_name">{{shelter.name}}</p>
+                            <p class="font-sm" id="h4shelter_name">{{shelter.shelter}}</p>
                         </div>
                         <div class="col-md-4">
                             <h5 class="font-weight-bold font-xs mb-1"> Contact Person </h5>
-                            <p class="font-sm" id="h4shelter_number">{{shelter.contact_number1}}</p>
+                            <p class="font-sm" id="h4shelter_number">{{shelter.contact_number1}},{{shelter.contact_number2}}</p>
                         </div>
                         <div class="col-md-4">
                             <h5 class="font-weight-bold font-xs mb-1"> Area </h5>

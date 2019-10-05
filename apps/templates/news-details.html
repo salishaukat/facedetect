@@ -7,14 +7,21 @@
             <div class="row justify-content-center">
                 <div class="col-10">
                     <h3 class="news-title mb-0">{{news.name}}</h3>
-                    <span class="post-date d-block mb-2">{{news.created_at|date:"m-d-Y"}}</span>
+                    <span class="post-date d-block mb-2">{{news.created_at|date:"d-F-y"}}</span>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-10 post-media ">
-                    <video  preload="auto" controls autoplay>
-                       <source type="video/mp4" src="/collection/{{news.video}}"/>
-                    </video>
+                    {% if news.video %}
+                        <video  preload="auto" controls autoplay>
+                           <source type="video/mp4" src="/collection/{{news.video}}"/>
+                        </video>
+                    {% elif news.image1 %}
+                        <div class="col-10 post-media ">
+                            <img src="/collection/{{news.image1}}" alt="video">
+                        </div>
+                    {% else %}
+                    {% endif %}
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -23,22 +30,22 @@
                         <ul>
                             <li>
                                 <a href="#.">
-                                    <img src="img/fb-icon.png" alt="">
+                                    <img src="{% static 'img/fb-icon.png' %}" alt="">
                                 </a>
                             </li>
-                            <li>
+<!--                             <li>
                                 <a href="#.">
-                                    <img src="img/twitter-icon.png" alt="">
+                                    <img src="{% static 'img/fb-icon.png' %}img/twitter-icon.png" alt="">
                                 </a>
                             </li>
                             <li>
                                 <a href="#.">
                                     <img src="img/youtube-icon.png" alt="">
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
-                    {{news.details}}
+                    {{news.details|safe}}
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -46,8 +53,8 @@
                     <div class="row recent-nav justify-content-between">
                         {% if news.id > news_first.id %}
                         <div class="col align-items-center ">
-                            <a href="#.">
-                                <img src="img/previous-arrow.png" alt="">
+                            <a href="{{news_previous.id}}">
+                                <img src="{% static 'img/previous-arrow.png' %}" alt="">
                                 <span class="ml-2">Previous</span>
 
                             </a>
@@ -55,9 +62,9 @@
                         {% endif %}
                         {% if news.id < news_last.id %}
                         <div class="col align-items-center text-right">
-                            <a href="#.">
+                            <a href="{{news_next.id}}">
                                 <span class="mr-2">Next</span>
-                                <img src="img/next-arrow.png" alt="">
+                                <img src="{% static 'img/next-arrow.png' %}" alt="">
                             </a>
                         </div>
                         {% endif %}
@@ -65,29 +72,45 @@
                 </div>
                 <div class="col-sm-12 col-md-10 col-lg-10 mt-4">
                     <div class="row justify-content-between">
+                        {% if news.id > news_first.id %}
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="bahamas-thumbs video">
-                                <a href="#." class="post-link"></a>
-                                <div class="post-image-holder">
-                                    <img src="img/thumb-01.jpg" alt="">
-                                </div>
-                                <img class="play-icon" src="img/play-icon.png" alt="play-icon">
+                                <a href="{{news_previous.id}}" class="post-link"></a>
+                                {% if news_previous.image1 %}
+                                    <div class="post-image-holder">
+                                        <img src="/collection/{{news_previous.image1}}" alt="">
+                                    </div>
+                                {% endif %}
+                                {% if news_previous.video %}
+                                    <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
+                                {% endif %}
                                 <div class="post-info">
-                                    <span class="post-date d-block mb-2">05-Dec-2018</span>
-                                    <span class="post-title d-block">Future Interactions Between Man & Machine</span>
+                                    <span class="post-date d-block mb-2">{{news_previous.created_at|date:"d-F-y"}}</span>
+                                    <span class="post-title d-block">{{news_previous.name}}</span>
                                 </div>
                             </div>
                         </div>
+                        {% endif %}
+                        {% if news.id < news_last.id %}
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="bahamas-thumbs">
-                                <a href="#." class="post-link"></a>
+                                <a href="{{news_next.id}}" class="post-link"></a>
+                                {% if news_next.image1 %}
+                                    <div class="post-image-holder">
+                                        <img src="/collection/{{news_next.image1}}" alt="">
+                                    </div>
+                                {% endif %}
+                                {% if news_next.video %}
+                                    <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
+                                {% endif %}                                
                                 <div class="post-info">
-                                    <span class="post-date d-block mb-2">05-Dec-2018</span>
-                                    <span class="post-title d-block">Future Interactions Between Man & Machine</span>
+                                    <span class="post-date d-block mb-2">{{news_next.created_at|date:"d-F-y"}}</span>
+                                    <span class="post-title d-block">{{news_next.name}}</span>
                                 </div>
 
                             </div>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

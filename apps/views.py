@@ -598,15 +598,19 @@ def get_face_from_image(request):
 
 
 def news(request):
-    news = News.objects.all()
-    return render(request, 'news.html',{'news':news})
+    news = News.objects.all().order_by('-created_at')
+    return render(request, 'news.html',{'news':news,  "user":request.session["username"] })
 
 
 def news_details(request, id=None):
     news_first = News.objects.first()
     news_last = News.objects.last()
+    news_next = News.objects.filter(id=id+1).first()
+    news_previous = News.objects.filter(id=id-1).first()
     news = News.objects.filter(id=id).first()
-    return render(request, 'news-details.html',{'news':news,"news_first":news_first,"news_last":news_last})
+    print(news_next)
+    print(news_previous)
+    return render(request, 'news-details.html',{'news':news,"news_first":news_first,"news_last":news_last,"news_next":news_next,"news_previous":news_previous})
 
 def found(request,id=None):
     try:
@@ -614,11 +618,11 @@ def found(request,id=None):
     except:
         lostone = None
     try:
-        contact = Contact.objects.filter(id=id).values()[0]
+        contact = Contact.objects.filter(lost_one=id).values()[0]
     except:
         contact = None
     try:
-        shelter = Shelter.objects.filter(id=id).values()[0]
+        shelter = Shelter.objects.filter(lost_one=id).values()[0]
     except:
         shelter = None
     print(lostone)
