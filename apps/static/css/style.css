@@ -24,6 +24,14 @@ h6 {
     height: 300px;
 }
 
+.register-detail{
+    overflow: auto;
+}
+
+.img-show,.modal-img{
+    cursor: pointer;
+}
+
 /* Style the tab */
 .tab {
   overflow: hidden;
@@ -452,9 +460,15 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 
 .detail .post-media{
     width: 100%;
-    height: 450px;
     margin-bottom: 44px;
+    overflow: hidden;
 }
+
+.detail .post-media img,
+.detail .post-media video{
+    width: 100%
+}
+
 
 .detail .post-content p{
     font-size: 18px;
@@ -488,6 +502,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
     padding: 30px;
     height: 250px;
     position: relative;
+    overflow: hidden;
 }
 .bahamas-thumbs.spliter{
     height:100%;
@@ -527,8 +542,9 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
-    height:100%;
-    width: auto;
+    height:auto;
+    width: calc(100% + 100px);
+    max-width: initial;
 }
 .bahamas-thumbs .post-info{
     position: absolute;
