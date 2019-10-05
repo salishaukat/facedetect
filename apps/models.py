@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
+from django.template.defaultfilters import truncatechars
 
 upload_storage = FileSystemStorage(location=settings.UPLOAD_ROOT, base_url='uploads')
 
@@ -126,4 +127,7 @@ class News(models.Model):
     video = models.FileField(upload_to='videos', storage=upload_storage, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
-
+    @property
+    def short_description(self):
+        from django.utils.html import strip_tags
+        return truncatechars(strip_tags(self.details), 70)

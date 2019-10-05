@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-
 from .models import *
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -38,7 +37,8 @@ class UserAdmin(admin.ModelAdmin):
 	list_display = ['id', 'username','email','first_name','last_name','is_active']
 
 class NewsAdmin(admin.ModelAdmin):
-	list_display = ['id', 'details','name']
+    list_display = ['id','name','short_description']
+
 
 admin.site.register(News, NewsAdmin)
 
