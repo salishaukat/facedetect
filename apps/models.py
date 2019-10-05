@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 
+upload_storage = FileSystemStorage(location=settings.UPLOAD_ROOT, base_url='uploads')
 
 class UserProfile(models.Model):
   user = models.OneToOneField(User, related_name="profile", on_delete=True)
@@ -119,10 +122,10 @@ class Sponsor(models.Model):
 class News(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
     details = RichTextField(config_name='awesome_ckeditor')
-    image1 = models.FileField(upload_to='news')
-    image2 = models.FileField(upload_to='news')
-    image3 = models.FileField(upload_to='news')
-    video = models.FileField(upload_to='news')
+    image1 = models.FileField(upload_to='images', storage=upload_storage)
+    image2 = models.FileField(upload_to='images', storage=upload_storage)
+    image3 = models.FileField(upload_to='images', storage=upload_storage)
+    video = models.FileField(upload_to='videos', storage=upload_storage)
     created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
 
