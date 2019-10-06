@@ -33,7 +33,10 @@ def random_with_N_digits(n):
     return randint(range_start, range_end)
 
 def live(request):
-    return render(request, 'live.html')
+    return render(request, 'live.html',{"user":request.session["username"]})
+
+def about_us(request):
+    return render(request, 'about_us.html',{"user":request.session["username"]})
 
 def search(request, id=None):
     if 'username' not in request.session:
