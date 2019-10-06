@@ -5,6 +5,8 @@
  =========================================================
 
  */
+ /*Font Open Sans*/
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 .bootstrap-switch {
   display: inline-block;
@@ -3892,7 +3894,7 @@ Created using IcoMoon - icomoon.io
 }
 
 /*------------------------
-	base class definition
+  base class definition
 -------------------------*/
 
 .now-ui-icons {
@@ -4000,7 +4002,7 @@ Created using IcoMoon - icomoon.io
 -------------------------*/
 
 /*------------------------
-	font icons
+  font icons
 -------------------------*/
 
 .now-ui-icons.ui-1_check:before {

@@ -33,7 +33,10 @@ def random_with_N_digits(n):
     return randint(range_start, range_end)
 
 def live(request):
-    return render(request, 'live.html')
+    return render(request, 'live.html',{"user":request.session["username"]})
+
+def about_us(request):
+    return render(request, 'about_us.html',{"user":request.session["username"]})
 
 def search(request, id=None):
     if 'username' not in request.session:
@@ -595,3 +598,36 @@ def get_face_from_image(request):
                 #contact = Contact.objects.filter(lost_one__folder_name__contains=identity['predicted_label']).values()[0]
                 print(contact)
     return JsonResponse({'contact': contact})
+
+
+def news(request):
+    news = News.objects.all().order_by('-created_at')
+    return render(request, 'news.html',{'news':news,  "user":request.session["username"] })
+
+
+def news_details(request, id=None):
+    news_first = News.objects.first()
+    news_last = News.objects.last()
+    news_next = News.objects.filter(id=id+1).first()
+    news_previous = News.objects.filter(id=id-1).first()
+    news = News.objects.filter(id=id).first()
+    print(news_next)
+    print(news_previous)
+    return render(request, 'news-details.html',{'news':news,"news_first":news_first,"news_last":news_last,"news_next":news_next,"news_previous":news_previous,  "user":request.session["username"]})
+
+def found(request,id=None):
+    try:
+        lostone = LostOne.objects.filter(id=id).values()[0]
+    except:
+        lostone = None
+    try:
+        contact = Contact.objects.filter(lost_one=id).values()[0]
+    except:
+        contact = None
+    try:
+        shelter = Shelter.objects.filter(lost_one=id).values()[0]
+    except:
+        shelter = None
+    print(lostone)
+   
+    return  render(request, 'found-one.html',{'lostone':lostone,'contact':contact, 'shelter':shelter})

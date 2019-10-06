@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="wrapper detail">
+    <section class="pt-5 pb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <h3 class="news-title mb-0">{{news.name}}</h3>
+                    <span class="post-date d-block mb-2">{{news.created_at|date:"d-F-y"}}</span>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                    {% if news.video %}
+                        <div class="col-10 post-media ">
+                            <video  preload="auto" controls autoplay>
+                               <source type="video/mp4" src="/news/{{news.video}}"/>
+                            </video>
+                        </div>
+                    {% elif news.image1 %}
+                        <div class="col-10 post-media ">
+                            <img src="/news/{{news.image1}}" alt="video">
+                        </div>
+                    {% else %}
+                    {% endif %}
+                
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-10 mb-4 post-content">
+                    <!-- <div class="social-share">
+                        <ul>
+                            <li>
+                                <a href="#.">
+                                    <img src="{% static 'img/fb-icon.png' %}" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#.">
+                                    <img src="{% static 'img/fb-icon.png' %}img/twitter-icon.png" alt="">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#.">
+                                    <img src="img/youtube-icon.png" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div> -->
+                    {{news.details|safe}}
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-10 col-lg-10  mt-4">
+                    <div class="row recent-nav justify-content-between">
+                        {% if news.id > news_first.id %}
+                        <div class="col align-items-center ">
+                            <a href="{{news_previous.id}}">
+                                <img src="{% static 'img/previous-arrow.png' %}" alt="">
+                                <span class="ml-2">Previous</span>
+
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if news.id < news_last.id %}
+                        <div class="col align-items-center text-right">
+                            <a href="{{news_next.id}}">
+                                <span class="mr-2">Next</span>
+                                <img src="{% static 'img/next-arrow.png' %}" alt="">
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-10 col-lg-10 mt-4">
+                    <div class="row justify-content-between">
+                        {% if news.id > news_first.id %}
+                        <div class="col-sm-6 col-md-6 col-lg-5">
+                            <div class="bahamas-thumbs video">
+                                <a href="{{news_previous.id}}" class="post-link"></a>
+                                {% if news_previous.image1 %}
+                                    <div class="post-image-holder">
+                                        <img src="/news/{{news_previous.image1}}" alt="">
+                                    </div>
+                                {% endif %}
+                                {% if news_previous.video %}
+                                    <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
+                                {% endif %}
+                                <div class="post-info">
+                                    <span class="post-date d-block mb-2">{{news_previous.created_at|date:"d-F-y"}}</span>
+                                    <span class="post-title d-block">{{news_previous.name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if news.id < news_last.id %}
+                        <div class="col-sm-6 col-md-6 col-lg-5">
+                            <div class="bahamas-thumbs video">
+                                <a href="{{news_next.id}}" class="post-link"></a>
+                                {% if news_next.image1 %}
+                                    <div class="post-image-holder">
+                                        <img src="/news/{{news_next.image1}}" alt="">
+                                    </div>
+                                {% endif %}
+                                {% if news_next.video %}
+                                    <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
+                                {% endif %}                                
+                                <div class="post-info">
+                                    <span class="post-date d-block mb-2">{{news_next.created_at|date:"d-F-y"}}</span>
+                                    <span class="post-title d-block">{{news_next.name}}</span>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

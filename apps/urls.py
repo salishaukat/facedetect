@@ -21,5 +21,9 @@ urlpatterns = [
     path('reports/<str:search>', views.reports, name="reports"),
     path('get_all_lost_one/<int:lost_one_id>',views.get_all_lost_one, name="get_all_lost_one"),
     path('live', views.live, name="live"),
-    path('get_face', views.get_face_from_image, name="get_face")
+    path('get_face', views.get_face_from_image, name="get_face"),
+    path('news', views.news, name="news"),
+    path('about-us', views.about_us, name="about-us"),
+    path('news_details/<int:id>', views.news_details, name="news_details"),
+    path('found/<int:id>', views.found, name="found")
 ]

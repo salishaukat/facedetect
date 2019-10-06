@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="wrapper">
+    <section class="pt-5 pb-5">
+        <div class="container">
+                <div class="row">
+                        <div class="col">
+                            <h4 class="text-center text-primary text-uppercase font-weight-bold mb-4 h4">About Us</h4>
+                        </div>
+                </div>
+       
+            <div class="row align-items-center">
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <img class="img-fluid rounded" src="{% static 'img/john_pic.jpg' %}" alt=""> 
+                </div>
+                <div class="col-md-9 col-sm-12">
+                    <h3 class="mb-0"><b>Bluestone Technologies Ltd focuses on enhancing the prospects for humanity through technology. </b></h3>
+                    <h4 class="mt-2"><b>Bluestone’s flagship platform, the Bluestone Blockchain Network, intends to create a Digital Blockchained Caribbean!</b></h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                        <p>FindMeBahamas, a digital search database for missing persons developed out of concern for the scale of missing persons after Hurricane Dorian; a Category 5 hurricane that ripped through two (2) major islands in The Bahamas, Abaco & Grand Bahama.</p>
+                        <p>FindMeBahamas leverages facial recognition and blockchain to match missing persons based on photos uploaded by loved ones or, shelter officials. FindMeBahamas also generates for each user a 6 digit ID number, providing a digital ID for governments and shelters to cross check identities of persons. </p>
+                        <p>CEO of Bluestone Technologies, John Bridgewater, rallied up his team to develop FindMeBahamas as a result of the terrifying experience of his missing grandmother, step-grandfather and brother after the storm.</p>
+                        <p>A native of Grand Bahama Island, John felt a need to do something for when this occurs again. The Bahamas is geographically situated in a hurricane belt and is prone to yearly hurricanes. John sought a need to be ready for when it does occur again in The Bahamas and is currently building for when other neighboring countries experience the same.</p>
+                        <p>These networks confirm the prowess of Bahamian technical expertise to contribute to social good.</p>
+                </div>
+              
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+    

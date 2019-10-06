@@ -1,5 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
+from django.template.defaultfilters import truncatechars
+
+upload_storage = FileSystemStorage(location=settings.UPLOAD_ROOT, base_url='uploads')
 
 class UserProfile(models.Model):
   user = models.OneToOneField(User, related_name="profile", on_delete=True)
@@ -29,6 +35,8 @@ class LostOne(models.Model):
     gender = models.CharField(null=True, blank=True, max_length=100)
     name = models.CharField(null=True, blank=True, max_length=100)
     folder_name = models.CharField(null=True, blank=True, max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
 
 
 class ShelterHome(models.Model):
@@ -67,6 +75,8 @@ class ShelterHome(models.Model):
     contact_number2 = models.CharField(null=True, blank=True, max_length=100)
     address = models.TextField(null=True, blank=True, max_length=300)
     area = models.CharField(null=True, blank=True, max_length=200, choices=AREA_CHOICES, default=1)
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
     
 
 class Contact(models.Model):
@@ -78,6 +88,8 @@ class Contact(models.Model):
     note = models.TextField(null=True, blank=True, max_length=500)
     area = models.CharField(null=True, blank=True, max_length=100)
     lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
 
 class Shelter(models.Model):
     #shelter_id = models.IntegerField(null=True, blank=True)
@@ -93,6 +105,8 @@ class Shelter(models.Model):
     person_pic4 = models.CharField(null=True, blank=True, max_length=1000)
     person_pic5 = models.CharField(null=True, blank=True, max_length=1000)
     person_pic6 = models.CharField(null=True, blank=True, max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
 
 class Sponsor(models.Model):
     #sid = models.IntegerField(null=True, blank=True)
@@ -102,10 +116,18 @@ class Sponsor(models.Model):
     contact_number = models.CharField(null=True, blank=True, max_length=100)
     company_logo = models.CharField(null=False, blank=False, max_length=100)
     active = models.BooleanField(null=True, blank=True, default=False)
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
 
 
-class Comments(models.Model):
-    lost_one = models.ForeignKey(LostOne, on_delete=models.CASCADE, null=True)
+class News(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
-    comment = models.TextField(null=False, blank=False)
-    created_date = models.DateTimeField(auto_now_add=True, blank=True)
+    details = RichTextField(config_name='awesome_ckeditor',null=True, blank=True)
+    image1 = models.FileField(upload_to='images', storage=upload_storage, null=True, blank=True)
+    video = models.FileField(upload_to='videos', storage=upload_storage, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
+    @property
+    def short_description(self):
+        from django.utils.html import strip_tags
+        return truncatechars(strip_tags(self.details), 70)

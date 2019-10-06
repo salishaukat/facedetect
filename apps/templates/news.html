@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="wrapper">
+    <section class=" mt-5 mb-5">
+        <div class="container news">
+            <div class="row">
+                <div class="col">
+                    <h4 class="text-center text-primary text-uppercase font-weight-bold mb-4 h4"> Bahamas News </h4>
+                </div>
+            </div>
+            <div class="row no-gutters mt-2">
+                {% if news.0 %}
+                    <div class="col-sm-12 col-md-7 pr-2">
+                        <div class="bahamas-thumbs large video">
+                            <a href="{% url 'news_details' id=news.0.id %}" class="post-link"></a>
+                            {% if news.0.image1 %}
+                                <div class="post-image-holder">
+                                    <img src="news/{{news.0.image1}}" alt="">
+                                </div>
+                            {% endif %}
+                            {% if news.0.video %}
+                                <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
+                            {% endif %}
+                            <div class="post-info">
+                                <span class="post-date d-block mb-2">{{news.0.created_at|date:"d-F-y"}}</span>
+                                <span class="post-title d-block">{{news.0.name|truncatechars:50}}</span>
+                                <span class="video-description d-block mt-3 mt-2">{{news.0.details|safe|truncatechars:100}}</span>
+                              </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="col-sm-12 col-md-5 pl-2">
+                    {% if news.1 %}
+                        <div class="h-50 pb-2">
+                            <div class="bahamas-thumbs spliter video">
+                                <a href="{% url 'news_details' id=news.1.id %}" class="post-link"></a>
+                                {% if news.1.image1 %}
+                                    <div class="post-image-holder">
+                                        <img src="news/{{news.1.image1}}" alt="">
+                                    </div>
+                                {% endif %}                            
+                                {% if news.1.video %}
+                                  <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
+                                {% endif %}
+                                <div class="post-info">
+                                    <span class="post-date d-block mb-2">{{news.1.created_at|date:"d-F-y"}}</span>
+                                    <span class="post-title d-block">{{news.1.name|truncatechars:50}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if news.2 %}
+                        <div class="h-50 pt-2">
+                            <div class="bahamas-thumbs spliter video">
+                                <a href="{% url 'news_details' id=news.2.id %}" class="post-link"></a>
+                                {% if news.2.image1 %}
+                                    <div class="post-image-holder">
+                                        <img src="news/{{news.2.image1}}" alt="">
+                                    </div>
+                                {% endif %}                            
+                                {% if news.2.video %}
+                                    <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
+                                {% endif %}
+                                <div class="post-info">
+                                    <span class="post-date d-block mb-2">{{news.2.created_at|date:"d-F-y"}}</span>
+                                    <span class="post-title d-block">{{news.2.name|truncatechars:50}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="looping-elements">
+                {% for new in news|slice:"3:" %}
+                <div class="col-sm-12 col-md-4">
+                    <div class="bahamas-thumbs video">
+                        <a href="{% url 'news_details' id=new.id %}" class="post-link"></a>
+                        {% if new.image1 %}
+                            <div class="post-image-holder">
+                                <img src="news/{{new.image1}}" alt="">
+                            </div>
+                        {% endif %}                            
+                        {% if new.video %}
+                            <img class="play-icon" src="{% static 'img/play-icon.png' %}" alt="play-icon">
+                        {% endif %}                        
+                        <div class="post-info">
+                            <span class="post-date d-block mb-2">{{new.created_at|date:"d-F-y"}}</span>
+                            <span class="post-title d-block">{{new.name|truncatechars:50}}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
+
+
+
+<!--             <div class="row mt-5 mb-5">
+                <div class="col text-center">
+                    <img src="img/loader.gif" alt="">
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+</div>
+
+<script>
+     function splitrow (elem, elemCounter) {
+        var item = elem,
+            counter = 0,
+            length = item.length / elemCounter,
+            rowHtml = "<div class='row no-gutters mt-3'></div>";
+        for (var i = 0; i < length; i++) {
+            item.slice(counter, counter + elemCounter).wrapAll(rowHtml);
+            counter += elemCounter;
+        }
+    }
+
+     splitrow($(".looping-elements > div"), 3);  // Run this function when show other item on page scroll
+
+
+</script>
+
+{% endblock %}
+    
