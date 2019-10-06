@@ -120,7 +120,7 @@ class Sponsor(models.Model):
     updated_at = models.DateTimeField(auto_now=True,null=True, blank=True)
 
 
-class News(models.Model):
+class New(models.Model):
     name = models.CharField(null=False, blank=False, max_length=100)
     details = RichTextField(config_name='awesome_ckeditor',null=True, blank=True)
     image1 = models.FileField(upload_to='images', storage=upload_storage, null=True, blank=True)

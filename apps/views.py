@@ -601,16 +601,16 @@ def get_face_from_image(request):
 
 
 def news(request):
-    news = News.objects.all().order_by('-created_at')
+    news = New.objects.all().order_by('-created_at')
     return render(request, 'news.html',{'news':news,  "user":request.session["username"] })
 
 
 def news_details(request, id=None):
-    news_first = News.objects.first()
-    news_last = News.objects.last()
-    news_next = News.objects.filter(id=id+1).first()
-    news_previous = News.objects.filter(id=id-1).first()
-    news = News.objects.filter(id=id).first()
+    news_first = New.objects.first()
+    news_last = New.objects.last()
+    news_next = New.objects.filter(id=id+1).first()
+    news_previous = New.objects.filter(id=id-1).first()
+    news = New.objects.filter(id=id).first()
     print(news_next)
     print(news_previous)
     return render(request, 'news-details.html',{'news':news,"news_first":news_first,"news_last":news_last,"news_next":news_next,"news_previous":news_previous,  "user":request.session["username"]})
