@@ -346,6 +346,11 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
     position: relative;
 }
 
+.post-content img{
+    width: auto;
+    height: auto;
+}
+
 .news-blog {
     position: absolute;
     left: 8%;
