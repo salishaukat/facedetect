@@ -522,12 +522,60 @@ def reports(request, search=None):
         if "reporter" in request.session["role"]:
             if search:
                 if search.lower() == 'oc':
-                    contacts = Contact.objects.exclude(lost_one__country__in=['Canada','Bahamas','United States of America'])
+                    result=[]
+                    lost_ones = LostOne.objects.exclude(country__in=['Canada','Bahamas','United States of America'])
+                    #contacts = Contact.objects.exclude(lost_one__country__in=['Canada','Bahamas','United States of America'])
+                    for lost_one in lost_ones:
+                        lost_data = LostOne.objects.filter(id = lost_one.id).values()[0]
+                        try:
+                            contact_data = Contact.objects.filter(lost_one = lost_one.id).values()[0]
+                        except:
+                            contact_data = None
+                        try:
+                            shelter_data = Shelter.objects.filter(lost_one = lost_one.id).values()[0]
+                        except:
+                            shelter_data = None
+
+                        result.append([lost_data,contact_data,shelter_data])
+                    #contacts = Contact.objects.all()
+
+
+
                 else:
-                    contacts = Contact.objects.filter(Q(lost_one__status__contains=search) | Q(name__contains=search) | Q(lost_one__area__contains=search) | Q(lost_one__country__contains=search))
+                    result=[]
+                    lost_ones = LostOne.objects.filter(Q(status__contains=search) | Q(area__contains=search) | Q(country__contains=search))
+                    #contacts = Contact.objects.filter(Q(lost_one__status__contains=search) | Q(name__contains=search) | Q(lost_one__area__contains=search) | Q(lost_one__country__contains=search))
+                    for lost_one in lost_ones:
+                        lost_data = LostOne.objects.filter(id = lost_one.id).values()[0]
+                        try:
+                            contact_data = Contact.objects.filter(lost_one = lost_one.id).values()[0]
+                        except:
+                            contact_data = None
+                        try:
+                            shelter_data = Shelter.objects.filter(lost_one = lost_one.id).values()[0]
+                        except:
+                            shelter_data = None
+
+                        result.append([lost_data,contact_data,shelter_data])
+                return render(request, 'reports.html',{'contacts':result,'search':search})                
+                #return render(request, 'reports.html',{'contacts':contacts,'search':search})
             else:
-                contacts = Contact.objects.all()
-            return render(request, 'reports.html',{'contacts':contacts,'search':search})
+                result=[]
+                lost_ones = LostOne.objects.all()
+                for lost_one in lost_ones:
+                    lost_data = LostOne.objects.filter(id = lost_one.id).values()[0]
+                    try:
+                        contact_data = Contact.objects.filter(lost_one = lost_one.id).values()[0]
+                    except:
+                        contact_data = None
+                    try:
+                        shelter_data = Shelter.objects.filter(lost_one = lost_one.id).values()[0]
+                    except:
+                        shelter_data = None
+
+                    result.append([lost_data,contact_data,shelter_data])
+                #contacts = Contact.objects.all()
+                return render(request, 'reports.html',{'contacts':result,'search':search})
     return redirect('index')
 
 def get_all_lost_one(request, lost_one_id=None):

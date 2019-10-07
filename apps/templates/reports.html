@@ -16,8 +16,10 @@
 
 	<!-- Custom fonts for this template -->
 	<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+	
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 	<!-- Custom theme template -->
+
 	<link href="{% static 'css/theme.css' %}" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
@@ -68,7 +70,7 @@
 							<a class="dropdown-item" href='{% url "reports" %}/Dundas Town'>AB - Dundas Town</a>
 						</div>
 					</li>
-					<li class="nav-item dropdown">
+<!-- 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-primary" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Shelter
 						</a>
@@ -81,7 +83,7 @@
 							<a class="dropdown-item" href='{% url "reports" %}/Sandals Foundation'>Sandals Foundation</a>
 							<a class="dropdown-item" href='{% url "reports" %}/Fort Lauderdale'>Fort Lauderdale</a>
 						</div>
-					</li>
+					</li> -->
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-primary" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Countries
@@ -94,37 +96,9 @@
 						</div>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-primary contactUs" href="#"><small>CONTACT US</small> <br/> +1-719-5842</a>
+						<a class="nav-link text-primary contactUs" href="mailto: support@findmebahamas.com"><small>CONTACT US</small> <br/> support@findmebahamas.com</a>
 					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link text-secondary" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<span class="d-md-none d-lg-block"><i class="fa fa-bell"></i></span> <span class="d-none d-md-block d-lg-none"> Notification </span>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right notification-dropdown" aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="#">
-								<ul class="list-group">
-									<li class="list-group-item">
-										<div class="d-flex w-100 justify-content-between">
-											<h6 class="mb-1 text-primary">Andrew Symound</h6>
-											<small>3 days ago</small>
-										</div>
-										<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.</p>
-									</li>
-								</ul>
-							</a>
-							<a class="dropdown-item" href="#">
-								<ul class="list-group">
-									<li class="list-group-item">
-										<div class="d-flex w-100 justify-content-between">
-											<h6 class="mb-1 text-primary">Andrew Symound</h6>
-											<small>3 days ago</small>
-										</div>
-										<p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.</p>
-									</li>
-								</ul>
-							</a>
-						</div>
-					</li>
+
 					<li class="nav-item">
 						<form class="" action="{% url 'logout' %}" method="post" enctype="multipart/form-data">
 							{% csrf_token %}
@@ -148,73 +122,144 @@
 						{% endif %}
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-12">
-						<div class="table-responsive mt-3 mb-3">
-							<table class="table">
+				<div class="tab">
+				  <button class="tablinks active" onclick="openCity(event, 'London')">Standard</button>
+				  <button class="tablinks" onclick="openCity(event, 'Paris')">Complete</button>
+				  
+				</div>
+
+
+
+					<div id="London" class="row tabcontent">
+						<div class="col-12">
+							<div class="table-responsive">
+							<table id="report-table" class="table">
 								<thead>
 									<tr>
-										<th scope="col">S#</th>
-										<th scope="col">Name</th>
-										<th scope="col">Gender</th>
-										<th scope="col">Age</th>
-										<th scope="col">Area</th>
-										<th scope="col">Nationality</th>
-										<th scope="col">Contact No</th>
-										<th scope="col">Status</th>
-										<th scope="col">Note</th>
+										<th class="align-middle" scope="col">S#</th>
+										<th class="align-middle" scope="col" style="min-width:200px">Name</th>
+										<th class="align-middle" scope="col">Age</th>
+										<th class="align-middle" scope="col">Area</th>
+										<th class="align-middle" scope="col">Country</th>
+										<th class="align-middle" scope="col">Contact No</th>
+										<th class="align-middle" scope="col">Shelter</th>
+										<th class="align-middle" scope="col">Status</th>
+										<th class="align-middle" scope="col">Last Seen / Notes</th>
 									</tr>
 								</thead>
+								
 								<tbody>
 									{% if contacts %}
-									{% for contact in contacts %}
-									<tr onclick="showmodel('{{contact.lost_one.id}}','{{contact.lost_one.person_pic1}}','{{contact.lost_one.first_name}}  {{contact.lost_one.last_name}}','{{contact.lost_one.gender}}','{{contact.lost_one.age}}','{{contact.lost_one.area}}','{{contact.lost_one.country}}','{{contact.lost_one.contact_number}}','{{contact.lost_one.status}}','{{contact.name}}','{{contact.contact_number1}}','{{contact.address}}','{{contact.note}},{{contact.lost_one.email}}')">
+										{% for contact in contacts %}
+										<tr>
+											<td class="align-middle"> {{ forloop.counter }} </td>
+											<td class="align-middle"><img class="rounded-circle user-img mt-1" src="{% if contact.0.person_pic1 %} {{contact.0.person_pic1}} {% else %} {% static 'img/no-img.jpeg' %} {% endif %}"/>
+											<strong>{{contact.0.first_name}} {{contact.0.last_name}}</strong> <div>Id: {{contact.0.id}}</div></td>
+											<td class="align-middle">{{contact.0.age}}</td>
+											<td class="align-middle">{{contact.0.area}}</td>
+											<td class="align-middle">{{contact.0.country}}</td>
+											<td class="align-middle">{{contact.0.contact_number}}</td>
+											<td class="align-middle">{% if contact.2 %}{{contact.2.shelter}} {% else %} - {% endif %}</td>											
+											<td class="align-middle">{% if contact.2 %}{{contact.2.status}} {% else %} {{contact.0.status}} {% endif %}</td>
+											<td class="align-middle">{% if contact.2 %}{{contact.2.note|truncatechars:30}} {% else %} {{contact.1.note|truncatechars:30}} {% endif %}</td>
+										</tr>
 
-										<td> {{ forloop.counter }} </td>
-										<td><img class="rounded-circle user-img" src="{{contact.lost_one.person_pic1}}"/><span>{{contact.lost_one.first_name}}  {{contact.lost_one.last_name}}</span></td>
-										<td>{{contact.lost_one.gender}}</td>
-										<td>{{contact.lost_one.age}}</td>
-										<td>{{contact.lost_one.area}}</td>
-										<td>{{contact.lost_one.country}}</td>
-										<td>{{contact.lost_one.contact_number}}</td>
-										<td>{{contact.lost_one.status}}</td>
-										<td>{{contact.note}}</td>
-									</tr>
-									{% endfor %}
+										{% endfor %}
 									{% else %}
-									<tr>
-										<td colspan="9" style="text-align:center">No records found</td>
-									</tr>
+										<tr>
+											<td colspan="9" style="text-align:center">No records found</td>
+										</tr>
 									{% endif %}
 
 								</tbody>
 
+								
 							</table>
 						</div>
-					</div>
-					{% if is_paginated %}
-					<ul class="pagination mx-auto">
-						{% if page_obj.has_previous %}
-						<li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-						{% else %}
-						<li class="disabled"><span>&laquo;</span></li>
-						{% endif %}
-						{% for i in paginator.page_range %}
-						{% if page_obj.number == i %}
-						<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-						{% else %}
-						<li><a href="?page={{ i }}">{{ i }}</a></li>
-						{% endif %}
-						{% endfor %}
-						{% if page_obj.has_next %}
-						<li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-						{% else %}
-						<li class="disabled"><span>&raquo;</span></li>
-						{% endif %}
-					</ul>
-					{% endif %}
+						</div>
 
-				</div>
+
+					</div>
+
+
+					<div id="Paris" class="row tabcontent">
+						<div class="col-12">
+							<div class="table-responsive">
+							<table id="report-table-comp" class="table">
+								<thead>
+									<tr>
+										<th class="align-middle" scope="col">S#</th>
+										<th class="align-middle" scope="col" style="min-width:200px">Name</th>
+										<th class="align-middle" scope="col">First name</th>
+										<th class="align-middle" scope="col">Last name</th>
+										<th class="align-middle" scope="col">Email address</th>
+										<th class="align-middle" scope="col">Contact number</th>
+										<th class="align-middle" scope="col">Age</th>
+										<th class="align-middle" scope="col">Status</th>
+										<th class="align-middle" scope="col">Area</th>
+										<th class="align-middle" scope="col">Country</th>
+										<th class="align-middle" scope="col">Gender</th>
+										<th class="align-middle" scope="col">Contact name</th>
+										<th class="align-middle" scope="col">Contact number1</th>
+										<th class="align-middle" scope="col">Contact number2</th>
+										<th class="align-middle" scope="col">Contact Address</th>
+										<th class="align-middle" scope="col">Contact Area</th>
+										<th class="align-middle" scope="col">Last seen / Notes</th>
+										<th class="align-middle" scope="col">Shelter Name</th>
+										<th class="align-middle" scope="col">Shelter number1</th>
+										<th class="align-middle" scope="col">Shelter number2</th>
+										<th class="align-middle" scope="col">Shelter Address</th>
+										<th class="align-middle" scope="col">Shelter Area</th>
+										<th class="align-middle" scope="col">Last seen / Notes</th>		
+									</tr>
+								</thead>
+								
+								<tbody>
+									{% if contacts %}
+										{% for contact in contacts %}
+										<tr>
+											<td class="align-middle"> {{ forloop.counter }} </td>
+											<td class="align-middle"><img class="rounded-circle user-img mt-1" src="{% if contact.0.person_pic1 %} {{contact.0.person_pic1}} {% else %} {% static 'img/no-img.jpeg' %} {% endif %}"/>
+											<strong>{{contact.0.first_name}} {{contact.0.last_name}}</strong> <div>Id: {{contact.0.id}}</div></td>
+											<td class="align-middle">{{contact.0.first_name}}</td>
+											<td class="align-middle">{{contact.0.last_name}}</td>
+											<td class="align-middle">{{contact.0.email_address}}</td>
+											<td class="align-middle">{{contact.0.contact_number}}</td>
+											<td class="align-middle">{{contact.0.age}}</td>
+											<td class="align-middle">{% if contact.2 %}{{contact.2.status}} {% else %} {{contact.0.status}} {% endif %}</td>
+											<td class="align-middle">{{contact.0.area}}</td>
+											<td class="align-middle">{{contact.0.country}}</td>
+											<td class="align-middle">{{contact.0.gender}}</td>
+											<td class="align-middle"> <strong>{{contact.1.name}}</strong> <div>Id: {{contact.1.id}}</div></td>
+											<td class="align-middle">{{contact.1.contact_number1}}</td>
+											<td class="align-middle">{{contact.1.contact_number2}}</td>
+											<td class="align-middle">{{contact.1.address}}</td>
+											<td class="align-middle">{{contact.1.area}}</td>
+											<td class="align-middle">{{contact.1.note|truncatechars:30}}</td>
+											<td class="align-middle"> <strong>{{contact.2.shelter}}</strong> <div>Id: {{contact.2.id}}</div></td>
+											<td class="align-middle">{{contact.2.contact_number1}}</td>
+											<td class="align-middle">{{contact.2.contact_number2}}</td>
+											<td class="align-middle">{{contact.2.address}}</td>
+											<td class="align-middle">{{contact.2.area}}</td>
+											<td class="align-middle">{{contact.2.note|truncatechars:30}}</td>
+										</tr>
+
+										{% endfor %}
+									{% else %}
+										<tr>
+											<td colspan="9" style="text-align:center">No records found</td>
+										</tr>
+									{% endif %}
+
+								</tbody>
+
+								
+							</table>
+						</div>
+						</div>
+
+
+					</div>			
 			</section>
 
 
@@ -233,164 +278,32 @@
 			</div>
 		</footer>
 
-		<!-- Modal -->
-		<div class="modal fade register-detail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content p-4">
-					<div class="modal-header">-
-						<!-- <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4> -->
-						<button type="button" class="close text-primary" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-					<div class="container"> 
-
-						<div class="row"> 
-							<div class="col-sm-12 bg-white col-md-4">
-								<img id="h4images" src="{% static 'img/image.jpg' %}" alt="Rounded Image" class="rounded">
-							</div>
-							<div class="col">
-								<h4 class="mb-0" id="h4name"> </h4>
-								<div class="row">
-									<div class="col-md-5">
-										<h4 class="text-primary" id="h4status"> </h4>
-									</div>
-								</div>
-								<hr/>
-								<div class="row"> 
-									<div class="col-md-3 col-sm-12">
-										<h5 class="font-weight-bold font-xs mb-1"> Contact No </h5>
-										<p class="font-sm" id="h4_lost_one_contact_no"></p>
-									</div>
-									<div class="col-md-2 col-sm-12">
-										<h5 class="font-weight-bold font-xs mb-1"> Age </h5>
-										<p class="font-sm" id="h4age"></p>
-									</div>
-									<div class="col-md-2 col-sm-12">
-										<h5 class="font-weight-bold font-xs mb-1"> Gender </h5>
-										<p class="font-sm" id="h4gender"> </p>
-									</div>
-									<div class="col-md-2 col-sm-12">
-										<h5 class="font-weight-bold font-xs mb-1"> Area </h5>
-										<p class="font-sm" id="h4_lost_one_area"></p>
-									</div>
-									<div class="col-md-3 col-sm-12">
-										<h5 class="font-weight-bold font-xs mb-1"> Country</h5>
-										<p class="font-sm" id="h4country"> Country </p>
-									</div>
-								</div>
-								<div class="row"> 
-									<div class="col">
-										<h5 class="font-weight-bold font-xs mb-1" > Email Address </h5>
-										<p class="font-sm mb-0" id="h4email"></p>
-									</div>
-								</div>
-								<hr/>
-								<div class="row"> 
-									<div class="col-md-6 col-sm-12">
-										<h5 class="font-weight-bold font-xs mb-1" > Name </h5>
-										<p class="font-sm" id="h4contact_name"> </p>
-									</div>
-									<div class="col-md-6 col-sm-12">
-										<h5 class="font-weight-bold font-xs mb-1" > Contact Person </h5>
-										<p class="font-sm" id="h4contact_number"> </p>
-									</div>
-								</div>
-								<div class="row"> 
-									<div class="col">
-										<h5 class="font-weight-bold font-xs mb-1" > Address </h5>
-										<p class="font-sm mb-0" id="h4address"></p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<hr/>
-						<div class="row"> 
-							<div class="col">
-								<h5 class="font-weight-bold font-xs mb-1" > Note </h5>
-								<p class="font-sm mb-0" id="h4note"></p>
-							</div>
-						</div>
-						<hr/>
-						<div class="row"> 
-
-							<div class="row"> 
-								<div class="col">
-									<div id="summernote">
-
-									</div>
-								</div>
-							</div>
-
-							<div class="row pt-5 pb-0 px-1" style="display: none;">
-								<form action="{% url 'comment' %}" method="post">
-									{% csrf_token %}
-									<input type="hidden" name="lost_one">
-									<div class="col-md-12">
-										<p> if you have any information on this person</p>
-										<p> please add in the discussion below </p>
-									</div>
-									{% if user and 'AnonymousUser' not in user %}
-									<div class="col-md-12">
-										<input name="comment_name" type="text"  placeholder="name" style="width: 300px" />
-									</div>
-									{% endif %}
-									<div class="col-md-12">
-										<textarea  style="width:300px" name="comment" placeholder="comment"></textarea>
-									</div>
-									<div class="col-md-12">
-										<button class="btn btn-primary">Add</button>
-									</div>
-								</form>
-							</div>
-
-
-
-							<div class="row pt-5 pb-0 px-1"> 
-								<div class="col-md-1">
-									<img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
-								</div>
-								<div class="col-md-11">
-									<h4 class="text-primary m-0"><strong> James Delia </strong></h4>
-									<p class="font-xs"> 2 Comments - 3 days ago </p>
-									<div class="clearfix"></div>
-									<p><span class="text-default"> Jama Nix - </span> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- Modal end -->
 			<!-- Bootstrap core JavaScript -->
 
 			<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
 			<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 			<script src="{% static 'vendor/theme.js' %}" type="text/javascript"></script>
-			<script src="{% static 'vendor/jquery.dataTables.min.js' %}" type="text/javascript"></script>
+			<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
 
 			<script>
-				function showmodel(id,image,lost_one_name,gender,age,area,country,lost_one_contact_number,status,name,contact_number,address,note,email){
-
-					$('#h4name').text(lost_one_name);
-					$('#h4_lost_one_contact_no').text(lost_one_contact_number)
-					$('#h4age').text(age)
-					$('#h4images').attr('src', image)
-					$('#h4status').text(status)
-					$('#h4gender').text(gender)
-					$('#h4_lost_one_area').text(area)
-					$('#h4country').text(country)
-					$('#h4email').text(email)
-					$('#h4contact_name').text(name)
-					$('#h4address').text(address)
-					$('#h4note').text(note)
-					$('#h4contact_number').text(contact_number)
-					$('#lost_one_update').attr('href', '{% url "lostone" %}/'+id)
-					$('#lost_one').val(id)
-					$('.register-detail').modal('show');
-
-
-				}
+				$(document).ready(function(){
+			   		var table = $('#report-table').DataTable({ dom: 'lrtip'});
+			   		var table = $('#report-table-comp').DataTable({ dom: 'lrtip'});
+			   		openCity(event, 'London');
+			   	})
+				function openCity(evt, cityName) {
+				  var i, tabcontent, tablinks;
+				  tabcontent = document.getElementsByClassName("tabcontent");
+				  for (i = 0; i < tabcontent.length; i++) {
+				    tabcontent[i].style.display = "none";
+				  }
+				  tablinks = document.getElementsByClassName("tablinks");
+				  for (i = 0; i < tablinks.length; i++) {
+				    tablinks[i].className = tablinks[i].className.replace(" active", "");
+				  }
+				  document.getElementById(cityName).style.display = "block";
+				  evt.currentTarget.className += " active";
+				}			   	
 			</script>
 
 
