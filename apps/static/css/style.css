@@ -249,13 +249,13 @@ h6 {
     padding: 0.5rem 1rem;
     line-height: 1.1rem;
     font-weight: 600;
-    text-align: right;
+    text-align: left;
 }
 
 
 .navbar .navbar-nav .nav-link.contactUs{
-    font-size: 1.2em !important;
-    line-height: 1.2rem;
+    font-size: 1em !important;
+    line-height: 1rem;
 }
 
 
@@ -1004,6 +1004,10 @@ a.text-primary:focus, a.text-primary:hover {
     background: #f2f2f2;
     margin-bottom: 0px !important;
     margin-top: 0px !important;
+}
+
+.navbar-nav{
+    align-items: center;
 }
 
 @media (min-width: 992px){
