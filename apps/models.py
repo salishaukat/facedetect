@@ -121,7 +121,7 @@ class Sponsor(models.Model):
 
 
 class New(models.Model):
-    name = models.CharField(null=False, blank=False, max_length=100)
+    name = models.CharField(null=False, blank=False, max_length=1000)
     details = RichTextField(config_name='awesome_ckeditor',null=True, blank=True)
     image1 = models.FileField(upload_to='images', storage=upload_storage, null=True, blank=True)
     video = models.FileField(upload_to='videos', storage=upload_storage, null=True, blank=True)
