@@ -29,7 +29,7 @@ django-grappelli==2.12.3
 django-js-asset==1.2.2
 django-tinymce==2.8.0
 django-widget-tweaks==1.4.5
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 docutils==0.15.2
 future==0.17.0
 graphviz==0.8.4
