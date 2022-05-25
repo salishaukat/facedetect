@@ -62,7 +62,7 @@ ppft==1.6.6.1
 progressbar2==3.43.1
 psycopg2-binary==2.8.3
 pycryptodome==3.6.6
-PyJWT==1.6.4
+PyJWT==2.4.0
 python-utils==2.3.0
 python3-openid==3.1.0
 pytz==2019.2
